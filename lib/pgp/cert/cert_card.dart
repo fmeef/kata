@@ -129,17 +129,17 @@ class CertCard extends StatelessWidget {
                       Chip(
                         label: Text(
                           'Active!',
-                          style: TextStyle(color: theme.colorScheme.secondary),
+                          style: TextStyle(color: theme.colorScheme.onTertiary),
                         ),
-                        backgroundColor: theme.colorScheme.onSecondary,
+                        backgroundColor: theme.colorScheme.tertiary,
                       )
                     else if (pgpKey.cert.hasPrivate)
                       Chip(
                         label: Text(
                           'Owned!',
-                          style: TextStyle(color: theme.colorScheme.onTertiary),
+                          style: TextStyle(color: theme.colorScheme.secondary),
                         ),
-                        backgroundColor: theme.colorScheme.tertiary,
+                        backgroundColor: theme.colorScheme.onSecondary,
                       )
                     else if (cert != null && graphController != null)
                       InkWell(
