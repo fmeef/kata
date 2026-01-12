@@ -1,7 +1,7 @@
 import 'package:kata/pgp/cert/active_cert.dart';
 import 'package:kata/pgp/cert/cert_card_menu.dart';
-import 'package:kata/pgp/identity_service.dart';
 import 'package:kata/pgp/wot/cert_list_args.dart';
+import 'package:kata/pgp/wot/graph_controller.dart';
 import 'package:kata/pgp/wot/sig_list.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +14,7 @@ class CertCard extends StatelessWidget {
   final bool active;
   final bool signable;
   final BigInt trust;
+  final GraphController? graphController;
   final cutoff = 560; // derived from length of themed fingerprint
   const CertCard({
     super.key,
@@ -21,6 +22,7 @@ class CertCard extends StatelessWidget {
     this.active = false,
     this.signable = true,
     required this.trust,
+    this.graphController,
   });
 
   Widget contentText(BuildContext context) {
@@ -132,21 +134,17 @@ class CertCard extends StatelessWidget {
                     else
                       (switch (cert) {
                         null => Chip(label: Text('Trust: $trust')),
-                        _ => InkWell(
-                          onTap: () async {
-                            final IdentityService service = context.read();
-                            final graphController = await service.authenticate(
-                              roots: [cert.cert.fingerprint],
-                              fingerprint: pgpKey.cert.fingerprint,
-                              trust: 1,
-                            );
-
-                            if (context.mounted) {
-                              context.push('/path', extra: graphController);
-                            }
-                          },
-                          child: Chip(label: Text('Trust: $trust')),
-                        ),
+                        _ => (switch (graphController) {
+                          null => Chip(label: Text('Trust: $trust')),
+                          _ => InkWell(
+                            onTap: () async {
+                              if (context.mounted) {
+                                context.push('/path', extra: graphController);
+                              }
+                            },
+                            child: Chip(label: Text('Trust: $trust')),
+                          ),
+                        }),
                       }),
                   ],
                 ),

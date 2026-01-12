@@ -5,6 +5,7 @@ import 'package:kata/pgp/cert/upload_confirm_dialog.dart';
 import 'package:kata/pgp/identity_service.dart';
 import 'package:kata/pgp/roots_provider.dart';
 import 'package:kata/pgp/wot/cert_list_args.dart';
+import 'package:kata/pgp/wot/graph_controller.dart';
 import 'package:kata/src/rust/api.dart';
 import 'package:kata/src/rust/api/db/connection.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
@@ -16,7 +17,12 @@ import 'package:provider/provider.dart';
 class _CertTrust {
   final PgpCertWithIds cert;
   final BigInt trust;
-  const _CertTrust({required this.cert, required this.trust});
+  final GraphController? graphController;
+  const _CertTrust({
+    required this.cert,
+    required this.trust,
+    this.graphController,
+  });
 }
 
 class _CertListState extends State<CertList> {
@@ -39,19 +45,31 @@ class _CertListState extends State<CertList> {
     watcher = null;
   }
 
-  Future<List<_CertTrust>> addAllCerts(
-    List<PgpCertWithIds> c,
-    StoreNetwork network,
-  ) async {
+  Future<List<_CertTrust>> addAllCerts(List<PgpCertWithIds> c) async {
     List<_CertTrust> n = [];
+    final ActiveCert activeCert = context.read();
+    final active = activeCert.cert;
     for (final cert in c) {
       try {
-        final trust = await network.authenticate(
-          remote: cert.cert.fingerprint,
-          trust: BigInt.from(240),
-        );
-        final res = _CertTrust(cert: cert, trust: trust.trust);
-        n.add(res);
+        final IdentityService service = context.read();
+        if (active != null) {
+          final graphController = await service.authenticate(
+            roots: [active.cert.fingerprint],
+            fingerprint: cert.cert.fingerprint,
+            trust: 1,
+          );
+
+          final res = _CertTrust(
+            cert: cert,
+            trust: graphController.graph.trust,
+            graphController: graphController,
+          );
+
+          n.add(res);
+        } else {
+          final res = _CertTrust(cert: cert, trust: BigInt.from(0));
+          n.add(res);
+        }
       } catch (e) {
         // Trust defaults to zero
       }
@@ -116,14 +134,14 @@ class _CertListState extends State<CertList> {
     try {
       if (widget.args.owned) {
         final c = await pgp.allOwnedCerts();
-        n.addAll(await addAllCerts(c, network));
+        n.addAll(await addAllCerts(c));
       } else {
         if (widget.args.grep != null && !shouldSearch) {
           final c = await pgp
               .iterCertsSearchKeyid(pattern: widget.args.grep!)
               .toList();
 
-          n.addAll(await addAllCerts(c, network));
+          n.addAll(await addAllCerts(c));
         }
 
         if (widget.args.searchUserId != null && !shouldSearch) {
@@ -131,17 +149,17 @@ class _CertListState extends State<CertList> {
               .iterCertsSearch(pattern: widget.args.searchUserId!)
               .toList();
 
-          n.addAll(await addAllCerts(c, network));
+          n.addAll(await addAllCerts(c));
         }
 
         if (widget.args.empty() && !shouldSearch) {
           final c = await pgp.iterCerts().toList();
-          n.addAll(await addAllCerts(c, network));
+          n.addAll(await addAllCerts(c));
         }
 
         if (shouldSearch) {
           final c = await pgp.iterCertsSearch(pattern: searchText).toList();
-          n.addAll(await addAllCerts(c, network));
+          n.addAll(await addAllCerts(c));
         }
       }
     } catch (e) {
@@ -218,6 +236,7 @@ class _CertListState extends State<CertList> {
                         (v) => CertCard(
                           pgpKey: v.cert,
                           trust: v.trust,
+                          graphController: v.graphController,
                           active:
                               v.cert.cert.fingerprint == cert?.cert.fingerprint,
                         ),
