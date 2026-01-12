@@ -36,7 +36,7 @@ class DrawerContent extends StatelessWidget {
         ],
       );
     } else {
-      return const Text('No active key');
+      return const Text('No active card');
     }
   }
 
@@ -59,7 +59,7 @@ class DrawerContent extends StatelessWidget {
             context.pop();
             context.push('/generate');
           },
-          child: const Text("Generate key"),
+          child: const Text("Generate card"),
         ),
         TextButton(
           onPressed: () async {
@@ -72,7 +72,7 @@ class DrawerContent extends StatelessWidget {
             }
           },
 
-          child: const Text("Import key"),
+          child: const Text("Import cards"),
         ),
         TextButton(
           onPressed: () {

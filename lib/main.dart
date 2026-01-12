@@ -34,7 +34,7 @@ String titleFromPath(String path) {
     '/sign_data' => 'Full network',
     '/network' => 'Full network',
     '/sign' => 'Add trust signature',
-    '/list' => 'All identities',
+    '/list' => 'All Cards',
     '/share' => 'Sharing identity card',
     '/mycards' => 'My Cards',
     _ => 'Kata',

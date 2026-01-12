@@ -69,7 +69,7 @@ class _SignKeyViewState extends State<SignKeyView> {
     if (cert != null) {
       return trustRadioGroup(context, cert);
     } else {
-      return const Text('No active keys');
+      return const Text('No active cards');
     }
   }
 }
