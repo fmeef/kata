@@ -1,3 +1,4 @@
+import 'package:kata/pgp/cert/active_cert.dart';
 import 'package:kata/pgp/cert/cert_card.dart';
 import 'package:kata/pgp/identity_service.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
@@ -69,7 +70,8 @@ class _GenerateKeyState extends State<GenerateKey> {
                     TextButton(
                       onPressed: () async {
                         if (context.mounted) {
-                          IdentityService app = context.read();
+                          final IdentityService app = context.read();
+                          final ActiveCert activeCert = context.read();
                           if (_formState.currentState!.validate()) {
                             final current = currentCert;
                             try {
@@ -86,6 +88,13 @@ class _GenerateKeyState extends State<GenerateKey> {
                                   .generate();
                               if (_online) {
                                 await app.uploadToKeyserver(cert);
+                              }
+
+                              if (activeCert.cert == null) {
+                                await app.pgpApp.updateRole(
+                                  fingerprint: cert.cert.fingerprint,
+                                  role: "primary",
+                                );
                               }
 
                               setState(() {
