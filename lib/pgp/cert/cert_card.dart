@@ -25,6 +25,16 @@ class CertCard extends StatelessWidget {
     this.graphController,
   });
 
+  Color colorForTrust(num trust) {
+    if (trust > 1 && trust < 120) {
+      return Colors.yellow;
+    } else if (trust >= 120) {
+      return Colors.green;
+    } else {
+      return Colors.white;
+    }
+  }
+
   Widget contentText(BuildContext context) {
     final theme = Theme.of(context);
     return Column(
@@ -142,7 +152,10 @@ class CertCard extends StatelessWidget {
                                 context.push('/path', extra: graphController);
                               }
                             },
-                            child: Chip(label: Text('Trust: $trust')),
+                            child: Chip(
+                              label: Text('Trust: $trust'),
+                              backgroundColor: colorForTrust(trust.toInt()),
+                            ),
                           ),
                         }),
                       }),
