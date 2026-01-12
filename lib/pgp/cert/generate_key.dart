@@ -58,51 +58,58 @@ class _GenerateKeyState extends State<GenerateKey> {
               ),
               Padding(
                 padding: EdgeInsetsGeometry.symmetric(vertical: 16),
-                child: TextButton(
-                  onPressed: () async {
-                    if (context.mounted) {
-                      IdentityService app = context.read();
-                      if (_formState.currentState!.validate()) {
-                        final current = currentCert;
-                        try {
-                          if (current != null) {
-                            await app.pgpApp.deletePrivateKey(
-                              fingerprint: current.cert.fingerprint,
-                            );
-                          }
-                          final cert = await app.pgpApp
-                              .generateKey(email: _emailController.text)
-                              .name(name: _nameController.text)
-                              .comment(comment: _commentController.text)
-                              .online(online: _online)
-                              .generate();
-                          if (_online) {
-                            await app.uploadToKeyserver(cert);
-                          }
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    if (currentCert != null)
+                      ElevatedButton(
+                        onPressed: () => context.pop(),
+                        child: const Text('Save'),
+                      ),
+                    TextButton(
+                      onPressed: () async {
+                        if (context.mounted) {
+                          IdentityService app = context.read();
+                          if (_formState.currentState!.validate()) {
+                            final current = currentCert;
+                            try {
+                              if (current != null) {
+                                await app.pgpApp.deletePrivateKey(
+                                  fingerprint: current.cert.fingerprint,
+                                );
+                              }
+                              final cert = await app.pgpApp
+                                  .generateKey(email: _emailController.text)
+                                  .name(name: _nameController.text)
+                                  .comment(comment: _commentController.text)
+                                  .online(online: _online)
+                                  .generate();
+                              if (_online) {
+                                await app.uploadToKeyserver(cert);
+                              }
 
-                          setState(() {
-                            currentCert = cert;
-                          });
-                        } on Exception catch (e) {
-                          sm.showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'Failed to generate certificate: $e',
-                              ),
-                            ),
-                          );
+                              setState(() {
+                                currentCert = cert;
+                              });
+                            } on Exception catch (e) {
+                              sm.showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Failed to generate certificate: $e',
+                                  ),
+                                ),
+                              );
+                            }
+                          }
                         }
-                      }
-                    }
-                  },
-                  child: const Text("Generate"),
+                      },
+                      child: currentCert == null
+                          ? const Text("Generate")
+                          : const Text('Regenerate'),
+                    ),
+                  ],
                 ),
               ),
-              if (currentCert != null)
-                ElevatedButton(
-                  onPressed: () => context.pop(),
-                  child: const Text('Save'),
-                ),
             ],
           ),
         ),
