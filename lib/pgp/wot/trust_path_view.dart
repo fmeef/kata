@@ -2,7 +2,6 @@ import 'package:kata/graphvis/rust_converter.dart';
 import 'package:kata/pgp/wot/graph_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_graph_view/flutter_graph_view.dart';
-import 'package:go_router/go_router.dart';
 
 class TrustPathView extends StatelessWidget {
   final GraphController adapter;

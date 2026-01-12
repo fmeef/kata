@@ -48,7 +48,6 @@ dependencies:
   path_provider: ^2.1.5
   provider: ^6.1.5+1
   freezed_annotation: ^3.1.0
-  graphview: ^1.5.1
   lazylist: ^0.0.1
   tap_to_expand: ^0.7.2
   github_identicon: ^1.0.1+1

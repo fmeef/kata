@@ -3,7 +3,6 @@ import 'package:kata/pgp/cert/cert_card_menu.dart';
 import 'package:kata/pgp/identity_service.dart';
 import 'package:kata/pgp/wot/cert_list_args.dart';
 import 'package:kata/pgp/wot/sig_list.dart';
-import 'package:kata/pgp/wot/trust_path_view.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:flutter/material.dart';
 import 'package:github_identicon/github_identicon.dart';
@@ -141,8 +140,8 @@ class CertCard extends StatelessWidget {
                               fingerprint: pgpKey.cert.fingerprint,
                               trust: 1,
                             );
-                            if (context.mounted &&
-                                graphController.graph.vertices.length > 1) {
+
+                            if (context.mounted) {
                               context.push('/path', extra: graphController);
                             }
                           },
