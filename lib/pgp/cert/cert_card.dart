@@ -141,24 +141,18 @@ class CertCard extends StatelessWidget {
                         ),
                         backgroundColor: theme.colorScheme.tertiary,
                       )
-                    else
-                      (switch (cert) {
-                        null => Chip(label: Text('Trust: $trust')),
-                        _ => (switch (graphController) {
-                          null => Chip(label: Text('Trust: $trust')),
-                          _ => InkWell(
-                            onTap: () async {
-                              if (context.mounted) {
-                                context.push('/path', extra: graphController);
-                              }
-                            },
-                            child: Chip(
-                              label: Text('Trust: $trust'),
-                              backgroundColor: colorForTrust(trust.toInt()),
-                            ),
-                          ),
-                        }),
-                      }),
+                    else if (cert != null && graphController != null)
+                      InkWell(
+                        onTap: () async {
+                          if (context.mounted) {
+                            context.push('/path', extra: graphController);
+                          }
+                        },
+                        child: Chip(
+                          label: Text('Trust: $trust'),
+                          backgroundColor: colorForTrust(trust.toInt()),
+                        ),
+                      ),
                   ],
                 ),
               ],
