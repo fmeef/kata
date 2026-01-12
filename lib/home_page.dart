@@ -7,14 +7,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Your identities', style: theme.textTheme.bodyLarge),
-        Expanded(child: CertList(args: CertListArgs(owned: true))),
-      ],
-    );
+    return Expanded(child: CertList(args: CertListArgs(owned: true)));
   }
 }
