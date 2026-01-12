@@ -6,6 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+extension IsEmail on String {
+  bool isEmail() {
+    return RegExp(
+      r'''^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$''',
+    ).hasMatch(this);
+  }
+}
+
 class _GenerateKeyState extends State<GenerateKey> {
   final GlobalKey<FormState> _formState = GlobalKey();
   PgpCertWithIds? currentCert;
@@ -30,7 +38,11 @@ class _GenerateKeyState extends State<GenerateKey> {
                 decoration: InputDecoration(hintText: "Email"),
                 validator: (v) {
                   if (v?.isEmpty ?? true) {
-                    return "Empty emails are not allowed";
+                    return 'Empty emails are not allowed';
+                  }
+
+                  if (!(v?.isEmail() ?? false)) {
+                    return 'The email field must be a valid email';
                   }
                   return null;
                 },
@@ -47,7 +59,7 @@ class _GenerateKeyState extends State<GenerateKey> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Text('Upload this key to servers'),
+                  const Text('Upload this card to servers'),
 
                   Checkbox(
                     value: _online,
@@ -103,9 +115,7 @@ class _GenerateKeyState extends State<GenerateKey> {
                             } on Exception catch (e) {
                               sm.showSnackBar(
                                 SnackBar(
-                                  content: Text(
-                                    'Failed to generate certificate: $e',
-                                  ),
+                                  content: Text('Failed to generate card: $e'),
                                 ),
                               );
                             }
