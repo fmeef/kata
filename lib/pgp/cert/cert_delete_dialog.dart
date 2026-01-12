@@ -1,3 +1,4 @@
+import 'package:kata/pgp/cert/cert_card.dart';
 import 'package:kata/src/rust/api.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:flutter/material.dart';
@@ -21,15 +22,16 @@ class CertDeleteDialog extends StatelessWidget {
 
     return Dialog(
       child: Padding(
-        padding: EdgeInsetsGeometry.all(6.0),
+        padding: EdgeInsetsGeometry.all(10),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Are you sure you want to delete the identity ${identity.ids.first}",
+              "Are you sure you want to delete the card ${identity.ids.first}",
               style: theme.textTheme.titleLarge,
             ),
+            CertCard(pgpKey: identity, trust: BigInt.from(0)),
             Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
