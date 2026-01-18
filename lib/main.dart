@@ -33,7 +33,7 @@ String titleFromPath(String path) {
     '/generate' => 'Generate identity',
     '/sign_data' => 'Full network',
     '/network' => 'Full network',
-    '/sign' => 'Add trust signature',
+    '/sign' => "Add trust to a friend's card",
     '/list' => 'All Cards',
     '/share' => 'Sharing identity card',
     '/mycards' => 'My Cards',

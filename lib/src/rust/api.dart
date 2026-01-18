@@ -83,7 +83,9 @@ abstract class PgpApp
   Future<List<String>> getFingerprints();
 
   @override
-  Future<PgpCertWithIds> getKeyFromFingerprint({required String fingerprint});
+  Future<PgpCertWithIds> getKeyFromFingerprint({
+    required UserHandle fingerprint,
+  });
 
   Future<Uint8List> getQr({
     required String resource,

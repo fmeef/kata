@@ -11,7 +11,6 @@ class _SignKeyViewState extends State<SignKeyView> {
   TrustLevel currentTrust = TrustLevel.partial();
 
   Widget trustRadioGroup(BuildContext context, PgpCertWithIds activeCert) {
-    final theme = Theme.of(context);
     final PgpApp pgpApp = context.read();
 
     return RadioGroup(
@@ -22,7 +21,6 @@ class _SignKeyViewState extends State<SignKeyView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Attempting to sign:', style: theme.textTheme.titleLarge),
           CertCard(
             pgpKey: widget.target,
             signable: false,
@@ -30,6 +28,8 @@ class _SignKeyViewState extends State<SignKeyView> {
           ),
           Column(
             children: [
+              Text('How much do you trust ${widget.target.ids.first}'),
+
               ListTile(
                 title: const Text('Ultimate'),
                 leading: Radio<TrustLevel>(value: TrustLevel.ultimate()),
@@ -44,18 +44,27 @@ class _SignKeyViewState extends State<SignKeyView> {
               ),
             ],
           ),
-          ElevatedButton(
-            onPressed: () async {
-              await pgpApp.signWithTrustLevel(
-                signer: activeCert.cert.fingerprint,
-                signee: widget.target.cert.fingerprint,
-                level: 1,
-                trust: currentTrust,
-              );
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                onPressed: () async {
+                  await pgpApp.signWithTrustLevel(
+                    signer: activeCert.cert.fingerprint,
+                    signee: widget.target.cert.fingerprint,
+                    level: 1,
+                    trust: currentTrust,
+                  );
 
-              if (context.mounted && context.canPop()) context.pop();
-            },
-            child: const Text('Sign'),
+                  if (context.mounted && context.canPop()) context.pop();
+                },
+                child: const Text('Sign'),
+              ),
+              TextButton(
+                onPressed: () => context.pop(),
+                child: const Text('Cancel'),
+              ),
+            ],
           ),
         ],
       ),

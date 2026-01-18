@@ -1,6 +1,7 @@
 import 'package:kata/pgp/wot/graph_controller.dart';
 import 'package:kata/prefs/pref_keys.dart';
 import 'package:kata/src/rust/api.dart';
+import 'package:kata/src/rust/api/pgp.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -43,7 +44,9 @@ class IdentityService {
       trust: BigInt.from(trust),
     );
 
-    final target = await pgpApp.getKeyFromFingerprint(fingerprint: fingerprint);
+    final target = await pgpApp.getKeyFromFingerprint(
+      fingerprint: UserHandle.fromHex(hex: fingerprint),
+    );
     // Graph output = Graph();
     // convertWotGraph(output, graph);
 

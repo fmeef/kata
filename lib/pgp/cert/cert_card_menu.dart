@@ -34,7 +34,7 @@ class _CertCardMenuState extends State<CertCardMenu> {
         ),
         if (widget.cert.cert.hasPrivate)
           MenuItemButton(
-            child: const Text('Upload'),
+            child: const Text('upload'),
             onPressed: () async {
               final servers =
                   await prefs.getStringList(prefKeyserverList) ??
