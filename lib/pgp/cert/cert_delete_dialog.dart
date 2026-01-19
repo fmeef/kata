@@ -1,5 +1,6 @@
 import 'package:kata/pgp/cert/cert_card.dart';
 import 'package:kata/src/rust/api.dart';
+import 'package:kata/src/rust/api/pgp.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -44,11 +45,15 @@ class CertDeleteDialog extends StatelessWidget {
                   onPressed: () async {
                     if (identity.cert.hasPrivate) {
                       await app.deletePrivateKey(
-                        fingerprint: identity.cert.fingerprint,
+                        fingerprint: UserHandle.fromHex(
+                          hex: identity.cert.fingerprint,
+                        ),
                       );
                     } else {
                       await app.deleteCert(
-                        fingerprint: identity.cert.fingerprint,
+                        fingerprint: UserHandle.fromHex(
+                          hex: identity.cert.fingerprint,
+                        ),
                       );
                     }
                     if (context.mounted) context.pop();

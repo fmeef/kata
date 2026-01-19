@@ -216,12 +216,12 @@ abstract class RustLibApi extends BaseApi {
 
   Future<void> crateApiPgpAppDeleteCert({
     required PgpApp that,
-    required String fingerprint,
+    required UserHandle fingerprint,
   });
 
   Future<void> crateApiPgpAppDeletePrivateKey({
     required PgpApp that,
-    required String fingerprint,
+    required UserHandle fingerprint,
   });
 
   Future<String> crateApiPgpAppExportArmor({required PgpApp that});
@@ -233,7 +233,7 @@ abstract class RustLibApi extends BaseApi {
 
   Future<void> crateApiPgpAppFillFromKeyserver({
     required PgpApp that,
-    required String fingerprint,
+    required UserHandle fingerprint,
     required String server,
   });
 
@@ -261,7 +261,7 @@ abstract class RustLibApi extends BaseApi {
     required String resource,
     String? handle,
     String? description,
-    required String key,
+    required UserHandle key,
     required bool fullKey,
   });
 
@@ -308,7 +308,7 @@ abstract class RustLibApi extends BaseApi {
 
   Future<CertSynopsis> crateApiPgpAppLookupSynopsisByFpr({
     required PgpApp that,
-    required String fingerprint,
+    required UserHandle fingerprint,
   });
 
   Future<void> crateApiPgpAppMegaFlush({required PgpApp that});
@@ -342,13 +342,13 @@ abstract class RustLibApi extends BaseApi {
 
   Future<void> crateApiPgpAppUpdateRole({
     required PgpApp that,
-    required String fingerprint,
+    required UserHandle fingerprint,
     required String role,
   });
 
   Future<void> crateApiPgpAppUploadToKeyserver({
     required PgpApp that,
-    required String fingerprint,
+    required UserHandle fingerprint,
     required String server,
   });
 
@@ -1687,7 +1687,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @override
   Future<void> crateApiPgpAppDeleteCert({
     required PgpApp that,
-    required String fingerprint,
+    required UserHandle fingerprint,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -1697,7 +1697,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
-          sse_encode_String(fingerprint, serializer);
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+            fingerprint,
+            serializer,
+          );
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -1724,7 +1727,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @override
   Future<void> crateApiPgpAppDeletePrivateKey({
     required PgpApp that,
-    required String fingerprint,
+    required UserHandle fingerprint,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -1734,7 +1737,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
-          sse_encode_String(fingerprint, serializer);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+            fingerprint,
+            serializer,
+          );
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -1830,7 +1836,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @override
   Future<void> crateApiPgpAppFillFromKeyserver({
     required PgpApp that,
-    required String fingerprint,
+    required UserHandle fingerprint,
     required String server,
   }) {
     return handler.executeNormal(
@@ -1841,7 +1847,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
-          sse_encode_String(fingerprint, serializer);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+            fingerprint,
+            serializer,
+          );
           sse_encode_String(server, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
@@ -2046,7 +2055,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     required String resource,
     String? handle,
     String? description,
-    required String key,
+    required UserHandle key,
     required bool fullKey,
   }) {
     return handler.executeNormal(
@@ -2060,7 +2069,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           sse_encode_String(resource, serializer);
           sse_encode_opt_String(handle, serializer);
           sse_encode_opt_String(description, serializer);
-          sse_encode_String(key, serializer);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+            key,
+            serializer,
+          );
           sse_encode_bool(fullKey, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
@@ -2470,7 +2482,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @override
   Future<CertSynopsis> crateApiPgpAppLookupSynopsisByFpr({
     required PgpApp that,
-    required String fingerprint,
+    required UserHandle fingerprint,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -2480,7 +2492,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
-          sse_encode_String(fingerprint, serializer);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+            fingerprint,
+            serializer,
+          );
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -2756,7 +2771,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @override
   Future<void> crateApiPgpAppUpdateRole({
     required PgpApp that,
-    required String fingerprint,
+    required UserHandle fingerprint,
     required String role,
   }) {
     return handler.executeNormal(
@@ -2767,7 +2782,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
-          sse_encode_String(fingerprint, serializer);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+            fingerprint,
+            serializer,
+          );
           sse_encode_String(role, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
@@ -2795,7 +2813,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @override
   Future<void> crateApiPgpAppUploadToKeyserver({
     required PgpApp that,
-    required String fingerprint,
+    required UserHandle fingerprint,
     required String server,
   }) {
     return handler.executeNormal(
@@ -2806,7 +2824,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
-          sse_encode_String(fingerprint, serializer);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+            fingerprint,
+            serializer,
+          );
           sse_encode_String(server, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
@@ -9246,10 +9267,12 @@ class PgpAppImpl extends RustOpaque implements PgpApp {
       .api
       .crateApiPgpAppCertifiedUseridsOf(that: this, fpr: fpr);
 
-  Future<void> deleteCert({required String fingerprint}) => RustLib.instance.api
+  Future<void> deleteCert({required UserHandle fingerprint}) => RustLib
+      .instance
+      .api
       .crateApiPgpAppDeleteCert(that: this, fingerprint: fingerprint);
 
-  Future<void> deletePrivateKey({required String fingerprint}) => RustLib
+  Future<void> deletePrivateKey({required UserHandle fingerprint}) => RustLib
       .instance
       .api
       .crateApiPgpAppDeletePrivateKey(that: this, fingerprint: fingerprint);
@@ -9261,7 +9284,7 @@ class PgpAppImpl extends RustOpaque implements PgpApp {
       RustLib.instance.api.crateApiPgpAppExportFile(that: this, file: file);
 
   Future<void> fillFromKeyserver({
-    required String fingerprint,
+    required UserHandle fingerprint,
     required String server,
   }) => RustLib.instance.api.crateApiPgpAppFillFromKeyserver(
     that: this,
@@ -9291,7 +9314,7 @@ class PgpAppImpl extends RustOpaque implements PgpApp {
     required String resource,
     String? handle,
     String? description,
-    required String key,
+    required UserHandle key,
     required bool fullKey,
   }) => RustLib.instance.api.crateApiPgpAppGetQr(
     that: this,
@@ -9344,7 +9367,7 @@ class PgpAppImpl extends RustOpaque implements PgpApp {
         userid: userid,
       );
 
-  Future<CertSynopsis> lookupSynopsisByFpr({required String fingerprint}) =>
+  Future<CertSynopsis> lookupSynopsisByFpr({required UserHandle fingerprint}) =>
       RustLib.instance.api.crateApiPgpAppLookupSynopsisByFpr(
         that: this,
         fingerprint: fingerprint,
@@ -9389,7 +9412,7 @@ class PgpAppImpl extends RustOpaque implements PgpApp {
       RustLib.instance.api.crateApiPgpAppUpdateCert(that: this, cert: cert);
 
   Future<void> updateRole({
-    required String fingerprint,
+    required UserHandle fingerprint,
     required String role,
   }) => RustLib.instance.api.crateApiPgpAppUpdateRole(
     that: this,
@@ -9398,7 +9421,7 @@ class PgpAppImpl extends RustOpaque implements PgpApp {
   );
 
   Future<void> uploadToKeyserver({
-    required String fingerprint,
+    required UserHandle fingerprint,
     required String server,
   }) => RustLib.instance.api.crateApiPgpAppUploadToKeyserver(
     that: this,

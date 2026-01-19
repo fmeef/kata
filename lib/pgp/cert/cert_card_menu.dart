@@ -1,6 +1,7 @@
 import 'package:kata/pgp/cert/cert_delete_dialog.dart';
 import 'package:kata/prefs/pref_keys.dart';
 import 'package:kata/src/rust/api.dart';
+import 'package:kata/src/rust/api/pgp.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -42,7 +43,9 @@ class _CertCardMenuState extends State<CertCardMenu> {
               for (final server in servers) {
                 try {
                   await pgpApp.uploadToKeyserver(
-                    fingerprint: widget.cert.cert.fingerprint,
+                    fingerprint: UserHandle.fromHex(
+                      hex: widget.cert.cert.fingerprint,
+                    ),
                     server: server,
                   );
                 } on Exception catch (e) {
@@ -64,7 +67,9 @@ class _CertCardMenuState extends State<CertCardMenu> {
           MenuItemButton(
             child: const Text('set active'),
             onPressed: () async => await pgpApp.updateRole(
-              fingerprint: widget.cert.cert.fingerprint,
+              fingerprint: UserHandle.fromHex(
+                hex: widget.cert.cert.fingerprint,
+              ),
               role: "primary",
             ),
           ),

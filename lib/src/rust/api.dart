@@ -54,10 +54,10 @@ abstract class PgpApp
       RustLib.instance.api.crateApiPgpAppCreate(config: config);
 
   @override
-  Future<void> deleteCert({required String fingerprint});
+  Future<void> deleteCert({required UserHandle fingerprint});
 
   @override
-  Future<void> deletePrivateKey({required String fingerprint});
+  Future<void> deletePrivateKey({required UserHandle fingerprint});
 
   @override
   Future<String> exportArmor();
@@ -66,7 +66,7 @@ abstract class PgpApp
   Future<void> exportFile({required String file});
 
   Future<void> fillFromKeyserver({
-    required String fingerprint,
+    required UserHandle fingerprint,
     required String server,
   });
 
@@ -91,7 +91,7 @@ abstract class PgpApp
     required String resource,
     String? handle,
     String? description,
-    required String key,
+    required UserHandle key,
     required bool fullKey,
   });
 
@@ -125,7 +125,7 @@ abstract class PgpApp
   Future<List<String>> lookupSynopsesByUserid({required UserId userid});
 
   @override
-  Future<CertSynopsis> lookupSynopsisByFpr({required String fingerprint});
+  Future<CertSynopsis> lookupSynopsisByFpr({required UserHandle fingerprint});
 
   @override
   Future<void> megaFlush();
@@ -151,10 +151,13 @@ abstract class PgpApp
   Future<void> updateCert({required ArcLazyCert cert});
 
   @override
-  Future<void> updateRole({required String fingerprint, required String role});
+  Future<void> updateRole({
+    required UserHandle fingerprint,
+    required String role,
+  });
 
   Future<void> uploadToKeyserver({
-    required String fingerprint,
+    required UserHandle fingerprint,
     required String server,
   });
 
@@ -164,9 +167,9 @@ abstract class PgpApp
 abstract class PgpAppTrait {
   Future<List<PgpCertWithIds>> allOwnedCerts();
 
-  Future<void> deleteCert({required String fingerprint});
+  Future<void> deleteCert({required UserHandle fingerprint});
 
-  Future<void> deletePrivateKey({required String fingerprint});
+  Future<void> deletePrivateKey({required UserHandle fingerprint});
 
   GenerateCert generateKey({required String email});
 
@@ -180,7 +183,10 @@ abstract class PgpAppTrait {
 
   Future<void> updateCert({required ArcLazyCert cert});
 
-  Future<void> updateRole({required String fingerprint, required String role});
+  Future<void> updateRole({
+    required UserHandle fingerprint,
+    required String role,
+  });
 }
 
 class Config {

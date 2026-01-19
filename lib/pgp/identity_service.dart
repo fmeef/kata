@@ -16,7 +16,7 @@ class IdentityService {
 
     for (final server in serverList) {
       await pgpApp.uploadToKeyserver(
-        fingerprint: cert.cert.fingerprint,
+        fingerprint: UserHandle.fromHex(hex: cert.cert.fingerprint),
         server: server,
       );
     }
@@ -27,8 +27,14 @@ class IdentityService {
         await prefs.getStringList(prefKeyserverList) ?? defaultKeyservers;
 
     for (final server in serverList) {
-      await pgpApp.fillFromKeyserver(fingerprint: fingerprint, server: server);
-      await pgpApp.uploadToKeyserver(fingerprint: fingerprint, server: server);
+      await pgpApp.fillFromKeyserver(
+        fingerprint: UserHandle.fromHex(hex: fingerprint),
+        server: server,
+      );
+      await pgpApp.uploadToKeyserver(
+        fingerprint: UserHandle.fromHex(hex: fingerprint),
+        server: server,
+      );
     }
   }
 

@@ -8,7 +8,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'pgp/cert.dart';
 import 'pgp/import.dart';
 
-// These functions are ignored because they are not marked as `pub`: `keyhandle`, `try_keyhandle`
+// These functions are ignored because they are not marked as `pub`: `keyhandle`, `try_fingerprint_owned`, `try_fingerprint`, `try_keyhandle`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `PgpServiceStore`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`
 // These functions are ignored (category: IgnoreBecauseOwnerTyShouldIgnore): `import_certs`, `new`

@@ -6,6 +6,7 @@
 import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
+import 'pgp.dart';
 part 'db.freezed.dart';
 
 // These functions are ignored because they are not marked as `pub`: `handle`
@@ -33,7 +34,7 @@ abstract class CertStoreTrait {
 
   Future<List<String>> lookupSynopsesByUserid({required UserId userid});
 
-  Future<CertSynopsis> lookupSynopsisByFpr({required String fingerprint});
+  Future<CertSynopsis> lookupSynopsisByFpr({required UserHandle fingerprint});
 
   Future<List<CertSynopsis>> synopses();
 

@@ -1,5 +1,6 @@
 import 'package:kata/prefs/pref_keys.dart';
 import 'package:kata/src/rust/api.dart';
+import 'package:kata/src/rust/api/pgp.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -23,7 +24,7 @@ class UploadConfirmDialog extends StatelessWidget {
         for (final server in servers) {
           try {
             await pgpApp.uploadToKeyserver(
-              fingerprint: cert.cert.fingerprint,
+              fingerprint: UserHandle.fromHex(hex: cert.cert.fingerprint),
               server: server,
             );
           } on Exception catch (e) {
