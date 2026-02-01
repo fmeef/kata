@@ -50,8 +50,8 @@ class _SignKeyViewState extends State<SignKeyView> {
               ElevatedButton(
                 onPressed: () async {
                   await pgpApp.signWithTrustLevel(
-                    signer: activeCert.cert.fingerprint,
-                    signee: widget.target.cert.fingerprint,
+                    signer: activeCert.cert.fingerprint.name(),
+                    signee: widget.target.cert.fingerprint.name(),
                     level: 1,
                     trust: currentTrust,
                   );

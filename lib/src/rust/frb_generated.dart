@@ -15,6 +15,7 @@ import 'api/db/migrations.dart';
 import 'api/db/store.dart';
 import 'api/pgp.dart';
 import 'api/pgp/cert.dart';
+import 'api/pgp/fingerprint.dart';
 import 'api/pgp/import.dart';
 import 'api/pgp/keys.dart';
 import 'api/pgp/sign.dart';
@@ -84,7 +85,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.11.1';
 
   @override
-  int get rustContentHash => 632273180;
+  int get rustContentHash => 501852343;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -547,9 +548,17 @@ abstract class RustLibApi extends BaseApi {
     required StoreNetwork that,
   });
 
+  String crateApiPgpUserHandleComposite({required UserHandle that});
+
+  String crateApiPgpUserHandleCompositeLujvo({required UserHandle that});
+
   UserHandle crateApiPgpUserHandleFromHex({required String hex});
 
-  Future<String> crateApiPgpUserHandleName({required UserHandle that});
+  String crateApiPgpUserHandleName({required UserHandle that});
+
+  VisualKey crateApiPgpUserHandleSeparate({required UserHandle that});
+
+  VisualKey crateApiPgpUserHandleSeparateLujvo({required UserHandle that});
 
   void crateApiDbConnectionWatcherWatch({
     required Watcher that,
@@ -4463,6 +4472,72 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  String crateApiPgpUserHandleComposite({required UserHandle that}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 164,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_String,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateApiPgpUserHandleCompositeConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpUserHandleCompositeConstMeta =>
+      const TaskConstMeta(
+        debugName: "UserHandle_composite",
+        argNames: ["that"],
+      );
+
+  @override
+  String crateApiPgpUserHandleCompositeLujvo({required UserHandle that}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 165,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_String,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateApiPgpUserHandleCompositeLujvoConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpUserHandleCompositeLujvoConstMeta =>
+      const TaskConstMeta(
+        debugName: "UserHandle_composite_lujvo",
+        argNames: ["that"],
+      );
+
+  @override
   UserHandle crateApiPgpUserHandleFromHex({required String hex}) {
     return handler.executeSync(
       SyncTask(
@@ -4472,7 +4547,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 164,
+            funcId: 166,
           )!;
         },
         codec: SseCodec(
@@ -4491,21 +4566,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "UserHandle_from_hex", argNames: ["hex"]);
 
   @override
-  Future<String> crateApiPgpUserHandleName({required UserHandle that}) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
+  String crateApiPgpUserHandleName({required UserHandle that}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
             that,
             serializer,
           );
-          pdeCallFfi(
+          return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 165,
-            port: port_,
-          );
+            funcId: 167,
+          )!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -4520,6 +4594,69 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   TaskConstMeta get kCrateApiPgpUserHandleNameConstMeta =>
       const TaskConstMeta(debugName: "UserHandle_name", argNames: ["that"]);
+
+  @override
+  VisualKey crateApiPgpUserHandleSeparate({required UserHandle that}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 168,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_visual_key,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateApiPgpUserHandleSeparateConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpUserHandleSeparateConstMeta =>
+      const TaskConstMeta(debugName: "UserHandle_separate", argNames: ["that"]);
+
+  @override
+  VisualKey crateApiPgpUserHandleSeparateLujvo({required UserHandle that}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 169,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_visual_key,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateApiPgpUserHandleSeparateLujvoConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpUserHandleSeparateLujvoConstMeta =>
+      const TaskConstMeta(
+        debugName: "UserHandle_separate_lujvo",
+        argNames: ["that"],
+      );
 
   @override
   void crateApiDbConnectionWatcherWatch({
@@ -4543,7 +4680,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 166,
+            funcId: 170,
           )!;
         },
         codec: SseCodec(
@@ -4577,7 +4714,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 167,
+            funcId: 171,
           )!;
         },
         codec: SseCodec(
@@ -4605,7 +4742,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 169,
+            funcId: 173,
             port: port_,
           );
         },
@@ -4640,7 +4777,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 170,
+            funcId: 174,
             port: port_,
           );
         },
@@ -4670,7 +4807,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 171,
+            funcId: 175,
             port: port_,
           );
         },
@@ -4708,7 +4845,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 172,
+            funcId: 176,
             port: port_,
           );
         },
@@ -4748,7 +4885,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 173,
+            funcId: 177,
             port: port_,
           );
         },
@@ -4778,7 +4915,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 174,
+            funcId: 178,
             port: port_,
           );
         },
@@ -4816,7 +4953,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 175,
+            funcId: 179,
             port: port_,
           );
         },
@@ -4854,7 +4991,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 176,
+            funcId: 180,
             port: port_,
           );
         },
@@ -4884,7 +5021,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 177,
+            funcId: 181,
             port: port_,
           );
         },
@@ -4919,7 +5056,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 178,
+            funcId: 182,
             port: port_,
           );
         },
@@ -4959,7 +5096,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 179,
+            funcId: 183,
             port: port_,
           );
         },
@@ -4989,7 +5126,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 180,
+            funcId: 184,
             port: port_,
           );
         },
@@ -5024,7 +5161,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 181,
+            funcId: 185,
             port: port_,
           );
         },
@@ -5057,7 +5194,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 182,
+            funcId: 186,
           )!;
         },
         codec: SseCodec(
@@ -5087,7 +5224,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 183,
+            funcId: 187,
           )!;
         },
         codec: SseCodec(
@@ -5120,7 +5257,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 184,
+            funcId: 188,
             port: port_,
           );
         },
@@ -6247,7 +6384,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
     return PgpCert(
       keyid: dco_decode_String(arr[0]),
-      fingerprint: dco_decode_String(arr[1]),
+      fingerprint:
+          dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+            arr[1],
+          ),
       hasPrivate: dco_decode_bool(arr[2]),
       online: dco_decode_bool(arr[3]),
     );
@@ -6401,6 +6541,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       content: dco_decode_opt_box_autoadd_qr_code_content(arr[1]),
       key: dco_decode_opt_box_autoadd_pgp_cert_with_ids(arr[2]),
       isStub: dco_decode_bool(arr[3]),
+    );
+  }
+
+  @protected
+  VisualKey dco_decode_visual_key(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 3)
+      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+    return VisualKey(
+      gismu: dco_decode_list_String(arr[0]),
+      emoji: dco_decode_list_String(arr[1]),
+      phone: dco_decode_String(arr[2]),
     );
   }
 
@@ -7548,7 +7701,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   PgpCert sse_decode_pgp_cert(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_keyid = sse_decode_String(deserializer);
-    var var_fingerprint = sse_decode_String(deserializer);
+    var var_fingerprint =
+        sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+          deserializer,
+        );
     var var_hasPrivate = sse_decode_bool(deserializer);
     var var_online = sse_decode_bool(deserializer);
     return PgpCert(
@@ -7705,6 +7861,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       key: var_key,
       isStub: var_isStub,
     );
+  }
+
+  @protected
+  VisualKey sse_decode_visual_key(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_gismu = sse_decode_list_String(deserializer);
+    var var_emoji = sse_decode_list_String(deserializer);
+    var var_phone = sse_decode_String(deserializer);
+    return VisualKey(gismu: var_gismu, emoji: var_emoji, phone: var_phone);
   }
 
   @protected
@@ -8918,7 +9083,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   void sse_encode_pgp_cert(PgpCert self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_String(self.keyid, serializer);
-    sse_encode_String(self.fingerprint, serializer);
+    sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+      self.fingerprint,
+      serializer,
+    );
     sse_encode_bool(self.hasPrivate, serializer);
     sse_encode_bool(self.online, serializer);
   }
@@ -9049,6 +9217,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_opt_box_autoadd_qr_code_content(self.content, serializer);
     sse_encode_opt_box_autoadd_pgp_cert_with_ids(self.key, serializer);
     sse_encode_bool(self.isStub, serializer);
+  }
+
+  @protected
+  void sse_encode_visual_key(VisualKey self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_String(self.gismu, serializer);
+    sse_encode_list_String(self.emoji, serializer);
+    sse_encode_String(self.phone, serializer);
   }
 
   @protected
@@ -9777,8 +9953,19 @@ class UserHandleImpl extends RustOpaque implements UserHandle {
         RustLib.instance.api.rust_arc_decrement_strong_count_UserHandlePtr,
   );
 
-  Future<String> name() =>
-      RustLib.instance.api.crateApiPgpUserHandleName(that: this);
+  String composite() =>
+      RustLib.instance.api.crateApiPgpUserHandleComposite(that: this);
+
+  String compositeLujvo() =>
+      RustLib.instance.api.crateApiPgpUserHandleCompositeLujvo(that: this);
+
+  String name() => RustLib.instance.api.crateApiPgpUserHandleName(that: this);
+
+  VisualKey separate() =>
+      RustLib.instance.api.crateApiPgpUserHandleSeparate(that: this);
+
+  VisualKey separateLujvo() =>
+      RustLib.instance.api.crateApiPgpUserHandleSeparateLujvo(that: this);
 }
 
 @sealed

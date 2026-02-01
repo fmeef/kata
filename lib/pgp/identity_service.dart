@@ -16,7 +16,7 @@ class IdentityService {
 
     for (final server in serverList) {
       await pgpApp.uploadToKeyserver(
-        fingerprint: UserHandle.fromHex(hex: cert.cert.fingerprint),
+        fingerprint: cert.cert.fingerprint,
         server: server,
       );
     }

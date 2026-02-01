@@ -3,11 +3,12 @@ import 'dart:typed_data';
 import 'package:kata/src/rust/api.dart';
 import 'package:flutter/material.dart';
 import 'package:github_identicon/github_identicon.dart';
+import 'package:kata/src/rust/api/pgp.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class SigCard extends StatelessWidget {
   final Uint8List? data;
-  final String fingerprint;
+  final UserHandle fingerprint;
   final String userid;
   final String? handle;
   final String? description;
@@ -42,7 +43,7 @@ class SigCard extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsetsGeometry.fromSTEB(8, 8, 16, 8),
-                  child: GitHubIdenticon(seed: fingerprint, size: 64),
+                  child: GitHubIdenticon(seed: fingerprint.name(), size: 64),
                 ),
                 Expanded(
                   child: Column(
@@ -62,7 +63,7 @@ class SigCard extends StatelessWidget {
                             if (handle != null)
                               Text(handle!, style: theme.textTheme.labelLarge),
                             Text(
-                              fingerprint,
+                              fingerprint.name(),
                               softWrap: true,
                               style: theme.textTheme.bodySmall,
                             ),

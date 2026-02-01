@@ -49,7 +49,9 @@ class ImportCertView extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () async {
                         try {
-                          await pgpApp.fillFromKeyserver(options.fingerprint);
+                          await pgpApp.fillFromKeyserver(
+                            options.fingerprint.name(),
+                          );
                         } on Exception catch (e) {
                           sm.showSnackBar(
                             SnackBar(

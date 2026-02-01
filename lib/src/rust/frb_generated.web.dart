@@ -14,6 +14,7 @@ import 'api/db/migrations.dart';
 import 'api/db/store.dart';
 import 'api/pgp.dart';
 import 'api/pgp/cert.dart';
+import 'api/pgp/fingerprint.dart';
 import 'api/pgp/import.dart';
 import 'api/pgp/keys.dart';
 import 'api/pgp/sign.dart';
@@ -637,6 +638,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   VerifyResult dco_decode_verify_result(dynamic raw);
 
   @protected
+  VisualKey dco_decode_visual_key(dynamic raw);
+
+  @protected
   WotGraph dco_decode_wot_graph(dynamic raw);
 
   @protected
@@ -1170,6 +1174,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   VerifyResult sse_decode_verify_result(SseDeserializer deserializer);
+
+  @protected
+  VisualKey sse_decode_visual_key(SseDeserializer deserializer);
 
   @protected
   WotGraph sse_decode_wot_graph(SseDeserializer deserializer);
@@ -1816,6 +1823,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_verify_result(VerifyResult self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_visual_key(VisualKey self, SseSerializer serializer);
 
   @protected
   void sse_encode_wot_graph(WotGraph self, SseSerializer serializer);

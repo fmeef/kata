@@ -1,5 +1,6 @@
 import 'package:kata/pgp/cert/active_cert.dart';
 import 'package:kata/pgp/cert/cert_card_menu.dart';
+import 'package:kata/pgp/cert/smart_fingerprint.dart';
 import 'package:kata/pgp/wot/cert_list_args.dart';
 import 'package:kata/pgp/wot/graph_controller.dart';
 import 'package:kata/pgp/wot/sig_list.dart';
@@ -36,12 +37,11 @@ class CertCard extends StatelessWidget {
   }
 
   Widget contentText(BuildContext context) {
-    final theme = Theme.of(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(pgpKey.cert.fingerprint, style: theme.textTheme.bodySmall),
+        SmartFingerprint(fingerprint: pgpKey.cert.fingerprint),
         SigList(pgpCert: pgpKey),
       ],
     );
@@ -68,7 +68,7 @@ class CertCard extends StatelessWidget {
                 Padding(
                   padding: EdgeInsetsGeometry.fromSTEB(8, 8, 16, 8),
                   child: GitHubIdenticon(
-                    seed: pgpKey.cert.fingerprint,
+                    seed: pgpKey.cert.fingerprint.name(),
                     size: 64,
                   ),
                 ),

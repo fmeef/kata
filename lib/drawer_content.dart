@@ -28,11 +28,14 @@ class DrawerContent extends StatelessWidget {
             )
           else
             Text(
-              cert.cert.fingerprint,
+              cert.cert.fingerprint.name(),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-          GitHubIdenticon(seed: cert.cert.fingerprint, size: identiconSize),
+          GitHubIdenticon(
+            seed: cert.cert.fingerprint.name(),
+            size: identiconSize,
+          ),
         ],
       );
     } else {

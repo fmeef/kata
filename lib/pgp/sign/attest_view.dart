@@ -3,7 +3,6 @@ import 'dart:typed_data';
 import 'package:kata/pgp/cert/active_cert.dart';
 import 'package:kata/pgp/sign/sig_card.dart';
 import 'package:kata/src/rust/api.dart';
-import 'package:kata/src/rust/api/pgp.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -22,7 +21,7 @@ class _AttestViewState extends State<AttestView> {
       resource: '',
       description: descriptionController.text,
       handle: handleController.text,
-      key: UserHandle.fromHex(hex: cert.cert.fingerprint),
+      key: cert.cert.fingerprint,
       fullKey: true,
     );
     setState(() {
@@ -50,7 +49,6 @@ class _AttestViewState extends State<AttestView> {
               SigCard(
                 pgpApp: pgpApp,
                 fingerprint: cert.cert.fingerprint,
-
                 handle: handleController.text,
                 userid: cert.ids.first,
                 description: descriptionController.text,

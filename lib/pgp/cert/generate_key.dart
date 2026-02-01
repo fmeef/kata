@@ -1,7 +1,6 @@
 import 'package:kata/pgp/cert/active_cert.dart';
 import 'package:kata/pgp/cert/cert_card.dart';
 import 'package:kata/pgp/identity_service.dart';
-import 'package:kata/src/rust/api/pgp.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -90,9 +89,7 @@ class _GenerateKeyState extends State<GenerateKey> {
                             try {
                               if (current != null) {
                                 await app.pgpApp.deletePrivateKey(
-                                  fingerprint: UserHandle.fromHex(
-                                    hex: current.cert.fingerprint,
-                                  ),
+                                  fingerprint: current.cert.fingerprint,
                                 );
                               }
                               final cert = await app.pgpApp
@@ -107,9 +104,7 @@ class _GenerateKeyState extends State<GenerateKey> {
 
                               if (activeCert.cert == null) {
                                 await app.pgpApp.updateRole(
-                                  fingerprint: UserHandle.fromHex(
-                                    hex: cert.cert.fingerprint,
-                                  ),
+                                  fingerprint: cert.cert.fingerprint,
                                   role: "primary",
                                 );
                               }

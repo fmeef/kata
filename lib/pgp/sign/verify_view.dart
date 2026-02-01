@@ -7,6 +7,7 @@ import 'package:kata/src/rust/api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zxing/flutter_zxing.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kata/src/rust/api/pgp.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
@@ -27,7 +28,7 @@ class VerifyView extends AbstractVerifier {
           'result ${result.content?.handle} ${result.content?.resource}',
         );
         final opt = ImportCertOptions(
-          fingerprint: result.fingerprints.first,
+          fingerprint: UserHandle.fromHex(hex: result.fingerprints.first),
           content: result,
         );
         if (ctx.mounted) {

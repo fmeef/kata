@@ -54,8 +54,8 @@ class _CertListState extends State<CertList> {
         final IdentityService service = context.read();
         if (active != null) {
           final graphController = await service.authenticate(
-            roots: [active.cert.fingerprint],
-            fingerprint: cert.cert.fingerprint,
+            roots: [active.cert.fingerprint.name()],
+            fingerprint: cert.cert.fingerprint.name(),
             trust: 1,
           );
 
@@ -105,7 +105,7 @@ class _CertListState extends State<CertList> {
     try {
       for (final key in certs) {
         certRefreshController.onUpdate(key.cert.ids.firstOrNull ?? "");
-        await pgp.fillFromKeyserver(key.cert.cert.fingerprint);
+        await pgp.fillFromKeyserver(key.cert.cert.fingerprint.name());
         if (key.cert.cert.online) {
           await pgp.uploadToKeyserver(key.cert);
         }
@@ -132,7 +132,12 @@ class _CertListState extends State<CertList> {
     final searchText = searchController.text;
     final shouldSearch = searchText.trim().isNotEmpty;
     try {
-      if (widget.args.owned) {
+      if (widget.args.fingerprint != null) {
+        final c = await pgp.getKeyFromFingerprint(
+          fingerprint: widget.args.fingerprint!,
+        );
+        n.addAll(await addAllCerts([c]));
+      } else if (widget.args.owned) {
         final c = await pgp.allOwnedCerts();
         n.addAll(await addAllCerts(c));
       } else {
@@ -186,7 +191,9 @@ class _CertListState extends State<CertList> {
         logger.d("using roots $roots");
 
         if (roots != null) {
-          final network = pgp.networkFromFingerprints(fingerprints: roots);
+          final network = pgp.networkFromFingerprints(
+            fingerprints: roots.map((v) => v.name()).toList(),
+          );
 
           if (watcher == null) {
             final w = pgp.getWatcher();
