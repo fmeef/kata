@@ -16,7 +16,7 @@ import 'package:kata/pgp/wot/graph_controller.dart';
 import 'package:kata/pgp/wot/sign_key_view.dart';
 import 'package:kata/pgp/wot/trust_path_view.dart';
 import 'package:kata/pgp_app_bar.dart';
-import 'package:kata/prefs/my_cards.dart';
+import 'package:kata/prefs/prefs.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:flutter/material.dart';
 import 'package:kata/src/rust/frb_generated.dart';
@@ -142,7 +142,7 @@ class _MyAppState extends State<MyApp> {
                 builder: (context, state) =>
                     TrustPathView(adapter: state.extra as GraphController),
               ),
-              GoRoute(path: '/mycards', builder: (context, state) => MyCards()),
+              GoRoute(path: '/mycards', builder: (context, state) => Prefs()),
               GoRoute(path: '/scan', builder: (context, state) => VerifyView()),
             ],
           ),

@@ -2,7 +2,7 @@ import 'package:kata/prefs/keyserver_list.dart';
 import 'package:kata/prefs/prefs_item.dart';
 import 'package:flutter/material.dart';
 
-class _PrefsViewState extends State<MyCards> {
+class _PrefsViewState extends State<Prefs> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,8 +22,8 @@ class _PrefsViewState extends State<MyCards> {
   }
 }
 
-class MyCards extends StatefulWidget {
-  const MyCards({super.key});
+class Prefs extends StatefulWidget {
+  const Prefs({super.key});
 
   @override
   State<StatefulWidget> createState() => _PrefsViewState();
