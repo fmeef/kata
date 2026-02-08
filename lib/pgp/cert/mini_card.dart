@@ -15,7 +15,9 @@ class MiniCard extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [SmartFingerprint(fingerprint: pgpKey.fingerprint())],
+      children: [
+        SmartFingerprint(fingerprint: pgpKey.fingerprint(), short: true),
+      ],
     );
   }
 

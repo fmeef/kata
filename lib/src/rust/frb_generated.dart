@@ -559,9 +559,15 @@ abstract class RustLibApi extends BaseApi {
 
   String crateApiPgpUserHandleComposite({required UserHandle that});
 
-  String crateApiPgpUserHandleCompositeLujvo({required UserHandle that});
+  String crateApiPgpUserHandleCompositeLujvo({
+    required UserHandle that,
+    required bool short,
+  });
 
-  String crateApiPgpUserHandleCompositeLujvoOrElse({required UserHandle that});
+  String crateApiPgpUserHandleCompositeLujvoOrElse({
+    required UserHandle that,
+    required bool short,
+  });
 
   UserHandle crateApiPgpUserHandleFromHex({required String hex});
 
@@ -4625,7 +4631,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  String crateApiPgpUserHandleCompositeLujvo({required UserHandle that}) {
+  String crateApiPgpUserHandleCompositeLujvo({
+    required UserHandle that,
+    required bool short,
+  }) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
@@ -4634,6 +4643,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
+          sse_encode_bool(short, serializer);
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -4645,7 +4655,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta: kCrateApiPgpUserHandleCompositeLujvoConstMeta,
-        argValues: [that],
+        argValues: [that, short],
         apiImpl: this,
       ),
     );
@@ -4654,11 +4664,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   TaskConstMeta get kCrateApiPgpUserHandleCompositeLujvoConstMeta =>
       const TaskConstMeta(
         debugName: "UserHandle_composite_lujvo",
-        argNames: ["that"],
+        argNames: ["that", "short"],
       );
 
   @override
-  String crateApiPgpUserHandleCompositeLujvoOrElse({required UserHandle that}) {
+  String crateApiPgpUserHandleCompositeLujvoOrElse({
+    required UserHandle that,
+    required bool short,
+  }) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
@@ -4667,6 +4680,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
+          sse_encode_bool(short, serializer);
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -4678,7 +4692,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: null,
         ),
         constMeta: kCrateApiPgpUserHandleCompositeLujvoOrElseConstMeta,
-        argValues: [that],
+        argValues: [that, short],
         apiImpl: this,
       ),
     );
@@ -4687,7 +4701,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   TaskConstMeta get kCrateApiPgpUserHandleCompositeLujvoOrElseConstMeta =>
       const TaskConstMeta(
         debugName: "UserHandle_composite_lujvo_or_else",
-        argNames: ["that"],
+        argNames: ["that", "short"],
       );
 
   @override
@@ -10421,11 +10435,11 @@ class UserHandleImpl extends RustOpaque implements UserHandle {
   String composite() =>
       RustLib.instance.api.crateApiPgpUserHandleComposite(that: this);
 
-  String compositeLujvo() =>
-      RustLib.instance.api.crateApiPgpUserHandleCompositeLujvo(that: this);
+  String compositeLujvo({required bool short}) => RustLib.instance.api
+      .crateApiPgpUserHandleCompositeLujvo(that: this, short: short);
 
-  String compositeLujvoOrElse() => RustLib.instance.api
-      .crateApiPgpUserHandleCompositeLujvoOrElse(that: this);
+  String compositeLujvoOrElse({required bool short}) => RustLib.instance.api
+      .crateApiPgpUserHandleCompositeLujvoOrElse(that: this, short: short);
 
   String name() => RustLib.instance.api.crateApiPgpUserHandleName(that: this);
 

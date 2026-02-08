@@ -28,7 +28,7 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
               style: theme.textTheme.bodySmall,
             ),
             FingerprintMode.lojban => Text(
-              widget.fingerprint.compositeLujvoOrElse(),
+              widget.fingerprint.compositeLujvoOrElse(short: widget.short),
               style: theme.textTheme.bodySmall,
             ),
             FingerprintMode.userid => Text(
@@ -63,11 +63,13 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
 class SmartFingerprint extends StatefulWidget {
   final UserHandle fingerprint;
   final FingerprintMode mode;
+  final bool short;
 
   const SmartFingerprint({
     super.key,
     required this.fingerprint,
     this.mode = FingerprintMode.lojban,
+    this.short = false,
   });
 
   @override

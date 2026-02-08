@@ -18,9 +18,9 @@ import 'pgp/import.dart';
 abstract class UserHandle implements RustOpaqueInterface {
   String composite();
 
-  String compositeLujvo();
+  String compositeLujvo({required bool short});
 
-  String compositeLujvoOrElse();
+  String compositeLujvoOrElse({required bool short});
 
   static UserHandle fromHex({required String hex}) =>
       RustLib.instance.api.crateApiPgpUserHandleFromHex(hex: hex);
