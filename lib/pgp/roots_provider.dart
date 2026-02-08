@@ -18,9 +18,10 @@ class RootsProvider extends StatelessWidget {
       create: (_) async {
         try {
           final certs = await app.allOwnedCerts();
+
           return certs.map((v) => v.cert.fingerprint).toList();
-        } on Exception {
-          return [];
+        } catch (e) {
+          return <UserHandle>[];
         }
       },
     );

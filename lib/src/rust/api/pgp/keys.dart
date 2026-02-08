@@ -8,9 +8,9 @@ import '../pgp.dart';
 import 'cert.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These functions are ignored because they are not marked as `pub`: `get_api_cert`, `new`
+// These functions are ignored because they are not marked as `pub`: `get_api_cert`, `get_api_stub_cert`, `new`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `GenerateCertInner`
-// These functions are ignored (category: IgnoreBecauseOwnerTyShouldIgnore): `get_key_from_fingerprint`, `iter_certs_search_keyid`, `iter_certs_search`, `iter_certs`, `iter_fingerprints`
+// These functions are ignored (category: IgnoreBecauseOwnerTyShouldIgnore): `get_key_from_fingerprint`, `get_stub_from_fingerprint`, `iter_certs_search_keyid`, `iter_certs_search`, `iter_certs`, `iter_fingerprints`
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<GenerateCert>>
 abstract class GenerateCert implements RustOpaqueInterface {

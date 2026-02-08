@@ -1,9 +1,6 @@
-import 'package:kata/pgp/cert/smart_fingerprint.dart';
-import 'package:kata/pgp/wot/cert_list_args.dart';
-import 'package:kata/src/rust/api/pgp.dart';
+import 'package:kata/pgp/cert/mini_card.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class SigList extends StatelessWidget {
   final PgpCertWithIds pgpCert;
@@ -32,12 +29,7 @@ class SigList extends StatelessWidget {
               '${pgpCert.sigs.length} $sigPlural',
               style: theme.textTheme.bodySmall,
             ),
-            children: pgpCert.sigs
-                .map(
-                  (v) =>
-                      SmartFingerprint(fingerprint: UserHandle.fromHex(hex: v)),
-                )
-                .toList(),
+            children: pgpCert.sigs.map((v) => MiniCard(pgpKey: v)).toList(),
           ),
         if (pgpCert.certifications.isNotEmpty)
           ExpansionTile(
@@ -46,13 +38,7 @@ class SigList extends StatelessWidget {
               style: theme.textTheme.bodySmall,
             ),
             children: pgpCert.certifications
-                .map(
-                  (v) => TextButton(
-                    onPressed: () =>
-                        context.push('/list', extra: CertListArgs(grep: v)),
-                    child: Text(v),
-                  ),
-                )
+                .map((v) => MiniCard(pgpKey: v))
                 .toList(),
           ),
       ],

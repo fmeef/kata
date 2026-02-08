@@ -7,6 +7,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(child: CertList(args: CertListArgs(owned: true)));
+    return CertList(args: CertListArgs(owned: true));
   }
 }

@@ -28,7 +28,7 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
               style: theme.textTheme.bodySmall,
             ),
             FingerprintMode.lojban => Text(
-              widget.fingerprint.compositeLujvo(),
+              widget.fingerprint.compositeLujvoOrElse(),
               style: theme.textTheme.bodySmall,
             ),
             FingerprintMode.userid => Text(

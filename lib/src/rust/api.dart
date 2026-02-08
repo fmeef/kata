@@ -96,6 +96,11 @@ abstract class PgpApp
   });
 
   @override
+  Future<PgpCertWithIds> getStubFromFingerprint({
+    required UserHandle fingerprint,
+  });
+
+  @override
   Watcher getWatcher();
 
   @override

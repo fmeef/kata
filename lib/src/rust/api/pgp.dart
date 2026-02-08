@@ -20,6 +20,8 @@ abstract class UserHandle implements RustOpaqueInterface {
 
   String compositeLujvo();
 
+  String compositeLujvoOrElse();
+
   static UserHandle fromHex({required String hex}) =>
       RustLib.instance.api.crateApiPgpUserHandleFromHex(hex: hex);
 
@@ -36,6 +38,10 @@ abstract class PgpServiceTrait {
   Future<void> exportFile({required String file});
 
   Future<PgpCertWithIds> getKeyFromFingerprint({
+    required UserHandle fingerprint,
+  });
+
+  Future<PgpCertWithIds> getStubFromFingerprint({
     required UserHandle fingerprint,
   });
 

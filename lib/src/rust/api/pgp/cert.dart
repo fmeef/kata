@@ -7,8 +7,15 @@ import '../../frb_generated.dart';
 import '../pgp.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These functions are ignored because they are not marked as `pub`: `from_bytes_sig`, `from_bytes`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `eq`, `fmt`, `fmt`, `partial_cmp`
+// These functions are ignored because they are not marked as `pub`: `from_bytes_sig`, `from_bytes_sig`, `from_bytes`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `partial_cmp`
+
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MaybeCert>>
+abstract class MaybeCert implements RustOpaqueInterface {
+  UserHandle fingerprint();
+
+  List<String>? maybeIds();
+}
 
 class PgpCert {
   final String keyid;
@@ -41,11 +48,44 @@ class PgpCert {
           online == other.online;
 }
 
-class PgpCertWithIds {
+class PgpCertStubSigs {
   final PgpCert cert;
   final List<String> ids;
   final List<String> sigs;
   final List<String> certifications;
+
+  const PgpCertStubSigs({
+    required this.cert,
+    required this.ids,
+    required this.sigs,
+    required this.certifications,
+  });
+
+  static PgpCertStubSigs fromBytes({required List<int> bytes}) => RustLib
+      .instance
+      .api
+      .crateApiPgpCertPgpCertStubSigsFromBytes(bytes: bytes);
+
+  @override
+  int get hashCode =>
+      cert.hashCode ^ ids.hashCode ^ sigs.hashCode ^ certifications.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PgpCertStubSigs &&
+          runtimeType == other.runtimeType &&
+          cert == other.cert &&
+          ids == other.ids &&
+          sigs == other.sigs &&
+          certifications == other.certifications;
+}
+
+class PgpCertWithIds {
+  final PgpCert cert;
+  final List<String> ids;
+  final List<MaybeCert> sigs;
+  final List<MaybeCert> certifications;
 
   const PgpCertWithIds({
     required this.cert,
