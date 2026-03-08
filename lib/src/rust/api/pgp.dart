@@ -30,6 +30,8 @@ abstract class UserHandle implements RustOpaqueInterface {
   VisualKey separate();
 
   VisualKey separateLujvo();
+
+  VisualKeyOr separateLujvoOrElse();
 }
 
 abstract class PgpServiceTrait {

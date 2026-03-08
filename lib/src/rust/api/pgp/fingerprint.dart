@@ -5,6 +5,8 @@
 
 import '../../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
+part 'fingerprint.freezed.dart';
 
 // These functions are ignored because they are not marked as `pub`: `bytes_to_n_fair`, `data_to_emoji`, `data_to_gismu_2`, `data_to_gismu`, `data_to_phone`, `get_gismu`, `lujvo_combined`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `GISMU`
@@ -21,6 +23,12 @@ class VisualKey {
     required this.phone,
   });
 
+  String joinEmoji() =>
+      RustLib.instance.api.crateApiPgpFingerprintVisualKeyJoinEmoji(that: this);
+
+  String joinGismu() =>
+      RustLib.instance.api.crateApiPgpFingerprintVisualKeyJoinGismu(that: this);
+
   @override
   int get hashCode => gismu.hashCode ^ emoji.hashCode ^ phone.hashCode;
 
@@ -32,4 +40,12 @@ class VisualKey {
           gismu == other.gismu &&
           emoji == other.emoji &&
           phone == other.phone;
+}
+
+@freezed
+sealed class VisualKeyOr with _$VisualKeyOr {
+  const VisualKeyOr._();
+
+  const factory VisualKeyOr.gismu(VisualKey field0) = VisualKeyOr_Gismu;
+  const factory VisualKeyOr.name(String field0) = VisualKeyOr_Name;
 }

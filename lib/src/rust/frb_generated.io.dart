@@ -489,6 +489,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   BigInt dco_decode_box_autoadd_usize(dynamic raw);
 
   @protected
+  VisualKey dco_decode_box_autoadd_visual_key(dynamic raw);
+
+  @protected
   CertSynopsis dco_decode_cert_synopsis(dynamic raw);
 
   @protected
@@ -671,6 +674,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   VisualKey dco_decode_visual_key(dynamic raw);
+
+  @protected
+  VisualKeyOr dco_decode_visual_key_or(dynamic raw);
 
   @protected
   WotGraph dco_decode_wot_graph(dynamic raw);
@@ -1035,6 +1041,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   BigInt sse_decode_box_autoadd_usize(SseDeserializer deserializer);
 
   @protected
+  VisualKey sse_decode_box_autoadd_visual_key(SseDeserializer deserializer);
+
+  @protected
   CertSynopsis sse_decode_cert_synopsis(SseDeserializer deserializer);
 
   @protected
@@ -1239,6 +1248,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   VisualKey sse_decode_visual_key(SseDeserializer deserializer);
+
+  @protected
+  VisualKeyOr sse_decode_visual_key_or(SseDeserializer deserializer);
 
   @protected
   WotGraph sse_decode_wot_graph(SseDeserializer deserializer);
@@ -1680,6 +1692,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_box_autoadd_usize(BigInt self, SseSerializer serializer);
 
   @protected
+  void sse_encode_box_autoadd_visual_key(
+    VisualKey self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_cert_synopsis(CertSynopsis self, SseSerializer serializer);
 
   @protected
@@ -1925,6 +1943,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_visual_key(VisualKey self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_visual_key_or(VisualKeyOr self, SseSerializer serializer);
 
   @protected
   void sse_encode_wot_graph(WotGraph self, SseSerializer serializer);

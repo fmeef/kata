@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kata/pgp/wot/cert_list_args.dart';
 import 'package:kata/src/rust/api/pgp.dart';
+import 'package:kata/src/rust/api/pgp/fingerprint.dart';
 
 enum FingerprintMode { userid, lojban, fingerprint }
 
@@ -18,8 +19,10 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final fp = widget.fingerprint.name();
+    final lujvo = widget.fingerprint.separateLujvoOrElse();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
       children: [
         TextButton(
           child: (switch (mode) {
@@ -27,10 +30,19 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
               fp,
               style: theme.textTheme.bodySmall,
             ),
-            FingerprintMode.lojban => Text(
-              widget.fingerprint.compositeLujvoOrElse(short: widget.short),
-              style: theme.textTheme.bodySmall,
-            ),
+            FingerprintMode.lojban => (switch (lujvo) {
+              VisualKeyOr_Gismu(:final field0) => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(field0.joinGismu(), style: theme.textTheme.bodySmall),
+                  Text(field0.phone, style: theme.textTheme.bodySmall),
+                ],
+              ),
+              VisualKeyOr_Name(:final field0) => Text(
+                field0,
+                style: theme.textTheme.bodySmall,
+              ),
+            }),
             FingerprintMode.userid => Text(
               fp,
               style: theme.textTheme.bodySmall,
