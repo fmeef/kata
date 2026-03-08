@@ -22,7 +22,6 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
     final lujvo = widget.fingerprint.separateLujvoOrElse();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
       children: [
         TextButton(
           child: (switch (mode) {
@@ -33,8 +32,30 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
             FingerprintMode.lojban => (switch (lujvo) {
               VisualKeyOr_Gismu(:final field0) => Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
                 children: [
-                  Text(field0.joinGismu(), style: theme.textTheme.bodySmall),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text(
+                        field0.gismu
+                            .sublist(0, (field0.gismu.length / 2.0).floor())
+                            .join(" "),
+                        style: theme.textTheme.bodySmall,
+                      ),
+                      Text(
+                        field0.gismu
+                            .sublist(
+                              (field0.gismu.length / 2.0).floor(),
+                              field0.gismu.length,
+                            )
+                            .join(" "),
+                        style: theme.textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
                   Text(field0.phone, style: theme.textTheme.bodySmall),
                 ],
               ),

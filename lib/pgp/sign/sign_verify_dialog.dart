@@ -23,8 +23,14 @@ class SignVerifyDialog extends StatelessWidget {
     final cert = activeCert.cert;
     Logger logger = context.read();
     return Dialog(
+      insetPadding: EdgeInsets.all(4),
       child: Padding(
-        padding: EdgeInsetsGeometry.all(16),
+        padding: EdgeInsetsGeometry.directional(
+          top: 16,
+          bottom: 16,
+          start: 8,
+          end: 8,
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
