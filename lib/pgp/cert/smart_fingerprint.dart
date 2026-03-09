@@ -19,6 +19,7 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final fp = widget.fingerprint.name();
+    final mp = MediaQuery.sizeOf(context);
     final lujvo = widget.fingerprint.separateLujvoOrElse();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -74,20 +75,20 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
             extra: CertListArgs(fingerprint: widget.fingerprint),
           ),
         ),
-        if (mode == FingerprintMode.fingerprint)
-          IconButton(
-            onPressed: () => setState(() {
-              mode = widget.mode;
-            }),
-            icon: const Icon(Icons.remove_outlined),
-          )
-        else
-          IconButton(
-            onPressed: () => setState(() {
-              mode = FingerprintMode.fingerprint;
-            }),
-            icon: const Icon(Icons.remove_red_eye_outlined),
-          ),
+        // if (mode == FingerprintMode.fingerprint)
+        //   IconButton(
+        //     onPressed: () => setState(() {
+        //       mode = widget.mode;
+        //     }),
+        //     icon: const Icon(Icons.remove_outlined),
+        //   )
+        // else
+        //   IconButton(
+        //     onPressed: () => setState(() {
+        //       mode = FingerprintMode.fingerprint;
+        //     }),
+        //     icon: const Icon(Icons.remove_red_eye_outlined),
+        //   ),
       ],
     );
   }

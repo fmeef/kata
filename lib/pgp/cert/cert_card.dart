@@ -17,6 +17,7 @@ class CertCard extends StatelessWidget {
   final BigInt trust;
   final GraphController? graphController;
   final cutoff = 560; // derived from length of themed fingerprint
+  final secondCutoff = 560;
   const CertCard({
     super.key,
     required this.pgpKey,
@@ -37,14 +38,47 @@ class CertCard extends StatelessWidget {
   }
 
   Widget contentText(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SmartFingerprint(fingerprint: pgpKey.cert.fingerprint),
-        SigList(pgpCert: pgpKey),
-      ],
+    return SmartFingerprint(fingerprint: pgpKey.cert.fingerprint);
+  }
+
+  Widget githubIdenticon(BuildContext context) {
+    return Padding(
+      padding: EdgeInsetsGeometry.fromSTEB(8, 8, 16, 8),
+      child: GitHubIdenticon(seed: pgpKey.cert.fingerprint.name(), size: 64),
     );
+  }
+
+  Widget titleExpansionTile(BuildContext context, Set<String> ids) {
+    final theme = Theme.of(context);
+    if (ids.length > 1) {
+      return ExpansionTile(
+        minTileHeight: 32,
+        tilePadding: EdgeInsetsGeometry.fromSTEB(0, 0, 0, 0),
+        childrenPadding: EdgeInsetsGeometry.fromSTEB(0, 0, 0, 0),
+        title: Text(
+          ids.firstOrNull ?? "N/A",
+          style: theme.textTheme.titleSmall,
+        ),
+        children: ids
+            .difference({ids.firstOrNull})
+            .map(
+              (v) => TextButton(
+                onPressed: () =>
+                    context.push('/list', extra: CertListArgs(searchUserId: v)),
+                child: Text(v),
+              ),
+            )
+            .toList(),
+      );
+    } else {
+      return Padding(
+        padding: EdgeInsetsGeometry.fromSTEB(0, 0, 0, 8),
+        child: Text(
+          pgpKey.ids.firstOrNull ?? "N/A",
+          style: theme.textTheme.titleSmall,
+        ),
+      );
+    }
   }
 
   @override
@@ -54,6 +88,7 @@ class CertCard extends StatelessWidget {
     final mq = MediaQuery.sizeOf(context);
     final ActiveCert activeCert = context.read();
     final cert = activeCert.cert;
+
     return Card(
       child: Padding(
         padding: EdgeInsetsGeometry.fromSTEB(16, 8, 16, 8),
@@ -61,61 +96,29 @@ class CertCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            titleExpansionTile(context, ids),
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: EdgeInsetsGeometry.fromSTEB(8, 8, 16, 8),
-                  child: GitHubIdenticon(
-                    seed: pgpKey.cert.fingerprint.name(),
-                    size: 64,
-                  ),
+                Row(
+                  children: [
+                    githubIdenticon(context),
+                    if (mq.width < cutoff) contentText(context),
+
+                    if (mq.width >= secondCutoff)
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // titleExpansionTile(context, ids),
+                          contentText(context),
+                        ],
+                      ),
+                  ],
                 ),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (ids.length > 1)
-                        ExpansionTile(
-                          minTileHeight: 32,
-                          tilePadding: EdgeInsetsGeometry.fromSTEB(0, 0, 0, 0),
-                          childrenPadding: EdgeInsetsGeometry.fromSTEB(
-                            0,
-                            0,
-                            0,
-                            0,
-                          ),
-                          title: Text(
-                            ids.firstOrNull ?? "N/A",
-                            style: theme.textTheme.titleSmall,
-                          ),
-                          children: ids
-                              .difference({ids.firstOrNull})
-                              .map(
-                                (v) => TextButton(
-                                  onPressed: () => context.push(
-                                    '/list',
-                                    extra: CertListArgs(searchUserId: v),
-                                  ),
-                                  child: Text(v),
-                                ),
-                              )
-                              .toList(),
-                        )
-                      else
-                        Padding(
-                          padding: EdgeInsetsGeometry.fromSTEB(0, 0, 0, 8),
-                          child: Text(
-                            pgpKey.ids.firstOrNull ?? "N/A",
-                            style: theme.textTheme.titleSmall,
-                          ),
-                        ),
-                      if (mq.width >= cutoff) contentText(context),
-                    ],
-                  ),
-                ),
+
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   mainAxisSize: MainAxisSize.max,
@@ -157,7 +160,7 @@ class CertCard extends StatelessWidget {
                 ),
               ],
             ),
-            if (mq.width < cutoff) contentText(context),
+            SigList(pgpCert: pgpKey),
           ],
         ),
       ),
