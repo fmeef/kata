@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:kata/drawer_content.dart';
 import 'package:kata/graphvis/graph_test.dart';
 

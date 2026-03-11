@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:kata/pgp/wot/cert_list_args.dart';
 import 'package:kata/src/rust/api/pgp.dart';
 import 'package:kata/src/rust/api/pgp/fingerprint.dart';
 
@@ -19,7 +17,7 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final fp = widget.fingerprint.name();
-    final mp = MediaQuery.sizeOf(context);
+
     final lujvo = widget.fingerprint.separateLujvoOrElse();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
