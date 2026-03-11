@@ -23,72 +23,46 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
     final lujvo = widget.fingerprint.separateLujvoOrElse();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        TextButton(
-          child: (switch (mode) {
-            FingerprintMode.fingerprint => Text(
-              fp,
-              style: theme.textTheme.bodySmall,
+        (switch (mode) {
+          FingerprintMode.fingerprint => Expanded(
+            child: Wrap(children: [Text(fp, style: theme.textTheme.bodySmall)]),
+          ),
+          FingerprintMode.lojban => (switch (lujvo) {
+            VisualKeyOr_Gismu(:final field0) => Expanded(
+              child: Wrap(
+                spacing: 4,
+                children:
+                    field0.gismu
+                        .map((v) => Text(v, style: theme.textTheme.bodySmall))
+                        .toList() +
+                    [Text(field0.phone, style: theme.textTheme.bodySmall)],
+              ),
             ),
-            FingerprintMode.lojban => (switch (lujvo) {
-              VisualKeyOr_Gismu(:final field0) => Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Text(
-                        field0.gismu
-                            .sublist(0, (field0.gismu.length / 2.0).floor())
-                            .join(" "),
-                        style: theme.textTheme.bodySmall,
-                      ),
-                      Text(
-                        field0.gismu
-                            .sublist(
-                              (field0.gismu.length / 2.0).floor(),
-                              field0.gismu.length,
-                            )
-                            .join(" "),
-                        style: theme.textTheme.bodySmall,
-                      ),
-                    ],
-                  ),
-                  Text(field0.phone, style: theme.textTheme.bodySmall),
-                ],
+
+            VisualKeyOr_Name(:final field0) => Expanded(
+              child: Wrap(
+                children: [Text(field0, style: theme.textTheme.bodySmall)],
               ),
-              VisualKeyOr_Name(:final field0) => Text(
-                field0,
-                style: theme.textTheme.bodySmall,
-              ),
-            }),
-            FingerprintMode.userid => Text(
-              fp,
-              style: theme.textTheme.bodySmall,
             ),
           }),
-          onPressed: () => context.push(
-            '/list',
-            extra: CertListArgs(fingerprint: widget.fingerprint),
+          FingerprintMode.userid => Text(fp, style: theme.textTheme.bodySmall),
+        }),
+        if (mode == FingerprintMode.fingerprint)
+          IconButton(
+            onPressed: () => setState(() {
+              mode = widget.mode;
+            }),
+            icon: const Icon(Icons.remove_outlined),
+          )
+        else
+          IconButton(
+            onPressed: () => setState(() {
+              mode = FingerprintMode.fingerprint;
+            }),
+            icon: const Icon(Icons.remove_red_eye_outlined),
           ),
-        ),
-        // if (mode == FingerprintMode.fingerprint)
-        //   IconButton(
-        //     onPressed: () => setState(() {
-        //       mode = widget.mode;
-        //     }),
-        //     icon: const Icon(Icons.remove_outlined),
-        //   )
-        // else
-        //   IconButton(
-        //     onPressed: () => setState(() {
-        //       mode = FingerprintMode.fingerprint;
-        //     }),
-        //     icon: const Icon(Icons.remove_red_eye_outlined),
-        //   ),
       ],
     );
   }

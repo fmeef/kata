@@ -37,14 +37,10 @@ class CertCard extends StatelessWidget {
     }
   }
 
-  Widget contentText(BuildContext context) {
-    return SmartFingerprint(fingerprint: pgpKey.cert.fingerprint);
-  }
-
   Widget githubIdenticon(BuildContext context) {
     return Padding(
       padding: EdgeInsetsGeometry.fromSTEB(8, 8, 16, 8),
-      child: GitHubIdenticon(seed: pgpKey.cert.fingerprint.name(), size: 64),
+      child: GitHubIdenticon(seed: pgpKey.cert.fingerprint.name(), size: 48),
     );
   }
 
@@ -95,28 +91,16 @@ class CertCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
             titleExpansionTile(context, ids),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    githubIdenticon(context),
-                    if (mq.width < cutoff) contentText(context),
-
-                    if (mq.width >= secondCutoff)
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          // titleExpansionTile(context, ids),
-                          contentText(context),
-                        ],
-                      ),
-                  ],
+                githubIdenticon(context),
+                Expanded(
+                  child: SmartFingerprint(fingerprint: pgpKey.cert.fingerprint),
                 ),
 
                 Column(
