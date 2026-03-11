@@ -4,6 +4,7 @@ import 'package:kata/pgp/cert/active_cert.dart';
 import 'package:kata/pgp/cert/cert_card.dart';
 import 'package:kata/pgp/sign/file_verify_view.dart';
 import 'package:kata/pgp/sign/import_cert_options.dart';
+import 'package:kata/pgp/sign/sig_card.dart';
 import 'package:kata/src/rust/api.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -37,7 +38,12 @@ class SignVerifyDialog extends StatelessWidget {
           children: [
             Text('Current card:', style: theme.textTheme.titleLarge),
             if (cert != null)
-              CertCard(pgpKey: cert, trust: BigInt.from(0))
+              SigCard(
+                fingerprint: cert.cert.fingerprint,
+                pgpApp: pgpApp,
+                userid: cert.ids.first,
+                disableQr: true,
+              )
             else
               Center(child: CircularProgressIndicator()),
             Row(
@@ -50,7 +56,7 @@ class SignVerifyDialog extends StatelessWidget {
                     }
                     context.push('/share');
                   },
-                  child: const Text('Create card'),
+                  child: const Text('Share card'),
                 ),
                 if (Platform.isAndroid || Platform.isIOS)
                   ElevatedButton(
