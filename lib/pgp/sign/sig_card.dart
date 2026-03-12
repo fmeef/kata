@@ -14,6 +14,7 @@ class SigCard extends StatelessWidget {
   final String? description;
   final PgpApp pgpApp;
   final bool disableQr;
+  final Orientation orientation;
 
   const SigCard({
     super.key,
@@ -22,13 +23,38 @@ class SigCard extends StatelessWidget {
     required this.userid,
     this.handle,
     this.description,
+    this.orientation = Orientation.landscape,
     this.data,
     this.disableQr = false,
   });
 
+  Widget getQr() {
+    final qrContent = QrImageView.withQr(
+      qr: QrCode.fromUint8List(
+        data: data!,
+        errorCorrectLevel: QrErrorCorrectLevel.M,
+      ),
+      size: 256,
+    );
+
+    return switch (orientation) {
+      Orientation.landscape => qrContent,
+      Orientation.portrait => Center(child: qrContent),
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
+    final children = [
+      if (!disableQr && data != null) getQr(),
+      if (description != null) Text(description!),
+    ];
+    final qrchildren = (switch (orientation) {
+      Orientation.landscape => children,
+      Orientation.portrait => children.reversed,
+    }).toList();
 
     return Card(
       child: Padding(
@@ -76,27 +102,13 @@ class SigCard extends StatelessWidget {
               ],
             ),
             if (data != null)
-              Row(
+              Flex(
                 crossAxisAlignment: CrossAxisAlignment.start,
-
-                children: [
-                  if (!disableQr)
-                    QrImageView.withQr(
-                      qr: QrCode.fromUint8List(
-                        data: data!,
-                        errorCorrectLevel: QrErrorCorrectLevel.M,
-                      ),
-                      size: 256,
-                    ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [if (description != null) Text(description!)],
-                    ),
-                  ),
-                ],
+                direction: (switch (orientation) {
+                  Orientation.landscape => Axis.horizontal,
+                  Orientation.portrait => Axis.vertical,
+                }),
+                children: qrchildren,
               )
             else if (!disableQr)
               Center(child: CircularProgressIndicator()),

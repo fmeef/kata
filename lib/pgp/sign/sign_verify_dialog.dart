@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:kata/pgp/cert/active_cert.dart';
-import 'package:kata/pgp/cert/cert_card.dart';
 import 'package:kata/pgp/sign/file_verify_view.dart';
 import 'package:kata/pgp/sign/import_cert_options.dart';
 import 'package:kata/pgp/sign/sig_card.dart';

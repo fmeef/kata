@@ -40,84 +40,90 @@ class _AttestViewState extends State<AttestView> {
     final PgpApp pgpApp = actualContext.read();
 
     if (cert != null) {
-      return Padding(
-        padding: EdgeInsetsGeometry.all(6.0),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SigCard(
-                pgpApp: pgpApp,
-                fingerprint: cert.cert.fingerprint,
-                handle: handleController.text,
-                userid: cert.ids.first,
-                description: descriptionController.text,
-                data: data,
-              ),
-              const Text('This is a preview of the card about to be shared'),
-              Column(
-                children: [
-                  TextField(
-                    controller: handleController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hint: const Text('Handle'),
-                    ),
-                    onChanged: (_) async => await syncData(pgpApp, cert),
-                    onEditingComplete: () async => await syncData(pgpApp, cert),
-                  ),
-                  TextField(
-                    controller: descriptionController,
-                    maxLines: null,
-                    minLines: 2,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hint: const Text('Description'),
-                    ),
-                    onChanged: (_) async => await syncData(pgpApp, cert),
-                    onEditingComplete: () async => await syncData(pgpApp, cert),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  TextButton(
-                    onPressed: () => context.pop(),
-                    child: const Text('Cancel'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      final screenshot = await screenshotController
-                          .captureFromWidget(
-                            SizedBox(
-                              width: 600,
-                              height: 390,
-                              child: SigCard(
-                                pgpApp: pgpApp,
-                                fingerprint: cert.cert.fingerprint,
+      return OrientationBuilder(
+        builder: (context, orientation) => Padding(
+          padding: EdgeInsetsGeometry.all(6.0),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SigCard(
+                  pgpApp: pgpApp,
+                  fingerprint: cert.cert.fingerprint,
+                  handle: handleController.text,
+                  userid: cert.ids.first,
+                  description: descriptionController.text,
+                  data: data,
+                  orientation: orientation,
+                ),
 
-                                handle: handleController.text,
-                                userid: cert.ids.first,
-                                description: descriptionController.text,
-                                data: data,
+                const Text('This is a preview of the card about to be shared'),
+                Column(
+                  children: [
+                    TextField(
+                      controller: handleController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hint: const Text('Handle'),
+                      ),
+                      onChanged: (_) async => await syncData(pgpApp, cert),
+                      onEditingComplete: () async =>
+                          await syncData(pgpApp, cert),
+                    ),
+                    TextField(
+                      controller: descriptionController,
+                      maxLines: null,
+                      minLines: 2,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hint: const Text('Description'),
+                      ),
+                      onChanged: (_) async => await syncData(pgpApp, cert),
+                      onEditingComplete: () async =>
+                          await syncData(pgpApp, cert),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButton(
+                      onPressed: () => context.pop(),
+                      child: const Text('Cancel'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        final screenshot = await screenshotController
+                            .captureFromWidget(
+                              SizedBox(
+                                width: 600,
+                                height: 390,
+                                child: SigCard(
+                                  pgpApp: pgpApp,
+                                  fingerprint: cert.cert.fingerprint,
+
+                                  handle: handleController.text,
+                                  userid: cert.ids.first,
+                                  description: descriptionController.text,
+                                  data: data,
+                                ),
                               ),
-                            ),
-                          );
+                            );
 
-                      final shareParams = ShareParams(
-                        files: [
-                          XFile.fromData(screenshot, mimeType: 'image/png'),
-                        ],
-                      );
+                        final shareParams = ShareParams(
+                          files: [
+                            XFile.fromData(screenshot, mimeType: 'image/png'),
+                          ],
+                        );
 
-                      SharePlus.instance.share(shareParams);
-                    },
-                    child: const Text('Sign'),
-                  ),
-                ],
-              ),
-            ],
+                        SharePlus.instance.share(shareParams);
+                      },
+                      child: const Text('Sign'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       );
