@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:kata/pgp/cert/active_cert.dart';
 import 'package:kata/pgp/sign/sig_card.dart';
 import 'package:kata/src/rust/api.dart';
@@ -27,6 +29,25 @@ class _AttestViewState extends State<AttestView> {
     setState(() {
       data = d;
     });
+  }
+
+  Future<Uint8List> captureScreenshot(BuildContext context) async {
+    final PgpApp pgpApp = context.read();
+    final ActiveCert activeCert = context.read();
+    final cert = activeCert.cert;
+    return await screenshotController.captureFromWidget(
+      SizedBox(
+        width: 800,
+        child: SigCard(
+          pgpApp: pgpApp,
+          fingerprint: activeCert.cert!.cert.fingerprint,
+          handle: handleController.text,
+          userid: cert!.ids.first,
+          description: descriptionController.text,
+          data: data,
+        ),
+      ),
+    );
   }
 
   @override
@@ -93,22 +114,9 @@ class _AttestViewState extends State<AttestView> {
                     ),
                     ElevatedButton(
                       onPressed: () async {
-                        final screenshot = await screenshotController
-                            .captureFromWidget(
-                              SizedBox(
-                                width: 600,
-                                height: 390,
-                                child: SigCard(
-                                  pgpApp: pgpApp,
-                                  fingerprint: cert.cert.fingerprint,
-
-                                  handle: handleController.text,
-                                  userid: cert.ids.first,
-                                  description: descriptionController.text,
-                                  data: data,
-                                ),
-                              ),
-                            );
+                        final screenshot = await captureScreenshot(
+                          actualContext,
+                        );
 
                         final shareParams = ShareParams(
                           files: [
@@ -118,7 +126,18 @@ class _AttestViewState extends State<AttestView> {
 
                         SharePlus.instance.share(shareParams);
                       },
-                      child: const Text('Sign'),
+                      child: const Text('Share'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        if (context.mounted) {
+                          final screenshot = await captureScreenshot(
+                            actualContext,
+                          );
+                          await FilePicker.platform.saveFile(bytes: screenshot);
+                        }
+                      },
+                      child: const Text('Save'),
                     ),
                   ],
                 ),

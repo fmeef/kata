@@ -81,6 +81,7 @@ class CertCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final ids = pgpKey.ids.toSet();
+
     final ActiveCert activeCert = context.read();
     final cert = activeCert.cert;
 

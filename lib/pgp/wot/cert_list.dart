@@ -186,6 +186,10 @@ class _CertListState extends State<CertList> {
     final cert = activeCert.cert;
     final shouldSearch = !widget.args.owned;
 
+    final active = cert?.cert.fingerprint;
+
+    logger.v("active=${active}");
+
     return RootsProvider(
       builder: (ctx, roots) {
         logger.d("using roots $roots");
@@ -245,7 +249,8 @@ class _CertListState extends State<CertList> {
                           trust: v.trust,
                           graphController: v.graphController,
                           active:
-                              v.cert.cert.fingerprint == cert?.cert.fingerprint,
+                              v.cert.cert.fingerprint.name() ==
+                              cert?.cert.fingerprint.name(),
                         ),
                       )
                       .toList(),

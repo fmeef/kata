@@ -49,7 +49,10 @@ class SigCard extends StatelessWidget {
 
     final children = [
       if (!disableQr && data != null) getQr(),
-      if (description != null) Text(description!),
+      if (description != null && orientation == Orientation.landscape)
+        Expanded(child: Wrap(children: [Text(description!)]))
+      else if (description != null)
+        Text(description!),
     ];
     final qrchildren = (switch (orientation) {
       Orientation.landscape => children,
@@ -62,6 +65,7 @@ class SigCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
