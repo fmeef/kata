@@ -46,6 +46,8 @@ mixin GoRouterAware<T extends StatefulWidget> on State<T> {
       return;
     }
 
+    onRoute(_currentLocation!.path.toString());
+
     /// If the current route is the top route and the current location is the same as the observer location then [_observerLocation] is the top route.
     if (_state.isTopRoute &&
         _sameLocation(_currentLocation!, _observerLocation)) {
@@ -82,6 +84,8 @@ mixin GoRouterAware<T extends StatefulWidget> on State<T> {
   bool _sameLocation(Uri a, Uri b) {
     return a.path.toString() == b.path.toString();
   }
+
+  void onRoute(String route) {}
 
   /// Called when the top route has been popped off, and the current route
   /// shows up.

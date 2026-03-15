@@ -16,31 +16,28 @@ class _SmartFabState extends State<SmartFab> with GoRouterAware {
     super.initState();
   }
 
-  @override
-  void didPush() {
+  void showFab() {
     setState(() {
       _showFab = true;
     });
   }
 
-  @override
-  void didPop() {
+  void hideFab() {
     setState(() {
       _showFab = false;
     });
   }
 
   @override
-  void didPopNext() {
-    setState(() {
-      _showFab = true;
-    });
-  }
-
-  @override
-  void didPushNext() {
-    setState(() {
-      _showFab = false;
+  void onRoute(String route) {
+    final Logger logger = context.read();
+    logger.e('onRoute $route');
+    (switch (route) {
+      '/' => showFab(),
+      '/list' => showFab(),
+      '/network' => showFab(),
+      '/mycards' => showFab(),
+      _ => hideFab(),
     });
   }
 
