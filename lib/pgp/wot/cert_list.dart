@@ -188,7 +188,7 @@ class _CertListState extends State<CertList> {
 
     final active = cert?.cert.fingerprint;
 
-    logger.v("active=${active}");
+    logger.d("active=$active");
 
     return RootsProvider(
       builder: (ctx, roots) {

@@ -6,7 +6,6 @@ import 'package:kata/pgp/sign/attest_view.dart';
 import 'package:kata/pgp/sign/import_cert_options.dart';
 import 'package:kata/pgp/sign/import_cert_view.dart';
 import 'package:kata/pgp/sign/sign_data.dart';
-import 'package:kata/pgp/sign/sign_verify_dialog.dart';
 import 'package:kata/pgp/sign/verify_view.dart';
 import 'package:kata/pgp/wot/cert_list.dart';
 import 'package:kata/pgp/wot/cert_list_args.dart';
@@ -17,6 +16,7 @@ import 'package:kata/pgp/wot/sign_key_view.dart';
 import 'package:kata/pgp/wot/trust_path_view.dart';
 import 'package:kata/pgp_app_bar.dart';
 import 'package:kata/prefs/prefs.dart';
+import 'package:kata/smart_fab.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:flutter/material.dart';
 import 'package:kata/src/rust/frb_generated.dart';
@@ -43,27 +43,17 @@ String titleFromPath(String path) {
 
 class _MyAppState extends State<MyApp> {
   String title = 'My Cards';
-  static final _routeObserver = RouteObserver<Route>();
 
   static final router = PgpView(
     child: MaterialApp.router(
       routerConfig: GoRouter(
-        observers: [_routeObserver],
         routes: [
           ShellRoute(
             builder: (context, state, child) => Scaffold(
               appBar: PgpAppBar(
                 title: titleFromPath(state.topRoute?.path ?? "/"),
               ),
-
-              floatingActionButton: FloatingActionButton(
-                onPressed: () async => await showDialog(
-                  context: context,
-
-                  builder: (ctx) => SignVerifyDialog(context: context),
-                ),
-                child: const Icon(Icons.new_label),
-              ),
+              floatingActionButton: SmartFab(),
               drawer: Drawer(child: DrawerContent()),
               bottomNavigationBar: BottomNavigationBar(
                 type: BottomNavigationBarType.fixed,

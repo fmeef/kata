@@ -2,7 +2,6 @@ import 'package:kata/db_provider.dart';
 import 'package:kata/src/rust/api.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
 class ActiveCertProvider extends StatelessWidget {
@@ -21,10 +20,7 @@ class ActiveCertProvider extends StatelessWidget {
       pgpApp: pgpApp,
       builder: (BuildContext ctx, dynamic cert) => builder(actualContext, cert),
       create: (_) async {
-        final out = await pgpApp.getCertByRole(role: 'primary');
-        final Logger logger = context.read();
-        logger.d("active read=$out");
-        return out;
+        return await pgpApp.getCertByRole(role: 'primary');
       },
     );
   }
