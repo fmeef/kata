@@ -26,7 +26,7 @@ class _CertTrust {
 }
 
 class _CertListState extends State<CertList> {
-  List<_CertTrust> certs = [];
+  List<_CertTrust>? certs;
   Watcher? watcher;
   _CertTrust? currentUpdate;
   ScaffoldFeatureController<MaterialBanner, MaterialBannerClosedReason>? banner;
@@ -103,7 +103,7 @@ class _CertListState extends State<CertList> {
     this.banner = bannnerOut;
 
     try {
-      for (final key in certs) {
+      for (final key in certs ?? []) {
         certRefreshController.onUpdate(key.cert.ids.firstOrNull ?? "");
         await pgp.fillFromKeyserver(key.cert.cert.fingerprint.name());
         if (key.cert.cert.online) {
@@ -128,6 +128,9 @@ class _CertListState extends State<CertList> {
   Future<void> updateCertsFromDb(StoreNetwork network) async {
     final PgpApp pgp = context.read();
     final Logger logger = context.read();
+    setState(() {
+      certs = null;
+    });
     List<_CertTrust> n = [];
     final searchText = searchController.text;
     final shouldSearch = searchText.trim().isNotEmpty;
@@ -169,10 +172,10 @@ class _CertListState extends State<CertList> {
       }
     } catch (e) {
       logger.e("exception in cert list: $e");
-      certs.clear();
+      certs = null;
     }
 
-    logger.d("update cert list ${certs.length}");
+    logger.d("update cert list ${certs?.length}");
     setState(() {
       certs = n;
     });
@@ -209,6 +212,10 @@ class _CertListState extends State<CertList> {
             );
             watcher = w;
           }
+
+          if (certs == null) {
+            return Center(child: CircularProgressIndicator());
+          }
           return Column(
             children: [
               if (shouldSearch)
@@ -233,7 +240,7 @@ class _CertListState extends State<CertList> {
                       onPressed: () => showDialog(
                         context: context,
                         builder: (ctx) => UploadConfirmDialog(
-                          certs: certs.map((v) => v.cert).toList(),
+                          certs: certs?.map((v) => v.cert).toList() ?? [],
                         ),
                       ),
                       icon: Icon(Icons.upload),
@@ -242,18 +249,20 @@ class _CertListState extends State<CertList> {
                 ),
               Expanded(
                 child: ListView(
-                  children: certs
-                      .map(
-                        (v) => CertCard(
-                          pgpKey: v.cert,
-                          trust: v.trust,
-                          graphController: v.graphController,
-                          active:
-                              v.cert.cert.fingerprint.name() ==
-                              cert?.cert.fingerprint.name(),
-                        ),
-                      )
-                      .toList(),
+                  children:
+                      certs
+                          ?.map(
+                            (v) => CertCard(
+                              pgpKey: v.cert,
+                              trust: v.trust,
+                              graphController: v.graphController,
+                              active:
+                                  v.cert.cert.fingerprint.name() ==
+                                  cert?.cert.fingerprint.name(),
+                            ),
+                          )
+                          .toList() ??
+                      [],
                 ),
               ),
             ],
