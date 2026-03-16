@@ -175,6 +175,7 @@ class _CertListState extends State<CertList> {
       certs = null;
     }
 
+    n.sort((a, b) => b.trust.compareTo(a.trust));
     logger.d("update cert list ${certs?.length}");
     setState(() {
       certs = n;
