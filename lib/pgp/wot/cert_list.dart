@@ -103,7 +103,7 @@ class _CertListState extends State<CertList> {
     this.banner = bannnerOut;
 
     try {
-      for (final key in certs ?? []) {
+      for (final _CertTrust key in certs ?? []) {
         certRefreshController.onUpdate(key.cert.ids.firstOrNull ?? "");
         await pgp.fillFromKeyserver(key.cert.cert.fingerprint.name());
         if (key.cert.cert.online) {
