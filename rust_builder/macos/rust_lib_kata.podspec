@@ -24,8 +24,8 @@ A new Flutter FFI plugin project.
   s.platform = :osx, '15.2'
   s.pod_target_xcconfig = { 
     'DEFINES_MODULE' => 'YES',
-    'LIBRARY_SEARCH_PATHS' => '/nix/store/j4w1bkz42r73lp6h2zdy77rfr5hkk9qg-wot_dual/lib',
-    'OTHER_LDFLAGS' => '-force_load ${BUILT_PRODUCTS_DIR}/librust_lib_kata.a -framework Foundation -framework SystemConfiguration -L/nix/store/j4w1bkz42r73lp6h2zdy77rfr5hkk9qg-wot_dual/lib -lbotan-3',
+    'LIBRARY_SEARCH_PATHS' => '${BOTAN_LIB_DIR}',
+    'OTHER_LDFLAGS' => '-force_load ${BUILT_PRODUCTS_DIR}/librust_lib_kata.a -framework Foundation -framework SystemConfiguration -L${BOTAN_LIB_DIR} -lbotan-3',
   }
   s.swift_version = '5.0'
 
@@ -43,7 +43,7 @@ A new Flutter FFI plugin project.
     'DEFINES_MODULE' => 'YES',
     # Flutter.framework does not contain a i386 slice.
     'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386',
-    'OTHER_LDFLAGS' => '-force_load ${BUILT_PRODUCTS_DIR}/librust_lib_kata.a -framework Foundation -framework SystemConfiguration -L/nix/store/j4w1bkz42r73lp6h2zdy77rfr5hkk9qg-wot_dual/lib -lbotan-3',
-    'LIBRARY_SEARCH_PATHS' => '/nix/store/j4w1bkz42r73lp6h2zdy77rfr5hkk9qg-wot_dual/lib',
+    'OTHER_LDFLAGS' => '-force_load ${BUILT_PRODUCTS_DIR}/librust_lib_kata.a -framework Foundation -framework SystemConfiguration -L${BOTAN_LIB_DIR} -lbotan-3',
+    'LIBRARY_SEARCH_PATHS' => '${BOTAN_LIB_DIR}',
   }
 end
