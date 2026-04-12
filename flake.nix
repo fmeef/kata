@@ -147,7 +147,7 @@
 
             baseInputs = [
               wot_dual
-              unstable.flutter
+              flutter
               androidSdk
               jdk17
               rustup
@@ -230,7 +230,7 @@
               if isMacos then
                 baseInputs
                 ++ [
-                  apple-sdk_15
+                  apple-sdk_26
                   crosspkgs.botan3
                   cctools
                 ]

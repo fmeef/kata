@@ -1,4 +1,5 @@
 import 'package:kata/pgp/cert/active_cert.dart';
+import 'package:kata/pgp/cert/automicon.dart';
 import 'package:kata/pgp/cert/cert_card_menu.dart';
 import 'package:kata/pgp/cert/smart_fingerprint.dart';
 import 'package:kata/pgp/wot/cert_list_args.dart';
@@ -40,7 +41,7 @@ class CertCard extends StatelessWidget {
   Widget githubIdenticon(BuildContext context) {
     return Padding(
       padding: EdgeInsetsGeometry.fromSTEB(8, 8, 16, 8),
-      child: GitHubIdenticon(seed: pgpKey.cert.fingerprint.name(), size: 48),
+      child: Automicon(handle: pgpKey.cert.fingerprint, scale: 8),
     );
   }
 

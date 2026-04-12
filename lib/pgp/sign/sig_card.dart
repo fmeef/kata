@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:kata/pgp/cert/automicon.dart';
 import 'package:kata/src/rust/api.dart';
 import 'package:flutter/material.dart';
 import 'package:github_identicon/github_identicon.dart';
@@ -73,7 +74,7 @@ class SigCard extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsetsGeometry.fromSTEB(8, 8, 16, 8),
-                  child: GitHubIdenticon(seed: fingerprint.name(), size: 64),
+                  child: Automicon(handle: fingerprint, scale: 8),
                 ),
                 Expanded(
                   child: Column(

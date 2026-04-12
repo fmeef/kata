@@ -133,7 +133,7 @@ class _AttestViewState extends State<AttestView> {
                           final screenshot = await captureScreenshot(
                             actualContext,
                           );
-                          await FilePicker.platform.saveFile(bytes: screenshot);
+                          await FilePicker.saveFile(bytes: screenshot);
                         }
                       },
                       child: const Text('Save'),
