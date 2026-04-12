@@ -25,7 +25,7 @@ abstract class UserHandle implements RustOpaqueInterface {
   static UserHandle fromHex({required String hex}) =>
       RustLib.instance.api.crateApiPgpUserHandleFromHex(hex: hex);
 
-  Future<SizedImage> identicon({required int scale});
+  Future<SizedImage> identicon({required int count, required int scale});
 
   String name();
 

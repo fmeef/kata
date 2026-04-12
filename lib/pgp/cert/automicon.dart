@@ -8,7 +8,9 @@ class _AutomiconState extends State<Automicon> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      widget.handle.identicon(scale: widget.scale).then((v) {
+      widget.handle.identicon(scale: widget.scale, count: widget.count).then((
+        v,
+      ) {
         setState(() {
           _image = Image.memory(v.buf);
         });
@@ -25,7 +27,13 @@ class _AutomiconState extends State<Automicon> {
 class Automicon extends StatefulWidget {
   final UserHandle handle;
   final int scale;
-  const Automicon({super.key, required this.handle, this.scale = 8});
+  final int count;
+  const Automicon({
+    super.key,
+    required this.handle,
+    this.scale = 8,
+    this.count = 3,
+  });
   @override
   State<StatefulWidget> createState() => _AutomiconState();
 }

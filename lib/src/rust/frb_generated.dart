@@ -574,6 +574,7 @@ abstract class RustLibApi extends BaseApi {
 
   Future<SizedImage> crateApiPgpUserHandleIdenticon({
     required UserHandle that,
+    required int count,
     required int scale,
   });
 
@@ -4749,6 +4750,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @override
   Future<SizedImage> crateApiPgpUserHandleIdenticon({
     required UserHandle that,
+    required int count,
     required int scale,
   }) {
     return handler.executeNormal(
@@ -4759,6 +4761,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
+          sse_encode_u_32(count, serializer);
           sse_encode_u_32(scale, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
@@ -4772,7 +4775,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta: kCrateApiPgpUserHandleIdenticonConstMeta,
-        argValues: [that, scale],
+        argValues: [that, count, scale],
         apiImpl: this,
       ),
     );
@@ -4781,7 +4784,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   TaskConstMeta get kCrateApiPgpUserHandleIdenticonConstMeta =>
       const TaskConstMeta(
         debugName: "UserHandle_identicon",
-        argNames: ["that", "scale"],
+        argNames: ["that", "count", "scale"],
       );
 
   @override
@@ -10700,8 +10703,12 @@ class UserHandleImpl extends RustOpaque implements UserHandle {
   String compositeLujvoOrElse({required bool short}) => RustLib.instance.api
       .crateApiPgpUserHandleCompositeLujvoOrElse(that: this, short: short);
 
-  Future<SizedImage> identicon({required int scale}) => RustLib.instance.api
-      .crateApiPgpUserHandleIdenticon(that: this, scale: scale);
+  Future<SizedImage> identicon({required int count, required int scale}) =>
+      RustLib.instance.api.crateApiPgpUserHandleIdenticon(
+        that: this,
+        count: count,
+        scale: scale,
+      );
 
   String name() => RustLib.instance.api.crateApiPgpUserHandleName(that: this);
 

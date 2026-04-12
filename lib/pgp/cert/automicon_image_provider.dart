@@ -22,7 +22,7 @@ class AutomiconImageProvider extends ImageProvider<UserHandle> {
         AutomiconImageStreamCompleter();
 
     key
-        .identicon(scale: scale)
+        .identicon(scale: scale, count: 4)
         .then(
           (img) async => await ImageDescriptor.raw(
             await ImmutableBuffer.fromUint8List(img.buf),
