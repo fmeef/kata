@@ -41,7 +41,7 @@ class CertCard extends StatelessWidget {
   Widget githubIdenticon(BuildContext context) {
     return Padding(
       padding: EdgeInsetsGeometry.fromSTEB(8, 8, 16, 8),
-      child: Automicon(handle: pgpKey.cert.fingerprint, scale: 8),
+      child: Automicon(handle: pgpKey.cert.fingerprint, scale: 4),
     );
   }
 

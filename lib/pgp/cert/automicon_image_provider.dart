@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:kata/pgp/cert/automicon_image_stream_completer.dart';
 import 'package:kata/src/rust/api/pgp.dart';
-import 'package:kata/src/rust/api/pgp/fingerprint.dart';
 import 'package:flutter/painting.dart';
 
 class AutomiconImageProvider extends ImageProvider<UserHandle> {

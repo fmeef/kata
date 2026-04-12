@@ -3,7 +3,6 @@ import 'dart:typed_data';
 import 'package:kata/pgp/cert/automicon.dart';
 import 'package:kata/src/rust/api.dart';
 import 'package:flutter/material.dart';
-import 'package:github_identicon/github_identicon.dart';
 import 'package:kata/src/rust/api/pgp.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -74,7 +73,7 @@ class SigCard extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsetsGeometry.fromSTEB(8, 8, 16, 8),
-                  child: Automicon(handle: fingerprint, scale: 8),
+                  child: Automicon(handle: fingerprint, scale: 4),
                 ),
                 Expanded(
                   child: Column(
