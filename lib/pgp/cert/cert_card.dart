@@ -7,7 +7,6 @@ import 'package:kata/pgp/wot/graph_controller.dart';
 import 'package:kata/pgp/wot/sig_list.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:flutter/material.dart';
-import 'package:github_identicon/github_identicon.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -41,7 +40,7 @@ class CertCard extends StatelessWidget {
   Widget githubIdenticon(BuildContext context) {
     return Padding(
       padding: EdgeInsetsGeometry.fromSTEB(8, 8, 16, 8),
-      child: Automicon(handle: pgpKey.cert.fingerprint, scale: 3, count: 3),
+      child: Automicon(handle: pgpKey.cert.fingerprint, scale: 3, count: 4),
     );
   }
 

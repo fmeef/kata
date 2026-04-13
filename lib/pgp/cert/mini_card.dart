@@ -1,3 +1,4 @@
+import 'package:kata/pgp/cert/automicon.dart';
 import 'package:kata/pgp/cert/smart_fingerprint.dart';
 import 'package:kata/pgp/wot/cert_list_args.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
@@ -39,9 +40,10 @@ class MiniCard extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsetsGeometry.fromSTEB(8, 0, 16, 0),
-                  child: GitHubIdenticon(
-                    seed: pgpKey.fingerprint().name(),
-                    size: 48,
+                  child: Automicon(
+                    handle: pgpKey.fingerprint(),
+                    scale: 3,
+                    count: 2,
                   ),
                 ),
                 Expanded(
