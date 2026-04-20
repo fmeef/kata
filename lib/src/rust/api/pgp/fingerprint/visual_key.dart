@@ -9,7 +9,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'visual_key.freezed.dart';
 
-// These functions are ignored because they are not marked as `pub`: `apply`, `bytes_to_n_fair`, `data_to_emoji`, `data_to_gismu_2`, `data_to_gismu`, `data_to_phone`, `get_gismu`, `identicon`, `lujvo_combined`
+// These functions are ignored because they are not marked as `pub`: `apply`, `bytes_to_n_fair`, `data_to_emoji`, `data_to_gismu_2`, `data_to_gismu`, `data_to_phone`, `get_gismu`, `identicon`, `is_overlapping`, `lujvo_combined`, `validate_overlap_single`, `validate_overlap`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `GISMU`, `IdenticonConfig`, `VisualKeyBuilderInner`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `deref`, `fmt`, `fmt`, `fmt`, `initialize`
 
