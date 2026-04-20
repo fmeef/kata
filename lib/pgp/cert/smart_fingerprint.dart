@@ -6,7 +6,7 @@ enum FingerprintMode { userid, lojban, fingerprint }
 
 class _SmartFingerprintState extends State<SmartFingerprint> {
   FingerprintMode mode = FingerprintMode.lojban;
-  VisualKeyOr? visualKey;
+  IdenticonKey? visualKey;
 
   @override
   void initState() {
@@ -43,7 +43,7 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
           FingerprintMode.fingerprint => Expanded(
             child: Wrap(children: [Text(fp, style: theme.textTheme.bodySmall)]),
           ),
-          FingerprintMode.lojban => (switch (visualKey) {
+          FingerprintMode.lojban => (switch (visualKey?.text()) {
             VisualKeyOr_Gismu(:final field0) => Expanded(
               child: Wrap(
                 spacing: 4,

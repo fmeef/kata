@@ -9,17 +9,25 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'visual_key.freezed.dart';
 
-// These functions are ignored because they are not marked as `pub`: `bytes_to_n_fair`, `data_to_emoji`, `data_to_gismu_2`, `data_to_gismu`, `data_to_phone`, `get_gismu`, `identicon`, `lujvo_combined`
+// These functions are ignored because they are not marked as `pub`: `apply_bytes`, `bytes_to_n_fair`, `data_to_emoji`, `data_to_gismu_2`, `data_to_gismu`, `data_to_phone`, `get_gismu`, `identicon`, `lujvo_combined`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `GISMU`, `IdenticonConfig`, `VisualKeyBuilderInner`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `deref`, `fmt`, `fmt`, `fmt`, `initialize`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `deref`, `fmt`, `fmt`, `fmt`, `initialize`
+
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Lifetimeable < IdenticonKey < 'static > >>>
+abstract class IdenticonKey implements RustOpaqueInterface {
+  Future<SizedImage?> identicon();
+
+  VisualKeyOr text();
+}
+
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Lifetimeable < Result < IdenticonKey < 'static > > >>>
+abstract class ResultIdenticonKey implements RustOpaqueInterface {}
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<VisualKeyBuilder>>
 abstract class VisualKeyBuilder implements RustOpaqueInterface {
-  Future<VisualKey> applyBytes({required List<int> bytes});
+  Future<ResultIdenticonKey> applyUserhandle({required UserHandle handle});
 
-  Future<VisualKey> applyUserhandle({required UserHandle handle});
-
-  Future<VisualKeyOr> applyUserhandleOrElse({required UserHandle handle});
+  Future<IdenticonKey> applyUserhandleOrElse({required UserHandle handle});
 
   VisualKeyBuilder emoji({required BigInt start, required BigInt end});
 
@@ -66,9 +74,8 @@ class VisualKey {
   final List<String>? gismu;
   final List<String>? emoji;
   final String? phone;
-  final SizedImage? identicon;
 
-  const VisualKey({this.gismu, this.emoji, this.phone, this.identicon});
+  const VisualKey({this.gismu, this.emoji, this.phone});
 
   String joinEmoji() => RustLib.instance.api
       .crateApiPgpFingerprintVisualKeyVisualKeyJoinEmoji(that: this);
@@ -77,8 +84,7 @@ class VisualKey {
       .crateApiPgpFingerprintVisualKeyVisualKeyJoinGismu(that: this);
 
   @override
-  int get hashCode =>
-      gismu.hashCode ^ emoji.hashCode ^ phone.hashCode ^ identicon.hashCode;
+  int get hashCode => gismu.hashCode ^ emoji.hashCode ^ phone.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -87,8 +93,7 @@ class VisualKey {
           runtimeType == other.runtimeType &&
           gismu == other.gismu &&
           emoji == other.emoji &&
-          phone == other.phone &&
-          identicon == other.identicon;
+          phone == other.phone;
 }
 
 @freezed
