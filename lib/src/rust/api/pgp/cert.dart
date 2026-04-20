@@ -3,11 +3,12 @@
 
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
+import '../../api.dart';
 import '../../frb_generated.dart';
 import '../pgp.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These functions are ignored because they are not marked as `pub`: `from_bytes_sig`, `from_bytes_sig`, `from_bytes`
+// These functions are ignored because they are not marked as `pub`: `from_bytes`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `partial_cmp`
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MaybeCert>>
@@ -66,6 +67,14 @@ class PgpCertStubSigs {
       .api
       .crateApiPgpCertPgpCertStubSigsFromBytes(bytes: bytes);
 
+  static Future<PgpCertStubSigs> fromBytesSig({
+    required List<int> bytes,
+    required PgpApp store,
+  }) => RustLib.instance.api.crateApiPgpCertPgpCertStubSigsFromBytesSig(
+    bytes: bytes,
+    store: store,
+  );
+
   @override
   int get hashCode =>
       cert.hashCode ^ ids.hashCode ^ sigs.hashCode ^ certifications.hashCode;
@@ -96,6 +105,14 @@ class PgpCertWithIds {
 
   static PgpCertWithIds fromBytes({required List<int> bytes}) =>
       RustLib.instance.api.crateApiPgpCertPgpCertWithIdsFromBytes(bytes: bytes);
+
+  static Future<PgpCertWithIds> fromBytesSig({
+    required List<int> bytes,
+    required PgpApp store,
+  }) => RustLib.instance.api.crateApiPgpCertPgpCertWithIdsFromBytesSig(
+    bytes: bytes,
+    store: store,
+  );
 
   bool hasPrivate() =>
       RustLib.instance.api.crateApiPgpCertPgpCertWithIdsHasPrivate(that: this);

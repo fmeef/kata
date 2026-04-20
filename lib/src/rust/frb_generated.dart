@@ -15,7 +15,7 @@ import 'api/db/migrations.dart';
 import 'api/db/store.dart';
 import 'api/pgp.dart';
 import 'api/pgp/cert.dart';
-import 'api/pgp/fingerprint.dart';
+import 'api/pgp/fingerprint/visual_key.dart';
 import 'api/pgp/import.dart';
 import 'api/pgp/keys.dart';
 import 'api/pgp/sign.dart';
@@ -85,7 +85,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => 1827231207;
+  int get rustContentHash => 730970435;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -578,6 +578,8 @@ abstract class RustLibApi extends BaseApi {
     required int scale,
   });
 
+  BigInt crateApiPgpUserHandleLen({required UserHandle that});
+
   String crateApiPgpUserHandleName({required UserHandle that});
 
   VisualKey crateApiPgpUserHandleSeparate({required UserHandle that});
@@ -586,6 +588,51 @@ abstract class RustLibApi extends BaseApi {
 
   VisualKeyOr crateApiPgpUserHandleSeparateLujvoOrElse({
     required UserHandle that,
+  });
+
+  Future<VisualKey> crateApiPgpFingerprintVisualKeyVisualKeyBuilderApplyBytes({
+    required VisualKeyBuilder that,
+    required List<int> bytes,
+  });
+
+  Future<VisualKey>
+  crateApiPgpFingerprintVisualKeyVisualKeyBuilderApplyUserhandle({
+    required VisualKeyBuilder that,
+    required UserHandle handle,
+  });
+
+  Future<VisualKeyOr>
+  crateApiPgpFingerprintVisualKeyVisualKeyBuilderApplyUserhandleOrElse({
+    required VisualKeyBuilder that,
+    required UserHandle handle,
+  });
+
+  VisualKeyBuilder crateApiPgpFingerprintVisualKeyVisualKeyBuilderEmoji({
+    required VisualKeyBuilder that,
+    required BigInt start,
+    required BigInt end,
+  });
+
+  VisualKeyBuilder crateApiPgpFingerprintVisualKeyVisualKeyBuilderIdenticon({
+    required VisualKeyBuilder that,
+    required BigInt start,
+    required BigInt end,
+    required int count,
+    required int scale,
+  });
+
+  VisualKeyBuilder crateApiPgpFingerprintVisualKeyVisualKeyBuilderLujvo({
+    required VisualKeyBuilder that,
+    required BigInt start,
+    required BigInt end,
+  });
+
+  VisualKeyBuilder crateApiPgpFingerprintVisualKeyVisualKeyBuilderNew();
+
+  VisualKeyBuilder crateApiPgpFingerprintVisualKeyVisualKeyBuilderPhone({
+    required VisualKeyBuilder that,
+    required BigInt start,
+    required BigInt end,
   });
 
   void crateApiDbConnectionWatcherWatch({
@@ -655,17 +702,31 @@ abstract class RustLibApi extends BaseApi {
     required List<int> bytes,
   });
 
+  Future<PgpCertStubSigs> crateApiPgpCertPgpCertStubSigsFromBytesSig({
+    required List<int> bytes,
+    required PgpApp store,
+  });
+
   PgpCertWithIds crateApiPgpCertPgpCertWithIdsFromBytes({
     required List<int> bytes,
+  });
+
+  Future<PgpCertWithIds> crateApiPgpCertPgpCertWithIdsFromBytesSig({
+    required List<int> bytes,
+    required PgpApp store,
   });
 
   bool crateApiPgpCertPgpCertWithIdsHasPrivate({required PgpCertWithIds that});
 
   Future<void> crateApiDbMigrationsRunMigrations({required SqliteDb conn});
 
-  String crateApiPgpFingerprintVisualKeyJoinEmoji({required VisualKey that});
+  String crateApiPgpFingerprintVisualKeyVisualKeyJoinEmoji({
+    required VisualKey that,
+  });
 
-  String crateApiPgpFingerprintVisualKeyJoinGismu({required VisualKey that});
+  String crateApiPgpFingerprintVisualKeyVisualKeyJoinGismu({
+    required VisualKey that,
+  });
 
   RustArcIncrementStrongCountFnType
   get rust_arc_increment_strong_count_ArcLazyCert;
@@ -784,6 +845,15 @@ abstract class RustLibApi extends BaseApi {
   RustArcDecrementStrongCountFnType get rust_arc_decrement_strong_count_UserId;
 
   CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_UserIdPtr;
+
+  RustArcIncrementStrongCountFnType
+  get rust_arc_increment_strong_count_VisualKeyBuilder;
+
+  RustArcDecrementStrongCountFnType
+  get rust_arc_decrement_strong_count_VisualKeyBuilder;
+
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_VisualKeyBuilderPtr;
 
   RustArcIncrementStrongCountFnType get rust_arc_increment_strong_count_Watcher;
 
@@ -4788,7 +4858,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  String crateApiPgpUserHandleName({required UserHandle that}) {
+  BigInt crateApiPgpUserHandleLen({required UserHandle that}) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
@@ -4801,6 +4871,36 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             generalizedFrbRustBinding,
             serializer,
             funcId: 173,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_usize,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpUserHandleLenConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpUserHandleLenConstMeta =>
+      const TaskConstMeta(debugName: "UserHandle_len", argNames: ["that"]);
+
+  @override
+  String crateApiPgpUserHandleName({required UserHandle that}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 174,
           )!;
         },
         codec: SseCodec(
@@ -4830,7 +4930,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 174,
+            funcId: 175,
           )!;
         },
         codec: SseCodec(
@@ -4860,7 +4960,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 175,
+            funcId: 176,
           )!;
         },
         codec: SseCodec(
@@ -4895,7 +4995,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 176,
+            funcId: 177,
           )!;
         },
         codec: SseCodec(
@@ -4913,6 +5013,334 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(
         debugName: "UserHandle_separate_lujvo_or_else",
         argNames: ["that"],
+      );
+
+  @override
+  Future<VisualKey> crateApiPgpFingerprintVisualKeyVisualKeyBuilderApplyBytes({
+    required VisualKeyBuilder that,
+    required List<int> bytes,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualKeyBuilder(
+            that,
+            serializer,
+          );
+          sse_encode_list_prim_u_8_loose(bytes, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 178,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_visual_key,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta:
+            kCrateApiPgpFingerprintVisualKeyVisualKeyBuilderApplyBytesConstMeta,
+        argValues: [that, bytes],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiPgpFingerprintVisualKeyVisualKeyBuilderApplyBytesConstMeta =>
+      const TaskConstMeta(
+        debugName: "VisualKeyBuilder_apply_bytes",
+        argNames: ["that", "bytes"],
+      );
+
+  @override
+  Future<VisualKey>
+  crateApiPgpFingerprintVisualKeyVisualKeyBuilderApplyUserhandle({
+    required VisualKeyBuilder that,
+    required UserHandle handle,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualKeyBuilder(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+            handle,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 179,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_visual_key,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta:
+            kCrateApiPgpFingerprintVisualKeyVisualKeyBuilderApplyUserhandleConstMeta,
+        argValues: [that, handle],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiPgpFingerprintVisualKeyVisualKeyBuilderApplyUserhandleConstMeta =>
+      const TaskConstMeta(
+        debugName: "VisualKeyBuilder_apply_userhandle",
+        argNames: ["that", "handle"],
+      );
+
+  @override
+  Future<VisualKeyOr>
+  crateApiPgpFingerprintVisualKeyVisualKeyBuilderApplyUserhandleOrElse({
+    required VisualKeyBuilder that,
+    required UserHandle handle,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualKeyBuilder(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+            handle,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 180,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_visual_key_or,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiPgpFingerprintVisualKeyVisualKeyBuilderApplyUserhandleOrElseConstMeta,
+        argValues: [that, handle],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiPgpFingerprintVisualKeyVisualKeyBuilderApplyUserhandleOrElseConstMeta =>
+      const TaskConstMeta(
+        debugName: "VisualKeyBuilder_apply_userhandle_or_else",
+        argNames: ["that", "handle"],
+      );
+
+  @override
+  VisualKeyBuilder crateApiPgpFingerprintVisualKeyVisualKeyBuilderEmoji({
+    required VisualKeyBuilder that,
+    required BigInt start,
+    required BigInt end,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualKeyBuilder(
+            that,
+            serializer,
+          );
+          sse_encode_usize(start, serializer);
+          sse_encode_usize(end, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 181,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualKeyBuilder,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiPgpFingerprintVisualKeyVisualKeyBuilderEmojiConstMeta,
+        argValues: [that, start, end],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiPgpFingerprintVisualKeyVisualKeyBuilderEmojiConstMeta =>
+      const TaskConstMeta(
+        debugName: "VisualKeyBuilder_emoji",
+        argNames: ["that", "start", "end"],
+      );
+
+  @override
+  VisualKeyBuilder crateApiPgpFingerprintVisualKeyVisualKeyBuilderIdenticon({
+    required VisualKeyBuilder that,
+    required BigInt start,
+    required BigInt end,
+    required int count,
+    required int scale,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualKeyBuilder(
+            that,
+            serializer,
+          );
+          sse_encode_usize(start, serializer);
+          sse_encode_usize(end, serializer);
+          sse_encode_u_32(count, serializer);
+          sse_encode_u_32(scale, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 182,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualKeyBuilder,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiPgpFingerprintVisualKeyVisualKeyBuilderIdenticonConstMeta,
+        argValues: [that, start, end, count, scale],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiPgpFingerprintVisualKeyVisualKeyBuilderIdenticonConstMeta =>
+      const TaskConstMeta(
+        debugName: "VisualKeyBuilder_identicon",
+        argNames: ["that", "start", "end", "count", "scale"],
+      );
+
+  @override
+  VisualKeyBuilder crateApiPgpFingerprintVisualKeyVisualKeyBuilderLujvo({
+    required VisualKeyBuilder that,
+    required BigInt start,
+    required BigInt end,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualKeyBuilder(
+            that,
+            serializer,
+          );
+          sse_encode_usize(start, serializer);
+          sse_encode_usize(end, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 183,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualKeyBuilder,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiPgpFingerprintVisualKeyVisualKeyBuilderLujvoConstMeta,
+        argValues: [that, start, end],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiPgpFingerprintVisualKeyVisualKeyBuilderLujvoConstMeta =>
+      const TaskConstMeta(
+        debugName: "VisualKeyBuilder_lujvo",
+        argNames: ["that", "start", "end"],
+      );
+
+  @override
+  VisualKeyBuilder crateApiPgpFingerprintVisualKeyVisualKeyBuilderNew() {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 184,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualKeyBuilder,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpFingerprintVisualKeyVisualKeyBuilderNewConstMeta,
+        argValues: [],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiPgpFingerprintVisualKeyVisualKeyBuilderNewConstMeta =>
+      const TaskConstMeta(debugName: "VisualKeyBuilder_new", argNames: []);
+
+  @override
+  VisualKeyBuilder crateApiPgpFingerprintVisualKeyVisualKeyBuilderPhone({
+    required VisualKeyBuilder that,
+    required BigInt start,
+    required BigInt end,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualKeyBuilder(
+            that,
+            serializer,
+          );
+          sse_encode_usize(start, serializer);
+          sse_encode_usize(end, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 185,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualKeyBuilder,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiPgpFingerprintVisualKeyVisualKeyBuilderPhoneConstMeta,
+        argValues: [that, start, end],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiPgpFingerprintVisualKeyVisualKeyBuilderPhoneConstMeta =>
+      const TaskConstMeta(
+        debugName: "VisualKeyBuilder_phone",
+        argNames: ["that", "start", "end"],
       );
 
   @override
@@ -4937,7 +5365,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 177,
+            funcId: 186,
           )!;
         },
         codec: SseCodec(
@@ -4971,7 +5399,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 178,
+            funcId: 187,
           )!;
         },
         codec: SseCodec(
@@ -4999,7 +5427,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 180,
+            funcId: 189,
             port: port_,
           );
         },
@@ -5034,7 +5462,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 181,
+            funcId: 190,
             port: port_,
           );
         },
@@ -5064,7 +5492,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 182,
+            funcId: 191,
             port: port_,
           );
         },
@@ -5102,7 +5530,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 183,
+            funcId: 192,
             port: port_,
           );
         },
@@ -5142,7 +5570,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 184,
+            funcId: 193,
             port: port_,
           );
         },
@@ -5172,7 +5600,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 185,
+            funcId: 194,
             port: port_,
           );
         },
@@ -5210,7 +5638,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 186,
+            funcId: 195,
             port: port_,
           );
         },
@@ -5248,7 +5676,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 187,
+            funcId: 196,
             port: port_,
           );
         },
@@ -5278,7 +5706,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 188,
+            funcId: 197,
             port: port_,
           );
         },
@@ -5313,7 +5741,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 189,
+            funcId: 198,
             port: port_,
           );
         },
@@ -5353,7 +5781,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 190,
+            funcId: 199,
             port: port_,
           );
         },
@@ -5383,7 +5811,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 191,
+            funcId: 200,
             port: port_,
           );
         },
@@ -5418,7 +5846,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 192,
+            funcId: 201,
             port: port_,
           );
         },
@@ -5451,7 +5879,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 193,
+            funcId: 202,
           )!;
         },
         codec: SseCodec(
@@ -5472,6 +5900,44 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<PgpCertStubSigs> crateApiPgpCertPgpCertStubSigsFromBytesSig({
+    required List<int> bytes,
+    required PgpApp store,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_prim_u_8_loose(bytes, serializer);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpApp(
+            store,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 203,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_pgp_cert_stub_sigs,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertStubSigsFromBytesSigConstMeta,
+        argValues: [bytes, store],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpCertPgpCertStubSigsFromBytesSigConstMeta =>
+      const TaskConstMeta(
+        debugName: "pgp_cert_stub_sigs_from_bytes_sig",
+        argNames: ["bytes", "store"],
+      );
+
+  @override
   PgpCertWithIds crateApiPgpCertPgpCertWithIdsFromBytes({
     required List<int> bytes,
   }) {
@@ -5483,7 +5949,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 194,
+            funcId: 204,
           )!;
         },
         codec: SseCodec(
@@ -5504,6 +5970,44 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<PgpCertWithIds> crateApiPgpCertPgpCertWithIdsFromBytesSig({
+    required List<int> bytes,
+    required PgpApp store,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_prim_u_8_loose(bytes, serializer);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpApp(
+            store,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 205,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_pgp_cert_with_ids,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertWithIdsFromBytesSigConstMeta,
+        argValues: [bytes, store],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpCertPgpCertWithIdsFromBytesSigConstMeta =>
+      const TaskConstMeta(
+        debugName: "pgp_cert_with_ids_from_bytes_sig",
+        argNames: ["bytes", "store"],
+      );
+
+  @override
   bool crateApiPgpCertPgpCertWithIdsHasPrivate({required PgpCertWithIds that}) {
     return handler.executeSync(
       SyncTask(
@@ -5513,7 +6017,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 195,
+            funcId: 206,
           )!;
         },
         codec: SseCodec(
@@ -5546,7 +6050,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 196,
+            funcId: 207,
             port: port_,
           );
         },
@@ -5565,7 +6069,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "run_migrations", argNames: ["conn"]);
 
   @override
-  String crateApiPgpFingerprintVisualKeyJoinEmoji({required VisualKey that}) {
+  String crateApiPgpFingerprintVisualKeyVisualKeyJoinEmoji({
+    required VisualKey that,
+  }) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
@@ -5574,28 +6080,31 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 197,
+            funcId: 208,
           )!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
           decodeErrorData: null,
         ),
-        constMeta: kCrateApiPgpFingerprintVisualKeyJoinEmojiConstMeta,
+        constMeta: kCrateApiPgpFingerprintVisualKeyVisualKeyJoinEmojiConstMeta,
         argValues: [that],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateApiPgpFingerprintVisualKeyJoinEmojiConstMeta =>
+  TaskConstMeta
+  get kCrateApiPgpFingerprintVisualKeyVisualKeyJoinEmojiConstMeta =>
       const TaskConstMeta(
         debugName: "visual_key_join_emoji",
         argNames: ["that"],
       );
 
   @override
-  String crateApiPgpFingerprintVisualKeyJoinGismu({required VisualKey that}) {
+  String crateApiPgpFingerprintVisualKeyVisualKeyJoinGismu({
+    required VisualKey that,
+  }) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
@@ -5604,21 +6113,22 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 198,
+            funcId: 209,
           )!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
           decodeErrorData: null,
         ),
-        constMeta: kCrateApiPgpFingerprintVisualKeyJoinGismuConstMeta,
+        constMeta: kCrateApiPgpFingerprintVisualKeyVisualKeyJoinGismuConstMeta,
         argValues: [that],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateApiPgpFingerprintVisualKeyJoinGismuConstMeta =>
+  TaskConstMeta
+  get kCrateApiPgpFingerprintVisualKeyVisualKeyJoinGismuConstMeta =>
       const TaskConstMeta(
         debugName: "visual_key_join_gismu",
         argNames: ["that"],
@@ -5781,6 +6291,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   RustArcDecrementStrongCountFnType
   get rust_arc_decrement_strong_count_UserId => wire
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserID;
+
+  RustArcIncrementStrongCountFnType
+  get rust_arc_increment_strong_count_VisualKeyBuilder => wire
+      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualKeyBuilder;
+
+  RustArcDecrementStrongCountFnType
+  get rust_arc_decrement_strong_count_VisualKeyBuilder => wire
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualKeyBuilder;
 
   RustArcIncrementStrongCountFnType
   get rust_arc_increment_strong_count_Watcher => wire
@@ -5956,6 +6474,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  VisualKeyBuilder
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualKeyBuilder(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return VisualKeyBuilderImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
   Watcher
   dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerWatcher(
     dynamic raw,
@@ -6061,6 +6588,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return UserHandleImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  VisualKeyBuilder
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualKeyBuilder(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return VisualKeyBuilderImpl.frbInternalDcoDecode(raw as List<dynamic>);
   }
 
   @protected
@@ -6252,6 +6788,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  VisualKeyBuilder
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualKeyBuilder(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return VisualKeyBuilderImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
   Watcher
   dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerWatcher(
     dynamic raw,
@@ -6423,6 +6968,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   QrCodeContent dco_decode_box_autoadd_qr_code_content(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_qr_code_content(raw);
+  }
+
+  @protected
+  SizedImage dco_decode_box_autoadd_sized_image(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_sized_image(raw);
   }
 
   @protected
@@ -6768,6 +7319,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  SizedImage? dco_decode_opt_box_autoadd_sized_image(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_sized_image(raw);
+  }
+
+  @protected
   BigInt? dco_decode_opt_box_autoadd_usize(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_usize(raw);
@@ -6996,12 +7553,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   VisualKey dco_decode_visual_key(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 3)
-      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
     return VisualKey(
-      gismu: dco_decode_list_String(arr[0]),
-      emoji: dco_decode_list_String(arr[1]),
-      phone: dco_decode_String(arr[2]),
+      gismu: dco_decode_opt_list_String(arr[0]),
+      emoji: dco_decode_opt_list_String(arr[1]),
+      phone: dco_decode_opt_String(arr[2]),
+      identicon: dco_decode_opt_box_autoadd_sized_image(arr[3]),
     );
   }
 
@@ -7246,6 +7804,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  VisualKeyBuilder
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualKeyBuilder(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return VisualKeyBuilderImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
   Watcher
   sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerWatcher(
     SseDeserializer deserializer,
@@ -7384,6 +7954,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return UserHandleImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  VisualKeyBuilder
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualKeyBuilder(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return VisualKeyBuilderImpl.frbInternalSseDecode(
       sse_decode_usize(deserializer),
       sse_decode_i_32(deserializer),
     );
@@ -7617,6 +8199,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  VisualKeyBuilder
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualKeyBuilder(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return VisualKeyBuilderImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
   Watcher
   sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerWatcher(
     SseDeserializer deserializer,
@@ -7730,6 +8324,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_qr_code_content(deserializer));
+  }
+
+  @protected
+  SizedImage sse_decode_box_autoadd_sized_image(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_sized_image(deserializer));
   }
 
   @protected
@@ -8198,6 +8798,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  SizedImage? sse_decode_opt_box_autoadd_sized_image(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_sized_image(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
   BigInt? sse_decode_opt_box_autoadd_usize(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -8435,10 +9048,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @protected
   VisualKey sse_decode_visual_key(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_gismu = sse_decode_list_String(deserializer);
-    var var_emoji = sse_decode_list_String(deserializer);
-    var var_phone = sse_decode_String(deserializer);
-    return VisualKey(gismu: var_gismu, emoji: var_emoji, phone: var_phone);
+    var var_gismu = sse_decode_opt_list_String(deserializer);
+    var var_emoji = sse_decode_opt_list_String(deserializer);
+    var var_phone = sse_decode_opt_String(deserializer);
+    var var_identicon = sse_decode_opt_box_autoadd_sized_image(deserializer);
+    return VisualKey(
+      gismu: var_gismu,
+      emoji: var_emoji,
+      phone: var_phone,
+      identicon: var_identicon,
+    );
   }
 
   @protected
@@ -8699,6 +9318,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualKeyBuilder(
+    VisualKeyBuilder self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as VisualKeyBuilderImpl).frbInternalSseEncode(move: true),
+      serializer,
+    );
+  }
+
+  @protected
+  void
   sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerWatcher(
     Watcher self,
     SseSerializer serializer,
@@ -8849,6 +9481,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
       (self as UserHandleImpl).frbInternalSseEncode(move: false),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualKeyBuilder(
+    VisualKeyBuilder self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as VisualKeyBuilderImpl).frbInternalSseEncode(move: false),
       serializer,
     );
   }
@@ -9136,6 +9781,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualKeyBuilder(
+    VisualKeyBuilder self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as VisualKeyBuilderImpl).frbInternalSseEncode(move: null),
+      serializer,
+    );
+  }
+
+  @protected
+  void
   sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerWatcher(
     Watcher self,
     SseSerializer serializer,
@@ -9279,6 +9937,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_qr_code_content(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_sized_image(
+    SizedImage self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_sized_image(self, serializer);
   }
 
   @protected
@@ -9704,6 +10371,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_opt_box_autoadd_sized_image(
+    SizedImage? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_sized_image(self, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_opt_box_autoadd_usize(
     BigInt? self,
     SseSerializer serializer,
@@ -9917,9 +10597,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @protected
   void sse_encode_visual_key(VisualKey self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_list_String(self.gismu, serializer);
-    sse_encode_list_String(self.emoji, serializer);
-    sse_encode_String(self.phone, serializer);
+    sse_encode_opt_list_String(self.gismu, serializer);
+    sse_encode_opt_list_String(self.emoji, serializer);
+    sse_encode_opt_String(self.phone, serializer);
+    sse_encode_opt_box_autoadd_sized_image(self.identicon, serializer);
   }
 
   @protected
@@ -10710,6 +11391,8 @@ class UserHandleImpl extends RustOpaque implements UserHandle {
         scale: scale,
       );
 
+  BigInt len() => RustLib.instance.api.crateApiPgpUserHandleLen(that: this);
+
   String name() => RustLib.instance.api.crateApiPgpUserHandleName(that: this);
 
   VisualKey separate() =>
@@ -10740,6 +11423,88 @@ class UserIdImpl extends RustOpaque implements UserId {
     rustArcDecrementStrongCountPtr:
         RustLib.instance.api.rust_arc_decrement_strong_count_UserIdPtr,
   );
+}
+
+@sealed
+class VisualKeyBuilderImpl extends RustOpaque implements VisualKeyBuilder {
+  // Not to be used by end users
+  VisualKeyBuilderImpl.frbInternalDcoDecode(List<dynamic> wire)
+    : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  VisualKeyBuilderImpl.frbInternalSseDecode(
+    BigInt ptr,
+    int externalSizeOnNative,
+  ) : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount:
+        RustLib.instance.api.rust_arc_increment_strong_count_VisualKeyBuilder,
+    rustArcDecrementStrongCount:
+        RustLib.instance.api.rust_arc_decrement_strong_count_VisualKeyBuilder,
+    rustArcDecrementStrongCountPtr: RustLib
+        .instance
+        .api
+        .rust_arc_decrement_strong_count_VisualKeyBuilderPtr,
+  );
+
+  Future<VisualKey> applyBytes({required List<int> bytes}) => RustLib
+      .instance
+      .api
+      .crateApiPgpFingerprintVisualKeyVisualKeyBuilderApplyBytes(
+        that: this,
+        bytes: bytes,
+      );
+
+  Future<VisualKey> applyUserhandle({required UserHandle handle}) => RustLib
+      .instance
+      .api
+      .crateApiPgpFingerprintVisualKeyVisualKeyBuilderApplyUserhandle(
+        that: this,
+        handle: handle,
+      );
+
+  Future<VisualKeyOr> applyUserhandleOrElse({required UserHandle handle}) =>
+      RustLib.instance.api
+          .crateApiPgpFingerprintVisualKeyVisualKeyBuilderApplyUserhandleOrElse(
+            that: this,
+            handle: handle,
+          );
+
+  VisualKeyBuilder emoji({required BigInt start, required BigInt end}) =>
+      RustLib.instance.api.crateApiPgpFingerprintVisualKeyVisualKeyBuilderEmoji(
+        that: this,
+        start: start,
+        end: end,
+      );
+
+  VisualKeyBuilder identicon({
+    required BigInt start,
+    required BigInt end,
+    required int count,
+    required int scale,
+  }) => RustLib.instance.api
+      .crateApiPgpFingerprintVisualKeyVisualKeyBuilderIdenticon(
+        that: this,
+        start: start,
+        end: end,
+        count: count,
+        scale: scale,
+      );
+
+  VisualKeyBuilder lujvo({required BigInt start, required BigInt end}) =>
+      RustLib.instance.api.crateApiPgpFingerprintVisualKeyVisualKeyBuilderLujvo(
+        that: this,
+        start: start,
+        end: end,
+      );
+
+  VisualKeyBuilder phone({required BigInt start, required BigInt end}) =>
+      RustLib.instance.api.crateApiPgpFingerprintVisualKeyVisualKeyBuilderPhone(
+        that: this,
+        start: start,
+        end: end,
+      );
 }
 
 @sealed

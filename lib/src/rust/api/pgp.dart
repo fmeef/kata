@@ -6,10 +6,10 @@
 import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'pgp/cert.dart';
-import 'pgp/fingerprint.dart';
+import 'pgp/fingerprint/visual_key.dart';
 import 'pgp/import.dart';
 
-// These functions are ignored because they are not marked as `pub`: `as_bytes`, `from_fingerprint`, `keyhandle`, `try_fingerprint_owned`, `try_fingerprint`, `try_keyhandle`
+// These functions are ignored because they are not marked as `pub`: `as_bytes`, `from_fingerprint`, `try_fingerprint_owned`, `try_fingerprint`, `try_keyhandle`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `PgpServiceStore`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `eq`, `fmt`, `partial_cmp`
 // These functions are ignored (category: IgnoreBecauseOwnerTyShouldIgnore): `import_certs`, `new`
@@ -26,6 +26,8 @@ abstract class UserHandle implements RustOpaqueInterface {
       RustLib.instance.api.crateApiPgpUserHandleFromHex(hex: hex);
 
   Future<SizedImage> identicon({required int count, required int scale});
+
+  BigInt len();
 
   String name();
 

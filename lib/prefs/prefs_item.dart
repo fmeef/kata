@@ -38,7 +38,7 @@ class PrefsItem extends StatelessWidget {
                     ],
                   ),
                 ),
-                if (button != null) button!,
+                ?button,
               ],
             ),
           ),

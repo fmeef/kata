@@ -3,7 +3,6 @@ import 'package:kata/pgp/cert/smart_fingerprint.dart';
 import 'package:kata/pgp/wot/cert_list_args.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:flutter/material.dart';
-import 'package:github_identicon/github_identicon.dart';
 import 'package:go_router/go_router.dart';
 
 class MiniCard extends StatelessWidget {
