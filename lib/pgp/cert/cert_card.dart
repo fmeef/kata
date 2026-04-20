@@ -8,6 +8,7 @@ import 'package:kata/pgp/wot/sig_list.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kata/src/rust/api/pgp/fingerprint/visual_key.dart';
 import 'package:provider/provider.dart';
 
 class CertCard extends StatelessWidget {
@@ -16,16 +17,27 @@ class CertCard extends StatelessWidget {
   final bool signable;
   final BigInt trust;
   final GraphController? graphController;
+  late final VisualKeyBuilder visualKeyBuilder;
   final cutoff = 560; // derived from length of themed fingerprint
   final secondCutoff = 560;
-  const CertCard({
+  CertCard({
     super.key,
     required this.pgpKey,
     this.active = false,
     this.signable = true,
     required this.trust,
     this.graphController,
-  });
+  }) {
+    visualKeyBuilder =
+        VisualKeyBuilder.fromHandle(data: pgpKey.cert.fingerprint)
+            .lujvo(start: BigInt.from(0), end: BigInt.from(8))
+            .identicon(
+              start: pgpKey.cert.fingerprint.len() - BigInt.from(16),
+              end: pgpKey.cert.fingerprint.len(),
+              scale: 3,
+              count: 3,
+            );
+  }
 
   Color colorForTrust(num trust) {
     if (trust > 1 && trust < 120) {
@@ -40,7 +52,7 @@ class CertCard extends StatelessWidget {
   Widget githubIdenticon(BuildContext context) {
     return Padding(
       padding: EdgeInsetsGeometry.fromSTEB(8, 8, 16, 8),
-      child: Automicon(handle: pgpKey.cert.fingerprint, scale: 3, count: 4),
+      child: Automicon(handle: visualKeyBuilder, scale: 3, count: 4),
     );
   }
 
@@ -100,7 +112,10 @@ class CertCard extends StatelessWidget {
               children: [
                 githubIdenticon(context),
                 Expanded(
-                  child: SmartFingerprint(fingerprint: pgpKey.cert.fingerprint),
+                  child: SmartFingerprint(
+                    fingerprint: pgpKey.cert.fingerprint,
+                    builder: visualKeyBuilder,
+                  ),
                 ),
 
                 Column(

@@ -4,6 +4,7 @@ import 'package:kata/pgp/cert/automicon.dart';
 import 'package:kata/src/rust/api.dart';
 import 'package:flutter/material.dart';
 import 'package:kata/src/rust/api/pgp.dart';
+import 'package:kata/src/rust/api/pgp/fingerprint/visual_key.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class SigCard extends StatelessWidget {
@@ -15,8 +16,9 @@ class SigCard extends StatelessWidget {
   final PgpApp pgpApp;
   final bool disableQr;
   final Orientation orientation;
+  late final VisualKeyBuilder builder;
 
-  const SigCard({
+  SigCard({
     super.key,
     required this.fingerprint,
     required this.pgpApp,
@@ -26,7 +28,16 @@ class SigCard extends StatelessWidget {
     this.orientation = Orientation.landscape,
     this.data,
     this.disableQr = false,
-  });
+  }) {
+    builder = VisualKeyBuilder.fromHandle(data: fingerprint)
+        .lujvo(start: BigInt.from(0), end: BigInt.from(8))
+        .identicon(
+          start: fingerprint.len() - BigInt.from(16),
+          end: fingerprint.len(),
+          scale: 3,
+          count: 3,
+        );
+  }
 
   Widget getQr() {
     final qrContent = QrImageView.withQr(
@@ -73,7 +84,7 @@ class SigCard extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsetsGeometry.fromSTEB(8, 8, 16, 8),
-                  child: Automicon(handle: fingerprint, scale: 4),
+                  child: Automicon(handle: builder, scale: 4),
                 ),
                 Expanded(
                   child: Column(

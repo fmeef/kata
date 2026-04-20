@@ -4,19 +4,30 @@ import 'package:kata/pgp/wot/cert_list_args.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kata/src/rust/api/pgp/fingerprint/visual_key.dart';
 
 class MiniCard extends StatelessWidget {
   final MaybeCert pgpKey;
+  late final VisualKeyBuilder builder;
 
   final cutoff = 560; // derived from length of themed fingerprint
-  const MiniCard({super.key, required this.pgpKey});
+  MiniCard({super.key, required this.pgpKey}) {
+    final fp = pgpKey.fingerprint().len();
+    builder = VisualKeyBuilder.fromHandle(data: pgpKey.fingerprint())
+        .lujvo(start: BigInt.from(0), end: BigInt.from(8))
+        .identicon(start: fp - BigInt.from(16), end: fp, scale: 3, count: 2);
+  }
 
   Widget contentText(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SmartFingerprint(fingerprint: pgpKey.fingerprint(), short: true),
+        SmartFingerprint(
+          fingerprint: pgpKey.fingerprint(),
+          builder: builder,
+          short: true,
+        ),
       ],
     );
   }
@@ -39,11 +50,7 @@ class MiniCard extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsetsGeometry.fromSTEB(8, 0, 16, 0),
-                  child: Automicon(
-                    handle: pgpKey.fingerprint(),
-                    scale: 3,
-                    count: 2,
-                  ),
+                  child: Automicon(handle: builder, scale: 3, count: 2),
                 ),
                 Expanded(
                   child: Column(

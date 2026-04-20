@@ -6,27 +6,18 @@ enum FingerprintMode { userid, lojban, fingerprint }
 
 class _SmartFingerprintState extends State<SmartFingerprint> {
   FingerprintMode mode = FingerprintMode.lojban;
-  IdenticonKey? visualKey;
+  VisualKeyOr? visualKey;
 
   @override
   void initState() {
     super.initState();
     mode = widget.mode;
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      VisualKeyBuilder()
-          .lujvo(start: BigInt.from(0), end: BigInt.from(8))
-          .identicon(
-            start: widget.fingerprint.len() - BigInt.from(16),
-            end: widget.fingerprint.len(),
-            count: 3,
-            scale: 8,
-          )
-          .applyUserhandleOrElse(handle: widget.fingerprint)
-          .then(
-            (v) => setState(() {
-              visualKey = v;
-            }),
-          );
+      widget.builder.applyOrElse().then(
+        (v) => setState(() {
+          visualKey = v;
+        }),
+      );
     });
   }
 
@@ -43,7 +34,7 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
           FingerprintMode.fingerprint => Expanded(
             child: Wrap(children: [Text(fp, style: theme.textTheme.bodySmall)]),
           ),
-          FingerprintMode.lojban => (switch (visualKey?.text()) {
+          FingerprintMode.lojban => (switch (visualKey) {
             VisualKeyOr_Gismu(:final field0) => Expanded(
               child: Wrap(
                 spacing: 4,
@@ -95,10 +86,12 @@ class SmartFingerprint extends StatefulWidget {
   final UserHandle fingerprint;
   final FingerprintMode mode;
   final bool short;
+  final VisualKeyBuilder builder;
 
   const SmartFingerprint({
     super.key,
     required this.fingerprint,
+    required this.builder,
     this.mode = FingerprintMode.lojban,
     this.short = false,
   });

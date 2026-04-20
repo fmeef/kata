@@ -9,27 +9,24 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'visual_key.freezed.dart';
 
-// These functions are ignored because they are not marked as `pub`: `apply_bytes`, `bytes_to_n_fair`, `data_to_emoji`, `data_to_gismu_2`, `data_to_gismu`, `data_to_phone`, `get_gismu`, `identicon`, `lujvo_combined`
+// These functions are ignored because they are not marked as `pub`: `apply`, `bytes_to_n_fair`, `data_to_emoji`, `data_to_gismu_2`, `data_to_gismu`, `data_to_phone`, `get_gismu`, `identicon`, `lujvo_combined`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `GISMU`, `IdenticonConfig`, `VisualKeyBuilderInner`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `deref`, `fmt`, `fmt`, `fmt`, `initialize`
 
-// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Lifetimeable < IdenticonKey < 'static > >>>
-abstract class IdenticonKey implements RustOpaqueInterface {
-  Future<SizedImage?> identicon();
-
-  VisualKeyOr text();
-}
-
-// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Lifetimeable < Result < IdenticonKey < 'static > > >>>
-abstract class ResultIdenticonKey implements RustOpaqueInterface {}
-
-// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<VisualKeyBuilder>>
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Lifetimeable < VisualKeyBuilder < 'static > >>>
 abstract class VisualKeyBuilder implements RustOpaqueInterface {
-  Future<ResultIdenticonKey> applyUserhandle({required UserHandle handle});
-
-  Future<IdenticonKey> applyUserhandleOrElse({required UserHandle handle});
+  Future<VisualKeyOr> applyOrElse();
 
   VisualKeyBuilder emoji({required BigInt start, required BigInt end});
+
+  static VisualKeyBuilder fromHandle({required UserHandle data}) => RustLib
+      .instance
+      .api
+      .crateApiPgpFingerprintVisualKeyLifetimeableAutoOwnedRustOpaqueFlutterRustBridgeforGeneratedRustAutoOpaqueInnerVisualKeyBuilderstaticFromHandle(
+        data: data,
+      );
+
+  Future<SizedImage?> getIdenticon();
 
   VisualKeyBuilder identicon({
     required BigInt start,
@@ -39,9 +36,6 @@ abstract class VisualKeyBuilder implements RustOpaqueInterface {
   });
 
   VisualKeyBuilder lujvo({required BigInt start, required BigInt end});
-
-  factory VisualKeyBuilder() =>
-      RustLib.instance.api.crateApiPgpFingerprintVisualKeyVisualKeyBuilderNew();
 
   VisualKeyBuilder phone({required BigInt start, required BigInt end});
 }

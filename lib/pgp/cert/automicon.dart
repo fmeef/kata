@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kata/src/rust/api/pgp.dart';
+import 'package:kata/src/rust/api/pgp/fingerprint/visual_key.dart';
 
 class _AutomiconState extends State<Automicon> {
   Image? _image;
@@ -8,11 +8,11 @@ class _AutomiconState extends State<Automicon> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      widget.handle.identicon(scale: widget.scale, count: widget.count).then((
-        v,
-      ) {
+      widget.handle.getIdenticon().then((v) {
         setState(() {
-          _image = Image.memory(v.buf);
+          if (v != null) {
+            _image = Image.memory(v.buf);
+          }
         });
       });
     });
@@ -25,7 +25,7 @@ class _AutomiconState extends State<Automicon> {
 }
 
 class Automicon extends StatefulWidget {
-  final UserHandle handle;
+  final VisualKeyBuilder handle;
   final int scale;
   final int count;
   const Automicon({
