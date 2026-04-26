@@ -32,7 +32,7 @@ class CertCard extends StatelessWidget {
         VisualKeyBuilder.fromHandle(data: pgpKey.cert.fingerprint)
             .lujvo(start: BigInt.from(0), end: BigInt.from(8))
             .identicon(
-              start: pgpKey.cert.fingerprint.len() - BigInt.from(16),
+              start: pgpKey.cert.fingerprint.len() - BigInt.from(8),
               end: pgpKey.cert.fingerprint.len(),
               scale: 3,
               count: 3,
