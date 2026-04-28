@@ -9,11 +9,13 @@ class _AutomiconState extends State<Automicon> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       widget.handle.getIdenticon().then((v) {
-        setState(() {
-          if (v != null) {
-            _image = Image.memory(v.buf);
-          }
-        });
+        if (mounted) {
+          setState(() {
+            if (v != null) {
+              _image = Image.memory(v.buf);
+            }
+          });
+        }
       });
     });
   }
