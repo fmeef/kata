@@ -35,7 +35,9 @@ abstract class VisualKeyBuilder implements RustOpaqueInterface {
     required int scale,
   });
 
-  VisualKeyBuilder identiconMaxEnd({required int scale});
+  VisualKeyBuilder identiconAutoEnd({required int scale});
+
+  VisualKeyBuilder identiconAutoSize({required int count, required int scale});
 
   VisualKeyBuilder lujvo({required BigInt start, required BigInt end});
 

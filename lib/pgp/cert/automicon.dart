@@ -11,12 +11,7 @@ class _AutomiconState extends State<Automicon> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       widget.handle
-          .identicon(
-            start: widget.len - size,
-            end: widget.len,
-            count: widget.count,
-            scale: widget.scale,
-          )
+          .identiconAutoSize(count: widget.count, scale: 3)
           .getIdenticon()
           .then((v) {
             if (mounted) {
@@ -33,7 +28,7 @@ class _AutomiconState extends State<Automicon> {
   Future<void> toggleSize() async {
     if (expanded) {
       final image = await widget.handle
-          .identiconMaxEnd(scale: 3)
+          .identiconAutoEnd(scale: 3)
           .getIdenticon();
       if (image != null) {
         setState(() {
@@ -43,12 +38,7 @@ class _AutomiconState extends State<Automicon> {
       }
     } else {
       final image = await widget.handle
-          .identicon(
-            start: widget.len - size,
-            end: widget.len,
-            count: widget.count,
-            scale: widget.scale,
-          )
+          .identiconAutoSize(count: widget.count, scale: widget.scale)
           .getIdenticon();
       if (image != null) {
         setState(() {
