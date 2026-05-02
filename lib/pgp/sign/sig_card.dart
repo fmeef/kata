@@ -29,14 +29,9 @@ class SigCard extends StatelessWidget {
     this.data,
     this.disableQr = false,
   }) {
-    builder = VisualKeyBuilder.fromHandle(data: fingerprint)
-        .lujvo(start: BigInt.from(0), end: BigInt.from(8))
-        .identicon(
-          start: fingerprint.len() - BigInt.from(16),
-          end: fingerprint.len(),
-          scale: 3,
-          count: 3,
-        );
+    builder = VisualKeyBuilder.fromHandle(
+      data: fingerprint,
+    ).lujvo(start: BigInt.from(0), end: BigInt.from(8));
   }
 
   Widget getQr() {
@@ -84,7 +79,11 @@ class SigCard extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsetsGeometry.fromSTEB(8, 8, 16, 8),
-                  child: Automicon(handle: builder, scale: 4),
+                  child: Automicon(
+                    handle: builder,
+                    scale: 4,
+                    len: fingerprint.len(),
+                  ),
                 ),
                 Expanded(
                   child: Column(

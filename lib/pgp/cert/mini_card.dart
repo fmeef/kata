@@ -12,10 +12,9 @@ class MiniCard extends StatelessWidget {
 
   final cutoff = 560; // derived from length of themed fingerprint
   MiniCard({super.key, required this.pgpKey}) {
-    final fp = pgpKey.fingerprint().len();
-    builder = VisualKeyBuilder.fromHandle(data: pgpKey.fingerprint())
-        .lujvo(start: BigInt.from(0), end: BigInt.from(8))
-        .identicon(start: fp - BigInt.from(8), end: fp, scale: 3, count: 2);
+    builder = VisualKeyBuilder.fromHandle(
+      data: pgpKey.fingerprint(),
+    ).lujvo(start: BigInt.from(0), end: BigInt.from(8));
   }
 
   Widget contentText(BuildContext context) {
@@ -50,7 +49,12 @@ class MiniCard extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsetsGeometry.fromSTEB(8, 0, 16, 0),
-                  child: Automicon(handle: builder, scale: 3, count: 2),
+                  child: Automicon(
+                    handle: builder,
+                    scale: 3,
+                    count: 2,
+                    len: pgpKey.fingerprint().len(),
+                  ),
                 ),
                 Expanded(
                   child: Column(

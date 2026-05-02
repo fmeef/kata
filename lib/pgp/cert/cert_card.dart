@@ -28,15 +28,9 @@ class CertCard extends StatelessWidget {
     required this.trust,
     this.graphController,
   }) {
-    visualKeyBuilder =
-        VisualKeyBuilder.fromHandle(data: pgpKey.cert.fingerprint)
-            .lujvo(start: BigInt.from(0), end: BigInt.from(8))
-            .identicon(
-              start: pgpKey.cert.fingerprint.len() - BigInt.from(8),
-              end: pgpKey.cert.fingerprint.len(),
-              scale: 3,
-              count: 3,
-            );
+    visualKeyBuilder = VisualKeyBuilder.fromHandle(
+      data: pgpKey.cert.fingerprint,
+    ).lujvo(start: BigInt.from(0), end: BigInt.from(8));
   }
 
   Color colorForTrust(num trust) {
@@ -52,7 +46,12 @@ class CertCard extends StatelessWidget {
   Widget githubIdenticon(BuildContext context) {
     return Padding(
       padding: EdgeInsetsGeometry.fromSTEB(8, 8, 16, 8),
-      child: Automicon(handle: visualKeyBuilder, scale: 3, count: 4),
+      child: Automicon(
+        handle: visualKeyBuilder,
+        scale: 3,
+        count: 3,
+        len: pgpKey.cert.fingerprint.len(),
+      ),
     );
   }
 
