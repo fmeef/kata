@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated_io.dart';
 import 'package:kata/src/rust/api/pgp/fingerprint/visual_key.dart';
 
 class _AutomiconState extends State<Automicon> {
-  Image? _image;
+  Image? _small;
+  Image? _large;
   BigInt size = BigInt.from(8);
   bool expanded = false;
 
@@ -17,7 +19,7 @@ class _AutomiconState extends State<Automicon> {
             if (mounted) {
               setState(() {
                 if (v != null) {
-                  _image = Image.memory(v.buf);
+                  _small = Image.memory(v.buf);
                 }
               });
             }
@@ -27,23 +29,17 @@ class _AutomiconState extends State<Automicon> {
 
   Future<void> toggleSize() async {
     if (expanded) {
-      final image = await widget.handle
-          .identiconAutoSize(count: widget.count, scale: widget.scale)
-          .getIdenticon();
-      if (image != null) {
-        setState(() {
-          expanded = false;
-          _image = Image.memory(image.buf);
-        });
-      }
+      setState(() {
+        expanded = false;
+      });
     } else {
       final image = await widget.handle
           .identiconAutoEnd(scale: 3)
           .getIdenticon();
       if (image != null) {
+        _large = Image.memory(image.buf);
         setState(() {
           expanded = true;
-          _image = Image.memory(image.buf);
         });
       }
     }
@@ -51,10 +47,21 @@ class _AutomiconState extends State<Automicon> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () async => await toggleSize(),
-      child: _image ?? Center(child: CircularProgressIndicator()),
-    );
+    if (_small == null) {
+      return Center(child: CircularProgressIndicator());
+    } else {
+      return InkWell(
+        onTap: () async => await toggleSize(),
+        child: AnimatedCrossFade(
+          firstChild: _small!,
+          secondChild: _large ?? Center(child: CircularProgressIndicator()),
+          crossFadeState: expanded
+              ? CrossFadeState.showSecond
+              : CrossFadeState.showFirst,
+          duration: const Duration(seconds: 1),
+        ),
+      );
+    }
   }
 }
 
