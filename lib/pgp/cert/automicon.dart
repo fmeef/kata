@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated_io.dart';
 import 'package:kata/src/rust/api/pgp/fingerprint/visual_key.dart';
 
 class _AutomiconState extends State<Automicon> {
@@ -58,7 +57,8 @@ class _AutomiconState extends State<Automicon> {
           crossFadeState: expanded
               ? CrossFadeState.showSecond
               : CrossFadeState.showFirst,
-          duration: const Duration(seconds: 1),
+          duration: const Duration(milliseconds: 100),
+          reverseDuration: const Duration(milliseconds: 100),
         ),
       );
     }
