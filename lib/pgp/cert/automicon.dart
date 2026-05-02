@@ -4,6 +4,7 @@ import 'package:kata/src/rust/api/pgp/fingerprint/visual_key.dart';
 class _AutomiconState extends State<Automicon> {
   Image? _image;
   BigInt size = BigInt.from(8);
+  bool expanded = false;
 
   @override
   void initState() {
@@ -29,9 +30,41 @@ class _AutomiconState extends State<Automicon> {
     });
   }
 
+  Future<void> toggleSize() async {
+    if (expanded) {
+      final image = await widget.handle
+          .identiconMaxEnd(scale: 3)
+          .getIdenticon();
+      if (image != null) {
+        setState(() {
+          expanded = false;
+          _image = Image.memory(image.buf);
+        });
+      }
+    } else {
+      final image = await widget.handle
+          .identicon(
+            start: widget.len - size,
+            end: widget.len,
+            count: widget.count,
+            scale: widget.scale,
+          )
+          .getIdenticon();
+      if (image != null) {
+        setState(() {
+          expanded = true;
+          _image = Image.memory(image.buf);
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return InkWell(child: _image ?? Center(child: CircularProgressIndicator()));
+    return InkWell(
+      onTap: () async => await toggleSize(),
+      child: _image ?? Center(child: CircularProgressIndicator()),
+    );
   }
 }
 
