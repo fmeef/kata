@@ -28,7 +28,7 @@ class _AutomiconState extends State<Automicon> {
   Future<void> toggleSize() async {
     if (expanded) {
       final image = await widget.handle
-          .identiconAutoEnd(scale: 3)
+          .identiconAutoSize(count: widget.count, scale: widget.scale)
           .getIdenticon();
       if (image != null) {
         setState(() {
@@ -38,7 +38,7 @@ class _AutomiconState extends State<Automicon> {
       }
     } else {
       final image = await widget.handle
-          .identiconAutoSize(count: widget.count, scale: widget.scale)
+          .identiconAutoEnd(scale: 3)
           .getIdenticon();
       if (image != null) {
         setState(() {
