@@ -37,7 +37,7 @@ class DrawerContent extends StatelessWidget {
             handle: VisualKeyBuilder.fromHandle(
               data: cert.cert.fingerprint,
             ).lujvo(start: BigInt.from(0), end: BigInt.from(8)),
-            scale: 15,
+            scale: 4,
           ),
         ],
       );

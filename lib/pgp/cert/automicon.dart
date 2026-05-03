@@ -12,7 +12,7 @@ class _AutomiconState extends State<Automicon> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       widget.handle
-          .identiconAutoSize(count: widget.count, scale: 3)
+          .identiconAutoSize(count: widget.count, scale: widget.scale)
           .getIdenticon()
           .then((v) {
             if (mounted) {
@@ -33,7 +33,7 @@ class _AutomiconState extends State<Automicon> {
       });
     } else {
       final image = await widget.handle
-          .identiconAutoEnd(scale: 3)
+          .identiconAutoEnd(scale: widget.scale)
           .getIdenticon();
       if (image != null) {
         _large = Image.memory(image.buf);
@@ -74,7 +74,7 @@ class Automicon extends StatefulWidget {
     super.key,
     required this.handle,
     required this.len,
-    this.scale = 8,
+    this.scale = 3,
     this.count = 3,
   });
   @override
