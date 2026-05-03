@@ -50,7 +50,6 @@ dependencies:
   freezed_annotation: ^3.1.0
   lazylist: ^0.0.1
   tap_to_expand: ^0.7.2
-  github_identicon: ^1.0.1+1
   screenshot: ^3.0.0
   mobile_scanner: ^7.2.0
   share_plus: ^12.0.2

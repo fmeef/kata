@@ -387,14 +387,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  github_identicon:
-    dependency: "direct main"
-    description:
-      name: github_identicon
-      sha256: "9dad74c1556a1eece7d736c95e9555b011e74b524856037e4c2fbeaf0847e009"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.1+1"
   glob:
     dependency: transitive
     description:

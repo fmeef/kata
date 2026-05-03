@@ -1,9 +1,10 @@
 import 'package:kata/pgp/cert/active_cert.dart';
+import 'package:kata/pgp/cert/automicon.dart';
 import 'package:kata/src/rust/api.dart';
+import 'package:kata/src/rust/api/pgp/fingerprint/visual_key.dart';
 import 'package:kata/src/rust/api/pgp/import.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:github_identicon/github_identicon.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +12,6 @@ class DrawerContent extends StatelessWidget {
   const DrawerContent({super.key});
 
   Widget headerContent(BuildContext context) {
-    final double identiconSize = 100;
     final theme = Theme.of(context);
     final ActiveCert activeCert = context.read();
     final cert = activeCert.cert;
@@ -32,9 +32,12 @@ class DrawerContent extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-          GitHubIdenticon(
-            seed: cert.cert.fingerprint.name(),
-            size: identiconSize,
+          Automicon(
+            len: cert.cert.fingerprint.len(),
+            handle: VisualKeyBuilder.fromHandle(
+              data: cert.cert.fingerprint,
+            ).lujvo(start: BigInt.from(0), end: BigInt.from(8)),
+            scale: 15,
           ),
         ],
       );
