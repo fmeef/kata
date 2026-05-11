@@ -147,7 +147,7 @@
 
             baseInputs = [
               wot_dual
-              flutter
+              master.flutter
               androidSdk
               jdk17
               rustup
