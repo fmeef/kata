@@ -1,5 +1,6 @@
 PODS:
   - file_picker (0.0.1):
+    - Flutter
     - FlutterMacOS
   - file_selector_macos (0.0.1):
     - FlutterMacOS
@@ -7,9 +8,6 @@ PODS:
     - FlutterMacOS
   - FlutterMacOS (1.0.0)
   - mobile_scanner (7.0.0):
-    - Flutter
-    - FlutterMacOS
-  - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
   - rust_lib_kata (0.0.1):
@@ -21,19 +19,18 @@ PODS:
     - FlutterMacOS
 
 DEPENDENCIES:
-  - file_picker (from `Flutter/ephemeral/.symlinks/plugins/file_picker/macos`)
+  - file_picker (from `Flutter/ephemeral/.symlinks/plugins/file_picker/darwin`)
   - file_selector_macos (from `Flutter/ephemeral/.symlinks/plugins/file_selector_macos/macos`)
   - flutter_zxing (from `Flutter/ephemeral/.symlinks/plugins/flutter_zxing/macos`)
   - FlutterMacOS (from `Flutter/ephemeral`)
   - mobile_scanner (from `Flutter/ephemeral/.symlinks/plugins/mobile_scanner/darwin`)
-  - path_provider_foundation (from `Flutter/ephemeral/.symlinks/plugins/path_provider_foundation/darwin`)
   - rust_lib_kata (from `Flutter/ephemeral/.symlinks/plugins/rust_lib_kata/macos`)
   - share_plus (from `Flutter/ephemeral/.symlinks/plugins/share_plus/macos`)
   - shared_preferences_foundation (from `Flutter/ephemeral/.symlinks/plugins/shared_preferences_foundation/darwin`)
 
 EXTERNAL SOURCES:
   file_picker:
-    :path: Flutter/ephemeral/.symlinks/plugins/file_picker/macos
+    :path: Flutter/ephemeral/.symlinks/plugins/file_picker/darwin
   file_selector_macos:
     :path: Flutter/ephemeral/.symlinks/plugins/file_selector_macos/macos
   flutter_zxing:
@@ -42,8 +39,6 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral
   mobile_scanner:
     :path: Flutter/ephemeral/.symlinks/plugins/mobile_scanner/darwin
-  path_provider_foundation:
-    :path: Flutter/ephemeral/.symlinks/plugins/path_provider_foundation/darwin
   rust_lib_kata:
     :path: Flutter/ephemeral/.symlinks/plugins/rust_lib_kata/macos
   share_plus:
@@ -52,12 +47,11 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral/.symlinks/plugins/shared_preferences_foundation/darwin
 
 SPEC CHECKSUMS:
-  file_picker: e716a70a9fe5fd9e09ebc922d7541464289443af
+  file_picker: e81e2d2db6261a4e98febeae383bd2173ba8b396
   file_selector_macos: 3e56eaea051180007b900eacb006686fd54da150
-  flutter_zxing: ea030278aa2a051cd81a5b0053be9d0569d11c9a
+  flutter_zxing: 99d4c62c06f609ccb5347c71f388cebd7d5705ef
   FlutterMacOS: d0db08ddef1a9af05a5ec4b724367152bb0500b1
   mobile_scanner: 77265f3dc8d580810e91849d4a0811a90467ed5e
-  path_provider_foundation: 0b743cbb62d8e47eab856f09262bb8c1ddcfe6ba
   rust_lib_kata: 66d74447e092fd676077dccf97008c83449f5d19
   share_plus: 1fa619de8392a4398bfaf176d441853922614e89
   shared_preferences_foundation: 5086985c1d43c5ba4d5e69a4e8083a389e2909e6
