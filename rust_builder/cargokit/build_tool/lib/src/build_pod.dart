@@ -40,9 +40,9 @@ class BuildPod {
     }
 
     final outputDir = Environment.outputDir;
-    final buildDir = "${Environment.rootProjectDir}/../../build";
-    print("formatting build={$buildDir}");
-    runCommand("chmod", ["-R", "u+w", buildDir]);
+    //final buildDir = "${Environment.rootProjectDir}/../../build";
+    //print("formatting build={$buildDir}");
+    //runCommand("chmod", ["-R", "u+w", buildDir]);
     Directory(outputDir).createSync(recursive: true);
 
     final staticLibs = artifacts.values

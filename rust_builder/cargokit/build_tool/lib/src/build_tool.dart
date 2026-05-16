@@ -14,7 +14,6 @@ import 'logging.dart';
 import 'options.dart';
 import 'precompile_binaries.dart';
 import 'target.dart';
-import 'environment.dart';
 import 'util.dart';
 import 'verify_binaries.dart';
 
@@ -32,8 +31,8 @@ abstract class BuildCommand extends Command {
       enableVerboseLogging();
     }
 
-    final buildDir = "${Environment.rootProjectDir}/../../build";
-    runCommand("chmod", ["-R", "u+w", buildDir]);
+    //final buildDir = "${Environment.rootProjectDir}/../../build";
+    //runCommand("chmod", ["-R", "u+w", buildDir]);
 
     await runBuildCommand(options);
   }
@@ -48,8 +47,6 @@ class BuildPodCommand extends BuildCommand {
 
   @override
   Future<void> runBuildCommand(CargokitUserOptions options) async {
-    final buildDir = "${Environment.rootProjectDir}/../../build";
-    runCommand("chmod", ["-R", "u+w", buildDir]);
     final build = BuildPod(userOptions: options);
     await build.build();
   }

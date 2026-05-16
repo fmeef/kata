@@ -153,6 +153,7 @@
               rustup
               # fish
               cmake
+	      rsync
               ninja
               meson
               protobuf
