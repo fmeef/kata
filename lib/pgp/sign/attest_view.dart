@@ -119,8 +119,13 @@ class _AttestViewState extends State<AttestView> {
 
                         final shareParams = ShareParams(
                           files: [
-                            XFile.fromData(screenshot, mimeType: 'image/png'),
+                            XFile.fromData(
+                              screenshot,
+                              mimeType: 'image/png',
+                              name: '${cert.ids.first}.png',
+                            ),
                           ],
+                          title: 'Sharing card...',
                         );
 
                         SharePlus.instance.share(shareParams);
