@@ -7,6 +7,7 @@ import 'api/db.dart';
 import 'api/db/connection.dart';
 import 'api/pgp.dart';
 import 'api/pgp/cert.dart';
+import 'api/pgp/circles.dart';
 import 'api/pgp/import.dart';
 import 'api/pgp/keys.dart';
 import 'api/pgp/sign.dart';
@@ -52,6 +53,13 @@ abstract class PgpApp
 
   static Future<PgpApp> create({required Config config}) =>
       RustLib.instance.api.crateApiPgpAppCreate(config: config);
+
+  Future<Circle> createCircle({required List<CircleOr> keys});
+
+  Future<Circle> createCircleSigned({
+    required UserHandle author,
+    required List<CircleOr> keys,
+  });
 
   @override
   Future<void> deleteCert({required UserHandle fingerprint});
@@ -165,6 +173,8 @@ abstract class PgpApp
     required UserHandle fingerprint,
     required String server,
   });
+
+  Future<bool> verifyCircle({required Circle circle});
 
   Future<VerifyResult> verifyQrAllCerts({required List<int> content});
 }
