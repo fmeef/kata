@@ -11,7 +11,7 @@ import 'pgp/import.dart';
 
 // These functions are ignored because they are not marked as `pub`: `as_bytes`, `from_fingerprint`, `from_raw_hex`, `try_fingerprint_owned`, `try_fingerprint`, `try_keyhandle`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `PgpServiceStore`, `UserHandleVisitor`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `deserialize`, `eq`, `expecting`, `fmt`, `partial_cmp`, `serialize`, `visit_map`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `cmp`, `deserialize`, `eq`, `expecting`, `fmt`, `partial_cmp`, `serialize`, `visit_map`
 // These functions are ignored (category: IgnoreBecauseOwnerTyShouldIgnore): `import_certs`, `new`
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<UserHandle>>

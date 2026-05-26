@@ -10,21 +10,12 @@ import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'circle.freezed.dart';
 
 // These functions are ignored because they are not marked as `pub`: `as_bytes`, `bytes_buf`, `members_reader`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `eq`, `eq`, `eq`, `partial_cmp`, `partial_cmp`, `partial_cmp`
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Circle>>
 abstract class Circle implements RustOpaqueInterface {
-  CircleAuthor? get author;
-
-  UserHandle get id;
-
-  List<CircleOr> get members;
-
-  set author(CircleAuthor? author);
-
-  set id(UserHandle id);
-
-  set members(List<CircleOr> members);
+  static Future<Circle> create({required List<CircleOr> keys}) =>
+      RustLib.instance.api.crateApiPgpCirclesCircleCircleCreate(keys: keys);
 
   Future<bool> isMember({required UserHandle user});
 }
