@@ -11,7 +11,7 @@ import 'api/db/migrations.dart';
 import 'api/db/store.dart';
 import 'api/pgp.dart';
 import 'api/pgp/cert.dart';
-import 'api/pgp/circles.dart';
+import 'api/pgp/circles/circle.dart';
 import 'api/pgp/fingerprint/visual_key.dart';
 import 'api/pgp/import.dart';
 import 'api/pgp/keys.dart';
@@ -543,6 +543,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   dco_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
     dynamic raw,
   );
+
+  @protected
+  CircleOr dco_decode_box_autoadd_circle_or(dynamic raw);
 
   @protected
   Config dco_decode_box_autoadd_config(dynamic raw);
@@ -1185,6 +1188,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   sse_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
     SseDeserializer deserializer,
   );
+
+  @protected
+  CircleOr sse_decode_box_autoadd_circle_or(SseDeserializer deserializer);
 
   @protected
   Config sse_decode_box_autoadd_config(SseDeserializer deserializer);
@@ -1931,6 +1937,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void
   sse_encode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
     NewsGroup self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_circle_or(
+    CircleOr self,
     SseSerializer serializer,
   );
 

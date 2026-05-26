@@ -7,7 +7,7 @@ import 'api/db.dart';
 import 'api/db/connection.dart';
 import 'api/pgp.dart';
 import 'api/pgp/cert.dart';
-import 'api/pgp/circles.dart';
+import 'api/pgp/circles/circle.dart';
 import 'api/pgp/import.dart';
 import 'api/pgp/keys.dart';
 import 'api/pgp/sign.dart';
