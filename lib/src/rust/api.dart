@@ -7,6 +7,7 @@ import 'api/db.dart';
 import 'api/db/connection.dart';
 import 'api/pgp.dart';
 import 'api/pgp/cert.dart';
+import 'api/pgp/circles/app.dart';
 import 'api/pgp/circles/circle.dart';
 import 'api/pgp/import.dart';
 import 'api/pgp/keys.dart';
@@ -53,6 +54,8 @@ abstract class PgpApp
 
   static Future<PgpApp> create({required Config config}) =>
       RustLib.instance.api.crateApiPgpAppCreate(config: config);
+
+  Future<CircleApp> createApp({required UserHandle owner});
 
   Future<Circle> createCircleSigned({
     required UserHandle author,
