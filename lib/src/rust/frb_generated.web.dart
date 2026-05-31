@@ -509,6 +509,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   RustStreamSink<String> dco_decode_StreamSink_String_Sse(dynamic raw);
 
   @protected
+  RustStreamSink<AppMember> dco_decode_StreamSink_app_member_Sse(dynamic raw);
+
+  @protected
   RustStreamSink<PgpCertWithIds> dco_decode_StreamSink_pgp_cert_with_ids_Sse(
     dynamic raw,
   );
@@ -554,6 +557,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   UuidValue dco_decode_Uuid(dynamic raw);
+
+  @protected
+  AppMember dco_decode_app_member(dynamic raw);
 
   @protected
   bool dco_decode_bool(dynamic raw);
@@ -724,6 +730,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   dco_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
     dynamic raw,
   );
+
+  @protected
+  CircleOr? dco_decode_opt_box_autoadd_circle_or(dynamic raw);
 
   @protected
   OnlyFingerprint? dco_decode_opt_box_autoadd_only_fingerprint(dynamic raw);
@@ -1199,6 +1208,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  RustStreamSink<AppMember> sse_decode_StreamSink_app_member_Sse(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   RustStreamSink<PgpCertWithIds> sse_decode_StreamSink_pgp_cert_with_ids_Sse(
     SseDeserializer deserializer,
   );
@@ -1208,6 +1222,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   UuidValue sse_decode_Uuid(SseDeserializer deserializer);
+
+  @protected
+  AppMember sse_decode_app_member(SseDeserializer deserializer);
 
   @protected
   bool sse_decode_bool(SseDeserializer deserializer);
@@ -1394,6 +1411,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   sse_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
     SseDeserializer deserializer,
   );
+
+  @protected
+  CircleOr? sse_decode_opt_box_autoadd_circle_or(SseDeserializer deserializer);
 
   @protected
   OnlyFingerprint? sse_decode_opt_box_autoadd_only_fingerprint(
@@ -1959,6 +1979,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_StreamSink_app_member_Sse(
+    RustStreamSink<AppMember> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_StreamSink_pgp_cert_with_ids_Sse(
     RustStreamSink<PgpCertWithIds> self,
     SseSerializer serializer,
@@ -1969,6 +1995,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_Uuid(UuidValue self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_app_member(AppMember self, SseSerializer serializer);
 
   @protected
   void sse_encode_bool(bool self, SseSerializer serializer);
@@ -2199,6 +2228,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void
   sse_encode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
     NewsGroup? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_circle_or(
+    CircleOr? self,
     SseSerializer serializer,
   );
 
