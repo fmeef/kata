@@ -7,6 +7,7 @@ import 'api/db.dart';
 import 'api/db/connection.dart';
 import 'api/pgp.dart';
 import 'api/pgp/cert.dart';
+import 'api/pgp/circles.dart';
 import 'api/pgp/circles/app.dart';
 import 'api/pgp/circles/circle.dart';
 import 'api/pgp/import.dart';
@@ -174,6 +175,8 @@ abstract class PgpApp
     required UserHandle fingerprint,
     required String server,
   });
+
+  Future<bool> verifyApp({required CircleApp app});
 
   Future<bool> verifyCircle({required Circle circle});
 

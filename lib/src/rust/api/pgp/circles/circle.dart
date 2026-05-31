@@ -5,12 +5,12 @@
 
 import '../../../frb_generated.dart';
 import '../../pgp.dart';
+import '../circles.dart';
+import 'app.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
-import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
-part 'circle.freezed.dart';
 
-// These functions are ignored because they are not marked as `pub`: `as_bytes`, `bytes_buf`, `members_reader`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `eq`, `eq`, `eq`, `partial_cmp`, `partial_cmp`, `partial_cmp`
+// These functions are ignored because they are not marked as `pub`: `bytes_buf`, `members_reader`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `cmp`, `cmp`, `eq`, `eq`, `partial_cmp`, `partial_cmp`
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Circle>>
 abstract class Circle implements RustOpaqueInterface {
@@ -29,15 +29,4 @@ abstract class CircleAuthor implements RustOpaqueInterface {
   set author(UserHandle author);
 
   set sig(Uint8List sig);
-}
-
-@freezed
-sealed class CircleOr with _$CircleOr {
-  const CircleOr._();
-
-  const factory CircleOr.circle(Circle field0) = CircleOr_Circle;
-  const factory CircleOr.user(UserHandle field0) = CircleOr_User;
-
-  Future<bool> isMember({required UserHandle user}) => RustLib.instance.api
-      .crateApiPgpCirclesCircleCircleOrIsMember(that: this, user: user);
 }

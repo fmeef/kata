@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'circle.dart';
+part of 'circles.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -55,12 +55,13 @@ extension CircleOrPatterns on CircleOr {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( CircleOr_Circle value)?  circle,TResult Function( CircleOr_User value)?  user,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( CircleOr_Circle value)?  circle,TResult Function( CircleOr_User value)?  user,TResult Function( CircleOr_App value)?  app,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case CircleOr_Circle() when circle != null:
 return circle(_that);case CircleOr_User() when user != null:
-return user(_that);case _:
+return user(_that);case CircleOr_App() when app != null:
+return app(_that);case _:
   return orElse();
 
 }
@@ -78,12 +79,13 @@ return user(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( CircleOr_Circle value)  circle,required TResult Function( CircleOr_User value)  user,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( CircleOr_Circle value)  circle,required TResult Function( CircleOr_User value)  user,required TResult Function( CircleOr_App value)  app,}){
 final _that = this;
 switch (_that) {
 case CircleOr_Circle():
 return circle(_that);case CircleOr_User():
-return user(_that);}
+return user(_that);case CircleOr_App():
+return app(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -97,12 +99,13 @@ return user(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( CircleOr_Circle value)?  circle,TResult? Function( CircleOr_User value)?  user,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( CircleOr_Circle value)?  circle,TResult? Function( CircleOr_User value)?  user,TResult? Function( CircleOr_App value)?  app,}){
 final _that = this;
 switch (_that) {
 case CircleOr_Circle() when circle != null:
 return circle(_that);case CircleOr_User() when user != null:
-return user(_that);case _:
+return user(_that);case CircleOr_App() when app != null:
+return app(_that);case _:
   return null;
 
 }
@@ -119,11 +122,12 @@ return user(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( Circle field0)?  circle,TResult Function( UserHandle field0)?  user,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( Circle field0)?  circle,TResult Function( UserHandle field0)?  user,TResult Function( CircleApp field0)?  app,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case CircleOr_Circle() when circle != null:
 return circle(_that.field0);case CircleOr_User() when user != null:
-return user(_that.field0);case _:
+return user(_that.field0);case CircleOr_App() when app != null:
+return app(_that.field0);case _:
   return orElse();
 
 }
@@ -141,11 +145,12 @@ return user(_that.field0);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( Circle field0)  circle,required TResult Function( UserHandle field0)  user,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( Circle field0)  circle,required TResult Function( UserHandle field0)  user,required TResult Function( CircleApp field0)  app,}) {final _that = this;
 switch (_that) {
 case CircleOr_Circle():
 return circle(_that.field0);case CircleOr_User():
-return user(_that.field0);}
+return user(_that.field0);case CircleOr_App():
+return app(_that.field0);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -159,11 +164,12 @@ return user(_that.field0);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( Circle field0)?  circle,TResult? Function( UserHandle field0)?  user,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( Circle field0)?  circle,TResult? Function( UserHandle field0)?  user,TResult? Function( CircleApp field0)?  app,}) {final _that = this;
 switch (_that) {
 case CircleOr_Circle() when circle != null:
 return circle(_that.field0);case CircleOr_User() when user != null:
-return user(_that.field0);case _:
+return user(_that.field0);case CircleOr_App() when app != null:
+return app(_that.field0);case _:
   return null;
 
 }
@@ -297,6 +303,72 @@ class _$CircleOr_UserCopyWithImpl<$Res>
   return _then(CircleOr_User(
 null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
 as UserHandle,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class CircleOr_App extends CircleOr {
+  const CircleOr_App(this.field0): super._();
+  
+
+@override final  CircleApp field0;
+
+/// Create a copy of CircleOr
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CircleOr_AppCopyWith<CircleOr_App> get copyWith => _$CircleOr_AppCopyWithImpl<CircleOr_App>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CircleOr_App&&(identical(other.field0, field0) || other.field0 == field0));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,field0);
+
+@override
+String toString() {
+  return 'CircleOr.app(field0: $field0)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $CircleOr_AppCopyWith<$Res> implements $CircleOrCopyWith<$Res> {
+  factory $CircleOr_AppCopyWith(CircleOr_App value, $Res Function(CircleOr_App) _then) = _$CircleOr_AppCopyWithImpl;
+@useResult
+$Res call({
+ CircleApp field0
+});
+
+
+
+
+}
+/// @nodoc
+class _$CircleOr_AppCopyWithImpl<$Res>
+    implements $CircleOr_AppCopyWith<$Res> {
+  _$CircleOr_AppCopyWithImpl(this._self, this._then);
+
+  final CircleOr_App _self;
+  final $Res Function(CircleOr_App) _then;
+
+/// Create a copy of CircleOr
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
+  return _then(CircleOr_App(
+null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
+as CircleApp,
   ));
 }
 
