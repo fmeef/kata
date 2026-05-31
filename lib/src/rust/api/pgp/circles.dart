@@ -12,7 +12,7 @@ import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'circles.freezed.dart';
 
 // These functions are ignored because they are not marked as `pub`: `as_bytes`, `get_id`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `clone`, `cmp`, `eq`, `partial_cmp`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `clone`, `cmp`, `eq`, `fmt`, `partial_cmp`
 
 @freezed
 sealed class CircleOr with _$CircleOr {

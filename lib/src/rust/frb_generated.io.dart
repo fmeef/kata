@@ -722,6 +722,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  MemberTag dco_decode_member_tag(dynamic raw);
+
+  @protected
   OnConflict dco_decode_on_conflict(dynamic raw);
 
   @protected
@@ -1405,6 +1408,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<(String, GraphVertex)> sse_decode_list_record_string_graph_vertex(
     SseDeserializer deserializer,
   );
+
+  @protected
+  MemberTag sse_decode_member_tag(SseDeserializer deserializer);
 
   @protected
   OnConflict sse_decode_on_conflict(SseDeserializer deserializer);
@@ -2226,6 +2232,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     List<(String, GraphVertex)> self,
     SseSerializer serializer,
   );
+
+  @protected
+  void sse_encode_member_tag(MemberTag self, SseSerializer serializer);
 
   @protected
   void sse_encode_on_conflict(OnConflict self, SseSerializer serializer);

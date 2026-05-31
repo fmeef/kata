@@ -5,17 +5,20 @@
 
 import '../../../frb_generated.dart';
 import '../../pgp.dart';
+import 'circle.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 // These functions are ignored because they are not marked as `pub`: `as_bytes`, `as_read`, `get_id`, `resign`, `tag_reader`, `to_read`
-// These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `CircleAppInner`, `MemberTag`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `cmp`, `eq`, `eq`, `eq`, `eq`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`
+// These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `CircleAppInner`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `cmp`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<AppMember>>
 abstract class AppMember implements RustOpaqueInterface {}
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<CircleApp>>
 abstract class CircleApp implements RustOpaqueInterface {
+  Future<void> addCircle({required Circle circle, required MemberTag tag});
+
   Future<void> addMembers({required List<AppMember> members});
 
   Future<bool> isMember({required UserHandle user});
@@ -26,3 +29,5 @@ abstract class CircleApp implements RustOpaqueInterface {
 
   Future<void> setMembers({required List<AppMember> members});
 }
+
+enum MemberTag { merge, overwrite, delete }
