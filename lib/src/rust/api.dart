@@ -58,6 +58,8 @@ abstract class PgpApp
 
   Future<CircleApp> createApp({required UserHandle owner});
 
+  Future<Circle> createCircle({required List<CircleOr> keys});
+
   Future<Circle> createCircleSigned({
     required UserHandle author,
     required List<CircleOr> keys,

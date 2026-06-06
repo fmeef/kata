@@ -3,21 +3,36 @@
 
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
+import '../../../api.dart';
 import '../../../frb_generated.dart';
+import '../../db/connection.dart';
 import '../../pgp.dart';
 import '../circles.dart';
-import 'app.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These functions are ignored because they are not marked as `pub`: `bytes_buf`, `members_reader`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `cmp`, `cmp`, `eq`, `eq`, `fmt`, `fmt`, `partial_cmp`, `partial_cmp`
+// These functions are ignored because they are not marked as `pub`: `bytes_buf`, `members_reader`, `new_mut`, `update_digest`
+// These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `CircleInner`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `partial_cmp`, `partial_cmp`, `partial_cmp`
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Circle>>
-abstract class Circle implements RustOpaqueInterface {
-  static Future<Circle> create({required List<CircleOr> keys}) =>
-      RustLib.instance.api.crateApiPgpCirclesCircleCircleCreate(keys: keys);
+abstract class Circle implements RustOpaqueInterface, CircleLike {
+  @override
+  Future<List<CircleEntry>> consumeMembers();
+
+  @override
+  Future<CircleEntry?> getMember({required UserHandle id});
 
   Future<bool> isMember({required UserHandle user});
+
+  @override
+  Stream<CircleEntry> iterMembers();
+
+  Future<void> setPgp({required PgpApp pgp});
+
+  Future<void> toDb({required SqliteDb db});
+
+  @override
+  Future<bool> verify();
 }
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<CircleAuthor>>

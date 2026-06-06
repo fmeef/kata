@@ -3,49 +3,47 @@
 
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
+import '../../../api.dart';
 import '../../../frb_generated.dart';
+import '../../db/connection.dart';
 import '../../pgp.dart';
 import '../circles.dart';
 import 'circle.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These functions are ignored because they are not marked as `pub`: `as_bytes`, `as_read`, `resign`, `tag_reader`, `to_read`
-// These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `CircleAppInner`
+// These functions are ignored because they are not marked as `pub`: `as_bytes`, `as_read`, `as_str`, `new_empty`, `resign`, `tag_reader`, `to_read`
+// These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `AppMember`, `CircleAppInner`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `cmp`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<CircleApp>>
-abstract class CircleApp implements RustOpaqueInterface {
+abstract class CircleApp implements RustOpaqueInterface, CircleLike {
   Future<void> addApp({required CircleApp app, required MemberTag tag});
 
   Future<void> addCircle({required Circle circle, required MemberTag tag});
 
   Future<void> addUser({required UserHandle user, required MemberTag tag});
 
+  @override
+  Future<List<CircleEntry>> consumeMembers();
+
+  @override
+  Future<CircleEntry?> getMember({required UserHandle id});
+
   Future<bool> isMember({required UserHandle user});
 
-  Stream<AppMember> iterMembers();
+  @override
+  Stream<CircleEntry> iterMembers();
 
   Future<void> merge({required CircleApp other});
 
   Future<void> mergeBoth({required CircleApp other});
-}
 
-class AppMember {
-  final CircleOr? member;
-  final MemberTag tag;
+  Future<void> setPgp({required PgpApp app});
 
-  const AppMember({this.member, required this.tag});
+  Future<void> toDb({required SqliteDb db});
 
   @override
-  int get hashCode => member.hashCode ^ tag.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is AppMember &&
-          runtimeType == other.runtimeType &&
-          member == other.member &&
-          tag == other.tag;
+  Future<bool> verify();
 }
 
 enum MemberTag { merge, overwrite, delete }

@@ -4,13 +4,107 @@
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
 import '../../frb_generated.dart';
+import '../pgp.dart';
+import '../pgp/circles/app.dart';
 import 'connection.dart';
 import 'entities.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These functions are ignored because they are not marked as `pub`: `as_tsk`, `merge`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `clone`, `clone`, `clone`, `cmp`, `eq`, `fmt`, `partial_cmp`
-// These functions are ignored (category: IgnoreBecauseExplicitAttribute): `from_row`, `from_row`, `from_row`, `get_params`, `get_params`, `get_params`
+// These functions are ignored because they are not marked as `pub`: `as_tsk`, `get_bytes`, `get_userhandle`, `merge`, `new`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `cmp`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`
+// These functions are ignored (category: IgnoreBecauseExplicitAttribute): `from_row`, `from_row`, `from_row`, `from_row`, `from_row`, `from_row`, `get_params`, `get_params`, `get_params`, `get_params`, `get_params`, `get_params`
+
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<CircleData>>
+abstract class CircleData
+    implements RustOpaqueInterface, Crud, FromRow, GetParams {
+  @override
+  Future<void> delete({required SqliteDb conn});
+
+  static Future<bool> hasParams() =>
+      RustLib.instance.api.crateApiDbStoreCircleDataHasParams();
+
+  @override
+  Future<void> insert({required SqliteDb conn});
+
+  @override
+  Future<void> insertOnConflict({
+    required SqliteDb conn,
+    required OnConflict onConflict,
+  });
+
+  static Future<bool> isEntity() =>
+      RustLib.instance.api.crateApiDbStoreCircleDataIsEntity();
+
+  @override
+  Future<void> update({required SqliteDb conn});
+}
+
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<CircleMembersData>>
+abstract class CircleMembersData
+    implements RustOpaqueInterface, Crud, FromRow, GetParams {
+  @override
+  Future<void> delete({required SqliteDb conn});
+
+  static Future<bool> hasParams() =>
+      RustLib.instance.api.crateApiDbStoreCircleMembersDataHasParams();
+
+  @override
+  Future<void> insert({required SqliteDb conn});
+
+  @override
+  Future<void> insertOnConflict({
+    required SqliteDb conn,
+    required OnConflict onConflict,
+  });
+
+  static Future<bool> isEntity() =>
+      RustLib.instance.api.crateApiDbStoreCircleMembersDataIsEntity();
+
+  @override
+  Future<void> update({required SqliteDb conn});
+}
+
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<CircleWithMembers>>
+abstract class CircleWithMembers
+    implements RustOpaqueInterface, Crud, FromRow, GetParams {
+  @override
+  Future<void> delete({required SqliteDb conn});
+
+  Future<UserHandle?> getAuthor();
+
+  Future<Uint8List> getId();
+
+  Future<UserHandle> getIdUserhandle();
+
+  Future<Uint8List?> getMemberId();
+
+  Future<Uint8List?> getParentId();
+
+  Future<MemberTag?> getTag();
+
+  static Future<bool> hasParams() =>
+      RustLib.instance.api.crateApiDbStoreCircleWithMembersHasParams();
+
+  @override
+  Future<void> insert({required SqliteDb conn});
+
+  @override
+  Future<void> insertOnConflict({
+    required SqliteDb conn,
+    required OnConflict onConflict,
+  });
+
+  static Future<bool> isEntity() =>
+      RustLib.instance.api.crateApiDbStoreCircleWithMembersIsEntity();
+
+  @override
+  Future<void> update({required SqliteDb conn});
+}
+
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<DbMembers>>
+abstract class DbMembers implements RustOpaqueInterface {
+  Future<String> idHex();
+}
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PgpDataCert>>
 abstract class PgpDataCert
@@ -55,6 +149,10 @@ abstract class CertDao {
   Future<List<PgpDataCert>> getById({required String keyId});
 
   Future<List<PgpDataCert>> getByUserid({required String userid});
+
+  Future<List<CircleWithMembers>> getCircleById({required String id});
+
+  Future<List<CircleWithMembers>> getCirclesJoin();
 
   Future<OnlyFingerprint?> getFingerprintForRole({required String role});
 

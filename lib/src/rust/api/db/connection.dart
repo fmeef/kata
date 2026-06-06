@@ -45,6 +45,12 @@ abstract class SqliteDb implements RustOpaqueInterface, CertDao, Dao, TestDao {
   Future<List<PgpDataCert>> getByUserid({required String userid});
 
   @override
+  Future<List<CircleWithMembers>> getCircleById({required String id});
+
+  @override
+  Future<List<CircleWithMembers>> getCirclesJoin();
+
+  @override
   Future<void> getConnection();
 
   @override
