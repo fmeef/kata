@@ -20,6 +20,12 @@ abstract class Circle implements RustOpaqueInterface, CircleLike {
   Future<List<CircleEntry>> consumeMembers();
 
   @override
+  Future<Uint8List> getId();
+
+  @override
+  Future<UserHandle> getIdUserhandle();
+
+  @override
   Future<CircleEntry?> getMember({required UserHandle id});
 
   Future<bool> isMember({required UserHandle user});

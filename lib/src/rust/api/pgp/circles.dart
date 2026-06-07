@@ -8,12 +8,9 @@ import '../db/connection.dart';
 import '../db/store.dart';
 import '../pgp.dart';
 import 'circles/app.dart';
-import 'circles/circle.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
-import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
-part 'circles.freezed.dart';
 
-// These functions are ignored because they are not marked as `pub`: `as_bytes`, `from_app_member`, `from_circle_or`, `get_db_type`, `get_id`
+// These functions are ignored because they are not marked as `pub`: `as_bytes`, `from_app_member`, `from_circle_or`, `get_children_parent`, `get_children`, `get_db_type`, `get_id`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `cmp`, `cmp`, `eq`, `eq`, `fmt`, `fmt`, `partial_cmp`, `partial_cmp`
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<CircleEntry>>
@@ -31,34 +28,35 @@ abstract class CircleEntry implements RustOpaqueInterface {
   set tag(MemberTag? tag);
 }
 
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<CircleOr>>
+abstract class CircleOr implements RustOpaqueInterface {
+  static Future<List<CircleOr>> fromDb({
+    required List<CircleWithMembers> members,
+  }) => RustLib.instance.api.crateApiPgpCirclesCircleOrFromDb(members: members);
+
+  static Future<List<CircleOr>> fromDbFake({
+    required List<CircleWithMembers> members,
+  }) => RustLib.instance.api.crateApiPgpCirclesCircleOrFromDbFake(
+    members: members,
+  );
+
+  Future<String> idHex();
+
+  Future<bool> isMember({required UserHandle user});
+
+  Future<void> toDb({required SqliteDb db});
+}
+
 abstract class CircleLike {
   Future<List<CircleEntry>> consumeMembers();
+
+  Future<Uint8List> getId();
+
+  Future<UserHandle> getIdUserhandle();
 
   Future<CircleEntry?> getMember({required UserHandle id});
 
   Stream<CircleEntry> iterMembers();
 
   Future<bool> verify();
-}
-
-@freezed
-sealed class CircleOr with _$CircleOr {
-  const CircleOr._();
-
-  const factory CircleOr.circle(Circle field0) = CircleOr_Circle;
-  const factory CircleOr.user(UserHandle field0) = CircleOr_User;
-  const factory CircleOr.app(CircleApp field0) = CircleOr_App;
-
-  static Future<List<CircleOr>> fromDb({
-    required List<CircleWithMembers> members,
-  }) => RustLib.instance.api.crateApiPgpCirclesCircleOrFromDb(members: members);
-
-  Future<String> idHex() =>
-      RustLib.instance.api.crateApiPgpCirclesCircleOrIdHex(that: this);
-
-  Future<bool> isMember({required UserHandle user}) => RustLib.instance.api
-      .crateApiPgpCirclesCircleOrIsMember(that: this, user: user);
-
-  Future<void> toDb({required SqliteDb db}) =>
-      RustLib.instance.api.crateApiPgpCirclesCircleOrToDb(that: this, db: db);
 }
