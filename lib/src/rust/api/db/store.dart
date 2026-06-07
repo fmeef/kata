@@ -10,7 +10,7 @@ import 'connection.dart';
 import 'entities.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These functions are ignored because they are not marked as `pub`: `as_tsk`, `get_bytes`, `get_userhandle`, `merge`, `new`
+// These functions are ignored because they are not marked as `pub`: `as_tsk`, `get_bytes`, `get_userhandle`, `merge`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `DbMembers`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `cmp`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`
 // These functions are ignored (category: IgnoreBecauseExplicitAttribute): `from_row`, `from_row`, `from_row`, `from_row`, `from_row`, `from_row`, `get_params`, `get_params`, `get_params`, `get_params`, `get_params`, `get_params`
