@@ -1,4 +1,6 @@
+import 'package:kata/graphvis/centered_arrow_edge_decorator.dart';
 import 'package:kata/graphvis/rust_converter.dart';
+import 'package:kata/graphvis/smart_vertex_text_renderer.dart';
 import 'package:kata/src/rust/api.dart';
 import 'package:kata/src/rust/api/db/connection.dart';
 import 'package:kata/src/rust/api/pgp/wot/path.dart';
@@ -49,13 +51,23 @@ class _GraphTestState extends State<GraphTest> {
         ..backgroundBuilder = (ctx) {
           return Container(color: Colors.black);
         }
+        ..edgeShape =
+            EdgeLineShape(
+              decorators: [
+                CenteredArrowEdgeDecorator(
+                  arrowWidth: 30,
+                  arrowBaseDistance: 30,
+                ),
+              ],
+            ) // default is EdgeLineShape.
+        ..vertexShape = VertexCircleShape(
+          decorators: [],
+          textRenderer: SmartVertexTextRenderer(),
+        )
         ..graphStyle =
             (GraphStyle()
             // tagColor is prior to tagColorByIndex. use vertex.tags to get color
-            )
-        ..edgeShape =
-            EdgeLineShape() // default is EdgeLineShape.
-        ..vertexShape = VertexCircleShape(), // default is VertexCircleShape.,
+            ),
     );
   }
 }

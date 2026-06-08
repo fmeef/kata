@@ -1,4 +1,6 @@
+import 'package:kata/graphvis/centered_arrow_edge_decorator.dart';
 import 'package:kata/graphvis/rust_converter.dart';
+import 'package:kata/graphvis/smart_vertex_text_renderer.dart';
 import 'package:kata/pgp/wot/graph_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_graph_view/flutter_graph_view.dart';
@@ -42,8 +44,17 @@ class TrustPathView extends StatelessWidget {
                   // tagColor is prior to tagColorByIndex. use vertex.tags to get color
                   )
               ..edgeShape =
-                  EdgeLineShape() // default is EdgeLineShape.
-              ..vertexShape = VertexCircleShape(),
+                  EdgeLineShape(
+                    decorators: [
+                      CenteredArrowEdgeDecorator(
+                        arrowWidth: 20,
+                        arrowBaseDistance: 20,
+                      ),
+                    ],
+                  ) // default is EdgeLineShape.
+              ..vertexShape = VertexCircleShape(
+                textRenderer: SmartVertexTextRenderer(),
+              ),
           ),
         ),
       ],

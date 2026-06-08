@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
 import 'package:kata/src/rust/api/pgp/wot/path.dart';
 import 'package:flutter_graph_view/flutter_graph_view.dart';
 
@@ -19,6 +22,8 @@ class RustConverter extends DataConvertor<GraphVertex, GraphEdge> {
     vertex.tag = v.tag;
     vertex.tags = v.tags;
     vertex.data = v.data;
+    vertex.degree = 200;
+    vertex.colors = [Colors.black];
     return vertex;
   }
 

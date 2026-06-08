@@ -13,7 +13,7 @@ import 'package:kata/pgp/cert/generate_key.dart';
 import 'package:kata/pgp/pgp_view.dart';
 import 'package:kata/pgp/wot/graph_controller.dart';
 import 'package:kata/pgp/wot/sign_key_view.dart';
-import 'package:kata/pgp/wot/trust_path_view.dart';
+import 'package:kata/graphvis/trust_path_view.dart';
 import 'package:kata/pgp_app_bar.dart';
 import 'package:kata/prefs/prefs.dart';
 import 'package:kata/smart_fab.dart';
