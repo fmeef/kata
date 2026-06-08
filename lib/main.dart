@@ -1,3 +1,4 @@
+import 'package:kata/create_app.dart';
 import 'package:kata/drawer_content.dart';
 import 'package:kata/graphvis/graph_test.dart';
 
@@ -37,6 +38,7 @@ String titleFromPath(String path) {
     '/list' => 'All Cards',
     '/share' => 'Sharing identity card',
     '/mycards' => 'My Cards',
+    '/newapp' => 'Create Circle',
     _ => 'Kata',
   };
 }
@@ -135,6 +137,10 @@ class _MyAppState extends State<MyApp> {
               ),
               GoRoute(path: '/mycards', builder: (context, state) => Prefs()),
               GoRoute(path: '/scan', builder: (context, state) => VerifyView()),
+              GoRoute(
+                path: '/newapp',
+                builder: (context, state) => CreateApp(),
+              ),
             ],
           ),
         ],

@@ -87,6 +87,13 @@ class DrawerContent extends StatelessWidget {
           },
           child: const Text('Settings'),
         ),
+        TextButton(
+          onPressed: () {
+            context.pop();
+            context.push('/newapp');
+          },
+          child: const Text('Create circle'),
+        ),
       ],
     );
   }

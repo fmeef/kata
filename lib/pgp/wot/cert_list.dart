@@ -29,6 +29,7 @@ class _CertListState extends State<CertList> {
   List<_CertTrust>? certs;
   Watcher? watcher;
   _CertTrust? currentUpdate;
+  Set<PgpCertWithIds> _selected = {};
   ScaffoldFeatureController<MaterialBanner, MaterialBannerClosedReason>? banner;
   TextEditingController searchController = TextEditingController();
   final certRefreshController = CertRefreshController();
@@ -257,6 +258,16 @@ class _CertListState extends State<CertList> {
                               pgpKey: v.cert,
                               trust: v.trust,
                               graphController: v.graphController,
+                              selectable: (switch (widget.args.selectable) {
+                                null => null,
+                                final func => (cert, selected) async {
+                                  (switch (selected) {
+                                    true => _selected.add(cert),
+                                    false => _selected.remove(cert),
+                                  });
+                                  await func(_selected.toList());
+                                },
+                              }),
                               active:
                                   v.cert.cert.fingerprint.name() ==
                                   cert?.cert.fingerprint.name(),
