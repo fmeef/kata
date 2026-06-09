@@ -8,10 +8,11 @@ import 'package:kata/src/rust/api/pgp/fingerprint/visual_key.dart';
 
 class MiniCard extends StatelessWidget {
   final MaybeCert pgpKey;
+  final Color cardColor;
   late final VisualKeyBuilder builder;
 
   final cutoff = 560; // derived from length of themed fingerprint
-  MiniCard({super.key, required this.pgpKey}) {
+  MiniCard({super.key, required this.pgpKey, this.cardColor = Colors.white}) {
     builder = VisualKeyBuilder.fromHandle(
       data: pgpKey.fingerprint(),
     ).lujvo(start: BigInt.from(0), end: BigInt.from(8));
@@ -37,6 +38,7 @@ class MiniCard extends StatelessWidget {
     final ids = (pgpKey.maybeIds() ?? ['Unknown']).toSet();
     final mq = MediaQuery.sizeOf(context);
     return Card(
+      color: cardColor,
       child: Padding(
         padding: EdgeInsetsGeometry.fromSTEB(16, 8, 16, 8),
         child: Column(

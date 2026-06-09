@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kata/pgp/cert/cert_selector.dart';
 import 'package:kata/pgp/wot/cert_list.dart';
 import 'package:kata/pgp/wot/cert_list_args.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
@@ -18,17 +19,7 @@ class _CreateAppState extends State<CreateApp> {
     return Column(
       children: [
         Text('List cards'),
-        Expanded(
-          child: CertList(
-            args: CertListArgs(
-              selectable: (selected) {
-                setState(() {
-                  _selected = selected;
-                });
-              },
-            ),
-          ),
-        ),
+        Expanded(child: CertSelector()),
         ElevatedButton(onPressed: () => (), child: const Text('Confirm')),
       ],
     );

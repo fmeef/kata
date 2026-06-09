@@ -16,6 +16,9 @@ abstract class MaybeCert implements RustOpaqueInterface {
   UserHandle fingerprint();
 
   List<String>? maybeIds();
+
+  factory MaybeCert({required PgpCertWithIds cert}) =>
+      RustLib.instance.api.crateApiPgpCertMaybeCertNew(cert: cert);
 }
 
 class PgpCert {
