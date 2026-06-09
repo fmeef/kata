@@ -1,26 +1,52 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kata/circle/circle_card.dart';
 import 'package:kata/pgp/cert/cert_selector.dart';
 import 'package:kata/pgp/wot/cert_list.dart';
 import 'package:kata/pgp/wot/cert_list_args.dart';
+import 'package:kata/src/rust/api.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
+import 'package:kata/src/rust/api/pgp/circles.dart';
+import 'package:kata/src/rust/api/pgp/circles/circle.dart';
 import 'package:provider/provider.dart';
 
 enum Mode { App, Circle }
 
 class _CreateAppState extends State<CreateApp> {
   Mode _mode = Mode.Circle;
-  List<PgpCertWithIds> _selected = [];
+  List<MaybeCert> _selected = [];
+  Circle? _circle;
   Widget buildApp(BuildContext context) {
     return Column();
   }
 
   Widget buildCircle(BuildContext context) {
+    final PgpApp pgpApp = context.read();
     return Column(
       children: [
+        if (_circle != null) CircleCard(circle: _circle!),
         Text('List cards'),
-        Expanded(child: CertSelector()),
-        ElevatedButton(onPressed: () => (), child: const Text('Confirm')),
+        Expanded(
+          child: CertSelector(
+            selected: (l) => setState(() {
+              _selected = l;
+            }),
+          ),
+        ),
+        ElevatedButton(
+          onPressed: () async {
+            final c = await pgpApp.createCircle(
+              keys: _selected
+                  .map((v) => CircleOr.fromCert(userHandle: v.fingerprint()))
+                  .toList(),
+            );
+
+            setState(() {
+              _circle = c;
+            });
+          },
+          child: const Text('Confirm'),
+        ),
       ],
     );
   }

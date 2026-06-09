@@ -31,6 +31,11 @@ abstract class CircleEntry implements RustOpaqueInterface {
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<CircleOr>>
 abstract class CircleOr implements RustOpaqueInterface {
+  static CircleOr fromCert({required UserHandle userHandle}) => RustLib
+      .instance
+      .api
+      .crateApiPgpCirclesCircleOrFromCert(userHandle: userHandle);
+
   static Future<List<CircleOr>> fromDb({
     required List<CircleWithMembers> members,
   }) => RustLib.instance.api.crateApiPgpCirclesCircleOrFromDb(members: members);
