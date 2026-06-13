@@ -1,9 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kata/circle/circle_card.dart';
 import 'package:kata/pgp/cert/cert_selector.dart';
-import 'package:kata/pgp/wot/cert_list.dart';
-import 'package:kata/pgp/wot/cert_list_args.dart';
 import 'package:kata/src/rust/api.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
@@ -24,7 +21,7 @@ class _CreateAppState extends State<CreateApp> {
     final PgpApp pgpApp = context.read();
     return Column(
       children: [
-        if (_circle != null) CircleCard(circle: _circle!),
+        if (_circle != null) Expanded(child: CircleCard(circle: _circle!)),
         Text('List cards'),
         Expanded(
           child: CertSelector(

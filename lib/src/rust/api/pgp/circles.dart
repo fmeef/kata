@@ -10,9 +10,11 @@ import '../pgp.dart';
 import 'circles/app.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These functions are ignored because they are not marked as `pub`: `as_bytes`, `from_app_member`, `from_circle_or`, `get_children_parent`, `get_children`, `get_id`, `get_userhandle`, `into_userhandle`
+// These functions are ignored because they are not marked as `pub`: `as_bytes`, `from_app_member`, `from_circle_or`, `get_children_parent`, `get_children`, `get_id`, `get_userhandle`
+// These functions are ignored because they have generic arguments: `new`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `TagOr`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `partial_cmp`, `partial_cmp`, `partial_cmp`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `partial_cmp`, `partial_cmp`, `partial_cmp`
+// These functions are ignored (category: IgnoreBecauseNotAllowedOwner): `get_id_userhandle`, `get_id`, `get_member`, `get_type`, `iter_members`, `verify`
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<CircleEntry>>
 abstract class CircleEntry implements RustOpaqueInterface {
@@ -40,6 +42,8 @@ abstract class CircleOr implements RustOpaqueInterface {
     required List<CircleWithMembers> members,
   }) => RustLib.instance.api.crateApiPgpCirclesCircleOrFromDb(members: members);
 
+  GenericCircle generic();
+
   Future<String> idHex();
 
   Future<bool> isMember({required UserHandle user});
@@ -47,16 +51,33 @@ abstract class CircleOr implements RustOpaqueInterface {
   Future<void> toDb({required SqliteDb db});
 }
 
-abstract class CircleLike {
-  Future<List<CircleEntry>> consumeMembers();
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Lifetimeable < GenericCircle < 'static > >>>
+abstract class GenericCircle implements RustOpaqueInterface {
+  Uint8List getId();
 
-  Future<Uint8List> getId();
+  UserHandle getIdUserhandle();
 
-  Future<UserHandle> getIdUserhandle();
+  CircleEntry? getMember({required UserHandle id});
 
-  Future<CircleEntry?> getMember({required UserHandle id});
+  CircleType getType();
 
   Stream<CircleEntry> iterMembers();
 
   Future<bool> verify();
 }
+
+abstract class CircleLike {
+  Uint8List getId();
+
+  UserHandle getIdUserhandle();
+
+  CircleEntry? getMember({required UserHandle id});
+
+  CircleType getType();
+
+  Stream<CircleEntry> iterMembers();
+
+  Future<bool> verify();
+}
+
+enum CircleType { user, circle, app }

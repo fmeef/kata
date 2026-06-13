@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kata/circle/member_entry.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
 import 'package:kata/src/rust/api/pgp/circles/circle.dart';
 
@@ -18,16 +19,23 @@ class _CircleCardState extends State<CircleCard> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Card(
-      child: Column(
-        children: [
-          const Text('Circle'),
-          Column(
-            children: _members
-                .map((v) => Text('Circle ${v.id.name()}'))
-                .toList(),
-          ),
-        ],
+      child: Padding(
+        padding: EdgeInsetsGeometry.fromSTEB(16, 8, 16, 8),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text('Circle', style: theme.textTheme.titleMedium),
+            Column(
+              children: _members
+                  .map((item) => MemberEntry(entry: item))
+                  .toList(),
+            ),
+          ],
+        ),
       ),
     );
   }

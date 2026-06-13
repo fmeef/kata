@@ -24,16 +24,16 @@ abstract class CircleApp implements RustOpaqueInterface, CircleLike {
   Future<void> addUser({required UserHandle user, required MemberTag tag});
 
   @override
-  Future<List<CircleEntry>> consumeMembers();
+  Uint8List getId();
 
   @override
-  Future<Uint8List> getId();
+  UserHandle getIdUserhandle();
 
   @override
-  Future<UserHandle> getIdUserhandle();
+  CircleEntry? getMember({required UserHandle id});
 
   @override
-  Future<CircleEntry?> getMember({required UserHandle id});
+  CircleType getType();
 
   Future<bool> isMember({required UserHandle user});
 

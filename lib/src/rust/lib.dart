@@ -6,5 +6,5 @@
 import 'frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<BTreeSet < CircleOr >>>
-abstract class BTreeSetCircleOr implements RustOpaqueInterface {}
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Box < dyn CircleLike + Send + Sync + 'a >>>
+abstract class BoxCircleLikeA implements RustOpaqueInterface {}

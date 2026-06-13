@@ -78,6 +78,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
       ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerGenerateCertPtr;
 
   CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_GenericCirclePtr => wire
+      ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableGenericCirclestaticPtr;
+
+  CrossPlatformFinalizerArg
   get rust_arc_decrement_strong_count_ResultCertParserPtr => wire
       ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableResultCertParserstaticPtr;
 
@@ -139,6 +143,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   AnyhowException dco_decode_AnyhowException(dynamic raw);
+
+  @protected
+  GenericCircle
+  dco_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableGenericCirclestatic(
+    dynamic raw,
+  );
 
   @protected
   ResultCertParser
@@ -459,6 +469,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PgpImport dco_decode_DynTrait_PgpImport(dynamic raw);
 
   @protected
+  GenericCircle
+  dco_decode_Lifetimeable_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerGenericCirclestatic(
+    dynamic raw,
+  );
+
+  @protected
   ResultCertParser
   dco_decode_Lifetimeable_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerResultCertParserstatic(
     dynamic raw,
@@ -530,6 +546,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   GenerateCert
   dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerGenerateCert(
+    dynamic raw,
+  );
+
+  @protected
+  GenericCircle
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableGenericCirclestatic(
     dynamic raw,
   );
 
@@ -761,6 +783,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   CertificationSet dco_decode_certification_set(dynamic raw);
+
+  @protected
+  CircleType dco_decode_circle_type(dynamic raw);
 
   @protected
   Config dco_decode_config(dynamic raw);
@@ -996,6 +1021,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   AnyhowException sse_decode_AnyhowException(SseDeserializer deserializer);
+
+  @protected
+  GenericCircle
+  sse_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableGenericCirclestatic(
+    SseDeserializer deserializer,
+  );
 
   @protected
   ResultCertParser
@@ -1310,6 +1341,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PgpImport sse_decode_DynTrait_PgpImport(SseDeserializer deserializer);
 
   @protected
+  GenericCircle
+  sse_decode_Lifetimeable_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerGenericCirclestatic(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   ResultCertParser
   sse_decode_Lifetimeable_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerResultCertParserstatic(
     SseDeserializer deserializer,
@@ -1383,6 +1420,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   GenerateCert
   sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerGenerateCert(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  GenericCircle
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableGenericCirclestatic(
     SseDeserializer deserializer,
   );
 
@@ -1580,6 +1623,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   CertificationSet sse_decode_certification_set(SseDeserializer deserializer);
+
+  @protected
+  CircleType sse_decode_circle_type(SseDeserializer deserializer);
 
   @protected
   Config sse_decode_config(SseDeserializer deserializer);
@@ -1842,6 +1888,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_AnyhowException(
     AnyhowException self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableGenericCirclestatic(
+    GenericCircle self,
     SseSerializer serializer,
   );
 
@@ -2217,6 +2270,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
+  sse_encode_Lifetimeable_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerGenericCirclestatic(
+    GenericCircle self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
   sse_encode_Lifetimeable_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerResultCertParserstatic(
     ResultCertParser self,
     SseSerializer serializer,
@@ -2302,6 +2362,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void
   sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerGenerateCert(
     GenerateCert self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableGenericCirclestatic(
+    GenericCircle self,
     SseSerializer serializer,
   );
 
@@ -2549,6 +2616,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     CertificationSet self,
     SseSerializer serializer,
   );
+
+  @protected
+  void sse_encode_circle_type(CircleType self, SseSerializer serializer);
 
   @protected
   void sse_encode_config(Config self, SseSerializer serializer);
@@ -3207,6 +3277,40 @@ class RustLibWire implements BaseWire {
       );
   late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerGenerateCert =
       _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerGenerateCertPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableGenericCirclestatic(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableGenericCirclestatic(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableGenericCirclestaticPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_kata_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableGenericCirclestatic',
+      );
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableGenericCirclestatic =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableGenericCirclestaticPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableGenericCirclestatic(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableGenericCirclestatic(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableGenericCirclestaticPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_kata_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableGenericCirclestatic',
+      );
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableGenericCirclestatic =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableGenericCirclestaticPtr
           .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 
   void

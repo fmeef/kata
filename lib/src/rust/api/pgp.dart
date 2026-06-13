@@ -7,6 +7,7 @@ import '../frb_generated.dart';
 import 'db/connection.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'pgp/cert.dart';
+import 'pgp/circles.dart';
 import 'pgp/fingerprint/visual_key.dart';
 import 'pgp/import.dart';
 
@@ -16,7 +17,7 @@ import 'pgp/import.dart';
 // These functions are ignored (category: IgnoreBecauseOwnerTyShouldIgnore): `import_certs`, `new`
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<UserHandle>>
-abstract class UserHandle implements RustOpaqueInterface {
+abstract class UserHandle implements RustOpaqueInterface, CircleLike {
   String composite();
 
   String compositeLujvo({required bool short});
@@ -26,7 +27,22 @@ abstract class UserHandle implements RustOpaqueInterface {
   static UserHandle fromHex({required String hex}) =>
       RustLib.instance.api.crateApiPgpUserHandleFromHex(hex: hex);
 
+  @override
+  Uint8List getId();
+
+  @override
+  UserHandle getIdUserhandle();
+
+  @override
+  CircleEntry? getMember({required UserHandle id});
+
+  @override
+  CircleType getType();
+
   Future<SizedImage> identicon({required int count, required int scale});
+
+  @override
+  Stream<CircleEntry> iterMembers();
 
   BigInt len();
 
@@ -39,6 +55,9 @@ abstract class UserHandle implements RustOpaqueInterface {
   VisualKeyOr separateLujvoOrElse();
 
   Future<void> toDb({required SqliteDb db});
+
+  @override
+  Future<bool> verify();
 }
 
 abstract class PgpServiceTrait {
