@@ -12,7 +12,7 @@ enum Mode { App, Circle }
 class _CreateAppState extends State<CreateApp> {
   Mode _mode = Mode.Circle;
   List<MaybeCert> _selected = [];
-  Circle? _circle;
+  List<CircleEntry>? _circle;
   Widget buildApp(BuildContext context) {
     return Column();
   }
@@ -21,7 +21,7 @@ class _CreateAppState extends State<CreateApp> {
     final PgpApp pgpApp = context.read();
     return Column(
       children: [
-        if (_circle != null) Expanded(child: CircleCard(circle: _circle!)),
+        if (_circle != null) Expanded(child: CircleCard(members: _circle!)),
         Text('List cards'),
         Expanded(
           child: CertSelector(
@@ -38,8 +38,10 @@ class _CreateAppState extends State<CreateApp> {
                   .toList(),
             );
 
+            final members = await c.consumeMembers();
+
             setState(() {
-              _circle = c;
+              _circle = members;
             });
           },
           child: const Text('Confirm'),

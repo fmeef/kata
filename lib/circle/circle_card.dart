@@ -1,22 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kata/circle/member_entry.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
-import 'package:kata/src/rust/api/pgp/circles/circle.dart';
 
-class _CircleCardState extends State<CircleCard> {
-  List<CircleEntry> _members = [];
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      widget.circle.consumeMembers().then(
-        (members) => setState(() {
-          _members = members;
-        }),
-      );
-    });
-  }
-
+class CircleCard extends StatelessWidget {
+  final List<CircleEntry> members;
+  const CircleCard({super.key, required this.members});
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -30,7 +18,7 @@ class _CircleCardState extends State<CircleCard> {
           children: [
             Text('Circle', style: theme.textTheme.titleMedium),
             Column(
-              children: _members
+              children: members
                   .map((item) => MemberEntry(entry: item))
                   .toList(),
             ),
@@ -39,12 +27,4 @@ class _CircleCardState extends State<CircleCard> {
       ),
     );
   }
-}
-
-class CircleCard extends StatefulWidget {
-  final Circle circle;
-  const CircleCard({super.key, required this.circle});
-
-  @override
-  State<StatefulWidget> createState() => _CircleCardState();
 }
