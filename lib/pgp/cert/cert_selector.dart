@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_graph_view/extension/base_ext.dart';
 import 'package:kata/pgp/cert/mini_card.dart';
 import 'package:kata/pgp/roots_provider.dart';
 import 'package:kata/src/rust/api.dart';
@@ -11,7 +12,7 @@ import 'package:provider/provider.dart';
 
 class _CertSelectorState extends State<CertSelector> {
   Watcher? watcher;
-  List<MaybeCert>? _certs;
+  Map<String, MaybeCert>? _certs;
   final Set<String> _selected = {};
 
   Future<void> updateCerts() async {
@@ -31,7 +32,9 @@ class _CertSelectorState extends State<CertSelector> {
     }
 
     setState(() {
-      _certs = n;
+      _certs = Map.fromEntries(
+        n.map((v) => MapEntry(v.fingerprint().name(), v)),
+      );
     });
   }
 
@@ -62,7 +65,7 @@ class _CertSelectorState extends State<CertSelector> {
           children: [
             Expanded(
               child: ListView(
-                children: certs.map((cert) {
+                children: certs.values.map((cert) {
                   final fp = cert.fingerprint().name();
                   return InkWell(
                     highlightColor: Colors.black,
@@ -74,16 +77,15 @@ class _CertSelectorState extends State<CertSelector> {
                           _selected.add(fp);
                         }
                       });
-                      await widget.selected(
-                        _certs
-                                ?.where(
-                                  (v) => _selected.contains(
-                                    v.fingerprint().name(),
-                                  ),
-                                )
-                                .toList() ??
-                            [],
-                      );
+
+                      final entries =
+                          _certs?.entries
+                              .where((v) => _selected.contains(v.key))
+                              .map((v) => v.value)
+                              .toList() ??
+                          [];
+
+                      await widget.selected(entries);
                     },
                     child: MiniCard(
                       pgpKey: cert,

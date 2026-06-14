@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:kata/src/rust/api/pgp/wot/path.dart';
 import 'package:flutter_graph_view/flutter_graph_view.dart';

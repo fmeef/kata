@@ -9,23 +9,16 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
   VisualKeyOr? visualKey;
 
   @override
-  void initState() {
-    super.initState();
-    mode = widget.mode;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      widget.builder.applyOrElse().then(
-        (v) => setState(() {
-          visualKey = v;
-        }),
-      );
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final fp = widget.fingerprint.name();
-
+    widget.builder.applyOrElse().then((v) {
+      if (mounted) {
+        setState(() {
+          visualKey = v;
+        });
+      }
+    });
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       mainAxisSize: MainAxisSize.min,

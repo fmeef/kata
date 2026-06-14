@@ -3,7 +3,6 @@ import 'package:kata/circle/circle_card.dart';
 import 'package:kata/pgp/cert/cert_selector.dart';
 import 'package:kata/src/rust/api.dart';
 import 'package:kata/src/rust/api/pgp.dart';
-import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +10,7 @@ enum Mode { App, Circle }
 
 class _CreateAppState extends State<CreateApp> {
   Mode _mode = Mode.Circle;
-  List<MaybeCert> _selected = [];
+
   UserHandle? _circleId;
   List<CircleEntry>? _circle;
   Widget buildApp(BuildContext context) {
@@ -20,6 +19,7 @@ class _CreateAppState extends State<CreateApp> {
 
   Widget buildCircle(BuildContext context) {
     final PgpApp pgpApp = context.read();
+
     return Column(
       children: [
         if (_circle != null)
@@ -31,7 +31,7 @@ class _CreateAppState extends State<CreateApp> {
           child: CertSelector(
             selected: (l) async {
               final c = await pgpApp.createCircle(
-                keys: _selected
+                keys: l
                     .map((v) => CircleOr.fromCert(userHandle: v.fingerprint()))
                     .toList(),
               );
@@ -42,7 +42,6 @@ class _CreateAppState extends State<CreateApp> {
               setState(() {
                 _circle = members;
                 _circleId = id;
-                _selected = l;
               });
             },
           ),

@@ -9,13 +9,11 @@ class MemberEntry extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final id = entry.id;
     final content = entry.content;
 
     if (content != null) {
       final circle = content.generic();
       final id = circle.getIdUserhandle();
-      final lujvo = id.separateLujvo();
       final builder = VisualKeyBuilder.fromHandle(
         data: id,
       ).lujvo(start: BigInt.from(0), end: BigInt.from(16));

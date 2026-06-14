@@ -10,6 +10,7 @@ class CircleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final m = members.map((item) => MemberEntry(entry: item)).toList();
     return Card(
       child: Padding(
         padding: EdgeInsetsGeometry.fromSTEB(16, 8, 16, 8),
@@ -23,12 +24,7 @@ class CircleCard extends StatelessWidget {
               style: theme.textTheme.titleMedium,
             ),
             Expanded(
-              child: ListView(
-                scrollDirection: Axis.vertical,
-                children: members
-                    .map((item) => MemberEntry(entry: item))
-                    .toList(),
-              ),
+              child: ListView(scrollDirection: Axis.vertical, children: m),
             ),
           ],
         ),
