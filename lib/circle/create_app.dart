@@ -29,29 +29,25 @@ class _CreateAppState extends State<CreateApp> {
         Text('List cards'),
         Expanded(
           child: CertSelector(
-            selected: (l) => setState(() {
-              _selected = l;
-            }),
+            selected: (l) async {
+              final c = await pgpApp.createCircle(
+                keys: _selected
+                    .map((v) => CircleOr.fromCert(userHandle: v.fingerprint()))
+                    .toList(),
+              );
+
+              final id = c.getIdUserhandle();
+              final members = await c.consumeMembers();
+
+              setState(() {
+                _circle = members;
+                _circleId = id;
+                _selected = l;
+              });
+            },
           ),
         ),
-        ElevatedButton(
-          onPressed: () async {
-            final c = await pgpApp.createCircle(
-              keys: _selected
-                  .map((v) => CircleOr.fromCert(userHandle: v.fingerprint()))
-                  .toList(),
-            );
-
-            final id = c.getIdUserhandle();
-            final members = await c.consumeMembers();
-
-            setState(() {
-              _circle = members;
-              _circleId = id;
-            });
-          },
-          child: const Text('Confirm'),
-        ),
+        ElevatedButton(onPressed: () async {}, child: const Text('Confirm')),
       ],
     );
   }
