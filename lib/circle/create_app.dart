@@ -47,7 +47,6 @@ class _CreateAppState extends State<CreateApp> {
             },
           ),
         ),
-        ElevatedButton(onPressed: () async {}, child: const Text('Confirm')),
       ],
     );
   }
