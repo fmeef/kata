@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:kata/circle/circle_card.dart';
 import 'package:kata/pgp/cert/cert_selector.dart';
 import 'package:kata/src/rust/api.dart';
+import 'package:kata/src/rust/api/pgp.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
-import 'package:kata/src/rust/api/pgp/circles/circle.dart';
 import 'package:provider/provider.dart';
 
 enum Mode { App, Circle }
@@ -12,6 +12,7 @@ enum Mode { App, Circle }
 class _CreateAppState extends State<CreateApp> {
   Mode _mode = Mode.Circle;
   List<MaybeCert> _selected = [];
+  UserHandle? _circleId;
   List<CircleEntry>? _circle;
   Widget buildApp(BuildContext context) {
     return Column();
@@ -21,7 +22,10 @@ class _CreateAppState extends State<CreateApp> {
     final PgpApp pgpApp = context.read();
     return Column(
       children: [
-        if (_circle != null) Expanded(child: CircleCard(members: _circle!)),
+        if (_circle != null)
+          Expanded(
+            child: CircleCard(members: _circle!, id: _circleId!),
+          ),
         Text('List cards'),
         Expanded(
           child: CertSelector(
@@ -38,10 +42,12 @@ class _CreateAppState extends State<CreateApp> {
                   .toList(),
             );
 
+            final id = c.getIdUserhandle();
             final members = await c.consumeMembers();
 
             setState(() {
               _circle = members;
+              _circleId = id;
             });
           },
           child: const Text('Confirm'),
