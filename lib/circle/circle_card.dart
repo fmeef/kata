@@ -22,10 +22,13 @@ class CircleCard extends StatelessWidget {
               'Circle (${id.separateLujvo().joinGismu()})',
               style: theme.textTheme.titleMedium,
             ),
-            Column(
-              children: members
-                  .map((item) => MemberEntry(entry: item))
-                  .toList(),
+            Expanded(
+              child: ListView(
+                scrollDirection: Axis.vertical,
+                children: members
+                    .map((item) => MemberEntry(entry: item))
+                    .toList(),
+              ),
             ),
           ],
         ),
