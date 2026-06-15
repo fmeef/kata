@@ -77,9 +77,13 @@ class _CreateAppState extends State<CreateApp> {
               context,
               (_) => Column(
                 children: [
-                  CircleCard(members: _circle!, id: _circleId!),
+                  Expanded(
+                    child: CircleCard(members: _circle!, id: _circleId!),
+                  ),
                   ElevatedButton(
-                    onPressed: () async {},
+                    onPressed: () async {
+                      await _circle?.toDb(db: pgpApp.getDb());
+                    },
                     child: const Text('Create card'),
                   ),
                 ],
