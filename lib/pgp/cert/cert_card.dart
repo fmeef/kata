@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:kata/pgp/cert/active_cert.dart';
 import 'package:kata/pgp/cert/automicon.dart';
 import 'package:kata/pgp/cert/cert_card_menu.dart';
@@ -13,8 +11,27 @@ import 'package:go_router/go_router.dart';
 import 'package:kata/src/rust/api/pgp/fingerprint/visual_key.dart';
 import 'package:provider/provider.dart';
 
-class _CertCardState extends State<CertCard> {
-  bool _selected = false;
+class CertCard extends StatelessWidget {
+  final PgpCertWithIds pgpKey;
+  final bool active;
+  final bool signable;
+  final BigInt trust;
+  final GraphController? graphController;
+  late final VisualKeyBuilder visualKeyBuilder;
+  final cutoff = 560; // derived from length of themed fingerprint
+  final secondCutoff = 560;
+  CertCard({
+    super.key,
+    required this.pgpKey,
+    this.active = false,
+    this.signable = true,
+    required this.trust,
+    this.graphController,
+  }) {
+    visualKeyBuilder = VisualKeyBuilder.fromHandle(
+      data: pgpKey.cert.fingerprint,
+    ).lujvo(start: BigInt.from(0), end: BigInt.from(8));
+  }
 
   Color colorForTrust(num trust) {
     if (trust > 1 && trust < 120) {
@@ -30,10 +47,10 @@ class _CertCardState extends State<CertCard> {
     return Padding(
       padding: EdgeInsetsGeometry.fromSTEB(8, 8, 16, 8),
       child: Automicon(
-        handle: widget.visualKeyBuilder,
+        handle: visualKeyBuilder,
         scale: 3,
         count: 3,
-        len: widget.pgpKey.cert.fingerprint.len(),
+        len: pgpKey.cert.fingerprint.len(),
       ),
     );
   }
@@ -64,7 +81,7 @@ class _CertCardState extends State<CertCard> {
       return Padding(
         padding: EdgeInsetsGeometry.fromSTEB(0, 0, 0, 8),
         child: Text(
-          widget.pgpKey.ids.firstOrNull ?? "N/A",
+          pgpKey.ids.firstOrNull ?? "N/A",
           style: theme.textTheme.titleSmall,
         ),
       );
@@ -74,8 +91,7 @@ class _CertCardState extends State<CertCard> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final ids = widget.pgpKey.ids.toSet();
-    final selectable = widget.selectable;
+    final ids = pgpKey.ids.toSet();
 
     final ActiveCert activeCert = context.read();
     final cert = activeCert.cert;
@@ -96,30 +112,21 @@ class _CertCardState extends State<CertCard> {
                 githubIdenticon(context),
                 Expanded(
                   child: SmartFingerprint(
-                    fingerprint: widget.pgpKey.cert.fingerprint,
-                    builder: widget.visualKeyBuilder,
+                    fingerprint: pgpKey.cert.fingerprint,
+                    builder: visualKeyBuilder,
                   ),
                 ),
+
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     CertCardMenu(
-                      cert: widget.pgpKey,
-                      signable: widget.signable,
-                      active: widget.active,
+                      cert: pgpKey,
+                      signable: signable,
+                      active: active,
                     ),
-                    if (selectable != null)
-                      Checkbox(
-                        value: _selected,
-                        onChanged: (v) async {
-                          setState(() {
-                            _selected = v ?? false;
-                          });
-                          await selectable(widget.pgpKey, _selected);
-                        },
-                      ),
-                    if (widget.active && widget.pgpKey.cert.hasPrivate)
+                    if (active && pgpKey.cert.hasPrivate)
                       Chip(
                         label: Text(
                           'Active!',
@@ -127,7 +134,7 @@ class _CertCardState extends State<CertCard> {
                         ),
                         backgroundColor: theme.colorScheme.tertiary,
                       )
-                    else if (widget.pgpKey.cert.hasPrivate)
+                    else if (pgpKey.cert.hasPrivate)
                       Chip(
                         label: Text(
                           'Owned!',
@@ -135,57 +142,26 @@ class _CertCardState extends State<CertCard> {
                         ),
                         backgroundColor: theme.colorScheme.onSecondary,
                       )
-                    else if (cert != null && widget.graphController != null)
+                    else if (cert != null && graphController != null)
                       InkWell(
                         onTap: () async {
                           if (context.mounted) {
-                            context.push(
-                              '/path',
-                              extra: widget.graphController,
-                            );
+                            context.push('/path', extra: graphController);
                           }
                         },
                         child: Chip(
-                          label: Text('Trust: ${widget.trust}'),
-                          backgroundColor: colorForTrust(widget.trust.toInt()),
+                          label: Text('Trust: $trust'),
+                          backgroundColor: colorForTrust(trust.toInt()),
                         ),
                       ),
                   ],
                 ),
               ],
             ),
-            SigList(pgpCert: widget.pgpKey),
+            SigList(pgpCert: pgpKey),
           ],
         ),
       ),
     );
   }
-}
-
-class CertCard extends StatefulWidget {
-  final PgpCertWithIds pgpKey;
-  final bool active;
-  final bool signable;
-  final BigInt trust;
-  final GraphController? graphController;
-  final FutureOr<void> Function(PgpCertWithIds, bool)? selectable;
-  late final VisualKeyBuilder visualKeyBuilder;
-  final cutoff = 560; // derived from length of themed fingerprint
-  final secondCutoff = 560;
-  CertCard({
-    super.key,
-    required this.pgpKey,
-    this.active = false,
-    this.signable = true,
-    this.selectable,
-    required this.trust,
-    this.graphController,
-  }) {
-    visualKeyBuilder = VisualKeyBuilder.fromHandle(
-      data: pgpKey.cert.fingerprint,
-    ).lujvo(start: BigInt.from(0), end: BigInt.from(8));
-  }
-
-  @override
-  State<StatefulWidget> createState() => _CertCardState();
 }
