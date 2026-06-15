@@ -35,6 +35,9 @@ abstract class CircleApp implements RustOpaqueInterface, CircleLike {
   @override
   CircleType getType();
 
+  @override
+  Future<void> insert({required SqliteDb db});
+
   Future<bool> isMember({required UserHandle user});
 
   @override

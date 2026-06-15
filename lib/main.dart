@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:kata/circle/create_app.dart';
 import 'package:kata/drawer_content.dart';
 import 'package:kata/graphvis/graph_test.dart';
@@ -20,6 +22,7 @@ import 'package:kata/prefs/prefs.dart';
 import 'package:kata/smart_fab.dart';
 import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:flutter/material.dart';
+import 'package:kata/src/rust/api/sync.dart';
 import 'package:kata/src/rust/frb_generated.dart';
 import 'package:go_router/go_router.dart';
 

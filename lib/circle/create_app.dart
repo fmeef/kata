@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:kata/circle/app_card.dart';
 import 'package:kata/circle/circle_card.dart';
 import 'package:kata/pgp/cert/cert_selector.dart';
 import 'package:kata/src/rust/api.dart';
 import 'package:kata/src/rust/api/pgp.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
+import 'package:kata/src/rust/api/pgp/circles/circle.dart';
 import 'package:provider/provider.dart';
 
 enum Mode { App, Circle }
@@ -12,22 +14,17 @@ class _CreateAppState extends State<CreateApp> {
   Mode _mode = Mode.Circle;
 
   UserHandle? _circleId;
-  List<CircleEntry>? _circle;
-  Widget buildApp(BuildContext context) {
-    return Column();
-  }
-
-  Widget buildCircle(BuildContext context) {
+  NonOpaqueCircle? _circle;
+  Widget buildApp(BuildContext context, Widget Function(BuildContext) card) {
     final PgpApp pgpApp = context.read();
 
     return Column(
       children: [
-        if (_circle != null)
-          Expanded(
-            child: CircleCard(members: _circle!, id: _circleId!),
-          ),
+        if (_circle != null) Flexible(flex: 2, child: card(context)),
+
         Text('List cards'),
         Expanded(
+          flex: 3,
           child: CertSelector(
             selected: (l) async {
               final c = await pgpApp.createCircle(
@@ -52,6 +49,7 @@ class _CreateAppState extends State<CreateApp> {
 
   @override
   Widget build(BuildContext context) {
+    final PgpApp pgpApp = context.read();
     return Column(
       children: [
         RadioGroup<Mode>(
@@ -75,8 +73,22 @@ class _CreateAppState extends State<CreateApp> {
         ),
         Expanded(
           child: (switch (_mode) {
-            Mode.App => buildApp(context),
-            Mode.Circle => buildCircle(context),
+            Mode.Circle => buildApp(
+              context,
+              (_) => Column(
+                children: [
+                  CircleCard(members: _circle!, id: _circleId!),
+                  ElevatedButton(
+                    onPressed: () async {},
+                    child: const Text('Create card'),
+                  ),
+                ],
+              ),
+            ),
+            Mode.App => buildApp(
+              context,
+              (_) => AppCard(members: _circle!, id: _circleId!),
+            ),
           }),
         ),
       ],

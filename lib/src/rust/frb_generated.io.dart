@@ -22,6 +22,7 @@ import 'api/pgp/sign.dart';
 import 'api/pgp/wot/network.dart';
 import 'api/pgp/wot/path.dart';
 import 'api/ser.dart';
+import 'api/sync.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:ffi' as ffi;
@@ -747,6 +748,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   MemberTag dco_decode_box_autoadd_member_tag(dynamic raw);
 
   @protected
+  NonOpaqueCircle dco_decode_box_autoadd_non_opaque_circle(dynamic raw);
+
+  @protected
   OnlyFingerprint dco_decode_box_autoadd_only_fingerprint(dynamic raw);
 
   @protected
@@ -891,6 +895,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   MemberTag dco_decode_member_tag(dynamic raw);
+
+  @protected
+  NonOpaqueCircle dco_decode_non_opaque_circle(dynamic raw);
 
   @protected
   OnConflict dco_decode_on_conflict(dynamic raw);
@@ -1581,6 +1588,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   MemberTag sse_decode_box_autoadd_member_tag(SseDeserializer deserializer);
 
   @protected
+  NonOpaqueCircle sse_decode_box_autoadd_non_opaque_circle(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   OnlyFingerprint sse_decode_box_autoadd_only_fingerprint(
     SseDeserializer deserializer,
   );
@@ -1741,6 +1753,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   MemberTag sse_decode_member_tag(SseDeserializer deserializer);
+
+  @protected
+  NonOpaqueCircle sse_decode_non_opaque_circle(SseDeserializer deserializer);
 
   @protected
   OnConflict sse_decode_on_conflict(SseDeserializer deserializer);
@@ -2555,6 +2570,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_non_opaque_circle(
+    NonOpaqueCircle self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_only_fingerprint(
     OnlyFingerprint self,
     SseSerializer serializer,
@@ -2753,6 +2774,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_member_tag(MemberTag self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_non_opaque_circle(
+    NonOpaqueCircle self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_on_conflict(OnConflict self, SseSerializer serializer);

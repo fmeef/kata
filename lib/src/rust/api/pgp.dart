@@ -42,6 +42,9 @@ abstract class UserHandle implements RustOpaqueInterface, CircleLike {
   Future<SizedImage> identicon({required int count, required int scale});
 
   @override
+  Future<void> insert({required SqliteDb db});
+
+  @override
   Stream<CircleEntry> iterMembers();
 
   BigInt len();

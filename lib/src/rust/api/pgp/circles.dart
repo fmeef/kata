@@ -14,7 +14,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 // These functions are ignored because they have generic arguments: `new`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `TagOr`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `partial_cmp`, `partial_cmp`, `partial_cmp`
-// These functions are ignored (category: IgnoreBecauseNotAllowedOwner): `get_id_userhandle`, `get_id`, `get_member`, `get_type`, `iter_members`, `verify`
+// These functions are ignored (category: IgnoreBecauseNotAllowedOwner): `get_id_userhandle`, `get_id`, `get_member`, `get_type`, `insert`, `iter_members`, `verify`
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<CircleEntry>>
 abstract class CircleEntry implements RustOpaqueInterface {
@@ -61,6 +61,8 @@ abstract class GenericCircle implements RustOpaqueInterface {
 
   CircleType getType();
 
+  Future<void> insert({required SqliteDb db});
+
   Stream<CircleEntry> iterMembers();
 
   Future<bool> verify();
@@ -74,6 +76,8 @@ abstract class CircleLike {
   CircleEntry? getMember({required UserHandle id});
 
   CircleType getType();
+
+  Future<void> insert({required SqliteDb db});
 
   Stream<CircleEntry> iterMembers();
 
