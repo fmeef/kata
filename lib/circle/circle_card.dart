@@ -10,6 +10,7 @@ class CircleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     final m = members.members.map((item) => MemberEntry(entry: item)).toList();
     return Card(
       child: Padding(

@@ -6,6 +6,7 @@
 import '../../../api.dart';
 import '../../../frb_generated.dart';
 import '../../db/connection.dart';
+import '../../db/store.dart';
 import '../../pgp.dart';
 import '../circles.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
@@ -69,6 +70,12 @@ class NonOpaqueCircle {
     this.author,
     this.sig,
   });
+
+  static List<NonOpaqueCircle> fromDb({
+    required List<CircleWithMembers> items,
+  }) => RustLib.instance.api.crateApiPgpCirclesCircleNonOpaqueCircleFromDb(
+    items: items,
+  );
 
   Future<void> toDb({required SqliteDb db}) => RustLib.instance.api
       .crateApiPgpCirclesCircleNonOpaqueCircleToDb(that: this, db: db);

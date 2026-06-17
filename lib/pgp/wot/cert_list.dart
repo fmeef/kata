@@ -29,7 +29,6 @@ class _CertListState extends State<CertList> {
   List<_CertTrust>? certs;
   Watcher? watcher;
   _CertTrust? currentUpdate;
-  Set<PgpCertWithIds> _selected = {};
   ScaffoldFeatureController<MaterialBanner, MaterialBannerClosedReason>? banner;
   TextEditingController searchController = TextEditingController();
   final certRefreshController = CertRefreshController();

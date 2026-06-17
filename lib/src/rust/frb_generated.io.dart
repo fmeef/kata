@@ -870,6 +870,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<GraphEdge> dco_decode_list_graph_edge(dynamic raw);
 
   @protected
+  List<NonOpaqueCircle> dco_decode_list_non_opaque_circle(dynamic raw);
+
+  @protected
   List<PgpCertWithIds> dco_decode_list_pgp_cert_with_ids(dynamic raw);
 
   @protected
@@ -1722,6 +1725,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<GraphEdge> sse_decode_list_graph_edge(SseDeserializer deserializer);
+
+  @protected
+  List<NonOpaqueCircle> sse_decode_list_non_opaque_circle(
+    SseDeserializer deserializer,
+  );
 
   @protected
   List<PgpCertWithIds> sse_decode_list_pgp_cert_with_ids(
@@ -2735,6 +2743,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_list_graph_edge(
     List<GraphEdge> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_non_opaque_circle(
+    List<NonOpaqueCircle> self,
     SseSerializer serializer,
   );
 

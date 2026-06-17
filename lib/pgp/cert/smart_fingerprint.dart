@@ -7,18 +7,24 @@ enum FingerprintMode { userid, lojban, fingerprint }
 class _SmartFingerprintState extends State<SmartFingerprint> {
   FingerprintMode mode = FingerprintMode.lojban;
   VisualKeyOr? visualKey;
+  UserHandle? displayFp;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final fp = widget.fingerprint.name();
-    widget.builder.applyOrElse().then((v) {
-      if (mounted) {
-        setState(() {
-          visualKey = v;
-        });
-      }
-    });
+
+    if (visualKey == null || displayFp != widget.fingerprint) {
+      widget.builder.applyOrElse(data: widget.fingerprint).then((v) {
+        if (mounted) {
+          setState(() {
+            visualKey = v;
+            displayFp = widget.fingerprint;
+          });
+        }
+      });
+    }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       mainAxisSize: MainAxisSize.min,

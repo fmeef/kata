@@ -50,6 +50,7 @@ class _CreateAppState extends State<CreateApp> {
   @override
   Widget build(BuildContext context) {
     final PgpApp pgpApp = context.read();
+
     return Column(
       children: [
         RadioGroup<Mode>(

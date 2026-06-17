@@ -11,13 +11,15 @@ part 'visual_key.freezed.dart';
 
 // These functions are ignored because they are not marked as `pub`: `apply`, `bytes_to_n_fair`, `data_to_emoji`, `data_to_gismu_2`, `data_to_gismu`, `data_to_phone`, `get_gismu`, `identicon`, `is_overlapping`, `lujvo_combined`, `validate_overlap`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `GISMU`, `IdenticonConfig`, `VisualKeyBuilderInner`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `deref`, `fmt`, `fmt`, `fmt`, `initialize`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `clone`, `deref`, `fmt`, `fmt`, `fmt`, `hash`, `hash`, `initialize`
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Lifetimeable < VisualKeyBuilder < 'static > >>>
 abstract class VisualKeyBuilder implements RustOpaqueInterface {
-  Future<VisualKeyOr> applyOrElse();
+  Future<VisualKeyOr> applyOrElse({required UserHandle data});
 
   VisualKeyBuilder emoji({required BigInt start, required BigInt end});
+
+  UserHandle fingerprint();
 
   static VisualKeyBuilder fromHandle({required UserHandle data}) => RustLib
       .instance
@@ -42,6 +44,8 @@ abstract class VisualKeyBuilder implements RustOpaqueInterface {
   VisualKeyBuilder lujvo({required BigInt start, required BigInt end});
 
   VisualKeyBuilder phone({required BigInt start, required BigInt end});
+
+  Future<VisualKeyBuilder> setData({required UserHandle data});
 }
 
 class SizedImage {
