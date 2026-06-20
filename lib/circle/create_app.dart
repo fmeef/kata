@@ -20,7 +20,14 @@ class _CreateAppState extends State<CreateApp> {
 
     return Column(
       children: [
-        if (_circle != null) Flexible(flex: 2, child: card(context)),
+        if (_circle != null)
+          Flexible(
+            flex: 2,
+            child: ListView(
+              scrollDirection: Axis.vertical,
+              children: [card(context)],
+            ),
+          ),
 
         Expanded(
           flex: 3,
@@ -78,10 +85,7 @@ class _CreateAppState extends State<CreateApp> {
               (_) => Row(
                 children: [
                   Expanded(
-                    child: ListView(
-                      scrollDirection: Axis.vertical,
-                      children: [CircleCard(members: _circle!, id: _circleId!)],
-                    ),
+                    child: CircleCard(members: _circle!, id: _circleId!),
                   ),
                   ElevatedButton(
                     onPressed: () async {
@@ -94,7 +98,11 @@ class _CreateAppState extends State<CreateApp> {
             ),
             Mode.App => buildApp(
               context,
-              (_) => AppCard(members: _circle!, id: _circleId!),
+              (_) => AppCard(
+                members: _circle!,
+                id: _circleId!,
+                onChange: (value) => (),
+              ),
             ),
           }),
         ),
