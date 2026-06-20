@@ -22,7 +22,6 @@ class _CreateAppState extends State<CreateApp> {
       children: [
         if (_circle != null) Flexible(flex: 2, child: card(context)),
 
-        Text('List cards'),
         Expanded(
           flex: 3,
           child: CertSelector(
@@ -76,10 +75,13 @@ class _CreateAppState extends State<CreateApp> {
           child: (switch (_mode) {
             Mode.Circle => buildApp(
               context,
-              (_) => Column(
+              (_) => Row(
                 children: [
                   Expanded(
-                    child: CircleCard(members: _circle!, id: _circleId!),
+                    child: ListView(
+                      scrollDirection: Axis.vertical,
+                      children: [CircleCard(members: _circle!, id: _circleId!)],
+                    ),
                   ),
                   ElevatedButton(
                     onPressed: () async {
