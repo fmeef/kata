@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kata/circle/app_card.dart';
 import 'package:kata/circle/circle_card.dart';
+import 'package:kata/fab_observer.dart';
+import 'package:kata/fab_state.dart';
 import 'package:kata/pgp/cert/cert_selector.dart';
 import 'package:kata/src/rust/api.dart';
 import 'package:kata/src/rust/api/pgp.dart';
@@ -15,6 +18,28 @@ class _CreateAppState extends State<CreateApp> {
 
   UserHandle? _circleId;
   NonOpaqueCircle? _circle;
+  late final FabState state = context.read();
+
+  late final FabObserver observer = FabObserver(
+    handler: () async {
+      final PgpApp pgpApp = context.read();
+      await _circle?.toDb(db: pgpApp.getDb());
+      if (mounted) context.pop();
+    },
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    state.addHandler(observer);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    state.removeHandler(observer);
+  }
+
   Widget buildApp(BuildContext context, Widget Function(BuildContext) card) {
     final PgpApp pgpApp = context.read();
 
@@ -55,8 +80,6 @@ class _CreateAppState extends State<CreateApp> {
 
   @override
   Widget build(BuildContext context) {
-    final PgpApp pgpApp = context.read();
-
     return Column(
       children: [
         RadioGroup<Mode>(
@@ -86,12 +109,6 @@ class _CreateAppState extends State<CreateApp> {
                 children: [
                   Expanded(
                     child: CircleCard(members: _circle!, id: _circleId!),
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      await _circle?.toDb(db: pgpApp.getDb());
-                    },
-                    child: const Text('Create card'),
                   ),
                 ],
               ),

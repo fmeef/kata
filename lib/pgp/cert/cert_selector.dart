@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_graph_view/extension/base_ext.dart';
 import 'package:kata/pgp/cert/mini_card.dart';
 import 'package:kata/pgp/roots_provider.dart';
 import 'package:kata/src/rust/api.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kata/fab_state.dart';
 import 'package:kata/go_router_aware.dart';
 import 'package:kata/pgp/sign/sign_verify_dialog.dart';
 import 'package:logger/web.dart';
@@ -6,19 +7,22 @@ import 'package:provider/provider.dart';
 
 class _SmartFabState extends State<SmartFab> with GoRouterAware {
   bool _showFab = true;
-
   late Logger logger;
+
+  late final FabState state = context.read();
+
+  bool _create = false;
 
   @override
   void initState() {
-    logger = context.read();
-
     super.initState();
+    logger = context.read();
   }
 
-  void showFab() {
+  void showFab({bool create = false}) {
     setState(() {
       _showFab = true;
+      _create = create;
     });
   }
 
@@ -37,6 +41,7 @@ class _SmartFabState extends State<SmartFab> with GoRouterAware {
       '/list' => showFab(),
       '/network' => showFab(),
       '/mycards' => showFab(),
+      '/newapp' => showFab(create: true),
       _ => hideFab(),
     });
   }
@@ -50,12 +55,20 @@ class _SmartFabState extends State<SmartFab> with GoRouterAware {
         opacity: _showFab ? 1 : 0,
         duration: widget.duration,
         child: FloatingActionButton(
-          onPressed: () async => await showDialog(
-            context: context,
-
-            builder: (ctx) => SignVerifyDialog(context: context),
-          ),
-          child: const Icon(Icons.new_label),
+          onPressed: () async {
+            if (_create) {
+              await state.notifySave();
+            } else {
+              await showDialog(
+                context: context,
+                builder: (ctx) => SignVerifyDialog(context: context),
+              );
+            }
+          },
+          child: (switch (_create) {
+            false => Icon(Icons.new_label),
+            true => Icon(Icons.create),
+          }),
         ),
       ),
     );

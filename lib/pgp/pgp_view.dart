@@ -1,3 +1,4 @@
+import 'package:kata/fab_state.dart';
 import 'package:kata/pgp/cert/active_cert.dart';
 import 'package:kata/pgp/cert/active_cert_provider.dart';
 import 'package:kata/pgp/identity_service.dart';
@@ -25,6 +26,7 @@ class _PgpViewState extends State<PgpView> {
         providers: [
           Provider(create: (ctx) => service),
           Provider(create: (ctx) => Logger()),
+          Provider(create: (ctx) => FabState()),
           Provider(create: (ctx) => SharedPreferencesAsync()),
         ],
         child: MultiProvider(
