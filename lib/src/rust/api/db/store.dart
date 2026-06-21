@@ -14,6 +14,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `DbMembers`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `cmp`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`
 // These functions are ignored (category: IgnoreBecauseExplicitAttribute): `from_row`, `from_row`, `from_row`, `from_row`, `from_row`, `from_row`, `get_params`, `get_params`, `get_params`, `get_params`, `get_params`, `get_params`
+// These functions are ignored (category: IgnoreBecauseNotAllowedOwner): `from_row`
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<CircleData>>
 abstract class CircleData
@@ -151,6 +152,8 @@ abstract class CertDao {
   Future<List<CircleWithMembers>> getCirclesJoin();
 
   Future<OnlyFingerprint?> getFingerprintForRole({required String role});
+
+  Future<BigInt> getMigrationVersion();
 
   Future<List<PgpDataCert>> grepByEmail({required String email});
 

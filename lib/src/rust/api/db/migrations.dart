@@ -12,3 +12,9 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 Future<void> runMigrations({required SqliteDb conn}) =>
     RustLib.instance.api.crateApiDbMigrationsRunMigrations(conn: conn);
+
+Future<void> rollback({required SqliteDb conn, required BigInt version}) =>
+    RustLib.instance.api.crateApiDbMigrationsRollback(
+      conn: conn,
+      version: version,
+    );

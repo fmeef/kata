@@ -9,8 +9,8 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:uuid/uuid.dart';
 
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `fmt`
-// These functions are ignored (category: IgnoreBecauseExplicitAttribute): `from_row`, `from_row`, `from_row`, `from_rows`, `from_rows`, `from_rows`, `from_rows`, `from_rows`, `from_rows`, `from_rows`, `from_rows`, `from_rows`, `from_rows`, `get_params`, `get_params`
-// These functions are ignored (category: IgnoreBecauseNotAllowedOwner): `from_row`, `is_entity`, `is_entity`
+// These functions are ignored (category: IgnoreBecauseExplicitAttribute): `from_row`, `from_row`, `from_row`, `from_rows`, `from_rows`, `from_rows`, `from_rows`, `from_rows`, `from_rows`, `from_rows`, `from_rows`, `from_rows`, `from_rows`, `from_rows`, `get_params`, `get_params`
+// These functions are ignored (category: IgnoreBecauseNotAllowedOwner): `from_row`, `is_entity`, `is_entity`, `is_entity`
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<NewsGroup>>
 abstract class NewsGroup

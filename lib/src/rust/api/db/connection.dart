@@ -56,6 +56,9 @@ abstract class SqliteDb implements RustOpaqueInterface, CertDao, Dao, TestDao {
   @override
   Future<OnlyFingerprint?> getFingerprintForRole({required String role});
 
+  @override
+  Future<BigInt> getMigrationVersion();
+
   Watcher getWatcher();
 
   @override
@@ -86,6 +89,8 @@ abstract class SqliteDb implements RustOpaqueInterface, CertDao, Dao, TestDao {
 
   static SqliteDb newInMemory() =>
       RustLib.instance.api.crateApiDbConnectionSqliteDbNewInMemory();
+
+  Future<void> rollback({required BigInt version});
 
   @override
   Future<List<PgpDataCert>> searchOwnedCerts({required String userid});
