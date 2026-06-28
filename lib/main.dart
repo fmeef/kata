@@ -1,4 +1,4 @@
-import 'package:kata/circle/create_app.dart';
+import 'package:kata/circle/create_circle_app.dart';
 import 'package:kata/drawer_content.dart';
 import 'package:kata/graphvis/graph_test.dart';
 
@@ -139,7 +139,7 @@ class _MyAppState extends State<MyApp> {
               GoRoute(path: '/scan', builder: (context, state) => VerifyView()),
               GoRoute(
                 path: '/newapp',
-                builder: (context, state) => CreateApp(),
+                builder: (context, state) => CreateCircleApp(),
               ),
             ],
           ),

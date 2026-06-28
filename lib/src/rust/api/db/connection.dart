@@ -30,6 +30,9 @@ abstract class SqliteDb implements RustOpaqueInterface, CertDao, Dao, TestDao {
   Future<void> deleteByFingerprint({required String fingerprint});
 
   @override
+  Future<void> deleteCircle({required String id});
+
+  @override
   Future<List<PgpDataCert>> getByDomain({required String domain});
 
   @override
@@ -106,6 +109,9 @@ abstract class SqliteDb implements RustOpaqueInterface, CertDao, Dao, TestDao {
 
   @override
   Future<void> updateRole({required String fingerprint, required String role});
+
+  @override
+  Future<void> updateTag({required String tag, required String member});
 }
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Watcher>>

@@ -11,9 +11,9 @@ import '../circles.dart';
 import 'circle.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These functions are ignored because they are not marked as `pub`: `as_bytes`, `as_read`, `as_str`, `delete`, `into_option`, `is_none`, `new_empty`, `option_mut`, `option`, `resign`, `tag_reader`, `to_read`
-// These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `AppMember`, `CircleAppInner`, `MaybeDeleted`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `eq`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `hash`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`
+// These functions are ignored because they are not marked as `pub`: `as_bytes`, `as_read`, `as_str`, `delete`, `id_hex`, `into_option`, `is_none`, `new_empty`, `option_mut`, `option`, `resign`, `tag_reader`, `to_read`
+// These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `CircleAppInner`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `hash`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<CircleApp>>
 abstract class CircleApp implements RustOpaqueInterface, CircleLike {
@@ -22,6 +22,8 @@ abstract class CircleApp implements RustOpaqueInterface, CircleLike {
   Future<void> addCircle({required Circle circle, required MemberTag tag});
 
   Future<void> addUser({required UserHandle user, required MemberTag tag});
+
+  Future<NonOpaqueApp> consumeMembers();
 
   @override
   Uint8List getId();
@@ -55,4 +57,54 @@ abstract class CircleApp implements RustOpaqueInterface, CircleLike {
   Future<bool> verify();
 }
 
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MaybeDeleted>>
+abstract class MaybeDeleted implements RustOpaqueInterface {
+  CircleOr? member();
+}
+
+class AppMember {
+  final MaybeDeleted member;
+  final MemberTag tag;
+
+  const AppMember({required this.member, required this.tag});
+
+  @override
+  int get hashCode => member.hashCode ^ tag.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is AppMember &&
+          runtimeType == other.runtimeType &&
+          member == other.member &&
+          tag == other.tag;
+}
+
 enum MemberTag { merge, overwrite, delete }
+
+class NonOpaqueApp {
+  final List<AppMember> members;
+  final UserHandle owner;
+  final Uint8List sig;
+
+  const NonOpaqueApp({
+    required this.members,
+    required this.owner,
+    required this.sig,
+  });
+
+  Future<void> toDb({required SqliteDb db}) => RustLib.instance.api
+      .crateApiPgpCirclesAppNonOpaqueAppToDb(that: this, db: db);
+
+  @override
+  int get hashCode => members.hashCode ^ owner.hashCode ^ sig.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is NonOpaqueApp &&
+          runtimeType == other.runtimeType &&
+          members == other.members &&
+          owner == other.owner &&
+          sig == other.sig;
+}

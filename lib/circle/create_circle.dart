@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kata/circle/app_card.dart';
-
+import 'package:kata/circle/circle_card.dart';
 import 'package:kata/fab_observer.dart';
 import 'package:kata/fab_state.dart';
-import 'package:kata/pgp/cert/active_cert.dart';
 import 'package:kata/pgp/cert/cert_selector.dart';
 import 'package:kata/src/rust/api.dart';
 import 'package:kata/src/rust/api/pgp.dart';
-import 'package:kata/src/rust/api/pgp/circles/app.dart';
+import 'package:kata/src/rust/api/pgp/circles.dart';
+import 'package:kata/src/rust/api/pgp/circles/circle.dart';
 import 'package:provider/provider.dart';
 
-class _CreateAppState extends State<CreateApp> {
+class _CreateAppState extends State<CreateCircle> {
   UserHandle? _circleId;
-  NonOpaqueApp? _circle;
+  NonOpaqueCircle? _circle;
   late final FabState state = context.read();
 
   late final FabObserver observer = FabObserver(
@@ -54,20 +53,19 @@ class _CreateAppState extends State<CreateApp> {
           flex: 3,
           child: CertSelector(
             selected: (l) async {
-              final ActiveCert cert = context.read();
-              final activeCert = cert.cert;
-              if (activeCert != null && _circle == null) {
-                final c = await pgpApp.createApp(
-                  owner: activeCert.cert.fingerprint,
-                );
-                final id = c.getIdUserhandle();
-                final members = await c.consumeMembers();
+              final c = await pgpApp.createCircle(
+                keys: l
+                    .map((v) => CircleOr.fromCert(userHandle: v.fingerprint()))
+                    .toList(),
+              );
 
-                setState(() {
-                  _circle = members;
-                  _circleId = id;
-                });
-              }
+              final id = c.getIdUserhandle();
+              final members = await c.consumeMembers();
+
+              setState(() {
+                _circle = members;
+                _circleId = id;
+              });
             },
           ),
         ),
@@ -77,24 +75,17 @@ class _CreateAppState extends State<CreateApp> {
 
   @override
   Widget build(BuildContext context) {
-    final PgpApp pgpApp = context.read();
     return Column(
       children: [
         Expanded(
           child: buildApp(
             context,
-            (_) => AppCard(
-              members: _circle!,
-              id: _circleId!,
-              onChange: (value) async {
-                final circle = _circle;
-                if (value != null && circle != null) {
-                  await pgpApp.getDb().updateTag(
-                    tag: value.name.name,
-                    member: circle.owner.name(),
-                  );
-                }
-              },
+            (_) => Row(
+              children: [
+                Expanded(
+                  child: CircleCard(members: _circle!, id: _circleId!),
+                ),
+              ],
             ),
           ),
         ),
@@ -103,8 +94,8 @@ class _CreateAppState extends State<CreateApp> {
   }
 }
 
-class CreateApp extends StatefulWidget {
-  const CreateApp({super.key});
+class CreateCircle extends StatefulWidget {
+  const CreateCircle({super.key});
 
   @override
   State<StatefulWidget> createState() => _CreateAppState();

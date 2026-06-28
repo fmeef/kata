@@ -2,25 +2,25 @@ import 'dart:async';
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:kata/circle/member_entry.dart';
+import 'package:kata/circle/app_member_entry.dart';
 import 'package:kata/src/rust/api/pgp.dart';
-import 'package:kata/src/rust/api/pgp/circles/circle.dart';
+import 'package:kata/src/rust/api/pgp/circles/app.dart';
 
 typedef IconEntry = DropdownMenuEntry<AppTag>;
 
 enum AppTag {
-  merge('Merge', Icons.merge),
-  delete('Delete', Icons.delete),
-  overwrite('Overwrite', Icons.find_replace);
+  merge(MemberTag.merge, Icons.merge),
+  delete(MemberTag.delete, Icons.delete),
+  overwrite(MemberTag.overwrite, Icons.find_replace);
 
   const AppTag(this.name, this.icon);
-  final String name;
+  final MemberTag name;
   final IconData icon;
 
   static final List<IconEntry> entries = UnmodifiableListView(
     values.map(
       (icon) => IconEntry(
-        label: icon.name,
+        label: icon.name.name,
         value: icon,
         leadingIcon: Icon(icon.icon),
       ),
@@ -38,11 +38,12 @@ class _AppCardState extends State<AppCard> {
         .map(
           (item) => Row(
             children: [
-              Expanded(child: MemberEntry(entry: item)),
+              Expanded(child: AppMemberEntry(entry: item)),
               if (onChange != null)
                 DropdownMenu(
                   initialSelection: AppTag.merge,
                   dropdownMenuEntries: AppTag.entries,
+                  requestFocusOnTap: false,
                   onSelected: (AppTag? entry) async => await onChange(entry),
                 ),
             ],
@@ -65,7 +66,7 @@ class _AppCardState extends State<AppCard> {
 }
 
 class AppCard extends StatefulWidget {
-  final NonOpaqueCircle members;
+  final NonOpaqueApp members;
   final UserHandle id;
   final FutureOr<void> Function(AppTag?)? onChange;
   const AppCard({
