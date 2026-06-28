@@ -34,7 +34,8 @@ class _AppCardState extends State<AppCard> {
   Widget build(BuildContext context) {
     final onChange = widget.onChange;
     final theme = Theme.of(context);
-    final m = widget.members.members
+    final m = widget.members
+        .getMembers()
         .map(
           (item) => Row(
             children: [
@@ -66,7 +67,7 @@ class _AppCardState extends State<AppCard> {
 }
 
 class AppCard extends StatefulWidget {
-  final NonOpaqueApp members;
+  final CircleApp members;
   final UserHandle id;
   final FutureOr<void> Function(AppTag?)? onChange;
   const AppCard({

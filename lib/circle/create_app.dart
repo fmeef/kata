@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 
 class _CreateAppState extends State<CreateApp> {
   UserHandle? _circleId;
-  NonOpaqueApp? _circle;
+  CircleApp? _circle;
   late final FabState state = context.read();
 
   late final FabObserver observer = FabObserver(
@@ -60,13 +60,28 @@ class _CreateAppState extends State<CreateApp> {
                 final c = await pgpApp.createApp(
                   owner: activeCert.cert.fingerprint,
                 );
+
+                for (final member in l) {
+                  await c.addUser(
+                    user: member.fingerprint(),
+                    tag: MemberTag.merge,
+                  );
+                }
+
                 final id = c.getIdUserhandle();
-                final members = await c.consumeMembers();
 
                 setState(() {
-                  _circle = members;
+                  _circle = c;
                   _circleId = id;
                 });
+              } else if (_circle != null) {
+                for (final member in l) {
+                  await _circle?.addUser(
+                    user: member.fingerprint(),
+                    tag: MemberTag.merge,
+                  );
+                  setState(() {});
+                }
               }
             },
           ),
@@ -91,7 +106,7 @@ class _CreateAppState extends State<CreateApp> {
                 if (value != null && circle != null) {
                   await pgpApp.getDb().updateTag(
                     tag: value.name.name,
-                    member: circle.owner.name(),
+                    member: circle.idHex(),
                   );
                 }
               },
