@@ -12,7 +12,7 @@ class AppMemberEntry extends StatelessWidget {
     final content = entry.member.member();
 
     if (content != null) {
-      final circle = content.generic();
+      final circle = content;
       final id = circle.getIdUserhandle();
       final builder = VisualKeyBuilder.fromHandle(
         data: id,
