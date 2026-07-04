@@ -60,7 +60,7 @@ class _CreateAppState extends State<CreateCircle> {
               );
 
               final id = c.getIdUserhandle();
-              final members = await c.consumeMembers();
+              final members = c.consumeMembers();
 
               setState(() {
                 _circle = members;

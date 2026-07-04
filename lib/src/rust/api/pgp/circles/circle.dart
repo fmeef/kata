@@ -17,7 +17,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Circle>>
 abstract class Circle implements RustOpaqueInterface, CircleLike {
-  Future<NonOpaqueCircle> consumeMembers();
+  NonOpaqueCircle consumeMembers();
 
   @override
   Uint8List getId();

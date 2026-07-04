@@ -24,7 +24,10 @@ class _CertSelectorState extends State<CertSelector> {
     List<MaybeCert> n = [];
 
     try {
-      n = await pgp.iterCerts().map((v) => MaybeCert(cert: v)).toList();
+      n = await pgp
+          .iterCerts()
+          .map((v) => MaybeCert.fromCert(cert: v))
+          .toList();
     } catch (e) {
       logger.e("exception in cert selector: $e");
       _certs = null;

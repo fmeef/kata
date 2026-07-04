@@ -99,6 +99,9 @@ abstract class PgpApp
     required UserHandle fingerprint,
   });
 
+  @override
+  Future<PgpCertWithIds?> getKeyOr({required UserHandle fingerprint});
+
   Future<Uint8List> getQr({
     required String resource,
     String? handle,

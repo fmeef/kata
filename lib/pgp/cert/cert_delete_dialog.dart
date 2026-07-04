@@ -31,7 +31,10 @@ class CertDeleteDialog extends StatelessWidget {
               "Are you sure you want to delete the card ${identity.ids.first}",
               style: theme.textTheme.titleLarge,
             ),
-            CertCard(pgpKey: identity, trust: BigInt.from(0)),
+            CertCard(
+              pgpKey: MaybeCert.fromCert(cert: identity),
+              trust: BigInt.from(0),
+            ),
             Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceAround,

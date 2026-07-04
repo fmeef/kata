@@ -90,7 +90,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.13.0-beta.4';
 
   @override
-  int get rustContentHash => -409015607;
+  int get rustContentHash => 2103530150;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -120,7 +120,7 @@ abstract class RustLibApi extends BaseApi {
     required MemberTag tag,
   });
 
-  Future<NonOpaqueApp> crateApiPgpCirclesAppCircleAppConsumeMembers({
+  NonOpaqueApp crateApiPgpCirclesAppCircleAppConsumeMembers({
     required CircleApp that,
   });
 
@@ -323,7 +323,7 @@ abstract class RustLibApi extends BaseApi {
     required SqliteDb conn,
   });
 
-  Future<NonOpaqueCircle> crateApiPgpCirclesCircleCircleConsumeMembers({
+  NonOpaqueCircle crateApiPgpCirclesCircleCircleConsumeMembers({
     required Circle that,
   });
 
@@ -492,12 +492,6 @@ abstract class RustLibApi extends BaseApi {
     required UserHandle data,
   });
 
-  UserHandle crateApiPgpCertMaybeCertFingerprint({required MaybeCert that});
-
-  List<String>? crateApiPgpCertMaybeCertMaybeIds({required MaybeCert that});
-
-  MaybeCert crateApiPgpCertMaybeCertNew({required PgpCertWithIds cert});
-
   CircleOr? crateApiPgpCirclesAppMaybeDeletedMember({
     required MaybeDeleted that,
   });
@@ -660,6 +654,11 @@ abstract class RustLibApi extends BaseApi {
     required UserHandle fingerprint,
   });
 
+  Future<PgpCertWithIds?> crateApiPgpAppGetKeyOr({
+    required PgpApp that,
+    required UserHandle fingerprint,
+  });
+
   Future<Uint8List> crateApiPgpAppGetQr({
     required PgpApp that,
     required String resource,
@@ -774,6 +773,134 @@ abstract class RustLibApi extends BaseApi {
   Future<VerifyResult> crateApiPgpAppVerifyQrAllCerts({
     required PgpApp that,
     required List<int> content,
+  });
+
+  PgpCert crateApiPgpCertPgpCertStubSigsAutoAccessorGetCert({
+    required PgpCertStubSigs that,
+  });
+
+  List<String> crateApiPgpCertPgpCertStubSigsAutoAccessorGetCertifications({
+    required PgpCertStubSigs that,
+  });
+
+  List<String> crateApiPgpCertPgpCertStubSigsAutoAccessorGetIds({
+    required PgpCertStubSigs that,
+  });
+
+  List<String> crateApiPgpCertPgpCertStubSigsAutoAccessorGetSigs({
+    required PgpCertStubSigs that,
+  });
+
+  void crateApiPgpCertPgpCertStubSigsAutoAccessorSetCert({
+    required PgpCertStubSigs that,
+    required PgpCert cert,
+  });
+
+  void crateApiPgpCertPgpCertStubSigsAutoAccessorSetCertifications({
+    required PgpCertStubSigs that,
+    required List<String> certifications,
+  });
+
+  void crateApiPgpCertPgpCertStubSigsAutoAccessorSetIds({
+    required PgpCertStubSigs that,
+    required List<String> ids,
+  });
+
+  void crateApiPgpCertPgpCertStubSigsAutoAccessorSetSigs({
+    required PgpCertStubSigs that,
+    required List<String> sigs,
+  });
+
+  PgpCertStubSigs crateApiPgpCertPgpCertStubSigsFromBytes({
+    required List<int> bytes,
+  });
+
+  Future<PgpCertStubSigs> crateApiPgpCertPgpCertStubSigsFromBytesSig({
+    required List<int> bytes,
+    required PgpApp store,
+  });
+
+  PgpCert crateApiPgpCertPgpCertWithIdsAutoAccessorGetCert({
+    required PgpCertWithIds that,
+  });
+
+  List<MaybeCert> crateApiPgpCertPgpCertWithIdsAutoAccessorGetCertifications({
+    required PgpCertWithIds that,
+  });
+
+  List<String> crateApiPgpCertPgpCertWithIdsAutoAccessorGetIds({
+    required PgpCertWithIds that,
+  });
+
+  List<MaybeCert> crateApiPgpCertPgpCertWithIdsAutoAccessorGetSigs({
+    required PgpCertWithIds that,
+  });
+
+  void crateApiPgpCertPgpCertWithIdsAutoAccessorSetCert({
+    required PgpCertWithIds that,
+    required PgpCert cert,
+  });
+
+  void crateApiPgpCertPgpCertWithIdsAutoAccessorSetCertifications({
+    required PgpCertWithIds that,
+    required List<MaybeCert> certifications,
+  });
+
+  void crateApiPgpCertPgpCertWithIdsAutoAccessorSetIds({
+    required PgpCertWithIds that,
+    required List<String> ids,
+  });
+
+  void crateApiPgpCertPgpCertWithIdsAutoAccessorSetSigs({
+    required PgpCertWithIds that,
+    required List<MaybeCert> sigs,
+  });
+
+  PgpCertWithIds crateApiPgpCertPgpCertWithIdsCopy({
+    required PgpCertWithIds that,
+  });
+
+  PgpCertWithIds crateApiPgpCertPgpCertWithIdsFromBytes({
+    required List<int> bytes,
+  });
+
+  Future<PgpCertWithIds> crateApiPgpCertPgpCertWithIdsFromBytesSig({
+    required List<int> bytes,
+    required PgpApp store,
+  });
+
+  bool crateApiPgpCertPgpCertWithIdsHasPrivate({required PgpCertWithIds that});
+
+  String crateApiPgpCertPgpCertWithIdsIdHex({required PgpCertWithIds that});
+
+  UserHandle crateApiPgpCertPgpCertAutoAccessorGetFingerprint({
+    required PgpCert that,
+  });
+
+  bool crateApiPgpCertPgpCertAutoAccessorGetHasPrivate({required PgpCert that});
+
+  String crateApiPgpCertPgpCertAutoAccessorGetKeyid({required PgpCert that});
+
+  bool crateApiPgpCertPgpCertAutoAccessorGetOnline({required PgpCert that});
+
+  void crateApiPgpCertPgpCertAutoAccessorSetFingerprint({
+    required PgpCert that,
+    required UserHandle fingerprint,
+  });
+
+  void crateApiPgpCertPgpCertAutoAccessorSetHasPrivate({
+    required PgpCert that,
+    required bool hasPrivate,
+  });
+
+  void crateApiPgpCertPgpCertAutoAccessorSetKeyid({
+    required PgpCert that,
+    required String keyid,
+  });
+
+  void crateApiPgpCertPgpCertAutoAccessorSetOnline({
+    required PgpCert that,
+    required bool online,
   });
 
   Future<void> crateApiDbStorePgpDataCertDelete({
@@ -1109,6 +1236,12 @@ abstract class RustLibApi extends BaseApi {
 
   Future<void> crateApiInitLogging();
 
+  UserHandle crateApiPgpCertMaybeCertFingerprint({required MaybeCert that});
+
+  MaybeCert crateApiPgpCertMaybeCertFromCert({required PgpCertWithIds cert});
+
+  List<String>? crateApiPgpCertMaybeCertMaybeIds({required MaybeCert that});
+
   Future<void> crateApiPgpCirclesAppNonOpaqueAppToDb({
     required NonOpaqueApp that,
     required SqliteDb db,
@@ -1172,26 +1305,6 @@ abstract class RustLibApi extends BaseApi {
     required OnlyOnline that,
     required SqliteDb conn,
   });
-
-  PgpCertStubSigs crateApiPgpCertPgpCertStubSigsFromBytes({
-    required List<int> bytes,
-  });
-
-  Future<PgpCertStubSigs> crateApiPgpCertPgpCertStubSigsFromBytesSig({
-    required List<int> bytes,
-    required PgpApp store,
-  });
-
-  PgpCertWithIds crateApiPgpCertPgpCertWithIdsFromBytes({
-    required List<int> bytes,
-  });
-
-  Future<PgpCertWithIds> crateApiPgpCertPgpCertWithIdsFromBytesSig({
-    required List<int> bytes,
-    required PgpApp store,
-  });
-
-  bool crateApiPgpCertPgpCertWithIdsHasPrivate({required PgpCertWithIds that});
 
   Future<void> crateApiSyncReqwestTest();
 
@@ -1310,14 +1423,6 @@ abstract class RustLibApi extends BaseApi {
   get rust_arc_decrement_strong_count_VisualKeyBuilderPtr;
 
   RustArcIncrementStrongCountFnType
-  get rust_arc_increment_strong_count_MaybeCert;
-
-  RustArcDecrementStrongCountFnType
-  get rust_arc_decrement_strong_count_MaybeCert;
-
-  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_MaybeCertPtr;
-
-  RustArcIncrementStrongCountFnType
   get rust_arc_increment_strong_count_MaybeDeleted;
 
   RustArcDecrementStrongCountFnType
@@ -1344,6 +1449,30 @@ abstract class RustLibApi extends BaseApi {
   RustArcDecrementStrongCountFnType get rust_arc_decrement_strong_count_PgpApp;
 
   CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_PgpAppPtr;
+
+  RustArcIncrementStrongCountFnType get rust_arc_increment_strong_count_PgpCert;
+
+  RustArcDecrementStrongCountFnType get rust_arc_decrement_strong_count_PgpCert;
+
+  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_PgpCertPtr;
+
+  RustArcIncrementStrongCountFnType
+  get rust_arc_increment_strong_count_PgpCertStubSigs;
+
+  RustArcDecrementStrongCountFnType
+  get rust_arc_decrement_strong_count_PgpCertStubSigs;
+
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_PgpCertStubSigsPtr;
+
+  RustArcIncrementStrongCountFnType
+  get rust_arc_increment_strong_count_PgpCertWithIds;
+
+  RustArcDecrementStrongCountFnType
+  get rust_arc_decrement_strong_count_PgpCertWithIds;
+
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_PgpCertWithIdsPtr;
 
   RustArcIncrementStrongCountFnType
   get rust_arc_increment_strong_count_PgpDataCert;
@@ -1555,23 +1684,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  Future<NonOpaqueApp> crateApiPgpCirclesAppCircleAppConsumeMembers({
+  NonOpaqueApp crateApiPgpCirclesAppCircleAppConsumeMembers({
     required CircleApp that,
   }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleApp(
             that,
             serializer,
           );
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 4,
-            port: port_,
-          );
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 4)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_non_opaque_app,
@@ -3322,23 +3446,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  Future<NonOpaqueCircle> crateApiPgpCirclesCircleCircleConsumeMembers({
+  NonOpaqueCircle crateApiPgpCirclesCircleCircleConsumeMembers({
     required Circle that,
   }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircle(
             that,
             serializer,
           );
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 53,
-            port: port_,
-          );
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 53)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_non_opaque_circle,
@@ -3765,7 +3884,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           );
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_pgp_cert_with_ids,
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds,
           decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta: kCrateApiPgpKeysGenerateCertGenerateConstMeta,
@@ -4575,86 +4695,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  UserHandle crateApiPgpCertMaybeCertFingerprint({required MaybeCert that}) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-            that,
-            serializer,
-          );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 86)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData:
-              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle,
-          decodeErrorData: sse_decode_AnyhowException,
-        ),
-        constMeta: kCrateApiPgpCertMaybeCertFingerprintConstMeta,
-        argValues: [that],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta get kCrateApiPgpCertMaybeCertFingerprintConstMeta =>
-      const TaskConstMeta(
-        debugName: "MaybeCert_fingerprint",
-        argNames: ["that"],
-      );
-
-  @override
-  List<String>? crateApiPgpCertMaybeCertMaybeIds({required MaybeCert that}) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-            that,
-            serializer,
-          );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 87)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_list_String,
-          decodeErrorData: null,
-        ),
-        constMeta: kCrateApiPgpCertMaybeCertMaybeIdsConstMeta,
-        argValues: [that],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta get kCrateApiPgpCertMaybeCertMaybeIdsConstMeta =>
-      const TaskConstMeta(debugName: "MaybeCert_maybe_ids", argNames: ["that"]);
-
-  @override
-  MaybeCert crateApiPgpCertMaybeCertNew({required PgpCertWithIds cert}) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_box_autoadd_pgp_cert_with_ids(cert, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 88)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData:
-              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert,
-          decodeErrorData: null,
-        ),
-        constMeta: kCrateApiPgpCertMaybeCertNewConstMeta,
-        argValues: [cert],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta get kCrateApiPgpCertMaybeCertNewConstMeta =>
-      const TaskConstMeta(debugName: "MaybeCert_new", argNames: ["cert"]);
-
-  @override
   CircleOr? crateApiPgpCirclesAppMaybeDeletedMember({
     required MaybeDeleted that,
   }) {
@@ -4666,7 +4706,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 89)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 86)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_circle_or,
@@ -4694,7 +4734,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 90)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 87)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -4727,7 +4767,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 91)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 88)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -4760,7 +4800,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 92)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 89)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_Uuid,
@@ -4792,7 +4832,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 93)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 90)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_list_prim_u_8_strict,
@@ -4825,7 +4865,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 94)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 91)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_bool,
@@ -4856,7 +4896,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 95)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 92)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_Uuid,
@@ -4889,7 +4929,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             serializer,
           );
           sse_encode_String(description, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 96)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 93)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_unit,
@@ -4924,7 +4964,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             serializer,
           );
           sse_encode_String(groupName, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 97)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 94)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_unit,
@@ -4959,7 +4999,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             serializer,
           );
           sse_encode_opt_Uuid(parent, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 98)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 95)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_unit,
@@ -4993,7 +5033,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             serializer,
           );
           sse_encode_opt_list_prim_u_8_strict(parentHash, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 99)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 96)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_unit,
@@ -5028,11 +5068,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             serializer,
           );
           sse_encode_bool(sent, serializer);
-          return pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 100,
-          )!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 97)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_unit,
@@ -5065,11 +5101,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             serializer,
           );
           sse_encode_Uuid(uuid, serializer);
-          return pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 101,
-          )!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 98)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_unit,
@@ -5108,7 +5140,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 102,
+            funcId: 99,
             port: port_,
           );
         },
@@ -5138,7 +5170,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 103,
+            funcId: 100,
             port: port_,
           );
         },
@@ -5176,7 +5208,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 104,
+            funcId: 101,
             port: port_,
           );
         },
@@ -5219,7 +5251,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 105,
+            funcId: 102,
             port: port_,
           );
         },
@@ -5249,7 +5281,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 106,
+            funcId: 103,
             port: port_,
           );
         },
@@ -5287,7 +5319,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 107,
+            funcId: 104,
             port: port_,
           );
         },
@@ -5323,12 +5355,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 108,
+            funcId: 105,
             port: port_,
           );
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_list_pgp_cert_with_ids,
+          decodeSuccessData:
+              sse_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds,
           decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta: kCrateApiPgpAppAllOwnedCertsConstMeta,
@@ -5363,7 +5396,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 109,
+            funcId: 106,
             port: port_,
           );
         },
@@ -5399,7 +5432,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 110,
+            funcId: 107,
             port: port_,
           );
         },
@@ -5438,7 +5471,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 111,
+            funcId: 108,
             port: port_,
           );
         },
@@ -5470,7 +5503,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 112,
+            funcId: 109,
             port: port_,
           );
         },
@@ -5509,7 +5542,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 113,
+            funcId: 110,
             port: port_,
           );
         },
@@ -5547,7 +5580,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 114,
+            funcId: 111,
             port: port_,
           );
         },
@@ -5590,7 +5623,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 115,
+            funcId: 112,
             port: port_,
           );
         },
@@ -5632,7 +5665,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 116,
+            funcId: 113,
             port: port_,
           );
         },
@@ -5672,7 +5705,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 117,
+            funcId: 114,
             port: port_,
           );
         },
@@ -5706,7 +5739,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 118,
+            funcId: 115,
             port: port_,
           );
         },
@@ -5741,7 +5774,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 119,
+            funcId: 116,
             port: port_,
           );
         },
@@ -5783,7 +5816,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 120,
+            funcId: 117,
             port: port_,
           );
         },
@@ -5821,7 +5854,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 121,
+            funcId: 118,
           )!;
         },
         codec: SseCodec(
@@ -5858,12 +5891,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 122,
+            funcId: 119,
             port: port_,
           );
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_opt_box_autoadd_pgp_cert_with_ids,
+          decodeSuccessData:
+              sse_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds,
           decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta: kCrateApiPgpAppGetCertByRoleConstMeta,
@@ -5892,7 +5926,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 123,
+            funcId: 120,
           )!;
         },
         codec: SseCodec(
@@ -5923,7 +5957,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 124,
+            funcId: 121,
             port: port_,
           );
         },
@@ -5964,12 +5998,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 125,
+            funcId: 122,
             port: port_,
           );
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_pgp_cert_with_ids,
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds,
           decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta: kCrateApiPgpAppGetKeyFromFingerprintConstMeta,
@@ -5984,6 +6019,47 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         debugName: "PgpApp_get_key_from_fingerprint",
         argNames: ["that", "fingerprint"],
       );
+
+  @override
+  Future<PgpCertWithIds?> crateApiPgpAppGetKeyOr({
+    required PgpApp that,
+    required UserHandle fingerprint,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpApp(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+            fingerprint,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 123,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpAppGetKeyOrConstMeta,
+        argValues: [that, fingerprint],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpAppGetKeyOrConstMeta => const TaskConstMeta(
+    debugName: "PgpApp_get_key_or",
+    argNames: ["that", "fingerprint"],
+  );
 
   @override
   Future<Uint8List> crateApiPgpAppGetQr({
@@ -6013,7 +6089,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 126,
+            funcId: 124,
             port: port_,
           );
         },
@@ -6053,12 +6129,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 127,
+            funcId: 125,
             port: port_,
           );
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_pgp_cert_with_ids,
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds,
           decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta: kCrateApiPgpAppGetStubFromFingerprintConstMeta,
@@ -6087,7 +6164,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 128,
+            funcId: 126,
           )!;
         },
         codec: SseCodec(
@@ -6122,7 +6199,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 129,
+            funcId: 127,
             port: port_,
           );
         },
@@ -6159,7 +6236,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 130,
+            funcId: 128,
             port: port_,
           );
         },
@@ -6191,11 +6268,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
               that,
               serializer,
             );
-            sse_encode_StreamSink_pgp_cert_with_ids_Sse(sink, serializer);
+            sse_encode_StreamSink_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds_Sse(
+              sink,
+              serializer,
+            );
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 131,
+              funcId: 129,
               port: port_,
             );
           },
@@ -6232,12 +6312,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
               that,
               serializer,
             );
-            sse_encode_StreamSink_pgp_cert_with_ids_Sse(sink, serializer);
+            sse_encode_StreamSink_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds_Sse(
+              sink,
+              serializer,
+            );
             sse_encode_String(pattern, serializer);
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 132,
+              funcId: 130,
               port: port_,
             );
           },
@@ -6275,12 +6358,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
               that,
               serializer,
             );
-            sse_encode_StreamSink_pgp_cert_with_ids_Sse(sink, serializer);
+            sse_encode_StreamSink_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds_Sse(
+              sink,
+              serializer,
+            );
             sse_encode_String(pattern, serializer);
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 133,
+              funcId: 131,
               port: port_,
             );
           },
@@ -6319,7 +6405,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 134,
+              funcId: 132,
               port: port_,
             );
           },
@@ -6359,7 +6445,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 135,
+            funcId: 133,
             port: port_,
           );
         },
@@ -6397,7 +6483,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 136,
+            funcId: 134,
             port: port_,
           );
         },
@@ -6439,7 +6525,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 137,
+            funcId: 135,
             port: port_,
           );
         },
@@ -6480,7 +6566,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 138,
+            funcId: 136,
             port: port_,
           );
         },
@@ -6514,7 +6600,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 139,
+            funcId: 137,
             port: port_,
           );
         },
@@ -6549,7 +6635,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 140,
+            funcId: 138,
           )!;
         },
         codec: SseCodec(
@@ -6593,7 +6679,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 141,
+            funcId: 139,
             port: port_,
           );
         },
@@ -6627,7 +6713,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 142,
+            funcId: 140,
             port: port_,
           );
         },
@@ -6662,7 +6748,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 143,
+            funcId: 141,
             port: port_,
           );
         },
@@ -6696,7 +6782,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 144,
+            funcId: 142,
           )!;
         },
         codec: SseCodec(
@@ -6737,7 +6823,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 145,
+            funcId: 143,
             port: port_,
           );
         },
@@ -6779,7 +6865,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 146,
+            funcId: 144,
             port: port_,
           );
         },
@@ -6821,7 +6907,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 147,
+            funcId: 145,
             port: port_,
           );
         },
@@ -6862,7 +6948,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 148,
+            funcId: 146,
             port: port_,
           );
         },
@@ -6902,7 +6988,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 149,
+            funcId: 147,
             port: port_,
           );
         },
@@ -6939,7 +7025,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 150,
+            funcId: 148,
             port: port_,
           );
         },
@@ -6958,6 +7044,1141 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(
         debugName: "PgpApp_verify_qr_all_certs",
         argNames: ["that", "content"],
+      );
+
+  @override
+  PgpCert crateApiPgpCertPgpCertStubSigsAutoAccessorGetCert({
+    required PgpCertStubSigs that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 149,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertStubSigsAutoAccessorGetCertConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiPgpCertPgpCertStubSigsAutoAccessorGetCertConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCertStubSigs_auto_accessor_get_cert",
+        argNames: ["that"],
+      );
+
+  @override
+  List<String> crateApiPgpCertPgpCertStubSigsAutoAccessorGetCertifications({
+    required PgpCertStubSigs that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 150,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_String,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiPgpCertPgpCertStubSigsAutoAccessorGetCertificationsConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiPgpCertPgpCertStubSigsAutoAccessorGetCertificationsConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCertStubSigs_auto_accessor_get_certifications",
+        argNames: ["that"],
+      );
+
+  @override
+  List<String> crateApiPgpCertPgpCertStubSigsAutoAccessorGetIds({
+    required PgpCertStubSigs that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 151,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_String,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertStubSigsAutoAccessorGetIdsConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiPgpCertPgpCertStubSigsAutoAccessorGetIdsConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCertStubSigs_auto_accessor_get_ids",
+        argNames: ["that"],
+      );
+
+  @override
+  List<String> crateApiPgpCertPgpCertStubSigsAutoAccessorGetSigs({
+    required PgpCertStubSigs that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 152,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_String,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertStubSigsAutoAccessorGetSigsConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiPgpCertPgpCertStubSigsAutoAccessorGetSigsConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCertStubSigs_auto_accessor_get_sigs",
+        argNames: ["that"],
+      );
+
+  @override
+  void crateApiPgpCertPgpCertStubSigsAutoAccessorSetCert({
+    required PgpCertStubSigs that,
+    required PgpCert cert,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+            cert,
+            serializer,
+          );
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 153,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertStubSigsAutoAccessorSetCertConstMeta,
+        argValues: [that, cert],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiPgpCertPgpCertStubSigsAutoAccessorSetCertConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCertStubSigs_auto_accessor_set_cert",
+        argNames: ["that", "cert"],
+      );
+
+  @override
+  void crateApiPgpCertPgpCertStubSigsAutoAccessorSetCertifications({
+    required PgpCertStubSigs that,
+    required List<String> certifications,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+            that,
+            serializer,
+          );
+          sse_encode_list_String(certifications, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 154,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiPgpCertPgpCertStubSigsAutoAccessorSetCertificationsConstMeta,
+        argValues: [that, certifications],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiPgpCertPgpCertStubSigsAutoAccessorSetCertificationsConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCertStubSigs_auto_accessor_set_certifications",
+        argNames: ["that", "certifications"],
+      );
+
+  @override
+  void crateApiPgpCertPgpCertStubSigsAutoAccessorSetIds({
+    required PgpCertStubSigs that,
+    required List<String> ids,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+            that,
+            serializer,
+          );
+          sse_encode_list_String(ids, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 155,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertStubSigsAutoAccessorSetIdsConstMeta,
+        argValues: [that, ids],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiPgpCertPgpCertStubSigsAutoAccessorSetIdsConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCertStubSigs_auto_accessor_set_ids",
+        argNames: ["that", "ids"],
+      );
+
+  @override
+  void crateApiPgpCertPgpCertStubSigsAutoAccessorSetSigs({
+    required PgpCertStubSigs that,
+    required List<String> sigs,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+            that,
+            serializer,
+          );
+          sse_encode_list_String(sigs, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 156,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertStubSigsAutoAccessorSetSigsConstMeta,
+        argValues: [that, sigs],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiPgpCertPgpCertStubSigsAutoAccessorSetSigsConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCertStubSigs_auto_accessor_set_sigs",
+        argNames: ["that", "sigs"],
+      );
+
+  @override
+  PgpCertStubSigs crateApiPgpCertPgpCertStubSigsFromBytes({
+    required List<int> bytes,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_prim_u_8_loose(bytes, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 157,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertStubSigsFromBytesConstMeta,
+        argValues: [bytes],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpCertPgpCertStubSigsFromBytesConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCertStubSigs_from_bytes",
+        argNames: ["bytes"],
+      );
+
+  @override
+  Future<PgpCertStubSigs> crateApiPgpCertPgpCertStubSigsFromBytesSig({
+    required List<int> bytes,
+    required PgpApp store,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_prim_u_8_loose(bytes, serializer);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpApp(
+            store,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 158,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertStubSigsFromBytesSigConstMeta,
+        argValues: [bytes, store],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpCertPgpCertStubSigsFromBytesSigConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCertStubSigs_from_bytes_sig",
+        argNames: ["bytes", "store"],
+      );
+
+  @override
+  PgpCert crateApiPgpCertPgpCertWithIdsAutoAccessorGetCert({
+    required PgpCertWithIds that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 159,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertWithIdsAutoAccessorGetCertConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiPgpCertPgpCertWithIdsAutoAccessorGetCertConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCertWithIds_auto_accessor_get_cert",
+        argNames: ["that"],
+      );
+
+  @override
+  List<MaybeCert> crateApiPgpCertPgpCertWithIdsAutoAccessorGetCertifications({
+    required PgpCertWithIds that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 160,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_maybe_cert,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiPgpCertPgpCertWithIdsAutoAccessorGetCertificationsConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiPgpCertPgpCertWithIdsAutoAccessorGetCertificationsConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCertWithIds_auto_accessor_get_certifications",
+        argNames: ["that"],
+      );
+
+  @override
+  List<String> crateApiPgpCertPgpCertWithIdsAutoAccessorGetIds({
+    required PgpCertWithIds that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 161,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_String,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertWithIdsAutoAccessorGetIdsConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpCertPgpCertWithIdsAutoAccessorGetIdsConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCertWithIds_auto_accessor_get_ids",
+        argNames: ["that"],
+      );
+
+  @override
+  List<MaybeCert> crateApiPgpCertPgpCertWithIdsAutoAccessorGetSigs({
+    required PgpCertWithIds that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 162,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_maybe_cert,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertWithIdsAutoAccessorGetSigsConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiPgpCertPgpCertWithIdsAutoAccessorGetSigsConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCertWithIds_auto_accessor_get_sigs",
+        argNames: ["that"],
+      );
+
+  @override
+  void crateApiPgpCertPgpCertWithIdsAutoAccessorSetCert({
+    required PgpCertWithIds that,
+    required PgpCert cert,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+            cert,
+            serializer,
+          );
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 163,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertWithIdsAutoAccessorSetCertConstMeta,
+        argValues: [that, cert],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiPgpCertPgpCertWithIdsAutoAccessorSetCertConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCertWithIds_auto_accessor_set_cert",
+        argNames: ["that", "cert"],
+      );
+
+  @override
+  void crateApiPgpCertPgpCertWithIdsAutoAccessorSetCertifications({
+    required PgpCertWithIds that,
+    required List<MaybeCert> certifications,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+            that,
+            serializer,
+          );
+          sse_encode_list_maybe_cert(certifications, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 164,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiPgpCertPgpCertWithIdsAutoAccessorSetCertificationsConstMeta,
+        argValues: [that, certifications],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiPgpCertPgpCertWithIdsAutoAccessorSetCertificationsConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCertWithIds_auto_accessor_set_certifications",
+        argNames: ["that", "certifications"],
+      );
+
+  @override
+  void crateApiPgpCertPgpCertWithIdsAutoAccessorSetIds({
+    required PgpCertWithIds that,
+    required List<String> ids,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+            that,
+            serializer,
+          );
+          sse_encode_list_String(ids, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 165,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertWithIdsAutoAccessorSetIdsConstMeta,
+        argValues: [that, ids],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpCertPgpCertWithIdsAutoAccessorSetIdsConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCertWithIds_auto_accessor_set_ids",
+        argNames: ["that", "ids"],
+      );
+
+  @override
+  void crateApiPgpCertPgpCertWithIdsAutoAccessorSetSigs({
+    required PgpCertWithIds that,
+    required List<MaybeCert> sigs,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+            that,
+            serializer,
+          );
+          sse_encode_list_maybe_cert(sigs, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 166,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertWithIdsAutoAccessorSetSigsConstMeta,
+        argValues: [that, sigs],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiPgpCertPgpCertWithIdsAutoAccessorSetSigsConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCertWithIds_auto_accessor_set_sigs",
+        argNames: ["that", "sigs"],
+      );
+
+  @override
+  PgpCertWithIds crateApiPgpCertPgpCertWithIdsCopy({
+    required PgpCertWithIds that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 167,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertWithIdsCopyConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpCertPgpCertWithIdsCopyConstMeta =>
+      const TaskConstMeta(debugName: "PgpCertWithIds_copy", argNames: ["that"]);
+
+  @override
+  PgpCertWithIds crateApiPgpCertPgpCertWithIdsFromBytes({
+    required List<int> bytes,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_prim_u_8_loose(bytes, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 168,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertWithIdsFromBytesConstMeta,
+        argValues: [bytes],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpCertPgpCertWithIdsFromBytesConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCertWithIds_from_bytes",
+        argNames: ["bytes"],
+      );
+
+  @override
+  Future<PgpCertWithIds> crateApiPgpCertPgpCertWithIdsFromBytesSig({
+    required List<int> bytes,
+    required PgpApp store,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_prim_u_8_loose(bytes, serializer);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpApp(
+            store,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 169,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertWithIdsFromBytesSigConstMeta,
+        argValues: [bytes, store],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpCertPgpCertWithIdsFromBytesSigConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCertWithIds_from_bytes_sig",
+        argNames: ["bytes", "store"],
+      );
+
+  @override
+  bool crateApiPgpCertPgpCertWithIdsHasPrivate({required PgpCertWithIds that}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 170,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_bool,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertWithIdsHasPrivateConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpCertPgpCertWithIdsHasPrivateConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCertWithIds_has_private",
+        argNames: ["that"],
+      );
+
+  @override
+  String crateApiPgpCertPgpCertWithIdsIdHex({required PgpCertWithIds that}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 171,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_String,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertWithIdsIdHexConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpCertPgpCertWithIdsIdHexConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCertWithIds_id_hex",
+        argNames: ["that"],
+      );
+
+  @override
+  UserHandle crateApiPgpCertPgpCertAutoAccessorGetFingerprint({
+    required PgpCert that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 172,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertAutoAccessorGetFingerprintConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiPgpCertPgpCertAutoAccessorGetFingerprintConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCert_auto_accessor_get_fingerprint",
+        argNames: ["that"],
+      );
+
+  @override
+  bool crateApiPgpCertPgpCertAutoAccessorGetHasPrivate({
+    required PgpCert that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 173,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_bool,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertAutoAccessorGetHasPrivateConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpCertPgpCertAutoAccessorGetHasPrivateConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCert_auto_accessor_get_has_private",
+        argNames: ["that"],
+      );
+
+  @override
+  String crateApiPgpCertPgpCertAutoAccessorGetKeyid({required PgpCert that}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 174,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_String,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertAutoAccessorGetKeyidConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpCertPgpCertAutoAccessorGetKeyidConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCert_auto_accessor_get_keyid",
+        argNames: ["that"],
+      );
+
+  @override
+  bool crateApiPgpCertPgpCertAutoAccessorGetOnline({required PgpCert that}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 175,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_bool,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertAutoAccessorGetOnlineConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpCertPgpCertAutoAccessorGetOnlineConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCert_auto_accessor_get_online",
+        argNames: ["that"],
+      );
+
+  @override
+  void crateApiPgpCertPgpCertAutoAccessorSetFingerprint({
+    required PgpCert that,
+    required UserHandle fingerprint,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+            fingerprint,
+            serializer,
+          );
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 176,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertAutoAccessorSetFingerprintConstMeta,
+        argValues: [that, fingerprint],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiPgpCertPgpCertAutoAccessorSetFingerprintConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCert_auto_accessor_set_fingerprint",
+        argNames: ["that", "fingerprint"],
+      );
+
+  @override
+  void crateApiPgpCertPgpCertAutoAccessorSetHasPrivate({
+    required PgpCert that,
+    required bool hasPrivate,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+            that,
+            serializer,
+          );
+          sse_encode_bool(hasPrivate, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 177,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertAutoAccessorSetHasPrivateConstMeta,
+        argValues: [that, hasPrivate],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpCertPgpCertAutoAccessorSetHasPrivateConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCert_auto_accessor_set_has_private",
+        argNames: ["that", "hasPrivate"],
+      );
+
+  @override
+  void crateApiPgpCertPgpCertAutoAccessorSetKeyid({
+    required PgpCert that,
+    required String keyid,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+            that,
+            serializer,
+          );
+          sse_encode_String(keyid, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 178,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertAutoAccessorSetKeyidConstMeta,
+        argValues: [that, keyid],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpCertPgpCertAutoAccessorSetKeyidConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCert_auto_accessor_set_keyid",
+        argNames: ["that", "keyid"],
+      );
+
+  @override
+  void crateApiPgpCertPgpCertAutoAccessorSetOnline({
+    required PgpCert that,
+    required bool online,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+            that,
+            serializer,
+          );
+          sse_encode_bool(online, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 179,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertPgpCertAutoAccessorSetOnlineConstMeta,
+        argValues: [that, online],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpCertPgpCertAutoAccessorSetOnlineConstMeta =>
+      const TaskConstMeta(
+        debugName: "PgpCert_auto_accessor_set_online",
+        argNames: ["that", "online"],
       );
 
   @override
@@ -6980,7 +8201,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 151,
+            funcId: 180,
             port: port_,
           );
         },
@@ -7010,7 +8231,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 152,
+            funcId: 181,
             port: port_,
           );
         },
@@ -7048,7 +8269,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 153,
+            funcId: 182,
             port: port_,
           );
         },
@@ -7091,7 +8312,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 154,
+            funcId: 183,
             port: port_,
           );
         },
@@ -7121,7 +8342,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 155,
+            funcId: 184,
             port: port_,
           );
         },
@@ -7159,7 +8380,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 156,
+            funcId: 185,
             port: port_,
           );
         },
@@ -7197,7 +8418,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 157,
+            funcId: 186,
             port: port_,
           );
         },
@@ -7233,7 +8454,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 158,
+            funcId: 187,
             port: port_,
           );
         },
@@ -7264,7 +8485,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 159,
+            funcId: 188,
           )!;
         },
         codec: SseCodec(
@@ -7297,7 +8518,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 160,
+            funcId: 189,
             port: port_,
           );
         },
@@ -7329,7 +8550,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 161,
+            funcId: 190,
           )!;
         },
         codec: SseCodec(
@@ -7366,7 +8587,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 162,
+            funcId: 191,
             port: port_,
           );
         },
@@ -7402,7 +8623,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 163,
+            funcId: 192,
             port: port_,
           );
         },
@@ -7438,7 +8659,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 164,
+            funcId: 193,
             port: port_,
           );
         },
@@ -7472,7 +8693,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 165,
+            funcId: 194,
             port: port_,
           );
         },
@@ -7511,7 +8732,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 166,
+            funcId: 195,
             port: port_,
           );
         },
@@ -7549,7 +8770,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 167,
+            funcId: 196,
             port: port_,
           );
         },
@@ -7587,7 +8808,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 168,
+            funcId: 197,
             port: port_,
           );
         },
@@ -7625,7 +8846,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 169,
+            funcId: 198,
             port: port_,
           );
         },
@@ -7663,7 +8884,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 170,
+            funcId: 199,
             port: port_,
           );
         },
@@ -7702,7 +8923,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 171,
+            funcId: 200,
             port: port_,
           );
         },
@@ -7741,7 +8962,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 172,
+            funcId: 201,
             port: port_,
           );
         },
@@ -7780,7 +9001,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 173,
+            funcId: 202,
             port: port_,
           );
         },
@@ -7819,7 +9040,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 174,
+            funcId: 203,
             port: port_,
           );
         },
@@ -7858,7 +9079,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 175,
+            funcId: 204,
             port: port_,
           );
         },
@@ -7895,7 +9116,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 176,
+            funcId: 205,
             port: port_,
           );
         },
@@ -7932,7 +9153,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 177,
+            funcId: 206,
             port: port_,
           );
         },
@@ -7970,7 +9191,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 178,
+            funcId: 207,
             port: port_,
           );
         },
@@ -8007,7 +9228,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 179,
+            funcId: 208,
             port: port_,
           );
         },
@@ -8041,7 +9262,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 180,
+            funcId: 209,
           )!;
         },
         codec: SseCodec(
@@ -8079,7 +9300,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 181,
+            funcId: 210,
             port: port_,
           );
         },
@@ -8118,7 +9339,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 182,
+            funcId: 211,
             port: port_,
           );
         },
@@ -8158,7 +9379,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 183,
+            funcId: 212,
             port: port_,
           );
         },
@@ -8198,7 +9419,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 184,
+            funcId: 213,
             port: port_,
           );
         },
@@ -8237,7 +9458,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 185,
+            funcId: 214,
             port: port_,
           );
         },
@@ -8278,7 +9499,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 186,
+            funcId: 215,
             port: port_,
           );
         },
@@ -8322,7 +9543,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 187,
+            funcId: 216,
             port: port_,
           );
         },
@@ -8360,7 +9581,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 188,
+            funcId: 217,
             port: port_,
           );
         },
@@ -8391,7 +9612,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 189,
+            funcId: 218,
           )!;
         },
         codec: SseCodec(
@@ -8418,7 +9639,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 190,
+            funcId: 219,
           )!;
         },
         codec: SseCodec(
@@ -8453,7 +9674,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 191,
+            funcId: 220,
             port: port_,
           );
         },
@@ -8491,7 +9712,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 192,
+            funcId: 221,
             port: port_,
           );
         },
@@ -8530,7 +9751,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 193,
+            funcId: 222,
             port: port_,
           );
         },
@@ -8567,7 +9788,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 194,
+            funcId: 223,
             port: port_,
           );
         },
@@ -8604,7 +9825,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 195,
+            funcId: 224,
             port: port_,
           );
         },
@@ -8642,7 +9863,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 196,
+            funcId: 225,
             port: port_,
           );
         },
@@ -8682,7 +9903,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 197,
+            funcId: 226,
             port: port_,
           );
         },
@@ -8722,7 +9943,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 198,
+            funcId: 227,
             port: port_,
           );
         },
@@ -8758,7 +9979,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 199,
+            funcId: 228,
             port: port_,
           );
         },
@@ -8792,7 +10013,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 276,
+            funcId: 306,
           )!;
         },
         codec: SseCodec(
@@ -8829,7 +10050,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 277,
+            funcId: 307,
           )!;
         },
         codec: SseCodec(
@@ -8866,7 +10087,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 278,
+            funcId: 308,
           )!;
         },
         codec: SseCodec(
@@ -8896,7 +10117,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 279,
+            funcId: 309,
           )!;
         },
         codec: SseCodec(
@@ -8927,7 +10148,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 280,
+            funcId: 310,
           )!;
         },
         codec: SseCodec(
@@ -8957,7 +10178,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 281,
+            funcId: 311,
           )!;
         },
         codec: SseCodec(
@@ -8998,7 +10219,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 282,
+            funcId: 312,
           )!;
         },
         codec: SseCodec(
@@ -9032,7 +10253,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 283,
+            funcId: 313,
           )!;
         },
         codec: SseCodec(
@@ -9068,7 +10289,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 284,
+            funcId: 314,
             port: port_,
           );
         },
@@ -9109,7 +10330,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 285,
+            funcId: 315,
             port: port_,
           );
         },
@@ -9151,7 +10372,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 286,
+              funcId: 316,
               port: port_,
             );
           },
@@ -9187,7 +10408,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 287,
+            funcId: 317,
           )!;
         },
         codec: SseCodec(
@@ -9217,7 +10438,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 288,
+            funcId: 318,
           )!;
         },
         codec: SseCodec(
@@ -9247,7 +10468,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 289,
+            funcId: 319,
           )!;
         },
         codec: SseCodec(
@@ -9277,7 +10498,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 290,
+            funcId: 320,
           )!;
         },
         codec: SseCodec(
@@ -9312,7 +10533,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 291,
+            funcId: 321,
           )!;
         },
         codec: SseCodec(
@@ -9352,7 +10573,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 292,
+            funcId: 322,
             port: port_,
           );
         },
@@ -9385,7 +10606,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 293,
+            funcId: 323,
             port: port_,
           );
         },
@@ -9425,7 +10646,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 294,
+            funcId: 324,
           )!;
         },
         codec: SseCodec(
@@ -9460,7 +10681,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 295,
+            funcId: 325,
           )!;
         },
         codec: SseCodec(
@@ -9495,7 +10716,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 296,
+            funcId: 326,
             port: port_,
           );
         },
@@ -9526,7 +10747,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 297,
+            funcId: 327,
           )!;
         },
         codec: SseCodec(
@@ -9555,7 +10776,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 298,
+            funcId: 328,
           )!;
         },
         codec: SseCodec(
@@ -9593,7 +10814,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 299,
+            funcId: 329,
           )!;
         },
         codec: SseCodec(
@@ -9624,7 +10845,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 300,
+            funcId: 330,
           )!;
         },
         codec: SseCodec(
@@ -9651,7 +10872,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 301,
+            funcId: 331,
             port: port_,
           );
         },
@@ -9686,7 +10907,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 302,
+            funcId: 332,
             port: port_,
           );
         },
@@ -9724,7 +10945,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 303,
+            funcId: 333,
             port: port_,
           );
         },
@@ -9763,7 +10984,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 304,
+              funcId: 334,
               port: port_,
             );
           },
@@ -9803,7 +11024,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 305,
+            funcId: 335,
             port: port_,
           );
         },
@@ -9834,7 +11055,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 306,
+            funcId: 336,
             port: port_,
           );
         },
@@ -9866,7 +11087,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 307,
+            funcId: 337,
           )!;
         },
         codec: SseCodec(
@@ -9894,7 +11115,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 309,
+            funcId: 339,
             port: port_,
           );
         },
@@ -9913,6 +11134,100 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "init_logging", argNames: []);
 
   @override
+  UserHandle crateApiPgpCertMaybeCertFingerprint({required MaybeCert that}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_maybe_cert(that, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 340,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateApiPgpCertMaybeCertFingerprintConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpCertMaybeCertFingerprintConstMeta =>
+      const TaskConstMeta(
+        debugName: "maybe_cert_fingerprint",
+        argNames: ["that"],
+      );
+
+  @override
+  MaybeCert crateApiPgpCertMaybeCertFromCert({required PgpCertWithIds cert}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+            cert,
+            serializer,
+          );
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 341,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_maybe_cert,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertMaybeCertFromCertConstMeta,
+        argValues: [cert],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpCertMaybeCertFromCertConstMeta =>
+      const TaskConstMeta(
+        debugName: "maybe_cert_from_cert",
+        argNames: ["cert"],
+      );
+
+  @override
+  List<String>? crateApiPgpCertMaybeCertMaybeIds({required MaybeCert that}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_maybe_cert(that, serializer);
+          return pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 342,
+          )!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_opt_list_String,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiPgpCertMaybeCertMaybeIdsConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiPgpCertMaybeCertMaybeIdsConstMeta =>
+      const TaskConstMeta(
+        debugName: "maybe_cert_maybe_ids",
+        argNames: ["that"],
+      );
+
+  @override
   Future<void> crateApiPgpCirclesAppNonOpaqueAppToDb({
     required NonOpaqueApp that,
     required SqliteDb db,
@@ -9929,7 +11244,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 310,
+            funcId: 343,
             port: port_,
           );
         },
@@ -9965,7 +11280,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 311,
+            funcId: 344,
           )!;
         },
         codec: SseCodec(
@@ -10002,7 +11317,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 312,
+            funcId: 345,
             port: port_,
           );
         },
@@ -10040,7 +11355,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 313,
+            funcId: 346,
             port: port_,
           );
         },
@@ -10070,7 +11385,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 314,
+            funcId: 347,
             port: port_,
           );
         },
@@ -10108,7 +11423,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 315,
+            funcId: 348,
             port: port_,
           );
         },
@@ -10148,7 +11463,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 316,
+            funcId: 349,
             port: port_,
           );
         },
@@ -10178,7 +11493,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 317,
+            funcId: 350,
             port: port_,
           );
         },
@@ -10216,7 +11531,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 318,
+            funcId: 351,
             port: port_,
           );
         },
@@ -10254,7 +11569,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 319,
+            funcId: 352,
             port: port_,
           );
         },
@@ -10284,7 +11599,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 320,
+            funcId: 353,
             port: port_,
           );
         },
@@ -10319,7 +11634,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 321,
+            funcId: 354,
             port: port_,
           );
         },
@@ -10359,7 +11674,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 322,
+            funcId: 355,
             port: port_,
           );
         },
@@ -10389,7 +11704,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 323,
+            funcId: 356,
             port: port_,
           );
         },
@@ -10424,7 +11739,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 324,
+            funcId: 357,
             port: port_,
           );
         },
@@ -10446,176 +11761,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  PgpCertStubSigs crateApiPgpCertPgpCertStubSigsFromBytes({
-    required List<int> bytes,
-  }) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_list_prim_u_8_loose(bytes, serializer);
-          return pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 325,
-          )!;
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_pgp_cert_stub_sigs,
-          decodeErrorData: sse_decode_AnyhowException,
-        ),
-        constMeta: kCrateApiPgpCertPgpCertStubSigsFromBytesConstMeta,
-        argValues: [bytes],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta get kCrateApiPgpCertPgpCertStubSigsFromBytesConstMeta =>
-      const TaskConstMeta(
-        debugName: "pgp_cert_stub_sigs_from_bytes",
-        argNames: ["bytes"],
-      );
-
-  @override
-  Future<PgpCertStubSigs> crateApiPgpCertPgpCertStubSigsFromBytesSig({
-    required List<int> bytes,
-    required PgpApp store,
-  }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_list_prim_u_8_loose(bytes, serializer);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpApp(
-            store,
-            serializer,
-          );
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 326,
-            port: port_,
-          );
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_pgp_cert_stub_sigs,
-          decodeErrorData: sse_decode_AnyhowException,
-        ),
-        constMeta: kCrateApiPgpCertPgpCertStubSigsFromBytesSigConstMeta,
-        argValues: [bytes, store],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta get kCrateApiPgpCertPgpCertStubSigsFromBytesSigConstMeta =>
-      const TaskConstMeta(
-        debugName: "pgp_cert_stub_sigs_from_bytes_sig",
-        argNames: ["bytes", "store"],
-      );
-
-  @override
-  PgpCertWithIds crateApiPgpCertPgpCertWithIdsFromBytes({
-    required List<int> bytes,
-  }) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_list_prim_u_8_loose(bytes, serializer);
-          return pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 327,
-          )!;
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_pgp_cert_with_ids,
-          decodeErrorData: sse_decode_AnyhowException,
-        ),
-        constMeta: kCrateApiPgpCertPgpCertWithIdsFromBytesConstMeta,
-        argValues: [bytes],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta get kCrateApiPgpCertPgpCertWithIdsFromBytesConstMeta =>
-      const TaskConstMeta(
-        debugName: "pgp_cert_with_ids_from_bytes",
-        argNames: ["bytes"],
-      );
-
-  @override
-  Future<PgpCertWithIds> crateApiPgpCertPgpCertWithIdsFromBytesSig({
-    required List<int> bytes,
-    required PgpApp store,
-  }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_list_prim_u_8_loose(bytes, serializer);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpApp(
-            store,
-            serializer,
-          );
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 328,
-            port: port_,
-          );
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_pgp_cert_with_ids,
-          decodeErrorData: sse_decode_AnyhowException,
-        ),
-        constMeta: kCrateApiPgpCertPgpCertWithIdsFromBytesSigConstMeta,
-        argValues: [bytes, store],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta get kCrateApiPgpCertPgpCertWithIdsFromBytesSigConstMeta =>
-      const TaskConstMeta(
-        debugName: "pgp_cert_with_ids_from_bytes_sig",
-        argNames: ["bytes", "store"],
-      );
-
-  @override
-  bool crateApiPgpCertPgpCertWithIdsHasPrivate({required PgpCertWithIds that}) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_box_autoadd_pgp_cert_with_ids(that, serializer);
-          return pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 329,
-          )!;
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_bool,
-          decodeErrorData: null,
-        ),
-        constMeta: kCrateApiPgpCertPgpCertWithIdsHasPrivateConstMeta,
-        argValues: [that],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta get kCrateApiPgpCertPgpCertWithIdsHasPrivateConstMeta =>
-      const TaskConstMeta(
-        debugName: "pgp_cert_with_ids_has_private",
-        argNames: ["that"],
-      );
-
-  @override
   Future<void> crateApiSyncReqwestTest() {
     return handler.executeNormal(
       NormalTask(
@@ -10624,7 +11769,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 330,
+            funcId: 358,
             port: port_,
           );
         },
@@ -10659,7 +11804,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 331,
+            funcId: 359,
             port: port_,
           );
         },
@@ -10690,7 +11835,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 332,
+            funcId: 360,
             port: port_,
           );
         },
@@ -10720,7 +11865,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 333,
+            funcId: 361,
           )!;
         },
         codec: SseCodec(
@@ -10753,7 +11898,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 334,
+            funcId: 362,
           )!;
         },
         codec: SseCodec(
@@ -10909,14 +12054,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableVisualKeyBuilderstatic;
 
   RustArcIncrementStrongCountFnType
-  get rust_arc_increment_strong_count_MaybeCert => wire
-      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert;
-
-  RustArcDecrementStrongCountFnType
-  get rust_arc_decrement_strong_count_MaybeCert => wire
-      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert;
-
-  RustArcIncrementStrongCountFnType
   get rust_arc_increment_strong_count_MaybeDeleted => wire
       .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted;
 
@@ -10947,6 +12084,30 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   RustArcDecrementStrongCountFnType
   get rust_arc_decrement_strong_count_PgpApp => wire
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpApp;
+
+  RustArcIncrementStrongCountFnType
+  get rust_arc_increment_strong_count_PgpCert => wire
+      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert;
+
+  RustArcDecrementStrongCountFnType
+  get rust_arc_decrement_strong_count_PgpCert => wire
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert;
+
+  RustArcIncrementStrongCountFnType
+  get rust_arc_increment_strong_count_PgpCertStubSigs => wire
+      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs;
+
+  RustArcDecrementStrongCountFnType
+  get rust_arc_decrement_strong_count_PgpCertStubSigs => wire
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs;
+
+  RustArcIncrementStrongCountFnType
+  get rust_arc_increment_strong_count_PgpCertWithIds => wire
+      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds;
+
+  RustArcDecrementStrongCountFnType
+  get rust_arc_decrement_strong_count_PgpCertWithIds => wire
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds;
 
   RustArcIncrementStrongCountFnType
   get rust_arc_increment_strong_count_PgpDataCert => wire
@@ -11060,6 +12221,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  PgpCertWithIds
+  dco_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+      raw,
+    );
+  }
+
+  @protected
   PgpImportBytes
   dco_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpImportBytes(
     dynamic raw,
@@ -11077,6 +12249,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpImportFile(
+      raw,
+    );
+  }
+
+  @protected
+  UserHandle
+  dco_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
       raw,
     );
   }
@@ -11163,15 +12346,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  MaybeCert
-  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return MaybeCertImpl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
   MaybeDeleted
   dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
     dynamic raw,
@@ -11205,6 +12379,33 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return PgpAppImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  PgpCert
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return PgpCertImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  PgpCertStubSigs
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return PgpCertStubSigsImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  PgpCertWithIds
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return PgpCertWithIdsImpl.frbInternalDcoDecode(raw as List<dynamic>);
   }
 
   @protected
@@ -11334,6 +12535,33 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  PgpCert
+  dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return PgpCertImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  PgpCertStubSigs
+  dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return PgpCertStubSigsImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  PgpCertWithIds
+  dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return PgpCertWithIdsImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
   Circle
   dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircle(
     dynamic raw,
@@ -11397,15 +12625,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  MaybeCert
-  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return MaybeCertImpl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
   MaybeDeleted
   dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
     dynamic raw,
@@ -11430,6 +12649,33 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return PgpAppImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  PgpCert
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return PgpCertImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  PgpCertStubSigs
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return PgpCertStubSigsImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  PgpCertWithIds
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return PgpCertWithIdsImpl.frbInternalDcoDecode(raw as List<dynamic>);
   }
 
   @protected
@@ -11679,15 +12925,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  MaybeCert
-  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return MaybeCertImpl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
   MaybeDeleted
   dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
     dynamic raw,
@@ -11721,6 +12958,33 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return PgpAppImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  PgpCert
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return PgpCertImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  PgpCertStubSigs
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return PgpCertStubSigsImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  PgpCertWithIds
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return PgpCertWithIdsImpl.frbInternalDcoDecode(raw as List<dynamic>);
   }
 
   @protected
@@ -11820,15 +13084,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  RustStreamSink<String> dco_decode_StreamSink_String_Sse(dynamic raw) {
+  RustStreamSink<PgpCertWithIds>
+  dco_decode_StreamSink_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds_Sse(
+    dynamic raw,
+  ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     throw UnimplementedError();
   }
 
   @protected
-  RustStreamSink<PgpCertWithIds> dco_decode_StreamSink_pgp_cert_with_ids_Sse(
-    dynamic raw,
-  ) {
+  RustStreamSink<String> dco_decode_StreamSink_String_Sse(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     throw UnimplementedError();
   }
@@ -11973,6 +13238,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  PgpCertWithIds
+  dco_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+      raw,
+    );
+  }
+
+  @protected
   UserHandle
   dco_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
     dynamic raw,
@@ -11999,6 +13275,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   KeyHandle dco_decode_box_autoadd_key_handle(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_key_handle(raw);
+  }
+
+  @protected
+  MaybeCert dco_decode_box_autoadd_maybe_cert(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_maybe_cert(raw);
   }
 
   @protected
@@ -12029,12 +13311,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   OnlyOnline dco_decode_box_autoadd_only_online(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_only_online(raw);
-  }
-
-  @protected
-  PgpCertWithIds dco_decode_box_autoadd_pgp_cert_with_ids(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_pgp_cert_with_ids(raw);
   }
 
   @protected
@@ -12254,19 +13530,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  List<MaybeCert>
-  dco_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return (raw as List<dynamic>)
-        .map(
-          dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert,
-        )
-        .toList();
-  }
-
-  @protected
   List<NewsGroup>
   dco_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
     dynamic raw,
@@ -12275,6 +13538,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return (raw as List<dynamic>)
         .map(
           dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup,
+        )
+        .toList();
+  }
+
+  @protected
+  List<PgpCertWithIds>
+  dco_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(
+          dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds,
         )
         .toList();
   }
@@ -12348,15 +13624,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  List<NonOpaqueCircle> dco_decode_list_non_opaque_circle(dynamic raw) {
+  List<MaybeCert> dco_decode_list_maybe_cert(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return (raw as List<dynamic>).map(dco_decode_non_opaque_circle).toList();
+    return (raw as List<dynamic>).map(dco_decode_maybe_cert).toList();
   }
 
   @protected
-  List<PgpCertWithIds> dco_decode_list_pgp_cert_with_ids(dynamic raw) {
+  List<NonOpaqueCircle> dco_decode_list_non_opaque_circle(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return (raw as List<dynamic>).map(dco_decode_pgp_cert_with_ids).toList();
+    return (raw as List<dynamic>).map(dco_decode_non_opaque_circle).toList();
   }
 
   @protected
@@ -12401,6 +13677,29 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return (raw as List<dynamic>)
         .map(dco_decode_record_string_graph_vertex)
         .toList();
+  }
+
+  @protected
+  MaybeCert dco_decode_maybe_cert(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return MaybeCert_Full(
+          cert:
+              dco_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+                raw[1],
+              ),
+        );
+      case 1:
+        return MaybeCert_Fingerprint(
+          fpr:
+              dco_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+                raw[1],
+              ),
+        );
+      default:
+        throw Exception("unreachable");
+    }
   }
 
   @protected
@@ -12510,6 +13809,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  PgpCertWithIds?
+  dco_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+            raw,
+          );
+  }
+
+  @protected
   UserHandle?
   dco_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
     dynamic raw,
@@ -12547,12 +13859,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  PgpCertWithIds? dco_decode_opt_box_autoadd_pgp_cert_with_ids(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw == null ? null : dco_decode_box_autoadd_pgp_cert_with_ids(raw);
-  }
-
-  @protected
   QrCodeContent? dco_decode_opt_box_autoadd_qr_code_content(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_qr_code_content(raw);
@@ -12580,57 +13886,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Uint8List? dco_decode_opt_list_prim_u_8_strict(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_list_prim_u_8_strict(raw);
-  }
-
-  @protected
-  PgpCert dco_decode_pgp_cert(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 4)
-      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
-    return PgpCert(
-      keyid: dco_decode_String(arr[0]),
-      fingerprint:
-          dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
-            arr[1],
-          ),
-      hasPrivate: dco_decode_bool(arr[2]),
-      online: dco_decode_bool(arr[3]),
-    );
-  }
-
-  @protected
-  PgpCertStubSigs dco_decode_pgp_cert_stub_sigs(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 4)
-      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
-    return PgpCertStubSigs(
-      cert: dco_decode_pgp_cert(arr[0]),
-      ids: dco_decode_list_String(arr[1]),
-      sigs: dco_decode_list_String(arr[2]),
-      certifications: dco_decode_list_String(arr[3]),
-    );
-  }
-
-  @protected
-  PgpCertWithIds dco_decode_pgp_cert_with_ids(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 4)
-      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
-    return PgpCertWithIds(
-      cert: dco_decode_pgp_cert(arr[0]),
-      ids: dco_decode_list_String(arr[1]),
-      sigs:
-          dco_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-            arr[2],
-          ),
-      certifications:
-          dco_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-            arr[3],
-          ),
-    );
   }
 
   @protected
@@ -12784,7 +14039,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return VerifyResult(
       fingerprints: dco_decode_list_String(arr[0]),
       content: dco_decode_opt_box_autoadd_qr_code_content(arr[1]),
-      key: dco_decode_opt_box_autoadd_pgp_cert_with_ids(arr[2]),
+      key:
+          dco_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+            arr[2],
+          ),
       isStub: dco_decode_bool(arr[3]),
     );
   }
@@ -12875,6 +14133,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  PgpCertWithIds
+  sse_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner =
+        sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+          deserializer,
+        );
+    return inner;
+  }
+
+  @protected
   PgpImportBytes
   sse_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpImportBytes(
     SseDeserializer deserializer,
@@ -12895,6 +14166,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var inner =
         sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpImportFile(
+          deserializer,
+        );
+    return inner;
+  }
+
+  @protected
+  UserHandle
+  sse_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner =
+        sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
           deserializer,
         );
     return inner;
@@ -13009,18 +14293,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  MaybeCert
-  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return MaybeCertImpl.frbInternalSseDecode(
-      sse_decode_usize(deserializer),
-      sse_decode_i_32(deserializer),
-    );
-  }
-
-  @protected
   MaybeDeleted
   sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
     SseDeserializer deserializer,
@@ -13063,6 +14335,42 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return PgpAppImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  PgpCert
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return PgpCertImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  PgpCertStubSigs
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return PgpCertStubSigsImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  PgpCertWithIds
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return PgpCertWithIdsImpl.frbInternalSseDecode(
       sse_decode_usize(deserializer),
       sse_decode_i_32(deserializer),
     );
@@ -13237,6 +14545,42 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  PgpCert
+  sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return PgpCertImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  PgpCertStubSigs
+  sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return PgpCertStubSigsImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  PgpCertWithIds
+  sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return PgpCertWithIdsImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
   Circle
   sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircle(
     SseDeserializer deserializer,
@@ -13321,18 +14665,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  MaybeCert
-  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return MaybeCertImpl.frbInternalSseDecode(
-      sse_decode_usize(deserializer),
-      sse_decode_i_32(deserializer),
-    );
-  }
-
-  @protected
   MaybeDeleted
   sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
     SseDeserializer deserializer,
@@ -13363,6 +14695,42 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return PgpAppImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  PgpCert
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return PgpCertImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  PgpCertStubSigs
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return PgpCertStubSigsImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  PgpCertWithIds
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return PgpCertWithIdsImpl.frbInternalSseDecode(
       sse_decode_usize(deserializer),
       sse_decode_i_32(deserializer),
     );
@@ -13670,18 +15038,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  MaybeCert
-  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return MaybeCertImpl.frbInternalSseDecode(
-      sse_decode_usize(deserializer),
-      sse_decode_i_32(deserializer),
-    );
-  }
-
-  @protected
   MaybeDeleted
   sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
     SseDeserializer deserializer,
@@ -13724,6 +15080,42 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return PgpAppImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  PgpCert
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return PgpCertImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  PgpCertStubSigs
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return PgpCertStubSigsImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  PgpCertWithIds
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return PgpCertWithIdsImpl.frbInternalSseDecode(
       sse_decode_usize(deserializer),
       sse_decode_i_32(deserializer),
     );
@@ -13854,7 +15246,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  RustStreamSink<String> sse_decode_StreamSink_String_Sse(
+  RustStreamSink<PgpCertWithIds>
+  sse_decode_StreamSink_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds_Sse(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -13862,7 +15255,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  RustStreamSink<PgpCertWithIds> sse_decode_StreamSink_pgp_cert_with_ids_Sse(
+  RustStreamSink<String> sse_decode_StreamSink_String_Sse(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -13923,6 +15316,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  PgpCertWithIds
+  sse_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+      deserializer,
+    ));
+  }
+
+  @protected
   UserHandle
   sse_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
     SseDeserializer deserializer,
@@ -13949,6 +15353,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   KeyHandle sse_decode_box_autoadd_key_handle(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_key_handle(deserializer));
+  }
+
+  @protected
+  MaybeCert sse_decode_box_autoadd_maybe_cert(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_maybe_cert(deserializer));
   }
 
   @protected
@@ -13985,14 +15395,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   OnlyOnline sse_decode_box_autoadd_only_online(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_only_online(deserializer));
-  }
-
-  @protected
-  PgpCertWithIds sse_decode_box_autoadd_pgp_cert_with_ids(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_pgp_cert_with_ids(deserializer));
   }
 
   @protected
@@ -14228,25 +15630,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  List<MaybeCert>
-  sse_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    var len_ = sse_decode_i_32(deserializer);
-    var ans_ = <MaybeCert>[];
-    for (var idx_ = 0; idx_ < len_; ++idx_) {
-      ans_.add(
-        sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-          deserializer,
-        ),
-      );
-    }
-    return ans_;
-  }
-
-  @protected
   List<NewsGroup>
   sse_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
     SseDeserializer deserializer,
@@ -14258,6 +15641,25 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     for (var idx_ = 0; idx_ < len_; ++idx_) {
       ans_.add(
         sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
+          deserializer,
+        ),
+      );
+    }
+    return ans_;
+  }
+
+  @protected
+  List<PgpCertWithIds>
+  sse_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <PgpCertWithIds>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(
+        sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
           deserializer,
         ),
       );
@@ -14394,6 +15796,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<MaybeCert> sse_decode_list_maybe_cert(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <MaybeCert>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_maybe_cert(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
   List<NonOpaqueCircle> sse_decode_list_non_opaque_circle(
     SseDeserializer deserializer,
   ) {
@@ -14403,20 +15817,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var ans_ = <NonOpaqueCircle>[];
     for (var idx_ = 0; idx_ < len_; ++idx_) {
       ans_.add(sse_decode_non_opaque_circle(deserializer));
-    }
-    return ans_;
-  }
-
-  @protected
-  List<PgpCertWithIds> sse_decode_list_pgp_cert_with_ids(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    var len_ = sse_decode_i_32(deserializer);
-    var ans_ = <PgpCertWithIds>[];
-    for (var idx_ = 0; idx_ < len_; ++idx_) {
-      ans_.add(sse_decode_pgp_cert_with_ids(deserializer));
     }
     return ans_;
   }
@@ -14481,6 +15881,29 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       ans_.add(sse_decode_record_string_graph_vertex(deserializer));
     }
     return ans_;
+  }
+
+  @protected
+  MaybeCert sse_decode_maybe_cert(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_cert =
+            sse_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+              deserializer,
+            );
+        return MaybeCert_Full(cert: var_cert);
+      case 1:
+        var var_fpr =
+            sse_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+              deserializer,
+            );
+        return MaybeCert_Fingerprint(fpr: var_fpr);
+      default:
+        throw UnimplementedError('');
+    }
   }
 
   @protected
@@ -14602,6 +16025,22 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  PgpCertWithIds?
+  sse_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+        deserializer,
+      ));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
   UserHandle?
   sse_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
     SseDeserializer deserializer,
@@ -14668,19 +16107,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  PgpCertWithIds? sse_decode_opt_box_autoadd_pgp_cert_with_ids(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    if (sse_decode_bool(deserializer)) {
-      return (sse_decode_box_autoadd_pgp_cert_with_ids(deserializer));
-    } else {
-      return null;
-    }
-  }
-
-  @protected
   QrCodeContent? sse_decode_opt_box_autoadd_qr_code_content(
     SseDeserializer deserializer,
   ) {
@@ -14737,60 +16163,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     } else {
       return null;
     }
-  }
-
-  @protected
-  PgpCert sse_decode_pgp_cert(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_keyid = sse_decode_String(deserializer);
-    var var_fingerprint =
-        sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
-          deserializer,
-        );
-    var var_hasPrivate = sse_decode_bool(deserializer);
-    var var_online = sse_decode_bool(deserializer);
-    return PgpCert(
-      keyid: var_keyid,
-      fingerprint: var_fingerprint,
-      hasPrivate: var_hasPrivate,
-      online: var_online,
-    );
-  }
-
-  @protected
-  PgpCertStubSigs sse_decode_pgp_cert_stub_sigs(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_cert = sse_decode_pgp_cert(deserializer);
-    var var_ids = sse_decode_list_String(deserializer);
-    var var_sigs = sse_decode_list_String(deserializer);
-    var var_certifications = sse_decode_list_String(deserializer);
-    return PgpCertStubSigs(
-      cert: var_cert,
-      ids: var_ids,
-      sigs: var_sigs,
-      certifications: var_certifications,
-    );
-  }
-
-  @protected
-  PgpCertWithIds sse_decode_pgp_cert_with_ids(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_cert = sse_decode_pgp_cert(deserializer);
-    var var_ids = sse_decode_list_String(deserializer);
-    var var_sigs =
-        sse_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-          deserializer,
-        );
-    var var_certifications =
-        sse_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-          deserializer,
-        );
-    return PgpCertWithIds(
-      cert: var_cert,
-      ids: var_ids,
-      sigs: var_sigs,
-      certifications: var_certifications,
-    );
   }
 
   @protected
@@ -14931,7 +16303,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_fingerprints = sse_decode_list_String(deserializer);
     var var_content = sse_decode_opt_box_autoadd_qr_code_content(deserializer);
-    var var_key = sse_decode_opt_box_autoadd_pgp_cert_with_ids(deserializer);
+    var var_key =
+        sse_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+          deserializer,
+        );
     var var_isStub = sse_decode_bool(deserializer);
     return VerifyResult(
       fingerprints: var_fingerprints,
@@ -15026,6 +16401,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
+  sse_encode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    PgpCertWithIds self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+      self,
+      serializer,
+    );
+  }
+
+  @protected
+  void
   sse_encode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpImportBytes(
     PgpImportBytes self,
     SseSerializer serializer,
@@ -15045,6 +16433,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpImportFile(
+      self,
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+    UserHandle self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
       self,
       serializer,
     );
@@ -15169,19 +16570,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
-  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    MaybeCert self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-      (self as MaybeCertImpl).frbInternalSseEncode(move: true),
-      serializer,
-    );
-  }
-
-  @protected
-  void
   sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
     MaybeDeleted self,
     SseSerializer serializer,
@@ -15228,6 +16616,45 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
       (self as PgpAppImpl).frbInternalSseEncode(move: true),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    PgpCert self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as PgpCertImpl).frbInternalSseEncode(move: true),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    PgpCertStubSigs self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as PgpCertStubSigsImpl).frbInternalSseEncode(move: true),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    PgpCertWithIds self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as PgpCertWithIdsImpl).frbInternalSseEncode(move: true),
       serializer,
     );
   }
@@ -15416,6 +16843,45 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
+  sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    PgpCert self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as PgpCertImpl).frbInternalSseEncode(move: false),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    PgpCertStubSigs self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as PgpCertStubSigsImpl).frbInternalSseEncode(move: false),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    PgpCertWithIds self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as PgpCertWithIdsImpl).frbInternalSseEncode(move: false),
+      serializer,
+    );
+  }
+
+  @protected
+  void
   sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircle(
     Circle self,
     SseSerializer serializer,
@@ -15507,19 +16973,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
-  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    MaybeCert self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-      (self as MaybeCertImpl).frbInternalSseEncode(move: false),
-      serializer,
-    );
-  }
-
-  @protected
-  void
   sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
     MaybeDeleted self,
     SseSerializer serializer,
@@ -15553,6 +17006,45 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
       (self as PgpAppImpl).frbInternalSseEncode(move: false),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    PgpCert self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as PgpCertImpl).frbInternalSseEncode(move: false),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    PgpCertStubSigs self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as PgpCertStubSigsImpl).frbInternalSseEncode(move: false),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    PgpCertWithIds self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as PgpCertWithIdsImpl).frbInternalSseEncode(move: false),
       serializer,
     );
   }
@@ -15918,19 +17410,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
-  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    MaybeCert self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-      (self as MaybeCertImpl).frbInternalSseEncode(move: null),
-      serializer,
-    );
-  }
-
-  @protected
-  void
   sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
     MaybeDeleted self,
     SseSerializer serializer,
@@ -15977,6 +17456,45 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
       (self as PgpAppImpl).frbInternalSseEncode(move: null),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    PgpCert self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as PgpCertImpl).frbInternalSseEncode(move: null),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    PgpCertStubSigs self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as PgpCertStubSigsImpl).frbInternalSseEncode(move: null),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    PgpCertWithIds self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as PgpCertWithIdsImpl).frbInternalSseEncode(move: null),
       serializer,
     );
   }
@@ -16127,6 +17645,25 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void
+  sse_encode_StreamSink_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds_Sse(
+    RustStreamSink<PgpCertWithIds> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(
+      self.setupAndSerialize(
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+      ),
+      serializer,
+    );
+  }
+
+  @protected
   void sse_encode_StreamSink_String_Sse(
     RustStreamSink<String> self,
     SseSerializer serializer,
@@ -16136,23 +17673,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       self.setupAndSerialize(
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
-          decodeErrorData: sse_decode_AnyhowException,
-        ),
-      ),
-      serializer,
-    );
-  }
-
-  @protected
-  void sse_encode_StreamSink_pgp_cert_with_ids_Sse(
-    RustStreamSink<PgpCertWithIds> self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_String(
-      self.setupAndSerialize(
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_pgp_cert_with_ids,
           decodeErrorData: sse_decode_AnyhowException,
         ),
       ),
@@ -16216,6 +17736,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
+  sse_encode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    PgpCertWithIds self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+      self,
+      serializer,
+    );
+  }
+
+  @protected
+  void
   sse_encode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
     UserHandle self,
     SseSerializer serializer,
@@ -16249,6 +17782,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_key_handle(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_maybe_cert(
+    MaybeCert self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_maybe_cert(self, serializer);
   }
 
   @protected
@@ -16294,15 +17836,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_only_online(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_pgp_cert_with_ids(
-    PgpCertWithIds self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_pgp_cert_with_ids(self, serializer);
   }
 
   @protected
@@ -16514,22 +18047,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
-  sse_encode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    List<MaybeCert> self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.length, serializer);
-    for (final item in self) {
-      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-        item,
-        serializer,
-      );
-    }
-  }
-
-  @protected
-  void
   sse_encode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
     List<NewsGroup> self,
     SseSerializer serializer,
@@ -16538,6 +18055,22 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_i_32(self.length, serializer);
     for (final item in self) {
       sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
+        item,
+        serializer,
+      );
+    }
+  }
+
+  @protected
+  void
+  sse_encode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    List<PgpCertWithIds> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
         item,
         serializer,
       );
@@ -16658,6 +18191,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_list_maybe_cert(
+    List<MaybeCert> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_maybe_cert(item, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_list_non_opaque_circle(
     List<NonOpaqueCircle> self,
     SseSerializer serializer,
@@ -16666,18 +18211,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_i_32(self.length, serializer);
     for (final item in self) {
       sse_encode_non_opaque_circle(item, serializer);
-    }
-  }
-
-  @protected
-  void sse_encode_list_pgp_cert_with_ids(
-    List<PgpCertWithIds> self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.length, serializer);
-    for (final item in self) {
-      sse_encode_pgp_cert_with_ids(item, serializer);
     }
   }
 
@@ -16740,6 +18273,25 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_i_32(self.length, serializer);
     for (final item in self) {
       sse_encode_record_string_graph_vertex(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_maybe_cert(MaybeCert self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case MaybeCert_Full(cert: final cert):
+        sse_encode_i_32(0, serializer);
+        sse_encode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+          cert,
+          serializer,
+        );
+      case MaybeCert_Fingerprint(fpr: final fpr):
+        sse_encode_i_32(1, serializer);
+        sse_encode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+          fpr,
+          serializer,
+        );
     }
   }
 
@@ -16858,6 +18410,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
+  sse_encode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    PgpCertWithIds? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+        self,
+        serializer,
+      );
+    }
+  }
+
+  @protected
+  void
   sse_encode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
     UserHandle? self,
     SseSerializer serializer,
@@ -16926,19 +18495,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_opt_box_autoadd_pgp_cert_with_ids(
-    PgpCertWithIds? self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    sse_encode_bool(self != null, serializer);
-    if (self != null) {
-      sse_encode_box_autoadd_pgp_cert_with_ids(self, serializer);
-    }
-  }
-
-  @protected
   void sse_encode_opt_box_autoadd_qr_code_content(
     QrCodeContent? self,
     SseSerializer serializer,
@@ -17001,48 +18557,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     if (self != null) {
       sse_encode_list_prim_u_8_strict(self, serializer);
     }
-  }
-
-  @protected
-  void sse_encode_pgp_cert(PgpCert self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_String(self.keyid, serializer);
-    sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
-      self.fingerprint,
-      serializer,
-    );
-    sse_encode_bool(self.hasPrivate, serializer);
-    sse_encode_bool(self.online, serializer);
-  }
-
-  @protected
-  void sse_encode_pgp_cert_stub_sigs(
-    PgpCertStubSigs self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_pgp_cert(self.cert, serializer);
-    sse_encode_list_String(self.ids, serializer);
-    sse_encode_list_String(self.sigs, serializer);
-    sse_encode_list_String(self.certifications, serializer);
-  }
-
-  @protected
-  void sse_encode_pgp_cert_with_ids(
-    PgpCertWithIds self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_pgp_cert(self.cert, serializer);
-    sse_encode_list_String(self.ids, serializer);
-    sse_encode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-      self.sigs,
-      serializer,
-    );
-    sse_encode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-      self.certifications,
-      serializer,
-    );
   }
 
   @protected
@@ -17171,7 +18685,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_list_String(self.fingerprints, serializer);
     sse_encode_opt_box_autoadd_qr_code_content(self.content, serializer);
-    sse_encode_opt_box_autoadd_pgp_cert_with_ids(self.key, serializer);
+    sse_encode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+      self.key,
+      serializer,
+    );
     sse_encode_bool(self.isStub, serializer);
   }
 
@@ -17275,7 +18792,7 @@ class CircleAppImpl extends RustOpaque implements CircleApp {
         tag: tag,
       );
 
-  Future<NonOpaqueApp> consumeMembers() => RustLib.instance.api
+  NonOpaqueApp consumeMembers() => RustLib.instance.api
       .crateApiPgpCirclesAppCircleAppConsumeMembers(that: this);
 
   Uint8List getId() =>
@@ -17457,7 +18974,7 @@ class CircleImpl extends RustOpaque implements Circle {
         RustLib.instance.api.rust_arc_decrement_strong_count_CirclePtr,
   );
 
-  Future<NonOpaqueCircle> consumeMembers() => RustLib.instance.api
+  NonOpaqueCircle consumeMembers() => RustLib.instance.api
       .crateApiPgpCirclesCircleCircleConsumeMembers(that: this);
 
   Uint8List getId() =>
@@ -17680,32 +19197,6 @@ class GenericCircleImpl extends RustOpaque implements GenericCircle {
       .crateApiPgpCirclesLifetimeableAutoOwnedRustOpaqueFlutterRustBridgeforGeneratedRustAutoOpaqueInnerGenericCirclestaticVerify(
         that: this,
       );
-}
-
-@sealed
-class MaybeCertImpl extends RustOpaque implements MaybeCert {
-  // Not to be used by end users
-  MaybeCertImpl.frbInternalDcoDecode(List<dynamic> wire)
-    : super.frbInternalDcoDecode(wire, _kStaticData);
-
-  // Not to be used by end users
-  MaybeCertImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
-    : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
-
-  static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount:
-        RustLib.instance.api.rust_arc_increment_strong_count_MaybeCert,
-    rustArcDecrementStrongCount:
-        RustLib.instance.api.rust_arc_decrement_strong_count_MaybeCert,
-    rustArcDecrementStrongCountPtr:
-        RustLib.instance.api.rust_arc_decrement_strong_count_MaybeCertPtr,
-  );
-
-  UserHandle fingerprint() =>
-      RustLib.instance.api.crateApiPgpCertMaybeCertFingerprint(that: this);
-
-  List<String>? maybeIds() =>
-      RustLib.instance.api.crateApiPgpCertMaybeCertMaybeIds(that: this);
 }
 
 @sealed
@@ -17934,6 +19425,11 @@ class PgpAppImpl extends RustOpaque implements PgpApp {
     fingerprint: fingerprint,
   );
 
+  Future<PgpCertWithIds?> getKeyOr({required UserHandle fingerprint}) => RustLib
+      .instance
+      .api
+      .crateApiPgpAppGetKeyOr(that: this, fingerprint: fingerprint);
+
   Future<Uint8List> getQr({
     required String resource,
     String? handle,
@@ -18070,6 +19566,165 @@ class PgpAppImpl extends RustOpaque implements PgpApp {
       .instance
       .api
       .crateApiPgpAppVerifyQrAllCerts(that: this, content: content);
+}
+
+@sealed
+class PgpCertImpl extends RustOpaque implements PgpCert {
+  // Not to be used by end users
+  PgpCertImpl.frbInternalDcoDecode(List<dynamic> wire)
+    : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  PgpCertImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
+    : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount:
+        RustLib.instance.api.rust_arc_increment_strong_count_PgpCert,
+    rustArcDecrementStrongCount:
+        RustLib.instance.api.rust_arc_decrement_strong_count_PgpCert,
+    rustArcDecrementStrongCountPtr:
+        RustLib.instance.api.rust_arc_decrement_strong_count_PgpCertPtr,
+  );
+
+  UserHandle get fingerprint => RustLib.instance.api
+      .crateApiPgpCertPgpCertAutoAccessorGetFingerprint(that: this);
+
+  bool get hasPrivate => RustLib.instance.api
+      .crateApiPgpCertPgpCertAutoAccessorGetHasPrivate(that: this);
+
+  String get keyid => RustLib.instance.api
+      .crateApiPgpCertPgpCertAutoAccessorGetKeyid(that: this);
+
+  bool get online => RustLib.instance.api
+      .crateApiPgpCertPgpCertAutoAccessorGetOnline(that: this);
+
+  set fingerprint(UserHandle fingerprint) =>
+      RustLib.instance.api.crateApiPgpCertPgpCertAutoAccessorSetFingerprint(
+        that: this,
+        fingerprint: fingerprint,
+      );
+
+  set hasPrivate(bool hasPrivate) =>
+      RustLib.instance.api.crateApiPgpCertPgpCertAutoAccessorSetHasPrivate(
+        that: this,
+        hasPrivate: hasPrivate,
+      );
+
+  set keyid(String keyid) => RustLib.instance.api
+      .crateApiPgpCertPgpCertAutoAccessorSetKeyid(that: this, keyid: keyid);
+
+  set online(bool online) => RustLib.instance.api
+      .crateApiPgpCertPgpCertAutoAccessorSetOnline(that: this, online: online);
+}
+
+@sealed
+class PgpCertStubSigsImpl extends RustOpaque implements PgpCertStubSigs {
+  // Not to be used by end users
+  PgpCertStubSigsImpl.frbInternalDcoDecode(List<dynamic> wire)
+    : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  PgpCertStubSigsImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
+    : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount:
+        RustLib.instance.api.rust_arc_increment_strong_count_PgpCertStubSigs,
+    rustArcDecrementStrongCount:
+        RustLib.instance.api.rust_arc_decrement_strong_count_PgpCertStubSigs,
+    rustArcDecrementStrongCountPtr:
+        RustLib.instance.api.rust_arc_decrement_strong_count_PgpCertStubSigsPtr,
+  );
+
+  PgpCert get cert => RustLib.instance.api
+      .crateApiPgpCertPgpCertStubSigsAutoAccessorGetCert(that: this);
+
+  List<String> get certifications => RustLib.instance.api
+      .crateApiPgpCertPgpCertStubSigsAutoAccessorGetCertifications(that: this);
+
+  List<String> get ids => RustLib.instance.api
+      .crateApiPgpCertPgpCertStubSigsAutoAccessorGetIds(that: this);
+
+  List<String> get sigs => RustLib.instance.api
+      .crateApiPgpCertPgpCertStubSigsAutoAccessorGetSigs(that: this);
+
+  set cert(PgpCert cert) =>
+      RustLib.instance.api.crateApiPgpCertPgpCertStubSigsAutoAccessorSetCert(
+        that: this,
+        cert: cert,
+      );
+
+  set certifications(List<String> certifications) => RustLib.instance.api
+      .crateApiPgpCertPgpCertStubSigsAutoAccessorSetCertifications(
+        that: this,
+        certifications: certifications,
+      );
+
+  set ids(List<String> ids) => RustLib.instance.api
+      .crateApiPgpCertPgpCertStubSigsAutoAccessorSetIds(that: this, ids: ids);
+
+  set sigs(List<String> sigs) =>
+      RustLib.instance.api.crateApiPgpCertPgpCertStubSigsAutoAccessorSetSigs(
+        that: this,
+        sigs: sigs,
+      );
+}
+
+@sealed
+class PgpCertWithIdsImpl extends RustOpaque implements PgpCertWithIds {
+  // Not to be used by end users
+  PgpCertWithIdsImpl.frbInternalDcoDecode(List<dynamic> wire)
+    : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  PgpCertWithIdsImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
+    : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount:
+        RustLib.instance.api.rust_arc_increment_strong_count_PgpCertWithIds,
+    rustArcDecrementStrongCount:
+        RustLib.instance.api.rust_arc_decrement_strong_count_PgpCertWithIds,
+    rustArcDecrementStrongCountPtr:
+        RustLib.instance.api.rust_arc_decrement_strong_count_PgpCertWithIdsPtr,
+  );
+
+  PgpCert get cert => RustLib.instance.api
+      .crateApiPgpCertPgpCertWithIdsAutoAccessorGetCert(that: this);
+
+  List<MaybeCert> get certifications => RustLib.instance.api
+      .crateApiPgpCertPgpCertWithIdsAutoAccessorGetCertifications(that: this);
+
+  List<String> get ids => RustLib.instance.api
+      .crateApiPgpCertPgpCertWithIdsAutoAccessorGetIds(that: this);
+
+  List<MaybeCert> get sigs => RustLib.instance.api
+      .crateApiPgpCertPgpCertWithIdsAutoAccessorGetSigs(that: this);
+
+  set cert(PgpCert cert) => RustLib.instance.api
+      .crateApiPgpCertPgpCertWithIdsAutoAccessorSetCert(that: this, cert: cert);
+
+  set certifications(List<MaybeCert> certifications) => RustLib.instance.api
+      .crateApiPgpCertPgpCertWithIdsAutoAccessorSetCertifications(
+        that: this,
+        certifications: certifications,
+      );
+
+  set ids(List<String> ids) => RustLib.instance.api
+      .crateApiPgpCertPgpCertWithIdsAutoAccessorSetIds(that: this, ids: ids);
+
+  set sigs(List<MaybeCert> sigs) => RustLib.instance.api
+      .crateApiPgpCertPgpCertWithIdsAutoAccessorSetSigs(that: this, sigs: sigs);
+
+  PgpCertWithIds copy() =>
+      RustLib.instance.api.crateApiPgpCertPgpCertWithIdsCopy(that: this);
+
+  bool hasPrivate() =>
+      RustLib.instance.api.crateApiPgpCertPgpCertWithIdsHasPrivate(that: this);
+
+  String idHex() =>
+      RustLib.instance.api.crateApiPgpCertPgpCertWithIdsIdHex(that: this);
 }
 
 @sealed

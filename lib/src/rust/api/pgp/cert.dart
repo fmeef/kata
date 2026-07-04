@@ -7,63 +7,48 @@ import '../../api.dart';
 import '../../frb_generated.dart';
 import '../pgp.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
+part 'cert.freezed.dart';
 
 // These functions are ignored because they are not marked as `pub`: `from_bytes`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `partial_cmp`
 
-// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MaybeCert>>
-abstract class MaybeCert implements RustOpaqueInterface {
-  UserHandle fingerprint();
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PgpCert>>
+abstract class PgpCert implements RustOpaqueInterface {
+  UserHandle get fingerprint;
 
-  List<String>? maybeIds();
+  bool get hasPrivate;
 
-  factory MaybeCert({required PgpCertWithIds cert}) =>
-      RustLib.instance.api.crateApiPgpCertMaybeCertNew(cert: cert);
+  String get keyid;
+
+  bool get online;
+
+  set fingerprint(UserHandle fingerprint);
+
+  set hasPrivate(bool hasPrivate);
+
+  set keyid(String keyid);
+
+  set online(bool online);
 }
 
-class PgpCert {
-  final String keyid;
-  final UserHandle fingerprint;
-  final bool hasPrivate;
-  final bool online;
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PgpCertStubSigs>>
+abstract class PgpCertStubSigs implements RustOpaqueInterface {
+  PgpCert get cert;
 
-  const PgpCert({
-    required this.keyid,
-    required this.fingerprint,
-    required this.hasPrivate,
-    required this.online,
-  });
+  List<String> get certifications;
 
-  @override
-  int get hashCode =>
-      keyid.hashCode ^
-      fingerprint.hashCode ^
-      hasPrivate.hashCode ^
-      online.hashCode;
+  List<String> get ids;
 
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is PgpCert &&
-          runtimeType == other.runtimeType &&
-          keyid == other.keyid &&
-          fingerprint == other.fingerprint &&
-          hasPrivate == other.hasPrivate &&
-          online == other.online;
-}
+  List<String> get sigs;
 
-class PgpCertStubSigs {
-  final PgpCert cert;
-  final List<String> ids;
-  final List<String> sigs;
-  final List<String> certifications;
+  set cert(PgpCert cert);
 
-  const PgpCertStubSigs({
-    required this.cert,
-    required this.ids,
-    required this.sigs,
-    required this.certifications,
-  });
+  set certifications(List<String> certifications);
+
+  set ids(List<String> ids);
+
+  set sigs(List<String> sigs);
 
   static PgpCertStubSigs fromBytes({required List<int> bytes}) => RustLib
       .instance
@@ -77,34 +62,27 @@ class PgpCertStubSigs {
     bytes: bytes,
     store: store,
   );
-
-  @override
-  int get hashCode =>
-      cert.hashCode ^ ids.hashCode ^ sigs.hashCode ^ certifications.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is PgpCertStubSigs &&
-          runtimeType == other.runtimeType &&
-          cert == other.cert &&
-          ids == other.ids &&
-          sigs == other.sigs &&
-          certifications == other.certifications;
 }
 
-class PgpCertWithIds {
-  final PgpCert cert;
-  final List<String> ids;
-  final List<MaybeCert> sigs;
-  final List<MaybeCert> certifications;
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<PgpCertWithIds>>
+abstract class PgpCertWithIds implements RustOpaqueInterface {
+  PgpCert get cert;
 
-  const PgpCertWithIds({
-    required this.cert,
-    required this.ids,
-    required this.sigs,
-    required this.certifications,
-  });
+  List<MaybeCert> get certifications;
+
+  List<String> get ids;
+
+  List<MaybeCert> get sigs;
+
+  set cert(PgpCert cert);
+
+  set certifications(List<MaybeCert> certifications);
+
+  set ids(List<String> ids);
+
+  set sigs(List<MaybeCert> sigs);
+
+  PgpCertWithIds copy();
 
   static PgpCertWithIds fromBytes({required List<int> bytes}) =>
       RustLib.instance.api.crateApiPgpCertPgpCertWithIdsFromBytes(bytes: bytes);
@@ -117,20 +95,25 @@ class PgpCertWithIds {
     store: store,
   );
 
-  bool hasPrivate() =>
-      RustLib.instance.api.crateApiPgpCertPgpCertWithIdsHasPrivate(that: this);
+  bool hasPrivate();
 
-  @override
-  int get hashCode =>
-      cert.hashCode ^ ids.hashCode ^ sigs.hashCode ^ certifications.hashCode;
+  String idHex();
+}
 
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is PgpCertWithIds &&
-          runtimeType == other.runtimeType &&
-          cert == other.cert &&
-          ids == other.ids &&
-          sigs == other.sigs &&
-          certifications == other.certifications;
+@freezed
+sealed class MaybeCert with _$MaybeCert {
+  const MaybeCert._();
+
+  const factory MaybeCert.full({required PgpCertWithIds cert}) = MaybeCert_Full;
+  const factory MaybeCert.fingerprint({required UserHandle fpr}) =
+      MaybeCert_Fingerprint;
+
+  UserHandle fingerprint() =>
+      RustLib.instance.api.crateApiPgpCertMaybeCertFingerprint(that: this);
+
+  static MaybeCert fromCert({required PgpCertWithIds cert}) =>
+      RustLib.instance.api.crateApiPgpCertMaybeCertFromCert(cert: cert);
+
+  List<String>? maybeIds() =>
+      RustLib.instance.api.crateApiPgpCertMaybeCertMaybeIds(that: this);
 }

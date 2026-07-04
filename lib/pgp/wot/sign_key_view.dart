@@ -22,7 +22,7 @@ class _SignKeyViewState extends State<SignKeyView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CertCard(
-            pgpKey: widget.target,
+            pgpKey: MaybeCert.fromCert(cert: widget.target),
             signable: false,
             trust: BigInt.from(255),
           ),

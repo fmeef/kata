@@ -89,10 +89,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableVisualKeyBuilderstatic;
 
   CrossPlatformFinalizerArg
-  get rust_arc_decrement_strong_count_MaybeCertPtr => wire
-      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert;
-
-  CrossPlatformFinalizerArg
   get rust_arc_decrement_strong_count_MaybeDeletedPtr => wire
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted;
 
@@ -107,6 +103,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   CrossPlatformFinalizerArg
   get rust_arc_decrement_strong_count_PgpAppPtr => wire
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpApp;
+
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_PgpCertPtr => wire
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert;
+
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_PgpCertStubSigsPtr => wire
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs;
+
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_PgpCertWithIdsPtr => wire
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds;
 
   CrossPlatformFinalizerArg
   get rust_arc_decrement_strong_count_PgpDataCertPtr => wire
@@ -166,6 +174,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  PgpCertWithIds
+  dco_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    dynamic raw,
+  );
+
+  @protected
   PgpImportBytes
   dco_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpImportBytes(
     dynamic raw,
@@ -174,6 +188,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   PgpImportFile
   dco_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpImportFile(
+    dynamic raw,
+  );
+
+  @protected
+  UserHandle
+  dco_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
     dynamic raw,
   );
 
@@ -232,12 +252,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  MaybeCert
-  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    dynamic raw,
-  );
-
-  @protected
   MaybeDeleted
   dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
     dynamic raw,
@@ -258,6 +272,24 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   PgpApp
   dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpApp(
+    dynamic raw,
+  );
+
+  @protected
+  PgpCert
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    dynamic raw,
+  );
+
+  @protected
+  PgpCertStubSigs
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    dynamic raw,
+  );
+
+  @protected
+  PgpCertWithIds
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
     dynamic raw,
   );
 
@@ -346,6 +378,24 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  PgpCert
+  dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    dynamic raw,
+  );
+
+  @protected
+  PgpCertStubSigs
+  dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    dynamic raw,
+  );
+
+  @protected
+  PgpCertWithIds
+  dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    dynamic raw,
+  );
+
+  @protected
   Circle
   dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircle(
     dynamic raw,
@@ -388,12 +438,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  MaybeCert
-  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    dynamic raw,
-  );
-
-  @protected
   MaybeDeleted
   dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
     dynamic raw,
@@ -408,6 +452,24 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   PgpApp
   dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpApp(
+    dynamic raw,
+  );
+
+  @protected
+  PgpCert
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    dynamic raw,
+  );
+
+  @protected
+  PgpCertStubSigs
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    dynamic raw,
+  );
+
+  @protected
+  PgpCertWithIds
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
     dynamic raw,
   );
 
@@ -565,12 +627,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  MaybeCert
-  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    dynamic raw,
-  );
-
-  @protected
   MaybeDeleted
   dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
     dynamic raw,
@@ -591,6 +647,24 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   PgpApp
   dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpApp(
+    dynamic raw,
+  );
+
+  @protected
+  PgpCert
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    dynamic raw,
+  );
+
+  @protected
+  PgpCertStubSigs
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    dynamic raw,
+  );
+
+  @protected
+  PgpCertWithIds
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
     dynamic raw,
   );
 
@@ -658,12 +732,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  RustStreamSink<String> dco_decode_StreamSink_String_Sse(dynamic raw);
-
-  @protected
-  RustStreamSink<PgpCertWithIds> dco_decode_StreamSink_pgp_cert_with_ids_Sse(
+  RustStreamSink<PgpCertWithIds>
+  dco_decode_StreamSink_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds_Sse(
     dynamic raw,
   );
+
+  @protected
+  RustStreamSink<String> dco_decode_StreamSink_String_Sse(dynamic raw);
 
   @protected
   String dco_decode_String(dynamic raw);
@@ -732,6 +807,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  PgpCertWithIds
+  dco_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    dynamic raw,
+  );
+
+  @protected
   UserHandle
   dco_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
     dynamic raw,
@@ -747,6 +828,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   KeyHandle dco_decode_box_autoadd_key_handle(dynamic raw);
 
   @protected
+  MaybeCert dco_decode_box_autoadd_maybe_cert(dynamic raw);
+
+  @protected
   MemberTag dco_decode_box_autoadd_member_tag(dynamic raw);
 
   @protected
@@ -760,9 +844,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   OnlyOnline dco_decode_box_autoadd_only_online(dynamic raw);
-
-  @protected
-  PgpCertWithIds dco_decode_box_autoadd_pgp_cert_with_ids(dynamic raw);
 
   @protected
   PgpImportImplementor dco_decode_box_autoadd_pgp_import_implementor(
@@ -833,14 +914,14 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  List<MaybeCert>
-  dco_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
+  List<NewsGroup>
+  dco_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
     dynamic raw,
   );
 
   @protected
-  List<NewsGroup>
-  dco_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
+  List<PgpCertWithIds>
+  dco_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
     dynamic raw,
   );
 
@@ -878,10 +959,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<GraphEdge> dco_decode_list_graph_edge(dynamic raw);
 
   @protected
-  List<NonOpaqueCircle> dco_decode_list_non_opaque_circle(dynamic raw);
+  List<MaybeCert> dco_decode_list_maybe_cert(dynamic raw);
 
   @protected
-  List<PgpCertWithIds> dco_decode_list_pgp_cert_with_ids(dynamic raw);
+  List<NonOpaqueCircle> dco_decode_list_non_opaque_circle(dynamic raw);
 
   @protected
   List<int> dco_decode_list_prim_u_8_loose(dynamic raw);
@@ -903,6 +984,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<(String, GraphVertex)> dco_decode_list_record_string_graph_vertex(
     dynamic raw,
   );
+
+  @protected
+  MaybeCert dco_decode_maybe_cert(dynamic raw);
 
   @protected
   MemberTag dco_decode_member_tag(dynamic raw);
@@ -941,6 +1025,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  PgpCertWithIds?
+  dco_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    dynamic raw,
+  );
+
+  @protected
   UserHandle?
   dco_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
     dynamic raw,
@@ -959,9 +1049,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   OnlyOnline? dco_decode_opt_box_autoadd_only_online(dynamic raw);
 
   @protected
-  PgpCertWithIds? dco_decode_opt_box_autoadd_pgp_cert_with_ids(dynamic raw);
-
-  @protected
   QrCodeContent? dco_decode_opt_box_autoadd_qr_code_content(dynamic raw);
 
   @protected
@@ -975,15 +1062,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Uint8List? dco_decode_opt_list_prim_u_8_strict(dynamic raw);
-
-  @protected
-  PgpCert dco_decode_pgp_cert(dynamic raw);
-
-  @protected
-  PgpCertStubSigs dco_decode_pgp_cert_stub_sigs(dynamic raw);
-
-  @protected
-  PgpCertWithIds dco_decode_pgp_cert_with_ids(dynamic raw);
 
   @protected
   PgpImportImplementor dco_decode_pgp_import_implementor(dynamic raw);
@@ -1059,6 +1137,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  PgpCertWithIds
+  sse_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   PgpImportBytes
   sse_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpImportBytes(
     SseDeserializer deserializer,
@@ -1067,6 +1151,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   PgpImportFile
   sse_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpImportFile(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  UserHandle
+  sse_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
     SseDeserializer deserializer,
   );
 
@@ -1125,12 +1215,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  MaybeCert
-  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    SseDeserializer deserializer,
-  );
-
-  @protected
   MaybeDeleted
   sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
     SseDeserializer deserializer,
@@ -1151,6 +1235,24 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   PgpApp
   sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpApp(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PgpCert
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PgpCertStubSigs
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PgpCertWithIds
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
     SseDeserializer deserializer,
   );
 
@@ -1239,6 +1341,24 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  PgpCert
+  sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PgpCertStubSigs
+  sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PgpCertWithIds
+  sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   Circle
   sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircle(
     SseDeserializer deserializer,
@@ -1281,12 +1401,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  MaybeCert
-  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    SseDeserializer deserializer,
-  );
-
-  @protected
   MaybeDeleted
   sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
     SseDeserializer deserializer,
@@ -1301,6 +1415,24 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   PgpApp
   sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpApp(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PgpCert
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PgpCertStubSigs
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PgpCertWithIds
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
     SseDeserializer deserializer,
   );
 
@@ -1454,12 +1586,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  MaybeCert
-  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    SseDeserializer deserializer,
-  );
-
-  @protected
   MaybeDeleted
   sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
     SseDeserializer deserializer,
@@ -1480,6 +1606,24 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   PgpApp
   sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpApp(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PgpCert
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PgpCertStubSigs
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  PgpCertWithIds
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
     SseDeserializer deserializer,
   );
 
@@ -1547,12 +1691,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  RustStreamSink<String> sse_decode_StreamSink_String_Sse(
+  RustStreamSink<PgpCertWithIds>
+  sse_decode_StreamSink_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds_Sse(
     SseDeserializer deserializer,
   );
 
   @protected
-  RustStreamSink<PgpCertWithIds> sse_decode_StreamSink_pgp_cert_with_ids_Sse(
+  RustStreamSink<String> sse_decode_StreamSink_String_Sse(
     SseDeserializer deserializer,
   );
 
@@ -1581,6 +1726,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  PgpCertWithIds
+  sse_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   UserHandle
   sse_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
     SseDeserializer deserializer,
@@ -1594,6 +1745,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   KeyHandle sse_decode_box_autoadd_key_handle(SseDeserializer deserializer);
+
+  @protected
+  MaybeCert sse_decode_box_autoadd_maybe_cert(SseDeserializer deserializer);
 
   @protected
   MemberTag sse_decode_box_autoadd_member_tag(SseDeserializer deserializer);
@@ -1615,11 +1769,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   OnlyOnline sse_decode_box_autoadd_only_online(SseDeserializer deserializer);
-
-  @protected
-  PgpCertWithIds sse_decode_box_autoadd_pgp_cert_with_ids(
-    SseDeserializer deserializer,
-  );
 
   @protected
   PgpImportImplementor sse_decode_box_autoadd_pgp_import_implementor(
@@ -1692,14 +1841,14 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  List<MaybeCert>
-  sse_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
+  List<NewsGroup>
+  sse_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
     SseDeserializer deserializer,
   );
 
   @protected
-  List<NewsGroup>
-  sse_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
+  List<PgpCertWithIds>
+  sse_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
     SseDeserializer deserializer,
   );
 
@@ -1743,12 +1892,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<GraphEdge> sse_decode_list_graph_edge(SseDeserializer deserializer);
 
   @protected
-  List<NonOpaqueCircle> sse_decode_list_non_opaque_circle(
-    SseDeserializer deserializer,
-  );
+  List<MaybeCert> sse_decode_list_maybe_cert(SseDeserializer deserializer);
 
   @protected
-  List<PgpCertWithIds> sse_decode_list_pgp_cert_with_ids(
+  List<NonOpaqueCircle> sse_decode_list_non_opaque_circle(
     SseDeserializer deserializer,
   );
 
@@ -1774,6 +1921,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<(String, GraphVertex)> sse_decode_list_record_string_graph_vertex(
     SseDeserializer deserializer,
   );
+
+  @protected
+  MaybeCert sse_decode_maybe_cert(SseDeserializer deserializer);
 
   @protected
   MemberTag sse_decode_member_tag(SseDeserializer deserializer);
@@ -1812,6 +1962,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  PgpCertWithIds?
+  sse_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   UserHandle?
   sse_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
     SseDeserializer deserializer,
@@ -1836,11 +1992,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  PgpCertWithIds? sse_decode_opt_box_autoadd_pgp_cert_with_ids(
-    SseDeserializer deserializer,
-  );
-
-  @protected
   QrCodeContent? sse_decode_opt_box_autoadd_qr_code_content(
     SseDeserializer deserializer,
   );
@@ -1858,15 +2009,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   Uint8List? sse_decode_opt_list_prim_u_8_strict(SseDeserializer deserializer);
-
-  @protected
-  PgpCert sse_decode_pgp_cert(SseDeserializer deserializer);
-
-  @protected
-  PgpCertStubSigs sse_decode_pgp_cert_stub_sigs(SseDeserializer deserializer);
-
-  @protected
-  PgpCertWithIds sse_decode_pgp_cert_with_ids(SseDeserializer deserializer);
 
   @protected
   PgpImportImplementor sse_decode_pgp_import_implementor(
@@ -1953,6 +2095,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
+  sse_encode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    PgpCertWithIds self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
   sse_encode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpImportBytes(
     PgpImportBytes self,
     SseSerializer serializer,
@@ -1962,6 +2111,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void
   sse_encode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpImportFile(
     PgpImportFile self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+    UserHandle self,
     SseSerializer serializer,
   );
 
@@ -2030,13 +2186,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
-  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    MaybeCert self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void
   sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
     MaybeDeleted self,
     SseSerializer serializer,
@@ -2060,6 +2209,27 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void
   sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpApp(
     PgpApp self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    PgpCert self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    PgpCertStubSigs self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    PgpCertWithIds self,
     SseSerializer serializer,
   );
 
@@ -2163,6 +2333,27 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
+  sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    PgpCert self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    PgpCertStubSigs self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    PgpCertWithIds self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
   sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircle(
     Circle self,
     SseSerializer serializer,
@@ -2212,13 +2403,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
-  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    MaybeCert self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void
   sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
     MaybeDeleted self,
     SseSerializer serializer,
@@ -2235,6 +2419,27 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void
   sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpApp(
     PgpApp self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    PgpCert self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    PgpCertStubSigs self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    PgpCertWithIds self,
     SseSerializer serializer,
   );
 
@@ -2420,13 +2625,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
-  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    MaybeCert self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void
   sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
     MaybeDeleted self,
     SseSerializer serializer,
@@ -2450,6 +2648,27 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void
   sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpApp(
     PgpApp self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    PgpCert self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    PgpCertStubSigs self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    PgpCertWithIds self,
     SseSerializer serializer,
   );
 
@@ -2530,14 +2749,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_StreamSink_String_Sse(
-    RustStreamSink<String> self,
+  void
+  sse_encode_StreamSink_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds_Sse(
+    RustStreamSink<PgpCertWithIds> self,
     SseSerializer serializer,
   );
 
   @protected
-  void sse_encode_StreamSink_pgp_cert_with_ids_Sse(
-    RustStreamSink<PgpCertWithIds> self,
+  void sse_encode_StreamSink_String_Sse(
+    RustStreamSink<String> self,
     SseSerializer serializer,
   );
 
@@ -2569,6 +2789,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
+  sse_encode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    PgpCertWithIds self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
   sse_encode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
     UserHandle self,
     SseSerializer serializer,
@@ -2586,6 +2813,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_key_handle(
     KeyHandle self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_maybe_cert(
+    MaybeCert self,
     SseSerializer serializer,
   );
 
@@ -2616,12 +2849,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_only_online(
     OnlyOnline self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_box_autoadd_pgp_cert_with_ids(
-    PgpCertWithIds self,
     SseSerializer serializer,
   );
 
@@ -2713,15 +2940,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
-  sse_encode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    List<MaybeCert> self,
+  sse_encode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
+    List<NewsGroup> self,
     SseSerializer serializer,
   );
 
   @protected
   void
-  sse_encode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
-    List<NewsGroup> self,
+  sse_encode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    List<PgpCertWithIds> self,
     SseSerializer serializer,
   );
 
@@ -2776,14 +3003,14 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_list_non_opaque_circle(
-    List<NonOpaqueCircle> self,
+  void sse_encode_list_maybe_cert(
+    List<MaybeCert> self,
     SseSerializer serializer,
   );
 
   @protected
-  void sse_encode_list_pgp_cert_with_ids(
-    List<PgpCertWithIds> self,
+  void sse_encode_list_non_opaque_circle(
+    List<NonOpaqueCircle> self,
     SseSerializer serializer,
   );
 
@@ -2814,6 +3041,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     List<(String, GraphVertex)> self,
     SseSerializer serializer,
   );
+
+  @protected
+  void sse_encode_maybe_cert(MaybeCert self, SseSerializer serializer);
 
   @protected
   void sse_encode_member_tag(MemberTag self, SseSerializer serializer);
@@ -2861,6 +3091,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
+  sse_encode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    PgpCertWithIds? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
   sse_encode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
     UserHandle? self,
     SseSerializer serializer,
@@ -2891,12 +3128,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_opt_box_autoadd_pgp_cert_with_ids(
-    PgpCertWithIds? self,
-    SseSerializer serializer,
-  );
-
-  @protected
   void sse_encode_opt_box_autoadd_qr_code_content(
     QrCodeContent? self,
     SseSerializer serializer,
@@ -2917,21 +3148,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_opt_list_prim_u_8_strict(
     Uint8List? self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_pgp_cert(PgpCert self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_pgp_cert_stub_sigs(
-    PgpCertStubSigs self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_pgp_cert_with_ids(
-    PgpCertWithIds self,
     SseSerializer serializer,
   );
 
@@ -3195,22 +3411,6 @@ class RustLibWire implements BaseWire {
       );
 
   void
-  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    int ptr,
-  ) => wasmModule
-      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-        ptr,
-      );
-
-  void
-  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    int ptr,
-  ) => wasmModule
-      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-        ptr,
-      );
-
-  void
   rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
     int ptr,
   ) => wasmModule
@@ -3271,6 +3471,54 @@ class RustLibWire implements BaseWire {
     int ptr,
   ) => wasmModule
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpApp(
+        ptr,
+      );
+
+  void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    int ptr,
+  ) => wasmModule
+      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+        ptr,
+      );
+
+  void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    int ptr,
+  ) => wasmModule
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+        ptr,
+      );
+
+  void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    int ptr,
+  ) => wasmModule
+      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+        ptr,
+      );
+
+  void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    int ptr,
+  ) => wasmModule
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+        ptr,
+      );
+
+  void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    int ptr,
+  ) => wasmModule
+      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+        ptr,
+      );
+
+  void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    int ptr,
+  ) => wasmModule
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
         ptr,
       );
 
@@ -3546,16 +3794,6 @@ extension type RustLibWasmModule._(JSObject _) implements JSObject {
   );
 
   external void
-  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    int ptr,
-  );
-
-  external void
-  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeCert(
-    int ptr,
-  );
-
-  external void
   rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
     int ptr,
   );
@@ -3592,6 +3830,36 @@ extension type RustLibWasmModule._(JSObject _) implements JSObject {
 
   external void
   rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpApp(
+    int ptr,
+  );
+
+  external void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    int ptr,
+  );
+
+  external void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCert(
+    int ptr,
+  );
+
+  external void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    int ptr,
+  );
+
+  external void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertStubSigs(
+    int ptr,
+  );
+
+  external void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
+    int ptr,
+  );
+
+  external void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpCertWithIds(
     int ptr,
   );
 

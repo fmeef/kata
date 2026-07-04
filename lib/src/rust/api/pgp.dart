@@ -72,6 +72,8 @@ abstract class PgpServiceTrait {
     required UserHandle fingerprint,
   });
 
+  Future<PgpCertWithIds?> getKeyOr({required UserHandle fingerprint});
+
   Future<PgpCertWithIds> getStubFromFingerprint({
     required UserHandle fingerprint,
   });

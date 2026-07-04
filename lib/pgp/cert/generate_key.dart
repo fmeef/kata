@@ -28,7 +28,10 @@ class _GenerateKeyState extends State<GenerateKey> {
     return Column(
       children: [
         if (currentCert != null)
-          CertCard(pgpKey: currentCert!, trust: BigInt.from(100)),
+          CertCard(
+            pgpKey: MaybeCert.fromCert(cert: currentCert!),
+            trust: BigInt.from(100),
+          ),
         Form(
           key: _formState,
           child: Column(

@@ -254,7 +254,7 @@ class _CertListState extends State<CertList> {
                       certs
                           ?.map(
                             (v) => CertCard(
-                              pgpKey: v.cert,
+                              pgpKey: MaybeCert.fromCert(cert: v.cert),
                               trust: v.trust,
                               graphController: v.graphController,
                               active:
