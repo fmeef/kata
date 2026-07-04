@@ -14,31 +14,33 @@ import 'package:kata/src/rust/api/pgp/fingerprint/visual_key.dart';
 import 'package:provider/provider.dart';
 
 class _CertCardState extends State<CertCard> {
-  late PgpCertWithIds? _pgpKey;
-  late UserHandle _fingerprint;
+  PgpCertWithIds? _pgpKey;
+  UserHandle? _fingerprint;
   late MaybeCert pgpCert = widget.pgpKey;
 
   @override
   void initState() {
     super.initState();
     final PgpApp pgpApp = context.read();
-    (switch (pgpCert) {
-      MaybeCert_Full(:final cert) => setState(() {
-        _fingerprint = cert.cert.fingerprint;
-        _pgpKey = cert;
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => (switch (pgpCert) {
+        MaybeCert_Full(:final cert) => setState(() {
+          _fingerprint = cert.cert.fingerprint;
+          _pgpKey = cert;
+        }),
+        MaybeCert_Fingerprint(:final fingerprint) =>
+          pgpApp
+              .getKeyOr(fingerprint: fingerprint())
+              .then(
+                (v) => setState(() {
+                  _fingerprint = fingerprint();
+                  if (v != null) {
+                    _pgpKey = v;
+                  }
+                }),
+              ),
       }),
-      MaybeCert_Fingerprint(:final fingerprint) =>
-        pgpApp
-            .getKeyOr(fingerprint: fingerprint())
-            .then(
-              (v) => setState(() {
-                _fingerprint = fingerprint();
-                if (v != null) {
-                  _pgpKey = v;
-                }
-              }),
-            ),
-    });
+    );
   }
 
   Color colorForTrust(num trust) {
@@ -58,7 +60,7 @@ class _CertCardState extends State<CertCard> {
         handle: widget.visualKeyBuilder,
         scale: 3,
         count: 3,
-        len: _fingerprint.len(),
+        len: _fingerprint?.len() ?? BigInt.from(0),
       ),
     );
   }
@@ -109,6 +111,10 @@ class _CertCardState extends State<CertCard> {
 
     final ActiveCert activeCert = context.read();
     final cert = activeCert.cert;
+    final fingerprint = _fingerprint;
+    if (fingerprint == null) {
+      return Center(child: CircularProgressIndicator());
+    }
 
     return Card(
       child: Padding(
@@ -126,7 +132,7 @@ class _CertCardState extends State<CertCard> {
                 githubIdenticon(context),
                 Expanded(
                   child: SmartFingerprint(
-                    fingerprint: _fingerprint,
+                    fingerprint: fingerprint,
                     builder: visualKeyBuilder,
                   ),
                 ),

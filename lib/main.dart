@@ -1,3 +1,4 @@
+import 'package:kata/circle/circle_list.dart';
 import 'package:kata/circle/create_circle_app.dart';
 import 'package:kata/drawer_content.dart';
 import 'package:kata/graphvis/graph_test.dart';
@@ -72,18 +73,24 @@ class _MyAppState extends State<MyApp> {
                     icon: Icon(Icons.list),
                     label: 'All Cards',
                   ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.group),
+                    label: 'Circles',
+                  ),
                 ],
                 currentIndex: switch (GoRouterState.of(
                   context,
                 ).uri.toString()) {
                   '/network' => 0,
                   '/list' => 2,
+                  '/circles' => 3,
                   _ => 1,
                 },
                 onTap: (value) {
                   context.go(switch (value) {
                     0 => '/network',
                     2 => '/list',
+                    3 => '/circles',
                     _ => '/',
                   });
                 },
@@ -128,6 +135,12 @@ class _MyAppState extends State<MyApp> {
                 path: '/share',
                 builder: (context, state) {
                   return AttestView();
+                },
+              ),
+              GoRoute(
+                path: '/circles',
+                builder: (context, state) {
+                  return CircleList();
                 },
               ),
               GoRoute(
