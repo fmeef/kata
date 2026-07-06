@@ -6,19 +6,16 @@
 import '../../../api.dart';
 import '../../../frb_generated.dart';
 import '../../db/connection.dart';
-import '../../db/store.dart';
 import '../../pgp.dart';
 import '../circles.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 // These functions are ignored because they are not marked as `pub`: `bytes_buf`, `members_reader`, `new_mut`, `update_digest`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `CircleInner`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `cmp`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `partial_cmp`, `partial_cmp`, `partial_cmp`
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Circle>>
 abstract class Circle implements RustOpaqueInterface, CircleLike {
-  NonOpaqueCircle consumeMembers();
-
   @override
   Uint8List getId();
 
@@ -28,7 +25,8 @@ abstract class Circle implements RustOpaqueInterface, CircleLike {
   @override
   CircleEntry? getMember({required UserHandle id});
 
-  NonOpaqueCircle getMembers();
+  @override
+  List<CircleEntry> getMembers();
 
   @override
   CircleType getType();
@@ -58,41 +56,4 @@ abstract class CircleAuthor implements RustOpaqueInterface {
   set author(UserHandle author);
 
   set sig(Uint8List sig);
-}
-
-class NonOpaqueCircle {
-  final UserHandle id;
-  final List<CircleEntry> members;
-  final UserHandle? author;
-  final Uint8List? sig;
-
-  const NonOpaqueCircle({
-    required this.id,
-    required this.members,
-    this.author,
-    this.sig,
-  });
-
-  static List<NonOpaqueCircle> fromDb({
-    required List<CircleWithMembers> items,
-  }) => RustLib.instance.api.crateApiPgpCirclesCircleNonOpaqueCircleFromDb(
-    items: items,
-  );
-
-  Future<void> toDb({required SqliteDb db}) => RustLib.instance.api
-      .crateApiPgpCirclesCircleNonOpaqueCircleToDb(that: this, db: db);
-
-  @override
-  int get hashCode =>
-      id.hashCode ^ members.hashCode ^ author.hashCode ^ sig.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is NonOpaqueCircle &&
-          runtimeType == other.runtimeType &&
-          id == other.id &&
-          members == other.members &&
-          author == other.author &&
-          sig == other.sig;
 }

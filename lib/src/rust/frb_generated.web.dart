@@ -156,18 +156,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   AnyhowException dco_decode_AnyhowException(dynamic raw);
 
   @protected
-  Circle
-  dco_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircle(
-    dynamic raw,
-  );
-
-  @protected
-  CircleApp
-  dco_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleApp(
-    dynamic raw,
-  );
-
-  @protected
   GenericCircle
   dco_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableGenericCirclestatic(
     dynamic raw,
@@ -849,9 +837,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   NonOpaqueApp dco_decode_box_autoadd_non_opaque_app(dynamic raw);
 
   @protected
-  NonOpaqueCircle dco_decode_box_autoadd_non_opaque_circle(dynamic raw);
-
-  @protected
   OnlyFingerprint dco_decode_box_autoadd_only_fingerprint(dynamic raw);
 
   @protected
@@ -974,9 +959,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<MaybeCert> dco_decode_list_maybe_cert(dynamic raw);
 
   @protected
-  List<NonOpaqueCircle> dco_decode_list_non_opaque_circle(dynamic raw);
-
-  @protected
   List<int> dco_decode_list_prim_u_8_loose(dynamic raw);
 
   @protected
@@ -1005,9 +987,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   NonOpaqueApp dco_decode_non_opaque_app(dynamic raw);
-
-  @protected
-  NonOpaqueCircle dco_decode_non_opaque_circle(dynamic raw);
 
   @protected
   OnConflict dco_decode_on_conflict(dynamic raw);
@@ -1129,18 +1108,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   AnyhowException sse_decode_AnyhowException(SseDeserializer deserializer);
-
-  @protected
-  Circle
-  sse_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircle(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  CircleApp
-  sse_decode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleApp(
-    SseDeserializer deserializer,
-  );
 
   @protected
   GenericCircle
@@ -1782,11 +1749,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  NonOpaqueCircle sse_decode_box_autoadd_non_opaque_circle(
-    SseDeserializer deserializer,
-  );
-
-  @protected
   OnlyFingerprint sse_decode_box_autoadd_only_fingerprint(
     SseDeserializer deserializer,
   );
@@ -1919,11 +1881,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<MaybeCert> sse_decode_list_maybe_cert(SseDeserializer deserializer);
 
   @protected
-  List<NonOpaqueCircle> sse_decode_list_non_opaque_circle(
-    SseDeserializer deserializer,
-  );
-
-  @protected
   List<int> sse_decode_list_prim_u_8_loose(SseDeserializer deserializer);
 
   @protected
@@ -1954,9 +1911,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   NonOpaqueApp sse_decode_non_opaque_app(SseDeserializer deserializer);
-
-  @protected
-  NonOpaqueCircle sse_decode_non_opaque_circle(SseDeserializer deserializer);
 
   @protected
   OnConflict sse_decode_on_conflict(SseDeserializer deserializer);
@@ -2093,20 +2047,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_AnyhowException(
     AnyhowException self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void
-  sse_encode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircle(
-    Circle self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void
-  sse_encode_AutoExplicit_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleApp(
-    CircleApp self,
     SseSerializer serializer,
   );
 
@@ -2873,12 +2813,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_box_autoadd_non_opaque_circle(
-    NonOpaqueCircle self,
-    SseSerializer serializer,
-  );
-
-  @protected
   void sse_encode_box_autoadd_only_fingerprint(
     OnlyFingerprint self,
     SseSerializer serializer,
@@ -3047,12 +2981,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_list_non_opaque_circle(
-    List<NonOpaqueCircle> self,
-    SseSerializer serializer,
-  );
-
-  @protected
   void sse_encode_list_prim_u_8_loose(List<int> self, SseSerializer serializer);
 
   @protected
@@ -3088,12 +3016,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_non_opaque_app(NonOpaqueApp self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_non_opaque_circle(
-    NonOpaqueCircle self,
-    SseSerializer serializer,
-  );
 
   @protected
   void sse_encode_on_conflict(OnConflict self, SseSerializer serializer);

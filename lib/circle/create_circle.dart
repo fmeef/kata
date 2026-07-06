@@ -12,12 +12,13 @@ import 'package:provider/provider.dart';
 
 class _CreateAppState extends State<CreateCircle> {
   UserHandle? _circleId;
-  NonOpaqueCircle? _circle;
+  Circle? _circle;
   late final FabState state = context.read();
 
   late final FabObserver observer = FabObserver(
     handler: () async {
       final PgpApp pgpApp = context.read();
+      print('circle write $_circle');
       await _circle?.toDb(db: pgpApp.getDb());
       if (mounted) context.pop();
     },
@@ -60,10 +61,9 @@ class _CreateAppState extends State<CreateCircle> {
               );
 
               final id = c.getIdUserhandle();
-              final members = c.consumeMembers();
 
               setState(() {
-                _circle = members;
+                _circle = c;
                 _circleId = id;
               });
             },

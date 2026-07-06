@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:kata/pgp/cert/smart_fingerprint.dart';
-import 'package:kata/src/rust/api/pgp/circles/app.dart';
+import 'package:kata/src/rust/api/pgp/circles.dart';
 import 'package:kata/src/rust/api/pgp/fingerprint/visual_key.dart';
 
 class AppMemberEntry extends StatelessWidget {
-  final AppMember entry;
+  final CircleEntry entry;
   const AppMemberEntry({super.key, required this.entry});
 
   @override
   Widget build(BuildContext context) {
-    final content = entry.member.member();
+    final content = entry.content;
 
     if (content != null) {
       final circle = content;

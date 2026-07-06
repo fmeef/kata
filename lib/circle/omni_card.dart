@@ -15,7 +15,7 @@ class OmniCard extends StatelessWidget {
     return (switch (circle) {
       CircleOr_Circle(:final field0) => CircleCard(
         id: field0.getIdUserhandle(),
-        members: field0.getMembers(),
+        members: field0,
       ),
       CircleOr_App(:final field0) => AppCard(
         members: field0,

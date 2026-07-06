@@ -4,14 +4,17 @@ import 'package:kata/src/rust/api/pgp.dart';
 import 'package:kata/src/rust/api/pgp/circles/circle.dart';
 
 class CircleCard extends StatelessWidget {
-  final NonOpaqueCircle members;
+  final Circle members;
   final UserHandle id;
   const CircleCard({super.key, required this.members, required this.id});
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    final m = members.members.map((item) => MemberEntry(entry: item)).toList();
+    final m = members
+        .getMembers()
+        .map((item) => MemberEntry(entry: item))
+        .toList();
     return Card(
       child: Padding(
         padding: EdgeInsetsGeometry.fromSTEB(16, 8, 16, 8),

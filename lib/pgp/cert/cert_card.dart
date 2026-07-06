@@ -29,16 +29,16 @@ class _CertCardState extends State<CertCard> {
           _pgpKey = cert;
         }),
         MaybeCert_Fingerprint(:final fingerprint) =>
-          pgpApp
-              .getKeyOr(fingerprint: fingerprint())
-              .then(
-                (v) => setState(() {
-                  _fingerprint = fingerprint();
-                  if (v != null) {
-                    _pgpKey = v;
-                  }
-                }),
-              ),
+          pgpApp.getKeyOr(fingerprint: fingerprint()).then((v) {
+            if (mounted) {
+              setState(() {
+                _fingerprint = fingerprint();
+                if (v != null) {
+                  _pgpKey = v;
+                }
+              });
+            }
+          }),
       }),
     );
   }

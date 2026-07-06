@@ -5,14 +5,17 @@ import 'package:kata/src/rust/api/pgp/circles/circle.dart';
 import 'package:provider/provider.dart';
 
 class _CircleAppListState extends State<CircleAppList> {
-  List<NonOpaqueCircle>? _members;
+  List<Circle>? _members;
   @override
   Widget build(BuildContext context) {
     final PgpApp pgpApp = context.read();
     pgpApp.getDb().getCirclesJoin().then((c) {});
     return ListView(
       children:
-          _members?.map((v) => CircleCard(members: v, id: v.id)).toList() ?? [],
+          _members
+              ?.map((v) => CircleCard(members: v, id: v.getIdUserhandle()))
+              .toList() ??
+          [],
     );
   }
 }
