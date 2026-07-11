@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:kata/circle/circle_card_menu.dart';
 import 'package:kata/circle/member_entry.dart';
 import 'package:kata/src/rust/api/pgp.dart';
+import 'package:kata/src/rust/api/pgp/circles.dart';
 import 'package:kata/src/rust/api/pgp/circles/circle.dart';
 
 class CircleCard extends StatelessWidget {
   final Circle members;
   final UserHandle id;
-  const CircleCard({super.key, required this.members, required this.id});
+  final bool expanded;
+  final bool readonly;
+  const CircleCard({
+    super.key,
+    required this.members,
+    required this.id,
+    this.expanded = false,
+    this.readonly = false,
+  });
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
     final m = members
         .getMembers()
         .map((item) => MemberEntry(entry: item))
@@ -18,12 +27,21 @@ class CircleCard extends StatelessWidget {
     return Card(
       child: Padding(
         padding: EdgeInsetsGeometry.fromSTEB(16, 8, 16, 8),
-        child: ExpansionTile(
-          title: Text(
-            'Circle (${id.separateLujvo().joinGismu()})',
-            style: theme.textTheme.titleMedium,
-          ),
-          children: m,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: ExpansionTile(
+                initiallyExpanded: expanded,
+                title: Text(
+                  'Circle (${id.separateLujvo().joinGismu()})',
+                  style: theme.textTheme.titleMedium,
+                ),
+                trailing: CircleCardMenu(circle: CircleOr.circle(members)),
+                children: m,
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -10,7 +10,7 @@ import '../../pgp.dart';
 import '../circles.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These functions are ignored because they are not marked as `pub`: `bytes_buf`, `members_reader`, `new_mut`, `update_digest`
+// These functions are ignored because they are not marked as `pub`: `bytes_buf`, `members_reader`, `new_mut`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `CircleInner`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `partial_cmp`, `partial_cmp`, `partial_cmp`
 
@@ -42,6 +42,8 @@ abstract class Circle implements RustOpaqueInterface, CircleLike {
   Future<void> setPgp({required PgpApp pgp});
 
   Future<void> toDb({required SqliteDb db});
+
+  Future<void> updateDigest();
 
   @override
   Future<bool> verify();

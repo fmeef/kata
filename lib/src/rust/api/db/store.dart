@@ -137,7 +137,9 @@ abstract class CertDao {
 
   Future<void> deleteByFingerprint({required String fingerprint});
 
-  Future<void> deleteCircle({required String id});
+  Future<void> deleteCircle({required String id, required String ty});
+
+  Future<void> deleteCircleMember({required String id});
 
   Future<List<PgpDataCert>> getByDomain({required String domain});
 

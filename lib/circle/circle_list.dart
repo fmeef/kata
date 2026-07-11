@@ -28,7 +28,9 @@ class _CircleListState extends State<CircleList> {
     final members = _members;
     if (members != null) {
       return ListView(
-        children: members.map((v) => OmniCard(circle: v)).toList(),
+        children: members
+            .map((v) => OmniCard(circle: v, expanded: true))
+            .toList(),
       );
     } else {
       return Center(child: CircularProgressIndicator());

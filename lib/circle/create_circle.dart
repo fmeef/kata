@@ -18,7 +18,6 @@ class _CreateAppState extends State<CreateCircle> {
   late final FabObserver observer = FabObserver(
     handler: () async {
       final PgpApp pgpApp = context.read();
-      print('circle write $_circle');
       await _circle?.toDb(db: pgpApp.getDb());
       if (mounted) context.pop();
     },

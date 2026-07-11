@@ -3,7 +3,9 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:kata/circle/app_member_entry.dart';
+import 'package:kata/circle/circle_card_menu.dart';
 import 'package:kata/src/rust/api/pgp.dart';
+import 'package:kata/src/rust/api/pgp/circles.dart';
 import 'package:kata/src/rust/api/pgp/circles/app.dart';
 
 typedef IconEntry = DropdownMenuEntry<AppTag>;
@@ -46,7 +48,9 @@ class _AppCardState extends State<AppCard> {
                   dropdownMenuEntries: AppTag.entries,
                   requestFocusOnTap: false,
                   onSelected: (AppTag? entry) async => await onChange(entry),
-                ),
+                )
+              else
+                Chip(label: Text(item.tag?.name ?? AppTag.merge.name.name)),
             ],
           ),
         )
@@ -55,10 +59,12 @@ class _AppCardState extends State<AppCard> {
       child: Padding(
         padding: EdgeInsetsGeometry.fromSTEB(16, 8, 16, 8),
         child: ExpansionTile(
+          initiallyExpanded: widget.expanded,
           title: Text(
             'App (${widget.id.separateLujvo().joinGismu()})',
             style: theme.textTheme.titleMedium,
           ),
+          trailing: CircleCardMenu(circle: CircleOr.app(widget.members)),
           children: m,
         ),
       ),
@@ -69,11 +75,13 @@ class _AppCardState extends State<AppCard> {
 class AppCard extends StatefulWidget {
   final CircleApp members;
   final UserHandle id;
+  final bool expanded;
   final FutureOr<void> Function(AppTag?)? onChange;
   const AppCard({
     super.key,
     required this.members,
     required this.id,
+    this.expanded = false,
     this.onChange,
   });
 
