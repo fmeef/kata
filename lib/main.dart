@@ -40,6 +40,7 @@ String titleFromPath(String path) {
     '/share' => 'Sharing identity card',
     '/mycards' => 'My Cards',
     '/newapp' => 'Create Circle',
+    '/circles' => 'Circles and Apps',
     _ => 'Kata',
   };
 }

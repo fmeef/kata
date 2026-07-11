@@ -20,7 +20,7 @@ class _CreateAppState extends State<CreateApp> {
     handler: () async {
       final PgpApp pgpApp = context.read();
       await _circle?.toDb(db: pgpApp.getDb());
-      if (mounted) context.pop();
+      if (mounted) context.go('/circles');
     },
   );
 
