@@ -58,6 +58,8 @@ abstract class CircleApp implements RustOpaqueInterface, CircleLike {
 
   Future<void> toDb({required SqliteDb db});
 
+  void updateTag({required UserHandle id, required MemberTag tag});
+
   @override
   Future<bool> verify();
 }

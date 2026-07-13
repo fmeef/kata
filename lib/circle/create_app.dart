@@ -101,13 +101,11 @@ class _CreateAppState extends State<CreateApp> {
             (_) => AppCard(
               members: _circle!,
               id: _circleId!,
-              onChange: (value) async {
+              onChange: (id, value) async {
                 final circle = _circle;
-                if (value != null && circle != null) {
-                  await pgpApp.getDb().updateTag(
-                    tag: value.name.name,
-                    member: circle.idHex(),
-                  );
+                final tag = value?.name;
+                if (tag != null) {
+                  circle?.updateTag(id: id, tag: tag);
                 }
               },
             ),

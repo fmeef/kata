@@ -47,10 +47,11 @@ class _AppCardState extends State<AppCard> {
                   initialSelection: AppTag.merge,
                   dropdownMenuEntries: AppTag.entries,
                   requestFocusOnTap: false,
-                  onSelected: (AppTag? entry) async => await onChange(entry),
+                  onSelected: (AppTag? entry) async =>
+                      await onChange(item.id, entry),
                 )
               else
-                Chip(label: Text(item.tag?.name ?? AppTag.merge.name.name)),
+                Chip(label: Text(item.tag?.name ?? 'cry')),
             ],
           ),
         )
@@ -76,7 +77,7 @@ class AppCard extends StatefulWidget {
   final CircleApp members;
   final UserHandle id;
   final bool expanded;
-  final FutureOr<void> Function(AppTag?)? onChange;
+  final FutureOr<void> Function(UserHandle, AppTag?)? onChange;
   const AppCard({
     super.key,
     required this.members,
