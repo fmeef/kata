@@ -4,6 +4,7 @@
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
 import '../../frb_generated.dart';
+import '../pgp/circles.dart';
 import 'entities.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:uuid/uuid.dart';
@@ -11,7 +12,8 @@ import 'store.dart';
 
 // These functions are ignored because they are not marked as `pub`: `connection`, `fire_watchers`, `new`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `SqliteDbInner`, `WatcherInner`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `drop`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `drop`, `fmt`
+// These functions are ignored (category: IgnoreBecauseExplicitAttribute): `insert_on_conflict_custom`
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SqliteDb>>
 abstract class SqliteDb implements RustOpaqueInterface, CertDao, Dao, TestDao {
@@ -51,10 +53,19 @@ abstract class SqliteDb implements RustOpaqueInterface, CertDao, Dao, TestDao {
   Future<List<PgpDataCert>> getByUserid({required String userid});
 
   @override
-  Future<List<CircleWithMembers>> getCircleById({required String id});
+  Future<List<CircleWithMembers>> getCircleById({
+    required String id,
+    required String ty,
+  });
+
+  @override
+  Future<List<CircleWithMembers>> getCircleRoots();
 
   @override
   Future<List<CircleWithMembers>> getCirclesJoin();
+
+  @override
+  Future<List<CircleWithMembers>> getCirclesWithoutParent();
 
   @override
   Future<void> getConnection();
@@ -64,6 +75,8 @@ abstract class SqliteDb implements RustOpaqueInterface, CertDao, Dao, TestDao {
 
   @override
   Future<BigInt> getMigrationVersion();
+
+  Future<List<CircleHandle>> getRootHandles();
 
   Watcher getWatcher();
 
@@ -133,6 +146,12 @@ abstract class Crud {
   Future<void> insertOnConflict({
     required SqliteDb conn,
     required OnConflict onConflict,
+  });
+
+  Future<void> insertOnConflictCols({
+    required SqliteDb conn,
+    required OnConflict onConflict,
+    required List<String> cols,
   });
 
   Future<void> update({required SqliteDb conn});
