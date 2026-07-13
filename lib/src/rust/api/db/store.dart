@@ -90,11 +90,15 @@ abstract class CircleWithMembers
 
   Future<Uint8List> getId();
 
+  Future<(String, Uint8List)> getIdTuple();
+
   Future<UserHandle> getIdUserhandle();
 
   Future<Uint8List?> getMemberId();
 
   Future<Uint8List?> getParentId();
+
+  Future<(String, Uint8List)?> getParentTuple();
 
   Future<MemberTag?> getTag();
 

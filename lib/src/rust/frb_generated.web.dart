@@ -65,10 +65,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleEntry;
 
   CrossPlatformFinalizerArg
-  get rust_arc_decrement_strong_count_CircleHandlePtr => wire
-      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleHandle;
-
-  CrossPlatformFinalizerArg
   get rust_arc_decrement_strong_count_CircleMembersDataPtr => wire
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleMembersData;
 
@@ -250,12 +246,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  CircleHandle
-  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleHandle(
-    dynamic raw,
-  );
-
-  @protected
   CircleMembersData
   dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleMembersData(
     dynamic raw,
@@ -394,12 +384,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  CircleHandle
-  dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleHandle(
-    dynamic raw,
-  );
-
-  @protected
   NewsGroup
   dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
     dynamic raw,
@@ -450,12 +434,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   CircleEntry
   dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleEntry(
-    dynamic raw,
-  );
-
-  @protected
-  CircleHandle
-  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleHandle(
     dynamic raw,
   );
 
@@ -621,12 +599,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   CircleEntry
   dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleEntry(
-    dynamic raw,
-  );
-
-  @protected
-  CircleHandle
-  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleHandle(
     dynamic raw,
   );
 
@@ -891,6 +863,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   QrCodeContent dco_decode_box_autoadd_qr_code_content(dynamic raw);
 
   @protected
+  (String, Uint8List) dco_decode_box_autoadd_record_string_list_prim_u_8_strict(
+    dynamic raw,
+  );
+
+  @protected
   SizedImage dco_decode_box_autoadd_sized_image(dynamic raw);
 
   @protected
@@ -941,12 +918,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   List<CircleEntry>
   dco_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleEntry(
-    dynamic raw,
-  );
-
-  @protected
-  List<CircleHandle>
-  dco_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleHandle(
     dynamic raw,
   );
 
@@ -1089,6 +1060,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   QrCodeContent? dco_decode_opt_box_autoadd_qr_code_content(dynamic raw);
 
   @protected
+  (String, Uint8List)?
+  dco_decode_opt_box_autoadd_record_string_list_prim_u_8_strict(dynamic raw);
+
+  @protected
   SizedImage? dco_decode_opt_box_autoadd_sized_image(dynamic raw);
 
   @protected
@@ -1121,6 +1096,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   (String, GraphVertex) dco_decode_record_string_graph_vertex(dynamic raw);
+
+  @protected
+  (String, Uint8List) dco_decode_record_string_list_prim_u_8_strict(
+    dynamic raw,
+  );
 
   @protected
   SizedImage dco_decode_sized_image(dynamic raw);
@@ -1242,12 +1222,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   CircleEntry
   sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleEntry(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  CircleHandle
-  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleHandle(
     SseDeserializer deserializer,
   );
 
@@ -1390,12 +1364,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  CircleHandle
-  sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleHandle(
-    SseDeserializer deserializer,
-  );
-
-  @protected
   NewsGroup
   sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
     SseDeserializer deserializer,
@@ -1446,12 +1414,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   CircleEntry
   sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleEntry(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  CircleHandle
-  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleHandle(
     SseDeserializer deserializer,
   );
 
@@ -1613,12 +1575,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   CircleEntry
   sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleEntry(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  CircleHandle
-  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleHandle(
     SseDeserializer deserializer,
   );
 
@@ -1849,6 +1805,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  (String, Uint8List) sse_decode_box_autoadd_record_string_list_prim_u_8_strict(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   SizedImage sse_decode_box_autoadd_sized_image(SseDeserializer deserializer);
 
   @protected
@@ -1899,12 +1860,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   List<CircleEntry>
   sse_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleEntry(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  List<CircleHandle>
-  sse_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleHandle(
     SseDeserializer deserializer,
   );
 
@@ -2063,6 +2018,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  (String, Uint8List)?
+  sse_decode_opt_box_autoadd_record_string_list_prim_u_8_strict(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   SizedImage? sse_decode_opt_box_autoadd_sized_image(
     SseDeserializer deserializer,
   );
@@ -2099,6 +2060,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   (String, GraphVertex) sse_decode_record_string_graph_vertex(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  (String, Uint8List) sse_decode_record_string_list_prim_u_8_strict(
     SseDeserializer deserializer,
   );
 
@@ -2240,13 +2206,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void
   sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleEntry(
     CircleEntry self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void
-  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleHandle(
-    CircleHandle self,
     SseSerializer serializer,
   );
 
@@ -2413,13 +2372,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
-  sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleHandle(
-    CircleHandle self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void
   sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
     NewsGroup self,
     SseSerializer serializer,
@@ -2478,13 +2430,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void
   sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleEntry(
     CircleEntry self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void
-  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleHandle(
-    CircleHandle self,
     SseSerializer serializer,
   );
 
@@ -2679,13 +2624,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void
   sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleEntry(
     CircleEntry self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void
-  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleHandle(
-    CircleHandle self,
     SseSerializer serializer,
   );
 
@@ -2967,6 +2905,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_record_string_list_prim_u_8_strict(
+    (String, Uint8List) self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_sized_image(
     SizedImage self,
     SseSerializer serializer,
@@ -3030,13 +2974,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void
   sse_encode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleEntry(
     List<CircleEntry> self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void
-  sse_encode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleHandle(
-    List<CircleHandle> self,
     SseSerializer serializer,
   );
 
@@ -3231,6 +3168,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_opt_box_autoadd_record_string_list_prim_u_8_strict(
+    (String, Uint8List)? self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_opt_box_autoadd_sized_image(
     SizedImage? self,
     SseSerializer serializer,
@@ -3276,6 +3219,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_record_string_graph_vertex(
     (String, GraphVertex) self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_record_string_list_prim_u_8_strict(
+    (String, Uint8List) self,
     SseSerializer serializer,
   );
 
@@ -3408,22 +3357,6 @@ class RustLibWire implements BaseWire {
     int ptr,
   ) => wasmModule
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleEntry(
-        ptr,
-      );
-
-  void
-  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleHandle(
-    int ptr,
-  ) => wasmModule
-      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleHandle(
-        ptr,
-      );
-
-  void
-  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleHandle(
-    int ptr,
-  ) => wasmModule
-      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleHandle(
         ptr,
       );
 
@@ -3843,16 +3776,6 @@ extension type RustLibWasmModule._(JSObject _) implements JSObject {
 
   external void
   rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleEntry(
-    int ptr,
-  );
-
-  external void
-  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleHandle(
-    int ptr,
-  );
-
-  external void
-  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleHandle(
     int ptr,
   );
 
