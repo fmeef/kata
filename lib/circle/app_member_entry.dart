@@ -14,10 +14,25 @@ class AppMemberEntry extends StatelessWidget {
     if (content != null) {
       final circle = content;
       final id = circle.getIdUserhandle();
+      final icon = (switch (circle.getType()) {
+        CircleType.user => Icons.person,
+        CircleType.circle => Icons.group,
+        CircleType.app => Icons.apps,
+      });
       final builder = VisualKeyBuilder.fromHandle(
         data: id,
       ).lujvo(start: BigInt.from(0), end: BigInt.from(16));
-      return SmartFingerprint(fingerprint: id, builder: builder);
+      return Row(
+        children: [
+          Padding(
+            padding: EdgeInsetsGeometry.directional(end: 8),
+            child: Icon(icon),
+          ),
+          Expanded(
+            child: SmartFingerprint(fingerprint: id, builder: builder),
+          ),
+        ],
+      );
     } else {
       return Center(child: CircularProgressIndicator());
     }

@@ -24,6 +24,7 @@ class CircleCard extends StatelessWidget {
         .getMembers()
         .map((item) => MemberEntry(entry: item))
         .toList();
+
     return Card(
       child: Padding(
         padding: EdgeInsetsGeometry.fromSTEB(16, 8, 16, 8),
@@ -33,9 +34,20 @@ class CircleCard extends StatelessWidget {
             Expanded(
               child: ExpansionTile(
                 initiallyExpanded: expanded,
-                title: Text(
-                  'Circle (${id.separateLujvo().joinGismu()})',
-                  style: theme.textTheme.titleMedium,
+                leading: Chip(label: Text('${m.length}')),
+                title: Row(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsetsGeometry.directional(end: 8),
+                      child: Icon(Icons.group),
+                    ),
+                    Expanded(
+                      child: Text(
+                        id.separateLujvo().joinGismu(),
+                        style: theme.textTheme.titleMedium,
+                      ),
+                    ),
+                  ],
                 ),
                 trailing: CircleCardMenu(circle: CircleOr.circle(members)),
                 children: m,

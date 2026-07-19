@@ -10,14 +10,29 @@ class MemberEntry extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final content = entry.content;
-
+    final icon = (switch (entry.content?.getType()) {
+      CircleType.user => Icons.person,
+      CircleType.circle => Icons.group,
+      CircleType.app => Icons.apps,
+      null => Icons.device_unknown,
+    });
     if (content != null) {
       final circle = content;
       final id = circle.getIdUserhandle();
       final builder = VisualKeyBuilder.fromHandle(
         data: id,
       ).lujvo(start: BigInt.from(0), end: BigInt.from(16));
-      return SmartFingerprint(fingerprint: id, builder: builder);
+      return Row(
+        children: [
+          Padding(
+            padding: EdgeInsetsGeometry.directional(end: 8),
+            child: Icon(icon),
+          ),
+          Expanded(
+            child: SmartFingerprint(fingerprint: id, builder: builder),
+          ),
+        ],
+      );
     } else {
       return Center(child: CircularProgressIndicator());
     }

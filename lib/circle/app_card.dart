@@ -61,9 +61,20 @@ class _AppCardState extends State<AppCard> {
         padding: EdgeInsetsGeometry.fromSTEB(16, 8, 16, 8),
         child: ExpansionTile(
           initiallyExpanded: widget.expanded,
-          title: Text(
-            'App (${widget.id.separateLujvo().joinGismu()})',
-            style: theme.textTheme.titleMedium,
+          leading: Chip(label: Text('${m.length}')),
+          title: Row(
+            children: [
+              const Padding(
+                padding: EdgeInsetsGeometry.directional(end: 8),
+                child: Icon(Icons.apps),
+              ),
+              Expanded(
+                child: Text(
+                  widget.id.separateLujvo().joinGismu(),
+                  style: theme.textTheme.titleMedium,
+                ),
+              ),
+            ],
           ),
           trailing: CircleCardMenu(circle: CircleOr.app(widget.members)),
           children: m,

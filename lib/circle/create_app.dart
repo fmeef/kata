@@ -92,7 +92,6 @@ class _CreateAppState extends State<CreateApp> {
 
   @override
   Widget build(BuildContext context) {
-    final PgpApp pgpApp = context.read();
     return Column(
       children: [
         Expanded(
@@ -102,10 +101,9 @@ class _CreateAppState extends State<CreateApp> {
               members: _circle!,
               id: _circleId!,
               onChange: (id, value) async {
-                final circle = _circle;
                 final tag = value?.name;
                 if (tag != null) {
-                  circle?.updateTag(id: id, tag: tag);
+                  _circle?.updateTag(id: id, tag: tag);
                 }
               },
             ),
