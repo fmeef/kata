@@ -18,6 +18,8 @@ import 'pgp/import.dart';
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<UserHandle>>
 abstract class UserHandle implements RustOpaqueInterface, CircleLike {
+  String? comment();
+
   String composite();
 
   String compositeLujvo({required bool short});
@@ -59,6 +61,8 @@ abstract class UserHandle implements RustOpaqueInterface, CircleLike {
   VisualKey separateLujvo();
 
   VisualKeyOr separateLujvoOrElse();
+
+  Future<void> setName({required String name});
 
   Future<void> toDb({required SqliteDb db});
 

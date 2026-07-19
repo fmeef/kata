@@ -25,43 +25,57 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
       });
     }
 
+    final comment = widget.fingerprint.comment();
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       mainAxisSize: MainAxisSize.min,
       children: [
-        (switch (mode) {
-          FingerprintMode.fingerprint => Expanded(
-            child: Wrap(children: [Text(fp, style: theme.textTheme.bodySmall)]),
-          ),
-          FingerprintMode.lojban => (switch (visualKey) {
-            VisualKeyOr_Gismu(:final field0) => Expanded(
-              child: Wrap(
-                spacing: 4,
-                children:
-                    (field0.gismu
-                            ?.map(
-                              (v) => Text(v, style: theme.textTheme.bodySmall),
-                            )
-                            .toList() ??
-                        []) +
-                    [
-                      if (field0.phone != null)
-                        Text(
-                          field0.phone ?? "",
-                          style: theme.textTheme.bodySmall,
-                        ),
-                    ],
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (comment != null)
+              Text(comment, style: theme.textTheme.bodySmall),
+            (switch (mode) {
+              FingerprintMode.fingerprint => Wrap(
+                children: [Text(fp, style: theme.textTheme.bodySmall)],
               ),
-            ),
-            VisualKeyOr_Name(:final field0) => Expanded(
-              child: Wrap(
-                children: [Text(field0, style: theme.textTheme.bodySmall)],
+              FingerprintMode.lojban => (switch (visualKey) {
+                VisualKeyOr_Gismu(:final field0) => Wrap(
+                  spacing: 4,
+                  children:
+                      (field0.gismu
+                              ?.map(
+                                (v) =>
+                                    Text(v, style: theme.textTheme.bodySmall),
+                              )
+                              .toList() ??
+                          []) +
+                      [
+                        if (field0.phone != null)
+                          Text(
+                            field0.phone ?? "",
+                            style: theme.textTheme.bodySmall,
+                          ),
+                      ],
+                ),
+
+                VisualKeyOr_Name(:final field0) => Expanded(
+                  child: Wrap(
+                    children: [Text(field0, style: theme.textTheme.bodySmall)],
+                  ),
+                ),
+                _ => Center(child: CircularProgressIndicator()),
+              }),
+              FingerprintMode.userid => Text(
+                fp,
+                style: theme.textTheme.bodySmall,
               ),
-            ),
-            _ => Center(child: CircularProgressIndicator()),
-          }),
-          FingerprintMode.userid => Text(fp, style: theme.textTheme.bodySmall),
-        }),
+            }),
+          ],
+        ),
+
         if (mode == FingerprintMode.fingerprint)
           IconButton(
             onPressed: () => setState(() {
