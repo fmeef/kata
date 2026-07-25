@@ -128,6 +128,7 @@ class _CertCardState extends State<CertCard> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 githubIdenticon(context),
                 Expanded(
@@ -183,6 +184,7 @@ class _CertCardState extends State<CertCard> {
                   ),
               ],
             ),
+
             if (pgpKey != null) SigList(pgpCert: pgpKey),
           ],
         ),

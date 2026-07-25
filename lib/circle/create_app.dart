@@ -7,12 +7,10 @@ import 'package:kata/fab_state.dart';
 import 'package:kata/pgp/cert/active_cert.dart';
 import 'package:kata/pgp/cert/cert_selector.dart';
 import 'package:kata/src/rust/api.dart';
-import 'package:kata/src/rust/api/pgp.dart';
 import 'package:kata/src/rust/api/pgp/circles/app.dart';
 import 'package:provider/provider.dart';
 
 class _CreateAppState extends State<CreateApp> {
-  UserHandle? _circleId;
   CircleApp? _circle;
   late final FabState state = context.read();
 
@@ -72,7 +70,6 @@ class _CreateAppState extends State<CreateApp> {
 
                 setState(() {
                   _circle = c;
-                  _circleId = id;
                 });
               } else if (_circle != null) {
                 for (final member in l) {
@@ -99,7 +96,7 @@ class _CreateAppState extends State<CreateApp> {
             context,
             (_) => AppCard(
               members: _circle!,
-              id: _circleId!,
+              id: _circle!.getIdUserhandle(),
               onChange: (id, value) async {
                 final tag = value?.name;
                 if (tag != null) {

@@ -70,7 +70,7 @@ class _AppCardState extends State<AppCard> {
               ),
               Expanded(
                 child: Text(
-                  widget.id.separateLujvo().joinGismu(),
+                  widget.id.comment() ?? widget.id.separateLujvo().joinGismu(),
                   style: theme.textTheme.titleMedium,
                 ),
               ),

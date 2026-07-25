@@ -5,6 +5,7 @@
 
 import 'api/db.dart';
 import 'api/db/connection.dart';
+import 'api/db/store.dart';
 import 'api/pgp.dart';
 import 'api/pgp/cert.dart';
 import 'api/pgp/circles.dart';
@@ -52,6 +53,10 @@ abstract class PgpApp
 
   @override
   Future<List<UserId>> certifiedUseridsOf({required String fpr});
+
+  Future<List<CircleOr>> circlesFromDb({
+    required List<CircleWithMembers> members,
+  });
 
   static Future<PgpApp> create({required Config config}) =>
       RustLib.instance.api.crateApiPgpAppCreate(config: config);

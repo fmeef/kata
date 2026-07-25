@@ -29,7 +29,11 @@ class AppMemberEntry extends StatelessWidget {
             child: Icon(icon),
           ),
           Expanded(
-            child: SmartFingerprint(fingerprint: id, builder: builder),
+            child: SmartFingerprint(
+              fingerprint: id,
+              builder: builder,
+              mode: FingerprintMode.userid,
+            ),
           ),
         ],
       );

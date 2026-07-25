@@ -1,13 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_marquee_plus/flutter_marquee_plus.dart';
 import 'package:kata/src/rust/api/pgp.dart';
 import 'package:kata/src/rust/api/pgp/fingerprint/visual_key.dart';
+import 'package:marquee/marquee.dart';
 
 enum FingerprintMode { userid, lojban, fingerprint }
 
 class _SmartFingerprintState extends State<SmartFingerprint> {
-  FingerprintMode mode = FingerprintMode.lojban;
+  late FingerprintMode mode = widget.mode;
   VisualKeyOr? visualKey;
   UserHandle? displayFp;
+
+  Widget lojban() {
+    final theme = Theme.of(context);
+    return (switch (visualKey) {
+      VisualKeyOr_Gismu(:final field0) => Expanded(
+        child: Wrap(
+          spacing: 4,
+          children:
+              (field0.gismu
+                      ?.map((v) => Text(v, style: theme.textTheme.bodySmall))
+                      .toList() ??
+                  []) +
+              [
+                if (field0.phone != null)
+                  Text(field0.phone ?? "", style: theme.textTheme.bodySmall),
+              ],
+        ),
+      ),
+      VisualKeyOr_Name(:final field0) => Expanded(
+        child: Wrap(children: [Text(field0, style: theme.textTheme.bodySmall)]),
+      ),
+      _ => Center(child: CircularProgressIndicator()),
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,55 +53,35 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
 
     final comment = widget.fingerprint.comment();
 
+    final scaler = MediaQuery.textScalerOf(context);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (comment != null)
-              Text(comment, style: theme.textTheme.bodySmall),
-            (switch (mode) {
-              FingerprintMode.fingerprint => Wrap(
-                children: [Text(fp, style: theme.textTheme.bodySmall)],
-              ),
-              FingerprintMode.lojban => (switch (visualKey) {
-                VisualKeyOr_Gismu(:final field0) => Wrap(
-                  spacing: 4,
-                  children:
-                      (field0.gismu
-                              ?.map(
-                                (v) =>
-                                    Text(v, style: theme.textTheme.bodySmall),
-                              )
-                              .toList() ??
-                          []) +
-                      [
-                        if (field0.phone != null)
-                          Text(
-                            field0.phone ?? "",
-                            style: theme.textTheme.bodySmall,
-                          ),
-                      ],
+        (switch (mode) {
+          FingerprintMode.fingerprint => Expanded(
+            child: Wrap(children: [Text(fp, style: theme.textTheme.bodySmall)]),
+          ),
+          FingerprintMode.lojban => lojban(),
+          FingerprintMode.userid => (switch (comment) {
+            null => lojban(),
+            _ => Flexible(
+              fit: FlexFit.tight,
+              child: SizedBox(
+                height:
+                    scaler.scale(theme.textTheme.bodySmall?.fontSize ?? 15) *
+                    (theme.textTheme.bodySmall?.height ?? 1.0),
+                child: MarqueePlus(
+                  text: comment,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  style: theme.textTheme.bodySmall,
                 ),
-
-                VisualKeyOr_Name(:final field0) => Expanded(
-                  child: Wrap(
-                    children: [Text(field0, style: theme.textTheme.bodySmall)],
-                  ),
-                ),
-                _ => Center(child: CircularProgressIndicator()),
-              }),
-              FingerprintMode.userid => Text(
-                fp,
-                style: theme.textTheme.bodySmall,
               ),
-            }),
-          ],
-        ),
-
+            ),
+          }),
+        }),
         if (mode == FingerprintMode.fingerprint)
           IconButton(
             onPressed: () => setState(() {

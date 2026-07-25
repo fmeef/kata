@@ -5,7 +5,6 @@
 
 import '../../frb_generated.dart';
 import '../db/connection.dart';
-import '../db/store.dart';
 import '../pgp.dart';
 import 'circles/app.dart';
 import 'circles/circle.dart';
@@ -83,10 +82,6 @@ sealed class CircleOr with _$CircleOr {
       .instance
       .api
       .crateApiPgpCirclesCircleOrFromCert(userHandle: userHandle);
-
-  static Future<List<CircleOr>> fromDb({
-    required List<CircleWithMembers> members,
-  }) => RustLib.instance.api.crateApiPgpCirclesCircleOrFromDb(members: members);
 
   Uint8List getId() =>
       RustLib.instance.api.crateApiPgpCirclesCircleOrGetId(that: this);

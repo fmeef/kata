@@ -15,7 +15,7 @@ class _CircleListState extends State<CircleList> {
     handler: () async {
       final PgpApp app = context.read();
       final circles = await app.getDb().getCirclesJoin();
-      final c = await CircleOr.fromDb(members: circles);
+      final c = await app.circlesFromDb(members: circles);
 
       setState(() {
         _members = c;
@@ -31,7 +31,7 @@ class _CircleListState extends State<CircleList> {
 
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => pgpApp.getDb().getCirclesJoin().then((circles) async {
-        final c = await CircleOr.fromDb(members: circles);
+        final c = await pgpApp.circlesFromDb(members: circles);
         if (mounted) {
           setState(() {
             _members = c;
