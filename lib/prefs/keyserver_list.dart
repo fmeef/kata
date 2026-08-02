@@ -68,22 +68,20 @@ class _KeyserverListState extends State<KeyserverList> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text('Current keyservers'),
-            SizedBox(
-              height: 200,
-              child: ListView(
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                controller: scrollController,
-                children: keyservers
-                    .map(
-                      (v) => KeyserverListItem(
-                        keyserver: v,
-                        onDelete: (v) async => await removeTexts(v),
-                      ),
-                    )
-                    .toList(),
-              ),
+            ListView(
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              controller: scrollController,
+              children: keyservers
+                  .map(
+                    (v) => KeyserverListItem(
+                      keyserver: v,
+                      onDelete: (v) async => await removeTexts(v),
+                    ),
+                  )
+                  .toList(),
             ),
+
             Row(
               children: [
                 Expanded(

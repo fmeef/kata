@@ -7,28 +7,34 @@ class _TextInputDialogState extends State<TextInputDialog> {
   final TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TextField(controller: controller),
-        Row(
-          children: [
-            ElevatedButton(
-              onPressed: () async {
-                widget.onText(controller.text);
-                context.pop();
-              },
-              child: const Text('Submit'),
-            ),
-            TextButton(
-              onPressed: () async {
-                widget.onText(null);
-                context.pop();
-              },
-              child: const Text('Cancel'),
-            ),
-          ],
-        ),
-      ],
+    return Dialog(
+      insetPadding: EdgeInsets.all(4),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextField(controller: controller),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ElevatedButton(
+                onPressed: () async {
+                  widget.onText(controller.text);
+                  context.pop();
+                },
+                child: const Text('Submit'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  widget.onText(null);
+                  context.pop();
+                },
+                child: const Text('Cancel'),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,15 +1,54 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_marquee_plus/flutter_marquee_plus.dart';
+import 'package:kata/prefs/pref_keys.dart';
 import 'package:kata/src/rust/api/pgp.dart';
 import 'package:kata/src/rust/api/pgp/fingerprint/visual_key.dart';
-import 'package:marquee/marquee.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-enum FingerprintMode { userid, lojban, fingerprint }
+enum FingerprintMode {
+  userid("User ID"),
+  lojban("Lojban"),
+  fingerprint("Fingerprint");
+
+  const FingerprintMode(this.name);
+  final String name;
+
+  static FingerprintMode? fromString(String mode) {
+    return (switch (mode) {
+      "User ID" => FingerprintMode.userid,
+      "Lojban" => FingerprintMode.lojban,
+      "Fingerprint" => FingerprintMode.fingerprint,
+      _ => null,
+    });
+  }
+
+  static final List<String> entries = UnmodifiableListView(
+    values.map((v) => v.name),
+  );
+}
 
 class _SmartFingerprintState extends State<SmartFingerprint> {
-  late FingerprintMode mode = widget.mode;
+  late FingerprintMode? _mode = widget.mode;
+  late final SharedPreferencesAsync _prefs = context.read();
   VisualKeyOr? visualKey;
   UserHandle? displayFp;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => _prefs.getString(prefFingerprintMode).then((v) {
+        if (mounted && v != null) {
+          setState(() {
+            _mode = FingerprintMode.fromString(v);
+          });
+        }
+      }),
+    );
+  }
 
   Widget lojban() {
     final theme = Theme.of(context);
@@ -60,7 +99,7 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        (switch (mode) {
+        (switch (_mode ?? FingerprintMode.lojban) {
           FingerprintMode.fingerprint => Expanded(
             child: Wrap(children: [Text(fp, style: theme.textTheme.bodySmall)]),
           ),
@@ -82,17 +121,17 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
             ),
           }),
         }),
-        if (mode == FingerprintMode.fingerprint)
+        if (_mode == FingerprintMode.fingerprint)
           IconButton(
             onPressed: () => setState(() {
-              mode = widget.mode;
+              _mode = widget.mode;
             }),
             icon: const Icon(Icons.remove_outlined),
           )
         else
           IconButton(
             onPressed: () => setState(() {
-              mode = FingerprintMode.fingerprint;
+              _mode = FingerprintMode.fingerprint;
             }),
             icon: const Icon(Icons.remove_red_eye_outlined),
           ),
@@ -103,7 +142,7 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
 
 class SmartFingerprint extends StatefulWidget {
   final UserHandle fingerprint;
-  final FingerprintMode mode;
+  final FingerprintMode? mode;
   final bool short;
   final VisualKeyBuilder builder;
 
@@ -111,7 +150,7 @@ class SmartFingerprint extends StatefulWidget {
     super.key,
     required this.fingerprint,
     required this.builder,
-    this.mode = FingerprintMode.lojban,
+    this.mode,
     this.short = false,
   });
 

@@ -1,3 +1,4 @@
+import 'package:kata/prefs/fingerprint_name_dialog.dart';
 import 'package:kata/prefs/keyserver_list.dart';
 import 'package:kata/prefs/prefs_item.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,16 @@ class _PrefsViewState extends State<Prefs> {
           title: "Keyserver list",
           onTap: () async => await showDialog(
             context: context,
-            builder: (ctx) => Dialog(child: KeyserverList()),
+
+            builder: (ctx) => KeyserverList(),
+          ),
+        ),
+        PrefsItem(
+          description: 'Default display method user ids',
+          title: 'User id display method',
+          onTap: () async => await showDialog(
+            context: context,
+            builder: (ctx) => FingerprintNameDialog(),
           ),
         ),
         PrefsItem(
@@ -42,17 +52,15 @@ class _PrefsViewState extends State<Prefs> {
           button: Text(databaseVersion?.toString() ?? ""),
           onTap: () async => await showDialog(
             context: context,
-            builder: (ctx) => Dialog(
-              child: TextInputDialog(
-                onText: (t) async {
-                  if (t != null) {
-                    final version = BigInt.tryParse(t);
-                    if (version != null) {
-                      await pgpApp.getDb().rollback(version: version);
-                    }
+            builder: (ctx) => TextInputDialog(
+              onText: (t) async {
+                if (t != null) {
+                  final version = BigInt.tryParse(t);
+                  if (version != null) {
+                    await pgpApp.getDb().rollback(version: version);
                   }
-                },
-              ),
+                }
+              },
             ),
           ),
         ),
