@@ -39,15 +39,17 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) => _prefs.getString(prefFingerprintMode).then((v) {
-        if (mounted && v != null) {
-          setState(() {
-            _mode = FingerprintMode.fromString(v);
-          });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _prefs.getString(prefFingerprintMode).then((v) {
+        if (widget.mode == null) {
+          if (mounted && v != null) {
+            setState(() {
+              _mode = FingerprintMode.fromString(v);
+            });
+          }
         }
-      }),
-    );
+      });
+    });
   }
 
   Widget lojban() {
