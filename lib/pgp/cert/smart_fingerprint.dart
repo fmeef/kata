@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
@@ -7,6 +8,8 @@ import 'package:kata/src/rust/api/pgp.dart';
 import 'package:kata/src/rust/api/pgp/fingerprint/visual_key.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+FutureOr<void> onTapDefault(UserHandle _) {}
 
 enum FingerprintMode {
   userid("User ID"),
@@ -56,21 +59,31 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
     final theme = Theme.of(context);
     return (switch (visualKey) {
       VisualKeyOr_Gismu(:final field0) => Expanded(
-        child: Wrap(
-          spacing: 4,
-          children:
-              (field0.gismu
-                      ?.map((v) => Text(v, style: theme.textTheme.bodySmall))
-                      .toList() ??
-                  []) +
-              [
-                if (field0.phone != null)
-                  Text(field0.phone ?? "", style: theme.textTheme.bodySmall),
-              ],
+        child: InkWell(
+          onTap: () async => await widget.onTap(widget.fingerprint),
+          child: Wrap(
+            spacing: 4,
+            children:
+                (field0.gismu
+                        ?.map((v) => Text(v, style: theme.textTheme.bodySmall))
+                        .toList() ??
+                    []) +
+                [
+                  if (field0.phone != null)
+                    Text(field0.phone ?? "", style: theme.textTheme.bodySmall),
+                ],
+          ),
         ),
       ),
       VisualKeyOr_Name(:final field0) => Expanded(
-        child: Wrap(children: [Text(field0, style: theme.textTheme.bodySmall)]),
+        child: Wrap(
+          children: [
+            TextButton(
+              onPressed: () async => await widget.onTap(widget.fingerprint),
+              child: Text(field0, style: theme.textTheme.bodySmall),
+            ),
+          ],
+        ),
       ),
       _ => Center(child: CircularProgressIndicator()),
     });
@@ -103,7 +116,14 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
       children: [
         (switch (_mode ?? FingerprintMode.lojban) {
           FingerprintMode.fingerprint => Expanded(
-            child: Wrap(children: [Text(fp, style: theme.textTheme.bodySmall)]),
+            child: Wrap(
+              children: [
+                TextButton(
+                  onPressed: () async => await widget.onTap(widget.fingerprint),
+                  child: Text(fp, style: theme.textTheme.bodySmall),
+                ),
+              ],
+            ),
           ),
           FingerprintMode.lojban => lojban(),
           FingerprintMode.userid => (switch (comment) {
@@ -114,15 +134,19 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
                 height:
                     scaler.scale(theme.textTheme.bodySmall?.fontSize ?? 15) *
                     (theme.textTheme.bodySmall?.height ?? 1.0),
-                child: MarqueePlus(
-                  text: comment,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  style: theme.textTheme.bodySmall,
+                child: InkWell(
+                  onTap: () async => await widget.onTap(widget.fingerprint),
+                  child: MarqueePlus(
+                    text: comment,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    style: theme.textTheme.bodySmall,
+                  ),
                 ),
               ),
             ),
           }),
         }),
+
         if (_mode == FingerprintMode.fingerprint)
           IconButton(
             onPressed: () => setState(() {
@@ -147,6 +171,7 @@ class SmartFingerprint extends StatefulWidget {
   final FingerprintMode? mode;
   final bool short;
   final VisualKeyBuilder builder;
+  final FutureOr<void> Function(UserHandle) onTap;
 
   const SmartFingerprint({
     super.key,
@@ -154,6 +179,7 @@ class SmartFingerprint extends StatefulWidget {
     required this.builder,
     this.mode,
     this.short = false,
+    this.onTap = onTapDefault,
   });
 
   @override
