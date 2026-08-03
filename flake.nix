@@ -53,7 +53,7 @@
           crossSystem = {
             config = "aarch64-unknown-linux-android";
             useAndroidPrebuilt = true;
-            androidSdkVersion = "28";
+            androidSdkVersion = "36";
             androidNdkVersion = "27";
             useLLVM = true;
             libc = "bionic";
@@ -79,11 +79,11 @@
         #     allowUnfree = true;
         #   };
         # };
-        buildToolsVersion = "36.0.0";
+        buildToolsVersion = "30.0.0";
         androidComposition = pkgs.androidenv.composeAndroidPackages {
           buildToolsVersions = [
             buildToolsVersion
-            "36.0.0"
+            "30.0.0"
           ];
           platformVersions = [ "36" ];
           abiVersions = [
@@ -149,7 +149,7 @@
               wot_dual
               master.flutter
               androidSdk
-              jdk17
+              jdk21
               rustup
               # fish
               cmake
