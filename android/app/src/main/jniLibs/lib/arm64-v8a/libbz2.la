@@ -38,4 +38,3 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/nix/store/lpkhgf4mqnfg8iw2cwy0mnmlxbdvm35r-bzip2-aarch64-unknown-linux-android-1.0.8/lib'

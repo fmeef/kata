@@ -231,7 +231,6 @@
               if isMacos then
                 baseInputs
                 ++ [
-                  apple-sdk_26
                   crosspkgs.botan3
                   cctools
                 ]
