@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kata/circle/circle_card.dart';
+import 'package:kata/circle/circle_list_options.dart';
 import 'package:kata/fab_observer.dart';
 import 'package:kata/fab_state.dart';
 import 'package:kata/pgp/cert/cert_selector.dart';
@@ -19,7 +20,7 @@ class _CreateAppState extends State<CreateCircle> {
     handler: () async {
       final PgpApp pgpApp = context.read();
       await _circle?.toDb(db: pgpApp.getDb());
-      if (mounted) context.go('/circles');
+      if (mounted) context.go('/circles', extra: CircleListOptions());
     },
   );
 

@@ -35,24 +35,27 @@ enum FingerprintMode {
 
 class _SmartFingerprintState extends State<SmartFingerprint> {
   late FingerprintMode? _mode = widget.mode;
-  late final SharedPreferencesAsync _prefs = context.read();
+  late final SharedPreferencesAsync _prefs;
   VisualKeyOr? visualKey;
   UserHandle? displayFp;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _prefs.getString(prefFingerprintMode).then((v) {
-        if (widget.mode == null) {
-          if (mounted && v != null) {
-            setState(() {
-              _mode = FingerprintMode.fromString(v);
-            });
+    if (mounted) {
+      _prefs = context.read();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _prefs.getString(prefFingerprintMode).then((v) {
+          if (widget.mode == null) {
+            if (mounted && v != null) {
+              setState(() {
+                _mode = FingerprintMode.fromString(v);
+              });
+            }
           }
-        }
+        });
       });
-    });
+    }
   }
 
   Widget lojban() {

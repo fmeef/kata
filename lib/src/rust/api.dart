@@ -93,6 +93,8 @@ abstract class PgpApp
   @override
   Future<PgpCertWithIds?> getCertByRole({required String role});
 
+  Future<List<CircleOr>> getCirclesForParent({required CircleHandle parent});
+
   @override
   SqliteDb getDb();
 

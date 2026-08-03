@@ -190,6 +190,11 @@ abstract class CertDao {
 
   Future<List<CircleWithMembers>> getCircleRoots();
 
+  Future<List<CircleWithMembers>> getCirclesForParent({
+    required String parent,
+    required String parentType,
+  });
+
   Future<List<CircleWithMembers>> getCirclesJoin();
 
   Future<List<CircleWithMembers>> getCirclesWithoutParent();

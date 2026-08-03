@@ -3,7 +3,6 @@ import 'package:kata/circle/omni_card.dart';
 import 'package:kata/fab_observer.dart';
 import 'package:kata/fab_state.dart';
 import 'package:kata/src/rust/api.dart';
-import 'package:kata/src/rust/api/pgp.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
 import 'package:provider/provider.dart';
 
@@ -15,12 +14,20 @@ class _CircleListState extends State<CircleList> {
   late final FabObserver observer = FabObserver(
     handler: () async {
       final PgpApp app = context.read();
-      final circles = await app.getDb().getCirclesJoin();
-      final c = await app.circlesFromDb(members: circles);
+      if (widget.parent != null) {
+        final circles = await app.getCirclesForParent(parent: widget.parent!);
 
-      setState(() {
-        _members = c;
-      });
+        setState(() {
+          _members = circles;
+        });
+      } else {
+        final circles = await app.getDb().getCirclesJoin();
+        final c = await app.circlesFromDb(members: circles);
+
+        setState(() {
+          _members = c;
+        });
+      }
     },
   );
 
@@ -32,11 +39,23 @@ class _CircleListState extends State<CircleList> {
 
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => pgpApp.getDb().getCirclesJoin().then((circles) async {
-        final c = await pgpApp.circlesFromDb(members: circles);
-        if (mounted) {
-          setState(() {
-            _members = c;
-          });
+        if (widget.parent != null) {
+          final circles = await pgpApp.getCirclesForParent(
+            parent: widget.parent!,
+          );
+          if (mounted) {
+            setState(() {
+              _members = circles;
+            });
+          }
+        } else {
+          final circles = await pgpApp.getDb().getCirclesJoin();
+          final c = await pgpApp.circlesFromDb(members: circles);
+          if (mounted) {
+            setState(() {
+              _members = c;
+            });
+          }
         }
       }),
     );
@@ -64,7 +83,8 @@ class _CircleListState extends State<CircleList> {
 }
 
 class CircleList extends StatefulWidget {
-  const CircleList({super.key});
+  final CircleHandle? parent;
+  const CircleList({super.key, this.parent});
 
   @override
   State<StatefulWidget> createState() => _CircleListState();

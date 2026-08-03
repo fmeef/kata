@@ -44,6 +44,8 @@ abstract class UserHandle implements RustOpaqueInterface, CircleLike {
   @override
   CircleType getType();
 
+  CircleHandle handle();
+
   Future<SizedImage> identicon({required int count, required int scale});
 
   @override

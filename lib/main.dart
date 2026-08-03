@@ -1,4 +1,5 @@
 import 'package:kata/circle/circle_list.dart';
+import 'package:kata/circle/circle_list_options.dart';
 import 'package:kata/circle/create_circle_app.dart';
 import 'package:kata/drawer_content.dart';
 import 'package:kata/graphvis/graph_test.dart';
@@ -141,7 +142,9 @@ class _MyAppState extends State<MyApp> {
               GoRoute(
                 path: '/circles',
                 builder: (context, state) {
-                  return CircleList();
+                  final CircleListOptions? options =
+                      state.extra as CircleListOptions?;
+                  return CircleList(parent: options?.parent);
                 },
               ),
               GoRoute(

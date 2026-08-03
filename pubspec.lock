@@ -90,7 +90,7 @@ packages:
     source: hosted
     version: "4.1.3"
   build_runner:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: build_runner
       sha256: "5367e521935b102bdf1e735d2aab461e36b2edca6517662d088dd04cc39f8d16"

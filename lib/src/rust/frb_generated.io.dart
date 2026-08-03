@@ -835,6 +835,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  CircleHandle dco_decode_box_autoadd_circle_handle(dynamic raw);
+
+  @protected
   CircleOr dco_decode_box_autoadd_circle_or(dynamic raw);
 
   @protected
@@ -891,6 +894,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   CertificationSet dco_decode_certification_set(dynamic raw);
+
+  @protected
+  CircleHandle dco_decode_circle_handle(dynamic raw);
 
   @protected
   CircleOr dco_decode_circle_or(dynamic raw);
@@ -1777,6 +1783,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  CircleHandle sse_decode_box_autoadd_circle_handle(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   CircleOr sse_decode_box_autoadd_circle_or(SseDeserializer deserializer);
 
   @protected
@@ -1839,6 +1850,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   CertificationSet sse_decode_certification_set(SseDeserializer deserializer);
+
+  @protected
+  CircleHandle sse_decode_circle_handle(SseDeserializer deserializer);
 
   @protected
   CircleOr sse_decode_circle_or(SseDeserializer deserializer);
@@ -2865,6 +2879,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_circle_handle(
+    CircleHandle self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_circle_or(
     CircleOr self,
     SseSerializer serializer,
@@ -2959,6 +2979,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     CertificationSet self,
     SseSerializer serializer,
   );
+
+  @protected
+  void sse_encode_circle_handle(CircleHandle self, SseSerializer serializer);
 
   @protected
   void sse_encode_circle_or(CircleOr self, SseSerializer serializer);
