@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:kata/pgp/cert/mini_card.dart';
 import 'package:kata/pgp/roots_provider.dart';
@@ -9,10 +8,17 @@ import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
-class _CertSelectorState extends State<CertSelector> {
+class KV<K, T> {
+  final K key;
+  final T value;
+
+  const KV({required this.key, required this.value});
+}
+
+class _CertSelectorState<K, V> extends State<CertSelector<K, V>> {
   Watcher? watcher;
-  Map<String, MaybeCert>? _certs;
-  final Set<String> _selected = {};
+  Map<K, V>? _certs;
+  final Set<K> _selected = {};
 
   Future<void> updateCerts() async {
     final PgpApp pgp = context.read();
@@ -21,22 +27,22 @@ class _CertSelectorState extends State<CertSelector> {
       _certs = null;
     });
 
-    List<MaybeCert> n = [];
+    List<KV<K, V>> n = [];
 
     try {
-      n = await pgp
-          .iterCerts()
-          .map((v) => MaybeCert.fromCert(cert: v))
-          .toList();
+      // n = await pgp
+      //     .iterCerts()
+      //     .map((v) => MaybeCert.fromCert(cert: v))
+      //     .toList();
+
+      n = await widget.valueBuilder(pgp);
     } catch (e) {
       logger.e("exception in cert selector: $e");
       _certs = null;
     }
 
     setState(() {
-      _certs = Map.fromEntries(
-        n.map((v) => MapEntry(v.fingerprint().name(), v)),
-      );
+      _certs = Map.fromEntries(n.map((v) => MapEntry(v.key, v.value)));
     });
   }
 
@@ -67,11 +73,12 @@ class _CertSelectorState extends State<CertSelector> {
           children: [
             Expanded(
               child: ListView(
-                children: certs.values.map((cert) {
-                  final fp = cert.fingerprint().name();
+                children: certs.entries.map((entry) {
                   return InkWell(
                     highlightColor: Colors.black,
                     onTap: () async {
+                      final fp = entry.key;
+
                       setState(() {
                         if (_selected.contains(fp)) {
                           _selected.remove(fp);
@@ -87,14 +94,13 @@ class _CertSelectorState extends State<CertSelector> {
                               .toList() ??
                           [];
 
-                      await widget.selected(entries);
+                      await widget.selected.use(entries);
                     },
-                    child: MiniCard(
-                      pgpKey: cert,
-                      cardColor: (switch (_selected.contains(fp)) {
-                        true => Colors.blue.shade100,
-                        false => Colors.white,
-                      }),
+                    child: widget.builder.use(
+                      ctx,
+                      entry.key,
+                      entry.value,
+                      _selected,
                     ),
                   );
                 }).toList(),
@@ -107,9 +113,33 @@ class _CertSelectorState extends State<CertSelector> {
   }
 }
 
-class CertSelector extends StatefulWidget {
-  final FutureOr<void> Function(List<MaybeCert>) selected;
-  const CertSelector({super.key, required this.selected});
+typedef BuilderFunction<K, V> = dynamic Function(BuildContext, K, V, Set<K>);
+
+typedef SelectedFunction<V> = FutureOr<void> Function(V);
+
+class BoxedType<K, V> {
+  final BuilderFunction<K, V> func;
+  const BoxedType({required this.func});
+  dynamic use(BuildContext ctx, K k, V v, dynamic s) =>
+      func(ctx, k, v, Set<K>.from(s));
+}
+
+class BoxSelected<V> {
+  final SelectedFunction<List<V>> func;
+  const BoxSelected({required this.func});
+  FutureOr<void> use(dynamic v) => func(List<V>.from(v));
+}
+
+class CertSelector<K, V> extends StatefulWidget {
+  final BoxSelected<V> selected;
+  final BoxedType<K, V> builder;
+  final FutureOr<List<KV<K, V>>> Function(PgpApp) valueBuilder;
+  const CertSelector({
+    super.key,
+    required this.selected,
+    required this.builder,
+    required this.valueBuilder,
+  });
 
   @override
   State<StatefulWidget> createState() => _CertSelectorState();

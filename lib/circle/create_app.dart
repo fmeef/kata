@@ -7,7 +7,10 @@ import 'package:kata/fab_observer.dart';
 import 'package:kata/fab_state.dart';
 import 'package:kata/pgp/cert/active_cert.dart';
 import 'package:kata/pgp/cert/cert_selector.dart';
+import 'package:kata/pgp/cert/mini_card.dart';
+import 'package:kata/pgp/cert/user_selector.dart';
 import 'package:kata/src/rust/api.dart';
+import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:kata/src/rust/api/pgp/circles/app.dart';
 import 'package:provider/provider.dart';
 
@@ -51,7 +54,7 @@ class _CreateAppState extends State<CreateApp> {
 
         Expanded(
           flex: 3,
-          child: CertSelector(
+          child: UserSelector(
             selected: (l) async {
               final ActiveCert cert = context.read();
               final activeCert = cert.cert;

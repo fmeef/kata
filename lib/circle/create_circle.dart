@@ -5,6 +5,7 @@ import 'package:kata/circle/circle_list_options.dart';
 import 'package:kata/fab_observer.dart';
 import 'package:kata/fab_state.dart';
 import 'package:kata/pgp/cert/cert_selector.dart';
+import 'package:kata/pgp/cert/user_selector.dart';
 import 'package:kata/src/rust/api.dart';
 import 'package:kata/src/rust/api/pgp.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
@@ -52,7 +53,7 @@ class _CreateAppState extends State<CreateCircle> {
 
         Expanded(
           flex: 3,
-          child: CertSelector(
+          child: UserSelector(
             selected: (l) async {
               final c = await pgpApp.createCircle(
                 keys: l
