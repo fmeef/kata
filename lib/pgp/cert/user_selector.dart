@@ -12,7 +12,7 @@ class UserSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CertSelector<String, MaybeCert>(
-      selected: BoxSelected(func: selected),
+      selected: selected,
       valueBuilder: (pgpApp) async => await pgpApp
           .iterCerts()
           .map(
@@ -22,14 +22,12 @@ class UserSelector extends StatelessWidget {
             ),
           )
           .toList(),
-      builder: BoxedType(
-        func: (ctx, k, v, selected) => MiniCard(
-          pgpKey: v,
-          cardColor: (switch (selected.contains(k)) {
-            true => Colors.blue.shade100,
-            false => Colors.white,
-          }),
-        ),
+      builder: (ctx, k, v, selected) => MiniCard(
+        pgpKey: v,
+        cardColor: (switch (selected.contains(k)) {
+          true => Colors.blue.shade100,
+          false => Colors.white,
+        }),
       ),
     );
   }

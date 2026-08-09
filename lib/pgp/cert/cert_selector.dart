@@ -94,9 +94,9 @@ class _CertSelectorState<K, V> extends State<CertSelector<K, V>> {
                               .toList() ??
                           [];
 
-                      await widget.selected.use(entries);
+                      await widget.selectedBox.use(entries);
                     },
-                    child: widget.builder.use(
+                    child: widget.builderBox.use(
                       ctx,
                       entry.key,
                       entry.value,
@@ -131,15 +131,20 @@ class BoxSelected<V> {
 }
 
 class CertSelector<K, V> extends StatefulWidget {
-  final BoxSelected<V> selected;
-  final BoxedType<K, V> builder;
+  late final BoxSelected<V> selectedBox;
+  late final BoxedType<K, V> builderBox;
+  final BuilderFunction<K, V> builder;
+  final SelectedFunction<List<V>> selected;
   final FutureOr<List<KV<K, V>>> Function(PgpApp) valueBuilder;
-  const CertSelector({
+  CertSelector({
     super.key,
     required this.selected,
     required this.builder,
     required this.valueBuilder,
-  });
+  }) {
+    builderBox = BoxedType(func: builder);
+    selectedBox = BoxSelected(func: selected);
+  }
 
   @override
   State<StatefulWidget> createState() => _CertSelectorState();
