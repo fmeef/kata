@@ -1,19 +1,33 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:kata/src/rust/api/db/connection.dart';
+import 'package:kata/circle/omni_card.dart';
+import 'package:kata/pgp/cert/cert_selector.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
 
-class _CircleSelectorState extends State<CircleSelector> {
-  Watcher? watcher;
+class CircleSelector extends StatelessWidget {
+  final FutureOr<void> Function(List<CircleOr>) selected;
+  final CircleHandle? parent;
+  const CircleSelector({super.key, required this.selected, this.parent});
+
   @override
   Widget build(BuildContext context) {
-    return Column();
+    return CertSelector<String, CircleOr>(
+      selected: selected,
+      builder: (ctx, k, v, selected) => OmniCard(circle: v),
+      valueBuilder: (pgpApp) async {
+        if (parent != null) {
+          return await pgpApp
+              .getCirclesForParent(parent: parent!)
+              .asStream()
+              .map((v) => v.map((v) => KV(key: v.idHex(), value: v)).toList())
+              .first;
+        } else {
+          final circles = await pgpApp.getDb().getCirclesJoin();
+          final db = await pgpApp.circlesFromDb(members: circles);
+          return db.map((v) => KV(key: v.idHex(), value: v)).toList();
+        }
+      },
+    );
   }
-}
-
-class CircleSelector extends StatefulWidget {
-  final CircleHandle? parent;
-  const CircleSelector({super.key, this.parent});
-
-  @override
-  State<StatefulWidget> createState() => _CircleSelectorState();
 }

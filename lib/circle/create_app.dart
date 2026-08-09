@@ -6,11 +6,8 @@ import 'package:kata/circle/circle_list_options.dart';
 import 'package:kata/fab_observer.dart';
 import 'package:kata/fab_state.dart';
 import 'package:kata/pgp/cert/active_cert.dart';
-import 'package:kata/pgp/cert/cert_selector.dart';
-import 'package:kata/pgp/cert/mini_card.dart';
 import 'package:kata/pgp/cert/user_selector.dart';
 import 'package:kata/src/rust/api.dart';
-import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:kata/src/rust/api/pgp/circles/app.dart';
 import 'package:provider/provider.dart';
 
@@ -69,8 +66,6 @@ class _CreateAppState extends State<CreateApp> {
                     tag: MemberTag.merge,
                   );
                 }
-
-                final id = c.getIdUserhandle();
 
                 setState(() {
                   _circle = c;

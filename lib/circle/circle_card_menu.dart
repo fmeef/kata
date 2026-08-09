@@ -1,5 +1,6 @@
 import 'package:kata/circle/circle_delete_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:kata/circle/circle_selector.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
 
 class _CircleCardMenuState extends State<CircleCardMenu> {
@@ -17,6 +18,13 @@ class _CircleCardMenuState extends State<CircleCardMenu> {
             context: context,
             builder: (ctx) =>
                 CircleDeleteDialog(circle: widget.circle, context: context),
+          ),
+        ),
+        MenuItemButton(
+          child: const Text('Add to circle'),
+          onPressed: () async => showModalBottomSheet(
+            context: context,
+            builder: (ctx) => CircleSelector(selected: (sel) => ()),
           ),
         ),
       ],

@@ -1308,7 +1308,7 @@ abstract class RustLibApi extends BaseApi {
 
   CircleHandle crateApiPgpCirclesCircleOrHandle({required CircleOr that});
 
-  Future<String> crateApiPgpCirclesCircleOrIdHex({required CircleOr that});
+  String crateApiPgpCirclesCircleOrIdHex({required CircleOr that});
 
   Future<void> crateApiPgpCirclesCircleOrInsert({
     required CircleOr that,
@@ -11809,18 +11809,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "circle_or_handle", argNames: ["that"]);
 
   @override
-  Future<String> crateApiPgpCirclesCircleOrIdHex({required CircleOr that}) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
+  String crateApiPgpCirclesCircleOrIdHex({required CircleOr that}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_circle_or(that, serializer);
-          pdeCallFfi(
+          return pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
             funcId: 358,
-            port: port_,
-          );
+          )!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,

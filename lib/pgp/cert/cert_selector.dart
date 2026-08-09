@@ -1,10 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:kata/pgp/cert/mini_card.dart';
 import 'package:kata/pgp/roots_provider.dart';
 import 'package:kata/src/rust/api.dart';
 import 'package:kata/src/rust/api/db/connection.dart';
-import 'package:kata/src/rust/api/pgp/cert.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 

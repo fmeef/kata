@@ -15,7 +15,7 @@ part 'circles.freezed.dart';
 // These functions are ignored because they are not marked as `pub`: `as_bytes`, `as_read`, `db_type`, `empty`, `from_app_member`, `from_circle_or`, `get_children_parent`, `get_children`, `get_parent_cache`, `get_parent_vec`, `get_type_str`, `get_userhandle`
 // These functions are ignored because they have generic arguments: `new`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `CircleOrRef`, `CircleOrVisitor`, `TagOr`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_receiver_is_total_eq`, `assert_receiver_is_total_eq`, `assert_receiver_is_total_eq`, `assert_receiver_is_total_eq`, `assert_receiver_is_total_eq`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `deserialize`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `expecting`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `hash`, `hash`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `read`, `serialize`, `visit_map`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `deserialize`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `expecting`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `hash`, `hash`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `read`, `serialize`, `visit_map`
 // These functions are ignored (category: IgnoreBecauseNotAllowedOwner): `get_id_userhandle`, `get_id`, `get_member`, `get_members`, `get_type`, `insert`, `iter_members`, `verify`
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<CircleEntry>>
@@ -119,7 +119,7 @@ sealed class CircleOr with _$CircleOr {
   CircleHandle handle() =>
       RustLib.instance.api.crateApiPgpCirclesCircleOrHandle(that: this);
 
-  Future<String> idHex() =>
+  String idHex() =>
       RustLib.instance.api.crateApiPgpCirclesCircleOrIdHex(that: this);
 
   Future<void> insert({required SqliteDb db}) =>
