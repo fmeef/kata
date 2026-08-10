@@ -7,7 +7,8 @@ import 'package:kata/src/rust/api/pgp/fingerprint/visual_key.dart';
 
 class MemberEntry extends StatelessWidget {
   final CircleEntry entry;
-  const MemberEntry({super.key, required this.entry});
+  final bool noclick;
+  const MemberEntry({super.key, required this.entry, this.noclick = true});
 
   @override
   Widget build(BuildContext context) {
@@ -30,17 +31,26 @@ class MemberEntry extends StatelessWidget {
             padding: EdgeInsetsGeometry.directional(end: 8),
             child: Icon(icon),
           ),
-          Expanded(
-            child: SmartFingerprint(
-              fingerprint: id,
-              builder: builder,
-              mode: FingerprintMode.userid,
-              onTap: (id) => context.push(
-                '/circles',
-                extra: CircleListOptions(parent: id.handle()),
+          if (noclick)
+            Expanded(
+              child: SmartFingerprint(
+                fingerprint: id,
+                mode: FingerprintMode.userid,
+                builder: builder,
+              ),
+            )
+          else
+            Expanded(
+              child: SmartFingerprint(
+                fingerprint: id,
+                builder: builder,
+                mode: FingerprintMode.userid,
+                onTap: (id) => context.push(
+                  '/circles',
+                  extra: CircleListOptions(parent: id.handle()),
+                ),
               ),
             ),
-          ),
         ],
       );
     } else {

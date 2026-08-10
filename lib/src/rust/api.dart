@@ -56,6 +56,8 @@ abstract class PgpApp
 
   Future<List<CircleOr>> circlesFromDb({
     required List<CircleWithMembers> members,
+    required bool users,
+    CircleHandle? parent,
   });
 
   static Future<PgpApp> create({required Config config}) =>
@@ -90,8 +92,12 @@ abstract class PgpApp
   @override
   GenerateCert generateKey({required String email});
 
+  Future<List<String>> getAllCircleIds();
+
   @override
   Future<PgpCertWithIds?> getCertByRole({required String role});
+
+  Future<CircleOr?> getCircleById({required CircleHandle id});
 
   Future<List<CircleOr>> getCirclesForParent({required CircleHandle parent});
 

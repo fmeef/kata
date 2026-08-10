@@ -861,6 +861,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   OnlyFingerprint dco_decode_box_autoadd_only_fingerprint(dynamic raw);
 
   @protected
+  OnlyId dco_decode_box_autoadd_only_id(dynamic raw);
+
+  @protected
   OnlyOnline dco_decode_box_autoadd_only_online(dynamic raw);
 
   @protected
@@ -988,6 +991,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<MaybeCert> dco_decode_list_maybe_cert(dynamic raw);
 
   @protected
+  List<OnlyId> dco_decode_list_only_id(dynamic raw);
+
+  @protected
   List<int> dco_decode_list_prim_u_8_loose(dynamic raw);
 
   @protected
@@ -1024,6 +1030,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   OnlyFingerprint dco_decode_only_fingerprint(dynamic raw);
 
   @protected
+  OnlyId dco_decode_only_id(dynamic raw);
+
+  @protected
   OnlyOnline dco_decode_only_online(dynamic raw);
 
   @protected
@@ -1055,6 +1064,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   dco_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
     dynamic raw,
   );
+
+  @protected
+  CircleHandle? dco_decode_opt_box_autoadd_circle_handle(dynamic raw);
 
   @protected
   CircleOr? dco_decode_opt_box_autoadd_circle_or(dynamic raw);
@@ -1815,6 +1827,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  OnlyId sse_decode_box_autoadd_only_id(SseDeserializer deserializer);
+
+  @protected
   OnlyOnline sse_decode_box_autoadd_only_online(SseDeserializer deserializer);
 
   @protected
@@ -1950,6 +1965,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<MaybeCert> sse_decode_list_maybe_cert(SseDeserializer deserializer);
 
   @protected
+  List<OnlyId> sse_decode_list_only_id(SseDeserializer deserializer);
+
+  @protected
   List<int> sse_decode_list_prim_u_8_loose(SseDeserializer deserializer);
 
   @protected
@@ -1988,6 +2006,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   OnlyFingerprint sse_decode_only_fingerprint(SseDeserializer deserializer);
 
   @protected
+  OnlyId sse_decode_only_id(SseDeserializer deserializer);
+
+  @protected
   OnlyOnline sse_decode_only_online(SseDeserializer deserializer);
 
   @protected
@@ -2017,6 +2038,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   UserHandle?
   sse_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  CircleHandle? sse_decode_opt_box_autoadd_circle_handle(
     SseDeserializer deserializer,
   );
 
@@ -2926,6 +2952,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_only_id(OnlyId self, SseSerializer serializer);
+
+  @protected
   void sse_encode_box_autoadd_only_online(
     OnlyOnline self,
     SseSerializer serializer,
@@ -3097,6 +3126,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_list_only_id(List<OnlyId> self, SseSerializer serializer);
+
+  @protected
   void sse_encode_list_prim_u_8_loose(List<int> self, SseSerializer serializer);
 
   @protected
@@ -3143,6 +3175,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_only_id(OnlyId self, SseSerializer serializer);
+
+  @protected
   void sse_encode_only_online(OnlyOnline self, SseSerializer serializer);
 
   @protected
@@ -3176,6 +3211,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void
   sse_encode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
     UserHandle? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_circle_handle(
+    CircleHandle? self,
     SseSerializer serializer,
   );
 

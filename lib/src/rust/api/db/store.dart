@@ -12,8 +12,8 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 // These functions are ignored because they are not marked as `pub`: `as_tsk`, `get_bytes`, `get_userhandle`, `merge`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `DbMembers`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `cmp`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`
-// These functions are ignored (category: IgnoreBecauseExplicitAttribute): `from_row`, `from_row`, `from_row`, `from_row`, `from_row`, `from_row`, `get_params`, `get_params`, `get_params`, `get_params`, `get_params`, `get_params`, `insert_on_conflict_custom`, `insert_on_conflict_custom`, `insert_on_conflict_custom`, `insert_on_conflict_custom`, `insert_on_conflict_custom`, `insert_on_conflict_custom`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `cmp`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`
+// These functions are ignored (category: IgnoreBecauseExplicitAttribute): `from_row`, `from_row`, `from_row`, `from_row`, `from_row`, `from_row`, `from_row`, `get_params`, `get_params`, `get_params`, `get_params`, `get_params`, `get_params`, `get_params`, `insert_on_conflict_custom`, `insert_on_conflict_custom`, `insert_on_conflict_custom`, `insert_on_conflict_custom`, `insert_on_conflict_custom`, `insert_on_conflict_custom`, `insert_on_conflict_custom`
 // These functions are ignored (category: IgnoreBecauseNotAllowedOwner): `from_row`
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<CircleData>>
@@ -173,6 +173,8 @@ abstract class CertDao {
 
   Future<void> deleteCircleMember({required String id});
 
+  Future<List<OnlyId>> getAllCircleIds();
+
   Future<List<PgpDataCert>> getByDomain({required String domain});
 
   Future<List<PgpDataCert>> getByEmail({required String email});
@@ -189,6 +191,11 @@ abstract class CertDao {
   });
 
   Future<List<CircleWithMembers>> getCircleRoots();
+
+  Future<List<CircleWithMembers>> getCirclesById({
+    required String id,
+    required String circleType,
+  });
 
   Future<List<CircleWithMembers>> getCirclesForParent({
     required String parent,
@@ -273,6 +280,55 @@ class OnlyFingerprint {
       other is OnlyFingerprint &&
           runtimeType == other.runtimeType &&
           fingerprint == other.fingerprint;
+}
+
+class OnlyId {
+  final String id;
+
+  const OnlyId({required this.id});
+
+  Future<void> delete({required SqliteDb conn}) =>
+      RustLib.instance.api.crateApiDbStoreOnlyIdDelete(that: this, conn: conn);
+
+  static Future<bool> hasParams() =>
+      RustLib.instance.api.crateApiDbStoreOnlyIdHasParams();
+
+  Future<void> insert({required SqliteDb conn}) =>
+      RustLib.instance.api.crateApiDbStoreOnlyIdInsert(that: this, conn: conn);
+
+  Future<void> insertOnConflict({
+    required SqliteDb conn,
+    required OnConflict onConflict,
+  }) => RustLib.instance.api.crateApiDbStoreOnlyIdInsertOnConflict(
+    that: this,
+    conn: conn,
+    onConflict: onConflict,
+  );
+
+  Future<void> insertOnConflictCols({
+    required SqliteDb conn,
+    required OnConflict onConflict,
+    required List<String> cols,
+  }) => RustLib.instance.api.crateApiDbStoreOnlyIdInsertOnConflictCols(
+    that: this,
+    conn: conn,
+    onConflict: onConflict,
+    cols: cols,
+  );
+
+  static Future<bool> isEntity() =>
+      RustLib.instance.api.crateApiDbStoreOnlyIdIsEntity();
+
+  Future<void> update({required SqliteDb conn}) =>
+      RustLib.instance.api.crateApiDbStoreOnlyIdUpdate(that: this, conn: conn);
+
+  @override
+  int get hashCode => id.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is OnlyId && runtimeType == other.runtimeType && id == other.id;
 }
 
 class OnlyOnline {

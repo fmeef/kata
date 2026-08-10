@@ -8,8 +8,18 @@ import 'package:kata/src/rust/api/pgp/circles.dart';
 class OmniCard extends StatelessWidget {
   final CircleOr circle;
   final bool expanded;
+  final bool noclick;
+  final BoxConstraints? constrained;
+  final Color? cardColor;
 
-  const OmniCard({super.key, required this.circle, this.expanded = false});
+  const OmniCard({
+    super.key,
+    required this.circle,
+    this.expanded = false,
+    this.noclick = true,
+    this.constrained,
+    this.cardColor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +28,20 @@ class OmniCard extends StatelessWidget {
         id: field0.getIdUserhandle(),
         members: field0,
         expanded: expanded,
+        cardColor: cardColor,
+        noclick: noclick,
+        constrained: constrained,
       ),
       CircleOr_App(:final field0) => AppCard(
         members: field0,
         expanded: expanded,
         id: field0.getIdUserhandle(),
+        cardColor: cardColor,
       ),
       CircleOr_User(:final field0) => CertCard(
         pgpKey: MaybeCert.fingerprint(fpr: field0),
         trust: BigInt.from(0),
+        cardColor: cardColor,
       ),
     });
   }

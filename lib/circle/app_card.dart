@@ -57,6 +57,7 @@ class _AppCardState extends State<AppCard> {
         )
         .toList();
     return Card(
+      color: widget.cardColor,
       child: Padding(
         padding: EdgeInsetsGeometry.fromSTEB(16, 8, 16, 8),
         child: ExpansionTile(
@@ -88,6 +89,7 @@ class AppCard extends StatefulWidget {
   final CircleApp members;
   final UserHandle id;
   final bool expanded;
+  final Color? cardColor;
   final FutureOr<void> Function(UserHandle, AppTag?)? onChange;
   const AppCard({
     super.key,
@@ -95,6 +97,7 @@ class AppCard extends StatefulWidget {
     required this.id,
     this.expanded = false,
     this.onChange,
+    this.cardColor,
   });
 
   @override

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kata/circle/circle_list.dart';
+import 'package:kata/circle/circle_selector.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
 
 class AddCircleBottomsheet extends StatelessWidget {
@@ -9,7 +9,9 @@ class AddCircleBottomsheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Expanded(child: CircleList(parent: parent)),
+        Expanded(
+          child: CircleSelector(parent: parent, selected: (sel) => ()),
+        ),
         Row(
           children: [
             ElevatedButton(onPressed: () => (), child: const Text('Add')),

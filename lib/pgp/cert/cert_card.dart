@@ -117,6 +117,7 @@ class _CertCardState extends State<CertCard> {
     }
 
     return Card(
+      color: widget.cardColor,
       child: Padding(
         padding: EdgeInsetsGeometry.fromSTEB(16, 8, 16, 8),
         child: Column(
@@ -200,6 +201,7 @@ class CertCard extends StatefulWidget {
   final BigInt trust;
   final GraphController? graphController;
   late final VisualKeyBuilder visualKeyBuilder;
+  final Color? cardColor;
   final cutoff = 560; // derived from length of themed fingerprint
   final secondCutoff = 560;
   CertCard({
@@ -209,6 +211,7 @@ class CertCard extends StatefulWidget {
     this.signable = true,
     required this.trust,
     this.graphController,
+    this.cardColor,
   }) {
     visualKeyBuilder = VisualKeyBuilder.fromHandle(
       data: pgpKey.fingerprint(),

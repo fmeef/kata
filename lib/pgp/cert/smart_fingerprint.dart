@@ -58,33 +58,41 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
     }
   }
 
+  List<Widget> lojbanInner(VisualKey field0) {
+    final theme = Theme.of(context);
+
+    return (field0.gismu
+                ?.map((v) => Text(v, style: theme.textTheme.bodySmall))
+                .toList() ??
+            []) +
+        [
+          if (field0.phone != null)
+            Text(field0.phone ?? "", style: theme.textTheme.bodySmall),
+        ];
+  }
+
   Widget lojban() {
     final theme = Theme.of(context);
     return (switch (visualKey) {
       VisualKeyOr_Gismu(:final field0) => Expanded(
-        child: InkWell(
-          onTap: () async => await widget.onTap(widget.fingerprint),
-          child: Wrap(
-            spacing: 4,
-            children:
-                (field0.gismu
-                        ?.map((v) => Text(v, style: theme.textTheme.bodySmall))
-                        .toList() ??
-                    []) +
-                [
-                  if (field0.phone != null)
-                    Text(field0.phone ?? "", style: theme.textTheme.bodySmall),
-                ],
+        child: (switch (widget.onTap) {
+          null => Wrap(spacing: 4, children: lojbanInner(field0)),
+          _ => InkWell(
+            onTap: () async => await widget.onTap!(widget.fingerprint),
+            child: Wrap(spacing: 4, children: lojbanInner(field0)),
           ),
-        ),
+        }),
       ),
       VisualKeyOr_Name(:final field0) => Expanded(
         child: Wrap(
           children: [
-            TextButton(
-              onPressed: () async => await widget.onTap(widget.fingerprint),
-              child: Text(field0, style: theme.textTheme.bodySmall),
-            ),
+            if (widget.onTap != null)
+              TextButton(
+                onPressed: () async => await widget.onTap!(widget.fingerprint),
+                child: Text(field0, style: theme.textTheme.bodySmall),
+              )
+            else
+              Text(field0, style: theme.textTheme.bodySmall),
           ],
         ),
       ),
@@ -121,10 +129,14 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
           FingerprintMode.fingerprint => Expanded(
             child: Wrap(
               children: [
-                TextButton(
-                  onPressed: () async => await widget.onTap(widget.fingerprint),
-                  child: Text(fp, style: theme.textTheme.bodySmall),
-                ),
+                if (widget.onTap != null)
+                  TextButton(
+                    onPressed: () async =>
+                        await widget.onTap!(widget.fingerprint),
+                    child: Text(fp, style: theme.textTheme.bodySmall),
+                  )
+                else
+                  Text(fp, style: theme.textTheme.bodySmall),
               ],
             ),
           ),
@@ -137,14 +149,21 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
                 height:
                     scaler.scale(theme.textTheme.bodySmall?.fontSize ?? 15) *
                     (theme.textTheme.bodySmall?.height ?? 1.0),
-                child: InkWell(
-                  onTap: () async => await widget.onTap(widget.fingerprint),
-                  child: MarqueePlus(
+                child: (switch (widget.onTap) {
+                  null => MarqueePlus(
                     text: comment,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     style: theme.textTheme.bodySmall,
                   ),
-                ),
+                  _ => InkWell(
+                    onTap: () async => await widget.onTap!(widget.fingerprint),
+                    child: MarqueePlus(
+                      text: comment,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      style: theme.textTheme.bodySmall,
+                    ),
+                  ),
+                }),
               ),
             ),
           }),
@@ -174,7 +193,7 @@ class SmartFingerprint extends StatefulWidget {
   final FingerprintMode? mode;
   final bool short;
   final VisualKeyBuilder builder;
-  final FutureOr<void> Function(UserHandle) onTap;
+  final FutureOr<void> Function(UserHandle)? onTap;
 
   const SmartFingerprint({
     super.key,
@@ -182,7 +201,7 @@ class SmartFingerprint extends StatefulWidget {
     required this.builder,
     this.mode,
     this.short = false,
-    this.onTap = onTapDefault,
+    this.onTap,
   });
 
   @override

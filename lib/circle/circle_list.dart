@@ -22,7 +22,7 @@ class _CircleListState extends State<CircleList> {
         });
       } else {
         final circles = await app.getDb().getCirclesJoin();
-        final c = await app.circlesFromDb(members: circles);
+        final c = await app.circlesFromDb(members: circles, users: false);
 
         setState(() {
           _members = c;
@@ -50,7 +50,7 @@ class _CircleListState extends State<CircleList> {
           }
         } else {
           final circles = await pgpApp.getDb().getCirclesJoin();
-          final c = await pgpApp.circlesFromDb(members: circles);
+          final c = await pgpApp.circlesFromDb(members: circles, users: false);
           if (mounted) {
             setState(() {
               _members = c;
