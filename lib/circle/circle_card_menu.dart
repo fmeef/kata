@@ -24,7 +24,7 @@ class _CircleCardMenuState extends State<CircleCardMenu> {
           child: const Text('Add to circle'),
           onPressed: () async => showModalBottomSheet(
             context: context,
-            builder: (ctx) => AddCircleBottomsheet(),
+            builder: (ctx) => AddCircleBottomsheet(add: widget.circle.handle()),
           ),
         ),
       ],

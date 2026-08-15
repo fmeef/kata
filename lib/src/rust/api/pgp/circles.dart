@@ -12,11 +12,11 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'circles.freezed.dart';
 
-// These functions are ignored because they are not marked as `pub`: `as_bytes`, `as_read`, `db_type`, `empty`, `from_app_member`, `from_circle_or`, `get_children_parent`, `get_children`, `get_parent_cache`, `get_parent_vec`, `get_type_str`, `get_userhandle`
+// These functions are ignored because they are not marked as `pub`: `as_bytes`, `as_read`, `db_type`, `empty`, `from_app_member`, `from_circle_or`, `get_bytes`, `get_children_parent`, `get_children`, `get_id_vec`, `get_parent_cache`, `get_parent_vec`, `get_type_str`, `get_userhandle`
 // These functions are ignored because they have generic arguments: `new`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `CircleOrRef`, `CircleOrVisitor`, `TagOr`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `deserialize`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `expecting`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `hash`, `hash`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `read`, `serialize`, `visit_map`
-// These functions are ignored (category: IgnoreBecauseNotAllowedOwner): `get_id_userhandle`, `get_id`, `get_member`, `get_members`, `get_type`, `insert`, `iter_members`, `verify`
+// These functions are ignored (category: IgnoreBecauseNotAllowedOwner): `get_id_userhandle`, `get_id`, `get_member`, `get_members`, `get_type`, `insert`, `iter_members`, `validate`, `verify`
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<CircleEntry>>
 abstract class CircleEntry implements RustOpaqueInterface {
@@ -49,6 +49,8 @@ abstract class GenericCircle implements RustOpaqueInterface {
 
   Stream<CircleEntry> iterMembers();
 
+  Future<bool> validate();
+
   Future<bool> verify();
 }
 
@@ -66,6 +68,8 @@ abstract class CircleLike {
   Future<void> insert({required SqliteDb db});
 
   Stream<CircleEntry> iterMembers();
+
+  Future<bool> validate();
 
   Future<bool> verify();
 }
@@ -95,6 +99,17 @@ sealed class CircleOr with _$CircleOr {
   const factory CircleOr.circle(Circle field0) = CircleOr_Circle;
   const factory CircleOr.user(UserHandle field0) = CircleOr_User;
   const factory CircleOr.app(CircleApp field0) = CircleOr_App;
+
+  Future<void> add({
+    required CircleOr circle,
+    required MemberTag tag,
+    required SqliteDb db,
+  }) => RustLib.instance.api.crateApiPgpCirclesCircleOrAdd(
+    that: this,
+    circle: circle,
+    tag: tag,
+    db: db,
+  );
 
   static CircleOr fromCert({required UserHandle userHandle}) => RustLib
       .instance
@@ -133,6 +148,9 @@ sealed class CircleOr with _$CircleOr {
 
   Future<void> toDb({required SqliteDb db}) =>
       RustLib.instance.api.crateApiPgpCirclesCircleOrToDb(that: this, db: db);
+
+  Future<bool> validate() =>
+      RustLib.instance.api.crateApiPgpCirclesCircleOrValidate(that: this);
 
   Future<bool> verify() =>
       RustLib.instance.api.crateApiPgpCirclesCircleOrVerify(that: this);

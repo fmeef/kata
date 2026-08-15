@@ -90,7 +90,7 @@ abstract class CircleWithMembers
 
   Future<Uint8List> getId();
 
-  Future<(String, Uint8List)> getIdTuple();
+  Future<(String, UserHandle)> getIdTuple();
 
   Future<UserHandle> getIdUserhandle();
 
@@ -98,7 +98,7 @@ abstract class CircleWithMembers
 
   Future<Uint8List?> getParentId();
 
-  Future<(String, Uint8List)?> getParentTuple();
+  Future<(String, UserHandle)?> getParentTuple();
 
   Future<MemberTag?> getTag();
 

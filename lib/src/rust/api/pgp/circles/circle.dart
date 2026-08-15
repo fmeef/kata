@@ -16,6 +16,8 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Circle>>
 abstract class Circle implements RustOpaqueInterface, CircleLike {
+  Future<Uint8List> getDigest();
+
   @override
   Uint8List getId();
 
@@ -44,6 +46,9 @@ abstract class Circle implements RustOpaqueInterface, CircleLike {
   Future<void> toDb({required SqliteDb db});
 
   Future<void> updateDigest();
+
+  @override
+  Future<bool> validate();
 
   @override
   Future<bool> verify();

@@ -875,7 +875,8 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   QrCodeContent dco_decode_box_autoadd_qr_code_content(dynamic raw);
 
   @protected
-  (String, Uint8List) dco_decode_box_autoadd_record_string_list_prim_u_8_strict(
+  (String, UserHandle)
+  dco_decode_box_autoadd_record_string_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_user_handle(
     dynamic raw,
   );
 
@@ -1084,8 +1085,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   QrCodeContent? dco_decode_opt_box_autoadd_qr_code_content(dynamic raw);
 
   @protected
-  (String, Uint8List)?
-  dco_decode_opt_box_autoadd_record_string_list_prim_u_8_strict(dynamic raw);
+  (String, UserHandle)?
+  dco_decode_opt_box_autoadd_record_string_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_user_handle(
+    dynamic raw,
+  );
 
   @protected
   SizedImage? dco_decode_opt_box_autoadd_sized_image(dynamic raw);
@@ -1113,6 +1116,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   dco_decode_record_opt_string_list_certification(dynamic raw);
 
   @protected
+  (String, UserHandle)
+  dco_decode_record_string_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_user_handle(
+    dynamic raw,
+  );
+
+  @protected
   (String, UserId)
   dco_decode_record_string_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_user_id(
     dynamic raw,
@@ -1120,11 +1129,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   (String, GraphVertex) dco_decode_record_string_graph_vertex(dynamic raw);
-
-  @protected
-  (String, Uint8List) dco_decode_record_string_list_prim_u_8_strict(
-    dynamic raw,
-  );
 
   @protected
   SizedImage dco_decode_sized_image(dynamic raw);
@@ -1843,7 +1847,8 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  (String, Uint8List) sse_decode_box_autoadd_record_string_list_prim_u_8_strict(
+  (String, UserHandle)
+  sse_decode_box_autoadd_record_string_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_user_handle(
     SseDeserializer deserializer,
   );
 
@@ -2070,8 +2075,8 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  (String, Uint8List)?
-  sse_decode_opt_box_autoadd_record_string_list_prim_u_8_strict(
+  (String, UserHandle)?
+  sse_decode_opt_box_autoadd_record_string_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_user_handle(
     SseDeserializer deserializer,
   );
 
@@ -2105,6 +2110,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   sse_decode_record_opt_string_list_certification(SseDeserializer deserializer);
 
   @protected
+  (String, UserHandle)
+  sse_decode_record_string_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_user_handle(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   (String, UserId)
   sse_decode_record_string_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_user_id(
     SseDeserializer deserializer,
@@ -2112,11 +2123,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   (String, GraphVertex) sse_decode_record_string_graph_vertex(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  (String, Uint8List) sse_decode_record_string_list_prim_u_8_strict(
     SseDeserializer deserializer,
   );
 
@@ -2973,8 +2979,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_box_autoadd_record_string_list_prim_u_8_strict(
-    (String, Uint8List) self,
+  void
+  sse_encode_box_autoadd_record_string_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_user_handle(
+    (String, UserHandle) self,
     SseSerializer serializer,
   );
 
@@ -3251,8 +3258,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void sse_encode_opt_box_autoadd_record_string_list_prim_u_8_strict(
-    (String, Uint8List)? self,
+  void
+  sse_encode_opt_box_autoadd_record_string_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_user_handle(
+    (String, UserHandle)? self,
     SseSerializer serializer,
   );
 
@@ -3294,6 +3302,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
+  sse_encode_record_string_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_user_handle(
+    (String, UserHandle) self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
   sse_encode_record_string_auto_owned_rust_opaque_flutter_rust_bridgefor_generated_rust_auto_opaque_inner_user_id(
     (String, UserId) self,
     SseSerializer serializer,
@@ -3302,12 +3317,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_record_string_graph_vertex(
     (String, GraphVertex) self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_record_string_list_prim_u_8_strict(
-    (String, Uint8List) self,
     SseSerializer serializer,
   );
 

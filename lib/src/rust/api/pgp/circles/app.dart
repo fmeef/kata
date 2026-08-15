@@ -61,6 +61,9 @@ abstract class CircleApp implements RustOpaqueInterface, CircleLike {
   void updateTag({required UserHandle id, required MemberTag tag});
 
   @override
+  Future<bool> validate();
+
+  @override
   Future<bool> verify();
 }
 

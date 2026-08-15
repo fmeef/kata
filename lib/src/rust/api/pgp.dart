@@ -69,6 +69,9 @@ abstract class UserHandle implements RustOpaqueInterface, CircleLike {
   Future<void> toDb({required SqliteDb db});
 
   @override
+  Future<bool> validate();
+
+  @override
   Future<bool> verify();
 }
 
