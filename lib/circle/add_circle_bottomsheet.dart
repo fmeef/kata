@@ -30,7 +30,7 @@ class _AddCircleBottomsheetState extends State<AddCircleBottomsheet> {
                     await circle.add(
                       circle: add,
                       tag: MemberTag.merge,
-                      db: pgpApp.getDb(),
+                      db: pgpApp,
                     );
                   }
                 }

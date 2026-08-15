@@ -1327,7 +1327,7 @@ abstract class RustLibApi extends BaseApi {
     required CircleOr that,
     required CircleOr circle,
     required MemberTag tag,
-    required SqliteDb db,
+    required PgpApp db,
   });
 
   CircleOr crateApiPgpCirclesCircleOrFromCert({required UserHandle userHandle});
@@ -12008,7 +12008,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     required CircleOr that,
     required CircleOr circle,
     required MemberTag tag,
-    required SqliteDb db,
+    required PgpApp db,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -12017,7 +12017,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           sse_encode_box_autoadd_circle_or(that, serializer);
           sse_encode_box_autoadd_circle_or(circle, serializer);
           sse_encode_member_tag(tag, serializer);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSqliteDb(
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerPgpApp(
             db,
             serializer,
           );

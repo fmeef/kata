@@ -3,6 +3,7 @@
 
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
+import '../../api.dart';
 import '../../frb_generated.dart';
 import '../db/connection.dart';
 import '../pgp.dart';
@@ -103,7 +104,7 @@ sealed class CircleOr with _$CircleOr {
   Future<void> add({
     required CircleOr circle,
     required MemberTag tag,
-    required SqliteDb db,
+    required PgpApp db,
   }) => RustLib.instance.api.crateApiPgpCirclesCircleOrAdd(
     that: this,
     circle: circle,
