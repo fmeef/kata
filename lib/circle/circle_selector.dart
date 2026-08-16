@@ -30,7 +30,11 @@ class CircleSelector extends StatelessWidget {
               .first;
         } else {
           final circles = await pgpApp.getDb().getCirclesJoin();
-          final db = await pgpApp.circlesFromDb(members: circles, users: false);
+          final db = await pgpApp.circlesFromDb(
+            members: circles,
+            users: false,
+            all: true,
+          );
           return db.map((v) => KV(key: v.idHex(), value: v)).toList();
         }
       },

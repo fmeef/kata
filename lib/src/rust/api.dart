@@ -58,6 +58,7 @@ abstract class PgpApp
     required List<CircleWithMembers> members,
     required bool users,
     CircleHandle? parent,
+    required bool all,
   });
 
   static Future<PgpApp> create({required Config config}) =>

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:kata/circle/circle_list_options.dart';
 import 'package:kata/pgp/cert/smart_fingerprint.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
 import 'package:kata/src/rust/api/pgp/fingerprint/visual_key.dart';
@@ -32,7 +34,11 @@ class AppMemberEntry extends StatelessWidget {
             child: SmartFingerprint(
               fingerprint: id,
               builder: builder,
-              mode: FingerprintMode.userid,
+              mode: FingerprintMode.fingerprint,
+              onTap: (v) => context.push(
+                '/circles',
+                extra: CircleListOptions(parent: circle.handle()),
+              ),
             ),
           ),
         ],

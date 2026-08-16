@@ -3,7 +3,6 @@
 
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
-import '../../../api.dart';
 import '../../../frb_generated.dart';
 import '../../db/connection.dart';
 import '../../pgp.dart';
@@ -53,8 +52,6 @@ abstract class CircleApp implements RustOpaqueInterface, CircleLike {
   Future<void> merge({required CircleApp other});
 
   Future<void> mergeBoth({required CircleApp other});
-
-  Future<void> setPgp({required PgpApp app});
 
   Future<void> toDb({required SqliteDb db});
 
