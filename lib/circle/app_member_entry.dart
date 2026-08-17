@@ -34,7 +34,7 @@ class AppMemberEntry extends StatelessWidget {
             child: SmartFingerprint(
               fingerprint: id,
               builder: builder,
-              mode: FingerprintMode.fingerprint,
+              mode: FingerprintMode.userid,
               onTap: (v) => context.push(
                 '/circles',
                 extra: CircleListOptions(parent: circle.handle()),

@@ -90,7 +90,7 @@ class AppCard extends StatefulWidget {
   final UserHandle id;
   final bool expanded;
   final Color? cardColor;
-  final FutureOr<void> Function(UserHandle, AppTag?)? onChange;
+  final FutureOr<void> Function(CircleHandle, AppTag?)? onChange;
   const AppCard({
     super.key,
     required this.members,

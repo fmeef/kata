@@ -6,6 +6,7 @@
 import '../../api.dart';
 import '../../frb_generated.dart';
 import '../db/connection.dart';
+import '../db/store.dart';
 import '../pgp.dart';
 import 'circles/app.dart';
 import 'circles/circle.dart';
@@ -13,54 +14,17 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'circles.freezed.dart';
 
-// These functions are ignored because they are not marked as `pub`: `as_bytes`, `as_read`, `db_type`, `empty`, `from_app_member`, `from_circle_or`, `get_bytes`, `get_children_parent`, `get_children`, `get_id_vec`, `get_parent_cache`, `get_parent_vec`, `get_type_str`, `get_userhandle`
-// These functions are ignored because they have generic arguments: `new`
+// These functions are ignored because they are not marked as `pub`: `as_bytes`, `as_read`, `db_type`, `empty`, `from_app_member`, `from_circle_or`, `get_bin`, `get_bytes`, `get_children_parent`, `get_children`, `get_id_vec`, `get_parent_cache`, `get_parent_vec`, `get_type_str`, `get_type_u8`, `get_userhandle`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `CircleOrRef`, `TagOr`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `hash`, `hash`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `read`
-// These functions are ignored (category: IgnoreBecauseNotAllowedOwner): `get_id_userhandle`, `get_id`, `get_member`, `get_members`, `get_type`, `insert`, `iter_members`, `validate`, `verify`
-
-// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<CircleEntry>>
-abstract class CircleEntry implements RustOpaqueInterface {
-  CircleOr? get content;
-
-  UserHandle get id;
-
-  MemberTag? get tag;
-
-  set content(CircleOr? content);
-
-  set id(UserHandle id);
-
-  set tag(MemberTag? tag);
-}
-
-// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Lifetimeable < GenericCircle < 'static > >>>
-abstract class GenericCircle implements RustOpaqueInterface {
-  Uint8List getId();
-
-  UserHandle getIdUserhandle();
-
-  CircleEntry? getMember({required UserHandle id});
-
-  List<CircleEntry> getMembers();
-
-  CircleType getType();
-
-  Future<void> insert({required SqliteDb db});
-
-  Stream<CircleEntry> iterMembers();
-
-  Future<bool> validate();
-
-  Future<bool> verify();
-}
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `hash`, `hash`, `hash`, `hash`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `read`
+// These functions are ignored (category: IgnoreBecauseNotAllowedOwner): `from_db`, `get_id_userhandle`, `get_id`, `get_member`, `get_members`, `get_type`, `insert`, `iter_members`, `validate`, `verify`
 
 abstract class CircleLike {
   Uint8List getId();
 
   UserHandle getIdUserhandle();
 
-  CircleEntry? getMember({required UserHandle id});
+  CircleEntry? getMember({required CircleHandle id});
 
   List<CircleEntry> getMembers();
 
@@ -73,6 +37,26 @@ abstract class CircleLike {
   Future<bool> validate();
 
   Future<bool> verify();
+}
+
+class CircleEntry {
+  final CircleHandle id;
+  final CircleOr? content;
+  final MemberTag? tag;
+
+  const CircleEntry({required this.id, this.content, this.tag});
+
+  @override
+  int get hashCode => id.hashCode ^ content.hashCode ^ tag.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CircleEntry &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          content == other.content &&
+          tag == other.tag;
 }
 
 class CircleHandle {
@@ -117,13 +101,16 @@ sealed class CircleOr with _$CircleOr {
       .api
       .crateApiPgpCirclesCircleOrFromCert(userHandle: userHandle);
 
+  static Future<CircleOr> fromDb({required List<CircleWithMembers> db}) =>
+      RustLib.instance.api.crateApiPgpCirclesCircleOrFromDb(db: db);
+
   Uint8List getId() =>
       RustLib.instance.api.crateApiPgpCirclesCircleOrGetId(that: this);
 
   UserHandle getIdUserhandle() => RustLib.instance.api
       .crateApiPgpCirclesCircleOrGetIdUserhandle(that: this);
 
-  CircleEntry? getMember({required UserHandle id}) => RustLib.instance.api
+  CircleEntry? getMember({required CircleHandle id}) => RustLib.instance.api
       .crateApiPgpCirclesCircleOrGetMember(that: this, id: id);
 
   List<CircleEntry> getMembers() =>
@@ -141,7 +128,7 @@ sealed class CircleOr with _$CircleOr {
   Future<void> insert({required SqliteDb db}) =>
       RustLib.instance.api.crateApiPgpCirclesCircleOrInsert(that: this, db: db);
 
-  Future<bool> isMember({required UserHandle user}) => RustLib.instance.api
+  Future<bool> isMember({required CircleHandle user}) => RustLib.instance.api
       .crateApiPgpCirclesCircleOrIsMember(that: this, user: user);
 
   Stream<CircleEntry> iterMembers() =>

@@ -48,7 +48,7 @@ class CircleCard extends StatelessWidget {
                     ),
                     Expanded(
                       child: Text(
-                        id.name(),
+                        id.separateLujvo().joinGismu(),
                         style: theme.textTheme.titleMedium,
                       ),
                     ),

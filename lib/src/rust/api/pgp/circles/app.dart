@@ -5,6 +5,7 @@
 
 import '../../../frb_generated.dart';
 import '../../db/connection.dart';
+import '../../db/store.dart';
 import '../../pgp.dart';
 import '../circles.dart';
 import 'circle.dart';
@@ -24,6 +25,9 @@ abstract class CircleApp implements RustOpaqueInterface, CircleLike {
 
   NonOpaqueApp consumeMembers();
 
+  static Future<CircleApp> fromDb({required List<CircleWithMembers> db}) =>
+      RustLib.instance.api.crateApiPgpCirclesAppCircleAppFromDb(db: db);
+
   @override
   Uint8List getId();
 
@@ -31,7 +35,7 @@ abstract class CircleApp implements RustOpaqueInterface, CircleLike {
   UserHandle getIdUserhandle();
 
   @override
-  CircleEntry? getMember({required UserHandle id});
+  CircleEntry? getMember({required CircleHandle id});
 
   @override
   List<CircleEntry> getMembers();
@@ -44,7 +48,7 @@ abstract class CircleApp implements RustOpaqueInterface, CircleLike {
   @override
   Future<void> insert({required SqliteDb db});
 
-  Future<bool> isMember({required UserHandle user});
+  Future<bool> isMember({required CircleHandle user});
 
   @override
   Stream<CircleEntry> iterMembers();
@@ -55,7 +59,7 @@ abstract class CircleApp implements RustOpaqueInterface, CircleLike {
 
   Future<void> toDb({required SqliteDb db});
 
-  void updateTag({required UserHandle id, required MemberTag tag});
+  void updateTag({required CircleHandle id, required MemberTag tag});
 
   @override
   Future<bool> validate();

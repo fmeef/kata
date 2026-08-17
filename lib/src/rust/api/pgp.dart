@@ -5,9 +5,12 @@
 
 import '../frb_generated.dart';
 import 'db/connection.dart';
+import 'db/store.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'pgp/cert.dart';
 import 'pgp/circles.dart';
+import 'pgp/circles/app.dart';
+import 'pgp/circles/circle.dart';
 import 'pgp/fingerprint/visual_key.dart';
 import 'pgp/import.dart';
 
@@ -26,6 +29,9 @@ abstract class UserHandle implements RustOpaqueInterface, CircleLike {
 
   String compositeLujvoOrElse({required bool short});
 
+  static Future<UserHandle> fromDb({required List<CircleWithMembers> db}) =>
+      RustLib.instance.api.crateApiPgpUserHandleFromDb(db: db);
+
   static UserHandle fromHex({required String hex}) =>
       RustLib.instance.api.crateApiPgpUserHandleFromHex(hex: hex);
 
@@ -36,7 +42,7 @@ abstract class UserHandle implements RustOpaqueInterface, CircleLike {
   UserHandle getIdUserhandle();
 
   @override
-  CircleEntry? getMember({required UserHandle id});
+  CircleEntry? getMember({required CircleHandle id});
 
   @override
   List<CircleEntry> getMembers();
