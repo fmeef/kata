@@ -60,7 +60,7 @@ class CircleEntry {
 }
 
 class CircleHandle {
-  final String id;
+  final UserHandle id;
   final CircleType circleType;
 
   const CircleHandle({required this.id, required this.circleType});

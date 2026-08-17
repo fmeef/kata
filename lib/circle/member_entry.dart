@@ -54,7 +54,38 @@ class MemberEntry extends StatelessWidget {
         ],
       );
     } else {
-      return Center(child: CircularProgressIndicator());
+      final id = entry.id.id;
+      final builder = VisualKeyBuilder.fromHandle(
+        data: id,
+      ).lujvo(start: BigInt.from(0), end: BigInt.from(16));
+      return Row(
+        children: [
+          Padding(
+            padding: EdgeInsetsGeometry.directional(end: 8),
+            child: Icon(icon),
+          ),
+          if (noclick)
+            Expanded(
+              child: SmartFingerprint(
+                fingerprint: id,
+                mode: FingerprintMode.userid,
+                builder: builder,
+              ),
+            )
+          else
+            Expanded(
+              child: SmartFingerprint(
+                fingerprint: id,
+                builder: builder,
+                mode: FingerprintMode.userid,
+                onTap: (id) => context.push(
+                  '/circles',
+                  extra: CircleListOptions(parent: id.handle()),
+                ),
+              ),
+            ),
+        ],
+      );
     }
   }
 }

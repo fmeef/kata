@@ -14475,7 +14475,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     if (arr.length != 2)
       throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
     return CircleHandle(
-      id: dco_decode_String(arr[0]),
+      id: dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+        arr[0],
+      ),
       circleType: dco_decode_circle_type(arr[1]),
     );
   }
@@ -16550,7 +16552,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @protected
   CircleHandle sse_decode_circle_handle(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_id = sse_decode_String(deserializer);
+    var var_id =
+        sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+          deserializer,
+        );
     var var_circleType = sse_decode_circle_type(deserializer);
     return CircleHandle(id: var_id, circleType: var_circleType);
   }
@@ -18985,7 +18990,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @protected
   void sse_encode_circle_handle(CircleHandle self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_String(self.id, serializer);
+    sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
+      self.id,
+      serializer,
+    );
     sse_encode_circle_type(self.circleType, serializer);
   }
 
