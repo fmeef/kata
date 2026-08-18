@@ -10,8 +10,10 @@ import '../../pgp.dart';
 import '../circles.dart';
 import 'circle.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
+part 'app.freezed.dart';
 
-// These functions are ignored because they are not marked as `pub`: `as_bytes`, `as_read`, `as_str`, `delete`, `generic_read`, `id_hex`, `into_option`, `is_none`, `member_type`, `new_empty`, `option_mut`, `option`, `resign`, `tag_reader`, `to_read`
+// These functions are ignored because they are not marked as `pub`: `as_bytes`, `as_read`, `as_str`, `delete`, `id_hex`, `into_option`, `is_none`, `member_type`, `new_empty`, `option_mut`, `option`, `resign`, `tag_reader`, `to_read`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `CircleAppInner`, `EMPTY`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `deref`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `hash`, `initialize`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`
 
@@ -43,6 +45,9 @@ abstract class CircleApp implements RustOpaqueInterface, CircleLike {
   @override
   CircleType getType();
 
+  @override
+  CircleHandle handle();
+
   String idHex();
 
   @override
@@ -68,11 +73,6 @@ abstract class CircleApp implements RustOpaqueInterface, CircleLike {
   Future<bool> verify();
 }
 
-// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<MaybeDeleted>>
-abstract class MaybeDeleted implements RustOpaqueInterface {
-  CircleOr? member();
-}
-
 class AppMember {
   final MaybeDeleted member;
   final MemberTag tag;
@@ -89,6 +89,18 @@ class AppMember {
           runtimeType == other.runtimeType &&
           member == other.member &&
           tag == other.tag;
+}
+
+@freezed
+sealed class MaybeDeleted with _$MaybeDeleted {
+  const MaybeDeleted._();
+
+  const factory MaybeDeleted.member(CircleHandle field0) = MaybeDeleted_Member;
+  const factory MaybeDeleted.deleted(CircleHandle field0) =
+      MaybeDeleted_Deleted;
+
+  CircleHandle? member() =>
+      RustLib.instance.api.crateApiPgpCirclesAppMaybeDeletedMember(that: this);
 }
 
 enum MemberTag { merge, overwrite, delete }

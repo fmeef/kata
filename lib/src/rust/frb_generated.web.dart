@@ -81,10 +81,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableVisualKeyBuilderstatic;
 
   CrossPlatformFinalizerArg
-  get rust_arc_decrement_strong_count_MaybeDeletedPtr => wire
-      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted;
-
-  CrossPlatformFinalizerArg
   get rust_arc_decrement_strong_count_NewsGroupPtr => wire
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup;
 
@@ -240,12 +236,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   GenerateCert
   dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerGenerateCert(
-    dynamic raw,
-  );
-
-  @protected
-  MaybeDeleted
-  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
     dynamic raw,
   );
 
@@ -424,12 +414,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  MaybeDeleted
-  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
-    dynamic raw,
-  );
-
-  @protected
   NewsGroup
   dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
     dynamic raw,
@@ -591,12 +575,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   VisualKeyBuilder
   dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableVisualKeyBuilderstatic(
-    dynamic raw,
-  );
-
-  @protected
-  MaybeDeleted
-  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
     dynamic raw,
   );
 
@@ -798,6 +776,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   MaybeCert dco_decode_box_autoadd_maybe_cert(dynamic raw);
 
   @protected
+  MaybeDeleted dco_decode_box_autoadd_maybe_deleted(dynamic raw);
+
+  @protected
   MemberTag dco_decode_box_autoadd_member_tag(dynamic raw);
 
   @protected
@@ -963,6 +944,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   MaybeCert dco_decode_maybe_cert(dynamic raw);
+
+  @protected
+  MaybeDeleted dco_decode_maybe_deleted(dynamic raw);
 
   @protected
   MemberTag dco_decode_member_tag(dynamic raw);
@@ -1203,12 +1187,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  MaybeDeleted
-  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
-    SseDeserializer deserializer,
-  );
-
-  @protected
   NewsGroup
   sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
     SseDeserializer deserializer,
@@ -1383,12 +1361,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  MaybeDeleted
-  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
-    SseDeserializer deserializer,
-  );
-
-  @protected
   NewsGroup
   sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
     SseDeserializer deserializer,
@@ -1550,12 +1522,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  MaybeDeleted
-  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
-    SseDeserializer deserializer,
-  );
-
-  @protected
   NewsGroup
   sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
     SseDeserializer deserializer,
@@ -1713,6 +1679,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   MaybeCert sse_decode_box_autoadd_maybe_cert(SseDeserializer deserializer);
+
+  @protected
+  MaybeDeleted sse_decode_box_autoadd_maybe_deleted(
+    SseDeserializer deserializer,
+  );
 
   @protected
   MemberTag sse_decode_box_autoadd_member_tag(SseDeserializer deserializer);
@@ -1894,6 +1865,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   MaybeCert sse_decode_maybe_cert(SseDeserializer deserializer);
+
+  @protected
+  MaybeDeleted sse_decode_maybe_deleted(SseDeserializer deserializer);
 
   @protected
   MemberTag sse_decode_member_tag(SseDeserializer deserializer);
@@ -2172,13 +2146,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
-  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
-    MaybeDeleted self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void
   sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
     NewsGroup self,
     SseSerializer serializer,
@@ -2382,13 +2349,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
-  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
-    MaybeDeleted self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void
   sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
     NewsGroup self,
     SseSerializer serializer,
@@ -2578,13 +2538,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void
   sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableVisualKeyBuilderstatic(
     VisualKeyBuilder self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void
-  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
-    MaybeDeleted self,
     SseSerializer serializer,
   );
 
@@ -2781,6 +2734,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_maybe_cert(
     MaybeCert self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_maybe_deleted(
+    MaybeDeleted self,
     SseSerializer serializer,
   );
 
@@ -3012,6 +2971,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_maybe_cert(MaybeCert self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_maybe_deleted(MaybeDeleted self, SseSerializer serializer);
 
   @protected
   void sse_encode_member_tag(MemberTag self, SseSerializer serializer);
@@ -3363,22 +3325,6 @@ class RustLibWire implements BaseWire {
       );
 
   void
-  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
-    int ptr,
-  ) => wasmModule
-      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
-        ptr,
-      );
-
-  void
-  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
-    int ptr,
-  ) => wasmModule
-      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
-        ptr,
-      );
-
-  void
   rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNewsGroup(
     int ptr,
   ) => wasmModule
@@ -3722,16 +3668,6 @@ extension type RustLibWasmModule._(JSObject _) implements JSObject {
 
   external void
   rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerLifetimeableVisualKeyBuilderstatic(
-    int ptr,
-  );
-
-  external void
-  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
-    int ptr,
-  );
-
-  external void
-  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerMaybeDeleted(
     int ptr,
   );
 
