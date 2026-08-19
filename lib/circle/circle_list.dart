@@ -81,7 +81,7 @@ class _CircleListState extends State<CircleList> {
     if (members != null) {
       return ListView(
         children: members
-            .map((v) => OmniCard(circle: v, expanded: true))
+            .map((v) => OmniCard(circle: v, expanded: true, noclick: false))
             .toList(),
       );
     } else {
