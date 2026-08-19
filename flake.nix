@@ -53,7 +53,7 @@
           crossSystem = {
             config = "aarch64-unknown-linux-android";
             useAndroidPrebuilt = true;
-            androidSdkVersion = "36";
+            androidSdkVersion = "35";
             androidNdkVersion = "27";
             useLLVM = true;
             libc = "bionic";
