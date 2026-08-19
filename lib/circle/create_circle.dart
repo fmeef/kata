@@ -36,57 +36,57 @@ class _CreateAppState extends State<CreateCircle> {
     state.removeHandler(observer);
   }
 
-  Widget buildApp(BuildContext context, Widget Function(BuildContext) card) {
-    final PgpApp pgpApp = context.read();
-
-    return Column(
-      children: [
-        if (_circle != null)
-          Flexible(
-            flex: 2,
-            child: ListView(
-              scrollDirection: Axis.vertical,
-              children: [card(context)],
-            ),
-          ),
-
-        Expanded(
-          flex: 3,
-          child: UserSelector(
-            selected: (l) async {
-              final c = await pgpApp.createCircle(
-                keys: l
-                    .map((v) => CircleOr.fromCert(userHandle: v.fingerprint()))
-                    .toList(),
-              );
-
-              final id = c.getIdUserhandle();
-
-              setState(() {
-                _circle = c;
-                _circleId = id;
-              });
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    final PgpApp pgpApp = context.read();
     return Column(
       children: [
         Expanded(
-          child: buildApp(
-            context,
-            (_) => Row(
-              children: [
-                Expanded(
-                  child: CircleCard(members: _circle!, id: _circleId!),
+          child: Column(
+            children: [
+              if (_circle != null)
+                Flexible(
+                  flex: 2,
+                  child: ListView(
+                    scrollDirection: Axis.vertical,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: CircleCard(
+                              members: _circle!,
+                              id: _circleId!,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ],
-            ),
+
+              Expanded(
+                flex: 3,
+                child: UserSelector(
+                  selected: (l) async {
+                    final c = await pgpApp.createCircle(
+                      keys: l
+                          .map(
+                            (v) =>
+                                CircleOr.fromCert(userHandle: v.fingerprint()),
+                          )
+                          .toList(),
+                    );
+
+                    final id = c.getIdUserhandle();
+
+                    setState(() {
+                      _circle = c;
+                      _circleId = id;
+                    });
+                  },
+                ),
+              ),
+            ],
           ),
         ),
       ],

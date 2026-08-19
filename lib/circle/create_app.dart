@@ -35,74 +35,68 @@ class _CreateAppState extends State<CreateApp> {
     state.removeHandler(observer);
   }
 
-  Widget buildApp(BuildContext context, Widget Function(BuildContext) card) {
-    final PgpApp pgpApp = context.read();
-
-    return Column(
-      children: [
-        if (_circle != null)
-          Flexible(
-            flex: 2,
-            child: ListView(
-              scrollDirection: Axis.vertical,
-              children: [card(context)],
-            ),
-          ),
-
-        Expanded(
-          flex: 3,
-          child: UserSelector(
-            selected: (l) async {
-              final ActiveCert cert = context.read();
-              final activeCert = cert.cert;
-              if (activeCert != null && _circle == null) {
-                final c = await pgpApp.createApp(
-                  owner: activeCert.cert.fingerprint,
-                );
-
-                for (final member in l) {
-                  await c.addUser(
-                    user: member.fingerprint(),
-                    tag: MemberTag.merge,
-                  );
-                }
-
-                setState(() {
-                  _circle = c;
-                });
-              } else if (_circle != null) {
-                for (final member in l) {
-                  await _circle?.addUser(
-                    user: member.fingerprint(),
-                    tag: MemberTag.merge,
-                  );
-                  setState(() {});
-                }
-              }
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    final PgpApp pgpApp = context.read();
     return Column(
       children: [
         Expanded(
-          child: buildApp(
-            context,
-            (_) => AppCard(
-              members: _circle!,
-              id: _circle!.getIdUserhandle(),
-              onChange: (id, value) async {
-                final tag = value?.name;
-                if (tag != null) {
-                  _circle?.updateTag(id: id, tag: tag);
-                }
-              },
-            ),
+          child: Column(
+            children: [
+              if (_circle != null)
+                Flexible(
+                  flex: 2,
+                  child: ListView(
+                    scrollDirection: Axis.vertical,
+                    children: [
+                      AppCard(
+                        members: _circle!,
+                        id: _circle!.getIdUserhandle(),
+                        onChange: (id, value) async {
+                          final tag = value?.name;
+                          if (tag != null) {
+                            _circle?.updateTag(id: id, tag: tag);
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+
+              Expanded(
+                flex: 3,
+                child: UserSelector(
+                  selected: (l) async {
+                    final ActiveCert cert = context.read();
+                    final activeCert = cert.cert;
+                    if (activeCert != null && _circle == null) {
+                      final c = await pgpApp.createApp(
+                        owner: activeCert.cert.fingerprint,
+                      );
+
+                      for (final member in l) {
+                        await c.addUser(
+                          user: member.fingerprint(),
+                          tag: MemberTag.merge,
+                        );
+                      }
+
+                      setState(() {
+                        _circle = c;
+                      });
+                    } else if (_circle != null) {
+                      for (final member in l) {
+                        await _circle?.addUser(
+                          user: member.fingerprint(),
+                          tag: MemberTag.merge,
+                        );
+                        setState(() {});
+                      }
+                    }
+                  },
+                ),
+              ),
+            ],
           ),
         ),
       ],
