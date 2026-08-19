@@ -42,7 +42,6 @@ class _AddCircleBottomsheetState extends State<AddCircleBottomsheet> {
                 final add = await pgpApp.getCircleById(id: widget.add);
                 if (add != null) {
                   for (final circle in _selected) {
-                    //TODO: allow assigning tag
                     await circle.add(
                       circle: add,
                       tag: _tag?.name ?? MemberTag.merge,

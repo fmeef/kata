@@ -3,6 +3,7 @@ import 'package:kata/circle/omni_card.dart';
 import 'package:kata/fab_observer.dart';
 import 'package:kata/fab_state.dart';
 import 'package:kata/src/rust/api.dart';
+import 'package:kata/src/rust/api/db/connection.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
 import 'package:provider/provider.dart';
 
@@ -10,6 +11,7 @@ class _CircleListState extends State<CircleList> {
   List<CircleOr>? _members;
 
   late final FabState fabState = context.read();
+  late final Watcher _watcher;
 
   late final FabObserver observer = FabObserver(
     handler: () async {
@@ -45,43 +47,47 @@ class _CircleListState extends State<CircleList> {
     super.initState();
     fabState.addHandler(observer);
     final PgpApp pgpApp = context.read();
+    _watcher = pgpApp.getWatcher();
+    _watcher.watch(
+      table: 'circle_members',
+      cb: (_) {
+        if (widget.parent != null) {
+          print('get circles for ${widget.parent!.circleType.name}');
+          pgpApp.getCircleById(id: widget.parent!).then((circles) async {
+            final members = await circles?.iterMembers().toList();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (widget.parent != null) {
-        print('get circles for ${widget.parent!.circleType.name}');
-        pgpApp.getCircleById(id: widget.parent!).then((circles) async {
-          final members = await circles?.iterMembers().toList();
-
-          if (mounted) {
-            setState(() {
-              _members = members
-                  ?.where((v) => v.content != null)
-                  .map((v) => v.content!)
-                  .toList();
-            });
-          }
-        });
-      } else {
-        pgpApp.getDb().getCirclesJoin().then((circles) async {
-          final c = await pgpApp.circlesFromDb(
-            members: circles,
-            users: false,
-            all: true,
-          );
-          if (mounted) {
-            setState(() {
-              _members = c;
-            });
-          }
-        });
-      }
-    });
+            if (mounted) {
+              setState(() {
+                _members = members
+                    ?.where((v) => v.content != null)
+                    .map((v) => v.content!)
+                    .toList();
+              });
+            }
+          });
+        } else {
+          pgpApp.getDb().getCirclesJoin().then((circles) async {
+            final c = await pgpApp.circlesFromDb(
+              members: circles,
+              users: false,
+              all: true,
+            );
+            if (mounted) {
+              setState(() {
+                _members = c;
+              });
+            }
+          });
+        }
+      },
+    );
   }
 
   @override
   void dispose() {
     super.dispose();
     fabState.removeHandler(observer);
+    _watcher.dispose();
   }
 
   @override
