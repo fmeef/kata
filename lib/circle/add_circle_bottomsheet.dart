@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kata/circle/circle_selector.dart';
 import 'package:kata/src/rust/api.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
@@ -19,6 +20,7 @@ class _AddCircleBottomsheetState extends State<AddCircleBottomsheet> {
           ),
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             ElevatedButton(
               onPressed: () async {
@@ -31,10 +33,17 @@ class _AddCircleBottomsheetState extends State<AddCircleBottomsheet> {
                       tag: MemberTag.merge,
                       db: pgpApp,
                     );
+                    if (context.mounted) {
+                      context.pop();
+                    }
                   }
                 }
               },
               child: const Text('Add'),
+            ),
+            TextButton(
+              onPressed: () => context.pop(),
+              child: const Text('Cancel'),
             ),
           ],
         ),
