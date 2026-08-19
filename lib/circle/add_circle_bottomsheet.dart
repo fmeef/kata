@@ -25,7 +25,6 @@ class _AddCircleBottomsheetState extends State<AddCircleBottomsheet> {
                 final add = await pgpApp.getCircleById(id: widget.add);
                 if (add != null) {
                   for (final circle in _selected) {
-                    print('adding ${circle.getIdUserhandle().name()}');
                     //TODO: allow assigning tag
                     await circle.add(
                       circle: add,

@@ -32,12 +32,20 @@ class _MiniCircleState extends State<MiniCircle> {
           children: [
             Expanded(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children:
-                    _child
-                        ?.getMembers()
-                        .map((v) => MemberEntry(entry: v))
-                        .toList() ??
-                    [],
+                    <Widget>[
+                      Text(
+                        _child?.getIdUserhandle().separateLujvo().joinGismu() ??
+                            "",
+                      ),
+                    ] +
+                    (_child
+                            ?.getMembers()
+                            .map((v) => MemberEntry(entry: v))
+                            .toList() ??
+                        []),
               ),
             ),
           ],
