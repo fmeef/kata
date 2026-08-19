@@ -47,7 +47,7 @@ class MemberEntry extends StatelessWidget {
                 mode: FingerprintMode.userid,
                 onTap: (id) => context.push(
                   '/circles',
-                  extra: CircleListOptions(parent: id.handle()),
+                  extra: CircleListOptions(parent: entry.id),
                 ),
               ),
             ),

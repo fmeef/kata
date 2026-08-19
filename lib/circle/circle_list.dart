@@ -15,10 +15,15 @@ class _CircleListState extends State<CircleList> {
     handler: () async {
       final PgpApp app = context.read();
       if (widget.parent != null) {
-        final circles = await app.getCirclesForParent(parent: widget.parent!);
+        final circles = await app.getCircleById(id: widget.parent!);
+
+        final members = await circles?.iterMembers().toList();
 
         setState(() {
-          _members = circles;
+          _members = members
+              ?.where((v) => v.content != null)
+              .map((v) => v.content!)
+              .toList();
         });
       } else {
         final circles = await app.getDb().getCirclesJoin();
@@ -41,19 +46,23 @@ class _CircleListState extends State<CircleList> {
     fabState.addHandler(observer);
     final PgpApp pgpApp = context.read();
 
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) => pgpApp.getDb().getCirclesJoin().then((circles) async {
-        if (widget.parent != null) {
-          final circles = await pgpApp.getCirclesForParent(
-            parent: widget.parent!,
-          );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.parent != null) {
+        print('get circles for ${widget.parent!.circleType.name}');
+        pgpApp.getCircleById(id: widget.parent!).then((circles) async {
+          final members = await circles?.iterMembers().toList();
+
           if (mounted) {
             setState(() {
-              _members = circles;
+              _members = members
+                  ?.where((v) => v.content != null)
+                  .map((v) => v.content!)
+                  .toList();
             });
           }
-        } else {
-          final circles = await pgpApp.getDb().getCirclesJoin();
+        });
+      } else {
+        pgpApp.getDb().getCirclesJoin().then((circles) async {
           final c = await pgpApp.circlesFromDb(
             members: circles,
             users: false,
@@ -64,9 +73,9 @@ class _CircleListState extends State<CircleList> {
               _members = c;
             });
           }
-        }
-      }),
-    );
+        });
+      }
+    });
   }
 
   @override
