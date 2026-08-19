@@ -56,6 +56,7 @@ class _AppCardState extends State<AppCard> {
           ),
         )
         .toList();
+
     return Card(
       color: widget.cardColor,
       child: Padding(
@@ -78,7 +79,19 @@ class _AppCardState extends State<AppCard> {
             ],
           ),
           trailing: CircleCardMenu(circle: CircleOr.app(widget.members)),
-          children: m,
+          children: (switch (widget.constrained) {
+            null => m,
+            _ => [
+              ConstrainedBox(
+                constraints: widget.constrained!,
+                child: ListView(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  children: m,
+                ),
+              ),
+            ],
+          }),
         ),
       ),
     );
@@ -89,6 +102,7 @@ class AppCard extends StatefulWidget {
   final CircleApp members;
   final UserHandle id;
   final bool expanded;
+  final BoxConstraints? constrained;
   final Color? cardColor;
   final FutureOr<void> Function(CircleHandle, AppTag?)? onChange;
   const AppCard({
@@ -98,6 +112,7 @@ class AppCard extends StatefulWidget {
     this.expanded = false,
     this.onChange,
     this.cardColor,
+    this.constrained,
   });
 
   @override

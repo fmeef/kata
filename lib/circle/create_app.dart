@@ -51,6 +51,8 @@ class _CreateAppState extends State<CreateApp> {
                     children: [
                       AppCard(
                         members: _circle!,
+                        expanded: true,
+                        constrained: BoxConstraints(maxHeight: 250),
                         id: _circle!.getIdUserhandle(),
                         onChange: (id, value) async {
                           final tag = value?.name;
