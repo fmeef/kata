@@ -56,6 +56,8 @@ class _CreateAppState extends State<CreateCircle> {
                             child: CircleCard(
                               members: _circle!,
                               id: _circleId!,
+                              constrained: BoxConstraints(maxHeight: 250),
+                              expanded: true,
                             ),
                           ),
                         ],
