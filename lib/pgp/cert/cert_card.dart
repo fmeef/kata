@@ -66,12 +66,19 @@ class _CertCardState extends State<CertCard> {
   }
 
   Widget titleExpansionTile(BuildContext context, Set<String> ids) {
+    final signable = widget.signable;
+    final pgpKey = _pgpKey;
+    final active = widget.active;
     final theme = Theme.of(context);
     if (ids.length > 1) {
       return ExpansionTile(
         minTileHeight: 32,
         tilePadding: EdgeInsetsGeometry.fromSTEB(0, 0, 0, 0),
         childrenPadding: EdgeInsetsGeometry.fromSTEB(0, 0, 0, 0),
+        trailing: (switch (pgpKey) {
+          null => null,
+          _ => CertCardMenu(cert: pgpKey, signable: signable, active: active),
+        }),
         title: Text(
           ids.firstOrNull ?? "N/A",
           style: theme.textTheme.titleSmall,
@@ -101,7 +108,7 @@ class _CertCardState extends State<CertCard> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final signable = widget.signable;
+
     final visualKeyBuilder = widget.visualKeyBuilder;
     final active = widget.active;
     final graphController = widget.graphController;
@@ -144,11 +151,6 @@ class _CertCardState extends State<CertCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      CertCardMenu(
-                        cert: pgpKey,
-                        signable: signable,
-                        active: active,
-                      ),
                       if (active && pgpKey.cert.hasPrivate)
                         Chip(
                           label: Text(

@@ -13,7 +13,6 @@ class _MiniCircleState extends State<MiniCircle> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final members = await pgpApp.getCircleById(id: widget.handle);
-      print('get member $members');
       if (mounted) {
         setState(() {
           _child = members;

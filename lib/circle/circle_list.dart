@@ -52,7 +52,6 @@ class _CircleListState extends State<CircleList> {
       table: 'circle_members',
       cb: (_) {
         if (widget.parent != null) {
-          print('get circles for ${widget.parent!.circleType.name}');
           pgpApp.getCircleById(id: widget.parent!).then((circles) async {
             final members = await circles?.iterMembers().toList();
 

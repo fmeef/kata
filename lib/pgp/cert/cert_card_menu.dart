@@ -69,7 +69,7 @@ class _CertCardMenuState extends State<CertCardMenu> {
             ),
           ),
       ],
-      builder: (ctx, controller, child) => TextButton(
+      builder: (ctx, controller, child) => IconButton(
         focusNode: _buttonFocusNode,
         onPressed: () {
           if (controller.isOpen) {
@@ -78,7 +78,7 @@ class _CertCardMenuState extends State<CertCardMenu> {
             controller.open();
           }
         },
-        child: const Text('More actions'),
+        icon: Icon(Icons.menu),
       ),
     );
   }
