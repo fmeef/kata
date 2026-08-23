@@ -1,3 +1,4 @@
+import 'package:kata/circle/add_circle_bottomsheet.dart';
 import 'package:kata/pgp/cert/cert_delete_dialog.dart';
 import 'package:kata/prefs/pref_keys.dart';
 import 'package:kata/src/rust/api.dart';
@@ -30,6 +31,15 @@ class _CertCardMenuState extends State<CertCardMenu> {
             context: context,
             builder: (ctx) =>
                 CertDeleteDialog(identity: widget.cert, context: context),
+          ),
+        ),
+        MenuItemButton(
+          child: const Text('Add to circle'),
+          onPressed: () => showModalBottomSheet(
+            context: context,
+            builder: (ctx) => AddCircleBottomsheet(
+              add: widget.cert.cert.fingerprint.handle(),
+            ),
           ),
         ),
         if (widget.cert.cert.hasPrivate)

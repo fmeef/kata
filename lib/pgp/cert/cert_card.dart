@@ -101,7 +101,6 @@ class _CertCardState extends State<CertCard> {
     final active = widget.active;
     final graphController = widget.graphController;
     final trust = widget.trust;
-    final signable = widget.signable;
 
     final pgpKey = _pgpKey;
     final ids = pgpKey?.ids.toSet() ?? {};
