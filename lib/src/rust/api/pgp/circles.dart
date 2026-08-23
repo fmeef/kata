@@ -6,7 +6,6 @@
 import '../../api.dart';
 import '../../frb_generated.dart';
 import '../db/connection.dart';
-import '../db/store.dart';
 import '../pgp.dart';
 import 'circles/app.dart';
 import 'circles/circle.dart';
@@ -17,7 +16,7 @@ part 'circles.freezed.dart';
 // These functions are ignored because they are not marked as `pub`: `as_bytes`, `as_read`, `as_read`, `db_type`, `empty`, `from_circle_or_tag`, `from_circle_or`, `get_bin`, `get_bytes`, `get_children_parent`, `get_children`, `get_handle`, `get_id_vec`, `get_parent_cache`, `get_parent_vec`, `get_type_str`, `get_type_u8`, `get_userhandle`, `into_option`, `is_none`, `member_type`, `option_mut`, `option`, `thin`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `CircleOrRef`, `MaybeDeletedFull`, `TagOr`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `hash`, `hash`, `hash`, `hash`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `read`
-// These functions are ignored (category: IgnoreBecauseNotAllowedOwner): `from_db`, `get_id_userhandle`, `get_id`, `get_member`, `get_members`, `get_type`, `handle`, `insert`, `iter_members`, `validate`, `verify`
+// These functions are ignored (category: IgnoreBecauseNotAllowedOwner): `get_id_userhandle`, `get_id`, `get_member`, `get_members`, `get_type`, `handle`, `insert`, `iter_members`, `validate`, `verify`
 
 abstract class CircleLike {
   Uint8List getId();
@@ -102,9 +101,6 @@ sealed class CircleOr with _$CircleOr {
       .instance
       .api
       .crateApiPgpCirclesCircleOrFromCert(userHandle: userHandle);
-
-  static Future<CircleOr> fromDb({required List<CircleWithMembers> db}) =>
-      RustLib.instance.api.crateApiPgpCirclesCircleOrFromDb(db: db);
 
   Uint8List getId() =>
       RustLib.instance.api.crateApiPgpCirclesCircleOrGetId(that: this);

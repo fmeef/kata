@@ -5,7 +5,6 @@
 
 import '../../../frb_generated.dart';
 import '../../db/connection.dart';
-import '../../db/store.dart';
 import '../../pgp.dart';
 import '../circles.dart';
 import 'circle.dart';
@@ -26,9 +25,6 @@ abstract class CircleApp implements RustOpaqueInterface, CircleLike {
   Future<void> addUser({required UserHandle user, required MemberTag tag});
 
   NonOpaqueApp consumeMembers();
-
-  static Future<CircleApp> fromDb({required List<CircleWithMembers> db}) =>
-      RustLib.instance.api.crateApiPgpCirclesAppCircleAppFromDb(db: db);
 
   @override
   Uint8List getId();

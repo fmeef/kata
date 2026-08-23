@@ -5,7 +5,6 @@
 
 import '../../../frb_generated.dart';
 import '../../db/connection.dart';
-import '../../db/store.dart';
 import '../../pgp.dart';
 import '../circles.dart';
 import 'app.dart';
@@ -17,9 +16,6 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<Circle>>
 abstract class Circle implements RustOpaqueInterface, CircleLike {
-  static Future<Circle> fromDb({required List<CircleWithMembers> db}) =>
-      RustLib.instance.api.crateApiPgpCirclesCircleCircleFromDb(db: db);
-
   Future<Uint8List> getDigest();
 
   @override
