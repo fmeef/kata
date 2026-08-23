@@ -70,39 +70,27 @@ class _CertCardState extends State<CertCard> {
     final pgpKey = _pgpKey;
     final active = widget.active;
     final theme = Theme.of(context);
-    if (ids.length > 1) {
-      return ExpansionTile(
-        minTileHeight: 32,
-        tilePadding: EdgeInsetsGeometry.fromSTEB(0, 0, 0, 0),
-        childrenPadding: EdgeInsetsGeometry.fromSTEB(0, 0, 0, 0),
-        trailing: (switch (pgpKey) {
-          null => null,
-          _ => CertCardMenu(cert: pgpKey, signable: signable, active: active),
-        }),
-        title: Text(
-          ids.firstOrNull ?? "N/A",
-          style: theme.textTheme.titleSmall,
-        ),
-        children: ids
-            .difference({ids.firstOrNull})
-            .map(
-              (v) => TextButton(
-                onPressed: () =>
-                    context.push('/list', extra: CertListArgs(searchUserId: v)),
-                child: Text(v),
-              ),
-            )
-            .toList(),
-      );
-    } else {
-      return Padding(
-        padding: EdgeInsetsGeometry.fromSTEB(0, 0, 0, 8),
-        child: Text(
-          _pgpKey?.ids.firstOrNull ?? "N/A",
-          style: theme.textTheme.titleSmall,
-        ),
-      );
-    }
+
+    return ExpansionTile(
+      minTileHeight: 32,
+      tilePadding: EdgeInsetsGeometry.fromSTEB(0, 0, 0, 0),
+      childrenPadding: EdgeInsetsGeometry.fromSTEB(0, 0, 0, 0),
+      trailing: (switch (pgpKey) {
+        null => null,
+        _ => CertCardMenu(cert: pgpKey, signable: signable, active: active),
+      }),
+      title: Text(ids.firstOrNull ?? "N/A", style: theme.textTheme.titleSmall),
+      children: ids
+          .difference({ids.firstOrNull})
+          .map(
+            (v) => TextButton(
+              onPressed: () =>
+                  context.push('/list', extra: CertListArgs(searchUserId: v)),
+              child: Text(v),
+            ),
+          )
+          .toList(),
+    );
   }
 
   @override
@@ -153,12 +141,6 @@ class _CertCardState extends State<CertCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      if (ids.length <= 1)
-                        CertCardMenu(
-                          cert: pgpKey,
-                          signable: signable,
-                          active: active,
-                        ),
                       if (active && pgpKey.cert.hasPrivate)
                         Chip(
                           label: Text(
