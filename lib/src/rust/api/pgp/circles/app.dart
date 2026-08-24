@@ -39,6 +39,9 @@ abstract class CircleApp implements RustOpaqueInterface, CircleLike {
   List<CircleEntry> getMembers();
 
   @override
+  UserHandle? getOwner();
+
+  @override
   CircleType getType();
 
   @override
