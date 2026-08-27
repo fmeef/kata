@@ -1,5 +1,7 @@
 import 'package:kata/circle/circle_list.dart';
 import 'package:kata/circle/circle_list_options.dart';
+import 'package:kata/circle/create_app.dart';
+import 'package:kata/circle/create_circle.dart';
 import 'package:kata/circle/create_circle_app.dart';
 import 'package:kata/drawer_content.dart';
 import 'package:kata/graphvis/graph_test.dart';
@@ -40,7 +42,8 @@ String titleFromPath(String path) {
     '/list' => 'All Cards',
     '/share' => 'Sharing identity card',
     '/mycards' => 'My Cards',
-    '/newapp' => 'Create Circle',
+    '/newapp' => 'Create App',
+    '/newcircle' => 'Create Circle',
     '/circles' => 'Circles and Apps',
     _ => 'Kata',
   };
@@ -156,7 +159,11 @@ class _MyAppState extends State<MyApp> {
               GoRoute(path: '/scan', builder: (context, state) => VerifyView()),
               GoRoute(
                 path: '/newapp',
-                builder: (context, state) => CreateCircleApp(),
+                builder: (context, state) => CreateApp(),
+              ),
+              GoRoute(
+                path: '/newcircle',
+                builder: (context, state) => CreateCircle(),
               ),
             ],
           ),
