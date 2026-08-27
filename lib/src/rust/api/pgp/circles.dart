@@ -18,6 +18,32 @@ part 'circles.freezed.dart';
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `hash`, `hash`, `hash`, `hash`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `read`
 // These functions are ignored (category: IgnoreBecauseNotAllowedOwner): `get_id_userhandle`, `get_id`, `get_member`, `get_members`, `get_owner`, `get_type`, `handle`, `insert`, `iter_members`, `validate`, `verify`
 
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<CircleEntry>>
+abstract class CircleEntry implements RustOpaqueInterface {
+  CircleOr? get content;
+
+  CircleHandle get id;
+
+  MemberTag? get tag;
+
+  set content(CircleOr? content);
+
+  set id(CircleHandle id);
+
+  set tag(MemberTag? tag);
+}
+
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<CircleHandle>>
+abstract class CircleHandle implements RustOpaqueInterface {
+  CircleType get circleType;
+
+  UserHandle get id;
+
+  set circleType(CircleType circleType);
+
+  set id(UserHandle id);
+}
+
 abstract class CircleLike {
   Uint8List getId();
 
@@ -40,44 +66,6 @@ abstract class CircleLike {
   Future<bool> validate();
 
   Future<bool> verify();
-}
-
-class CircleEntry {
-  final CircleHandle id;
-  final CircleOr? content;
-  final MemberTag? tag;
-
-  const CircleEntry({required this.id, this.content, this.tag});
-
-  @override
-  int get hashCode => id.hashCode ^ content.hashCode ^ tag.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is CircleEntry &&
-          runtimeType == other.runtimeType &&
-          id == other.id &&
-          content == other.content &&
-          tag == other.tag;
-}
-
-class CircleHandle {
-  final UserHandle id;
-  final CircleType circleType;
-
-  const CircleHandle({required this.id, required this.circleType});
-
-  @override
-  int get hashCode => id.hashCode ^ circleType.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is CircleHandle &&
-          runtimeType == other.runtimeType &&
-          id == other.id &&
-          circleType == other.circleType;
 }
 
 @freezed

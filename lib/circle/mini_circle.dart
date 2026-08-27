@@ -6,14 +6,14 @@ import 'package:provider/provider.dart';
 
 class _MiniCircleState extends State<MiniCircle> {
   CircleOr? _child;
-  late final PgpApp pgpApp = context.read();
 
   @override
   void initState() {
     super.initState();
+    PgpApp pgpApp = context.read();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final members = await pgpApp.getCircleById(id: widget.handle);
-      if (mounted) {
+      if (mounted && _child == null) {
         setState(() {
           _child = members;
         });

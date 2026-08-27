@@ -8,8 +8,6 @@ import 'db/connection.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'pgp/cert.dart';
 import 'pgp/circles.dart';
-import 'pgp/circles/app.dart';
-import 'pgp/circles/circle.dart';
 import 'pgp/fingerprint/visual_key.dart';
 import 'pgp/import.dart';
 
