@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kata/circle/circle_list_options.dart';
+import 'package:kata/circle/extensions.dart';
 import 'package:kata/pgp/cert/smart_fingerprint.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
 import 'package:kata/src/rust/api/pgp/fingerprint/visual_key.dart';
@@ -16,11 +17,7 @@ class AppMemberEntry extends StatelessWidget {
     if (content != null) {
       final circle = content;
       final id = circle.getIdUserhandle();
-      final icon = (switch (circle.getType()) {
-        CircleType.user => Icons.person,
-        CircleType.circle => Icons.group,
-        CircleType.app => Icons.apps,
-      });
+      final icon = circle.getIcon();
       final builder = VisualKeyBuilder.fromHandle(
         data: id,
       ).lujvo(start: BigInt.from(0), end: BigInt.from(16));

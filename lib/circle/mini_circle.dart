@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:kata/circle/member_entry.dart';
 import 'package:kata/src/rust/api.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
+import 'package:kata/circle/extensions.dart';
+
 import 'package:provider/provider.dart';
 
 class _MiniCircleState extends State<MiniCircle> {
@@ -23,6 +25,8 @@ class _MiniCircleState extends State<MiniCircle> {
 
   @override
   Widget build(BuildContext context) {
+    final circleIcon = _child.getIcon();
+    final theme = Theme.of(context);
     return Card(
       color: widget.cardColor,
       child: Padding(
@@ -35,14 +39,38 @@ class _MiniCircleState extends State<MiniCircle> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:
                     <Widget>[
-                      Text(
-                        _child?.getIdUserhandle().separateLujvo().joinGismu() ??
-                            "",
+                      Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsGeometry.fromSTEB(0, 0, 8, 0),
+                            child: Icon(
+                              circleIcon,
+                              color: theme.colorScheme.tertiary,
+                            ),
+                          ),
+                          Text(
+                            _child
+                                    ?.getIdUserhandle()
+                                    .separateLujvo()
+                                    .joinGismu() ??
+                                "",
+                          ),
+                        ],
                       ),
                     ] +
                     (_child
                             ?.getMembers()
-                            .map((v) => MemberEntry(entry: v))
+                            .map(
+                              (v) => Padding(
+                                padding: EdgeInsetsGeometry.fromSTEB(
+                                  8,
+                                  0,
+                                  0,
+                                  0,
+                                ),
+                                child: MemberEntry(entry: v),
+                              ),
+                            )
                             .toList() ??
                         []),
               ),
