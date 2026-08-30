@@ -59,6 +59,7 @@ abstract class NewsGroup
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   });
 
   static Future<bool> isEntity() =>

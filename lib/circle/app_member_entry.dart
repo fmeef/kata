@@ -68,12 +68,23 @@ class AppMemberEntry extends StatelessWidget {
             childFocusNode: _node,
             menuChildren: [
               MenuItemButton(
-                child: const Text('delete'),
+                child: const Text('purge'),
                 onPressed: () async {
                   await parent.remove(
                     handle: entry.id,
                     parent: parent.handle(),
                     delete: false,
+                  );
+                  await parent.toDb(db: pgpApp.getDb());
+                },
+              ),
+              MenuItemButton(
+                child: const Text('delete'),
+                onPressed: () async {
+                  await parent.remove(
+                    handle: entry.id,
+                    parent: parent.handle(),
+                    delete: true,
                   );
                   await parent.toDb(db: pgpApp.getDb());
                 },

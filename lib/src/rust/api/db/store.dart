@@ -39,6 +39,7 @@ abstract class CircleData
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   });
 
   static Future<bool> isEntity() =>
@@ -71,6 +72,7 @@ abstract class CircleMembersData
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   });
 
   static Future<bool> isEntity() =>
@@ -119,6 +121,7 @@ abstract class CircleWithMembers
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   });
 
   static Future<bool> isEntity() =>
@@ -151,6 +154,7 @@ abstract class PgpDataCert
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   });
 
   static Future<bool> isEntity() =>
@@ -272,11 +276,13 @@ class OnlyFingerprint {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   }) => RustLib.instance.api.crateApiDbStoreOnlyFingerprintInsertOnConflictCols(
     that: this,
     conn: conn,
     onConflict: onConflict,
     cols: cols,
+    set_: set_,
   );
 
   static Future<bool> isEntity() =>
@@ -323,11 +329,13 @@ class OnlyId {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   }) => RustLib.instance.api.crateApiDbStoreOnlyIdInsertOnConflictCols(
     that: this,
     conn: conn,
     onConflict: onConflict,
     cols: cols,
+    set_: set_,
   );
 
   static Future<bool> isEntity() =>
@@ -372,11 +380,13 @@ class OnlyOnline {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   }) => RustLib.instance.api.crateApiDbStoreOnlyOnlineInsertOnConflictCols(
     that: this,
     conn: conn,
     onConflict: onConflict,
     cols: cols,
+    set_: set_,
   );
 
   static Future<bool> isEntity() =>

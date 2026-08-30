@@ -180,6 +180,7 @@ abstract class Crud {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   });
 
   Future<void> update({required SqliteDb conn});

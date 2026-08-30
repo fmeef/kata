@@ -236,6 +236,7 @@ abstract class RustLibApi extends BaseApi {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   });
 
   Future<bool> crateApiDbStoreCircleDataIsEntity();
@@ -313,6 +314,7 @@ abstract class RustLibApi extends BaseApi {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   });
 
   Future<bool> crateApiDbStoreCircleMembersDataIsEntity();
@@ -377,6 +379,7 @@ abstract class RustLibApi extends BaseApi {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   });
 
   Future<bool> crateApiDbStoreCircleWithMembersIsEntity();
@@ -608,6 +611,7 @@ abstract class RustLibApi extends BaseApi {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   });
 
   Future<bool> crateApiDbEntitiesNewsGroupIsEntity();
@@ -988,6 +992,7 @@ abstract class RustLibApi extends BaseApi {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   });
 
   Future<bool> crateApiDbStorePgpDataCertIsEntity();
@@ -1418,6 +1423,7 @@ abstract class RustLibApi extends BaseApi {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   });
 
   Future<bool> crateApiDbStoreOnlyFingerprintIsEntity();
@@ -1450,6 +1456,7 @@ abstract class RustLibApi extends BaseApi {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   });
 
   Future<bool> crateApiDbStoreOnlyIdIsEntity();
@@ -1482,6 +1489,7 @@ abstract class RustLibApi extends BaseApi {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   });
 
   Future<bool> crateApiDbStoreOnlyOnlineIsEntity();
@@ -2830,6 +2838,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -2845,6 +2854,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           );
           sse_encode_on_conflict(onConflict, serializer);
           sse_encode_list_String(cols, serializer);
+          sse_encode_list_String(set_, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -2857,7 +2867,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta: kCrateApiDbStoreCircleDataInsertOnConflictColsConstMeta,
-        argValues: [that, conn, onConflict, cols],
+        argValues: [that, conn, onConflict, cols, set_],
         apiImpl: this,
       ),
     );
@@ -2866,7 +2876,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   TaskConstMeta get kCrateApiDbStoreCircleDataInsertOnConflictColsConstMeta =>
       const TaskConstMeta(
         debugName: "CircleData_insert_on_conflict_cols",
-        argNames: ["that", "conn", "onConflict", "cols"],
+        argNames: ["that", "conn", "onConflict", "cols", "set_"],
       );
 
   @override
@@ -3435,6 +3445,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -3450,6 +3461,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           );
           sse_encode_on_conflict(onConflict, serializer);
           sse_encode_list_String(cols, serializer);
+          sse_encode_list_String(set_, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -3463,7 +3475,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         ),
         constMeta:
             kCrateApiDbStoreCircleMembersDataInsertOnConflictColsConstMeta,
-        argValues: [that, conn, onConflict, cols],
+        argValues: [that, conn, onConflict, cols, set_],
         apiImpl: this,
       ),
     );
@@ -3473,7 +3485,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   get kCrateApiDbStoreCircleMembersDataInsertOnConflictColsConstMeta =>
       const TaskConstMeta(
         debugName: "CircleMembersData_insert_on_conflict_cols",
-        argNames: ["that", "conn", "onConflict", "cols"],
+        argNames: ["that", "conn", "onConflict", "cols", "set_"],
       );
 
   @override
@@ -4001,6 +4013,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -4016,6 +4029,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           );
           sse_encode_on_conflict(onConflict, serializer);
           sse_encode_list_String(cols, serializer);
+          sse_encode_list_String(set_, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -4029,7 +4043,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         ),
         constMeta:
             kCrateApiDbStoreCircleWithMembersInsertOnConflictColsConstMeta,
-        argValues: [that, conn, onConflict, cols],
+        argValues: [that, conn, onConflict, cols, set_],
         apiImpl: this,
       ),
     );
@@ -4039,7 +4053,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   get kCrateApiDbStoreCircleWithMembersInsertOnConflictColsConstMeta =>
       const TaskConstMeta(
         debugName: "CircleWithMembers_insert_on_conflict_cols",
-        argNames: ["that", "conn", "onConflict", "cols"],
+        argNames: ["that", "conn", "onConflict", "cols", "set_"],
       );
 
   @override
@@ -5814,6 +5828,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -5829,6 +5844,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           );
           sse_encode_on_conflict(onConflict, serializer);
           sse_encode_list_String(cols, serializer);
+          sse_encode_list_String(set_, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -5841,7 +5857,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta: kCrateApiDbEntitiesNewsGroupInsertOnConflictColsConstMeta,
-        argValues: [that, conn, onConflict, cols],
+        argValues: [that, conn, onConflict, cols, set_],
         apiImpl: this,
       ),
     );
@@ -5850,7 +5866,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   TaskConstMeta get kCrateApiDbEntitiesNewsGroupInsertOnConflictColsConstMeta =>
       const TaskConstMeta(
         debugName: "NewsGroup_insert_on_conflict_cols",
-        argNames: ["that", "conn", "onConflict", "cols"],
+        argNames: ["that", "conn", "onConflict", "cols", "set_"],
       );
 
   @override
@@ -9086,6 +9102,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -9101,6 +9118,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           );
           sse_encode_on_conflict(onConflict, serializer);
           sse_encode_list_String(cols, serializer);
+          sse_encode_list_String(set_, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -9113,7 +9131,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta: kCrateApiDbStorePgpDataCertInsertOnConflictColsConstMeta,
-        argValues: [that, conn, onConflict, cols],
+        argValues: [that, conn, onConflict, cols, set_],
         apiImpl: this,
       ),
     );
@@ -9122,7 +9140,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   TaskConstMeta get kCrateApiDbStorePgpDataCertInsertOnConflictColsConstMeta =>
       const TaskConstMeta(
         debugName: "PgpDataCert_insert_on_conflict_cols",
-        argNames: ["that", "conn", "onConflict", "cols"],
+        argNames: ["that", "conn", "onConflict", "cols", "set_"],
       );
 
   @override
@@ -12890,6 +12908,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -12902,6 +12921,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           );
           sse_encode_on_conflict(onConflict, serializer);
           sse_encode_list_String(cols, serializer);
+          sse_encode_list_String(set_, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -12914,7 +12934,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta: kCrateApiDbStoreOnlyFingerprintInsertOnConflictColsConstMeta,
-        argValues: [that, conn, onConflict, cols],
+        argValues: [that, conn, onConflict, cols, set_],
         apiImpl: this,
       ),
     );
@@ -12924,7 +12944,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   get kCrateApiDbStoreOnlyFingerprintInsertOnConflictColsConstMeta =>
       const TaskConstMeta(
         debugName: "only_fingerprint_insert_on_conflict_cols",
-        argNames: ["that", "conn", "onConflict", "cols"],
+        argNames: ["that", "conn", "onConflict", "cols", "set_"],
       );
 
   @override
@@ -13144,6 +13164,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -13156,6 +13177,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           );
           sse_encode_on_conflict(onConflict, serializer);
           sse_encode_list_String(cols, serializer);
+          sse_encode_list_String(set_, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -13168,7 +13190,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta: kCrateApiDbStoreOnlyIdInsertOnConflictColsConstMeta,
-        argValues: [that, conn, onConflict, cols],
+        argValues: [that, conn, onConflict, cols, set_],
         apiImpl: this,
       ),
     );
@@ -13177,7 +13199,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   TaskConstMeta get kCrateApiDbStoreOnlyIdInsertOnConflictColsConstMeta =>
       const TaskConstMeta(
         debugName: "only_id_insert_on_conflict_cols",
-        argNames: ["that", "conn", "onConflict", "cols"],
+        argNames: ["that", "conn", "onConflict", "cols", "set_"],
       );
 
   @override
@@ -13394,6 +13416,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -13406,6 +13429,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           );
           sse_encode_on_conflict(onConflict, serializer);
           sse_encode_list_String(cols, serializer);
+          sse_encode_list_String(set_, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -13418,7 +13442,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta: kCrateApiDbStoreOnlyOnlineInsertOnConflictColsConstMeta,
-        argValues: [that, conn, onConflict, cols],
+        argValues: [that, conn, onConflict, cols, set_],
         apiImpl: this,
       ),
     );
@@ -13427,7 +13451,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   TaskConstMeta get kCrateApiDbStoreOnlyOnlineInsertOnConflictColsConstMeta =>
       const TaskConstMeta(
         debugName: "only_online_insert_on_conflict_cols",
-        argNames: ["that", "conn", "onConflict", "cols"],
+        argNames: ["that", "conn", "onConflict", "cols", "set_"],
       );
 
   @override
@@ -20960,11 +20984,13 @@ class CircleDataImpl extends RustOpaque implements CircleData {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   }) => RustLib.instance.api.crateApiDbStoreCircleDataInsertOnConflictCols(
     that: this,
     conn: conn,
     onConflict: onConflict,
     cols: cols,
+    set_: set_,
   );
 
   Future<void> update({required SqliteDb conn}) => RustLib.instance.api
@@ -21154,12 +21180,14 @@ class CircleMembersDataImpl extends RustOpaque implements CircleMembersData {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   }) =>
       RustLib.instance.api.crateApiDbStoreCircleMembersDataInsertOnConflictCols(
         that: this,
         conn: conn,
         onConflict: onConflict,
         cols: cols,
+        set_: set_,
       );
 
   Future<void> update({required SqliteDb conn}) => RustLib.instance.api
@@ -21232,12 +21260,14 @@ class CircleWithMembersImpl extends RustOpaque implements CircleWithMembers {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   }) =>
       RustLib.instance.api.crateApiDbStoreCircleWithMembersInsertOnConflictCols(
         that: this,
         conn: conn,
         onConflict: onConflict,
         cols: cols,
+        set_: set_,
       );
 
   Future<void> update({required SqliteDb conn}) => RustLib.instance.api
@@ -21385,11 +21415,13 @@ class NewsGroupImpl extends RustOpaque implements NewsGroup {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   }) => RustLib.instance.api.crateApiDbEntitiesNewsGroupInsertOnConflictCols(
     that: this,
     conn: conn,
     onConflict: onConflict,
     cols: cols,
+    set_: set_,
   );
 
   Future<void> update({required SqliteDb conn}) => RustLib.instance.api
@@ -21878,11 +21910,13 @@ class PgpDataCertImpl extends RustOpaque implements PgpDataCert {
     required SqliteDb conn,
     required OnConflict onConflict,
     required List<String> cols,
+    required List<String> set_,
   }) => RustLib.instance.api.crateApiDbStorePgpDataCertInsertOnConflictCols(
     that: this,
     conn: conn,
     onConflict: onConflict,
     cols: cols,
+    set_: set_,
   );
 
   Future<void> update({required SqliteDb conn}) => RustLib.instance.api
