@@ -1,18 +1,34 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kata/circle/app_card.dart';
 import 'package:kata/circle/circle_list_options.dart';
 import 'package:kata/circle/extensions.dart';
 import 'package:kata/pgp/cert/smart_fingerprint.dart';
+import 'package:kata/src/rust/api.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
+import 'package:kata/src/rust/api/pgp/circles/app.dart';
 import 'package:kata/src/rust/api/pgp/fingerprint/visual_key.dart';
+import 'package:provider/provider.dart';
 
 class AppMemberEntry extends StatelessWidget {
   final CircleEntry entry;
-  const AppMemberEntry({super.key, required this.entry});
+  final CircleApp parent;
+  final FocusNode _node = FocusNode();
+  final FutureOr<void> Function(CircleHandle, AppTag?)? onChange;
+  final MenuController _controller = MenuController();
+  AppMemberEntry({
+    super.key,
+    required this.entry,
+    required this.onChange,
+    required this.parent,
+  });
 
   @override
   Widget build(BuildContext context) {
     final content = entry.content;
+    final PgpApp pgpApp = context.read();
 
     if (content != null) {
       final circle = content;
@@ -36,6 +52,42 @@ class AppMemberEntry extends StatelessWidget {
                 '/circles',
                 extra: CircleListOptions(parent: circle.handle()),
               ),
+            ),
+          ),
+          if (onChange != null)
+            DropdownMenu(
+              initialSelection: AppTag.merge,
+              dropdownMenuEntries: AppTag.entries,
+              requestFocusOnTap: false,
+              onSelected: (AppTag? it) async => await onChange!(entry.id, it),
+            )
+          else
+            Chip(label: Text(entry.tag?.name ?? 'cry')),
+          MenuAnchor(
+            controller: _controller,
+            childFocusNode: _node,
+            menuChildren: [
+              MenuItemButton(
+                child: const Text('delete'),
+                onPressed: () async {
+                  await parent.remove(
+                    handle: entry.id,
+                    parent: parent.handle(),
+                    delete: false,
+                  );
+                  await parent.toDb(db: pgpApp.getDb());
+                },
+              ),
+            ],
+            builder: (ctx, controller, child) => IconButton(
+              onPressed: () {
+                if (controller.isOpen) {
+                  controller.close();
+                } else {
+                  controller.open();
+                }
+              },
+              icon: Icon(Icons.menu),
             ),
           ),
         ],

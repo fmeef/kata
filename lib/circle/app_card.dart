@@ -34,25 +34,14 @@ class _AppCardState extends State<AppCard> {
   final TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final onChange = widget.onChange;
     final theme = Theme.of(context);
     final m = widget.members
         .getMembers()
         .map(
-          (item) => Row(
-            children: [
-              Expanded(child: AppMemberEntry(entry: item)),
-              if (onChange != null)
-                DropdownMenu(
-                  initialSelection: AppTag.merge,
-                  dropdownMenuEntries: AppTag.entries,
-                  requestFocusOnTap: false,
-                  onSelected: (AppTag? entry) async =>
-                      await onChange(item.id, entry),
-                )
-              else
-                Chip(label: Text(item.tag?.name ?? 'cry')),
-            ],
+          (item) => AppMemberEntry(
+            entry: item,
+            onChange: widget.onChange,
+            parent: widget.members,
           ),
         )
         .toList();

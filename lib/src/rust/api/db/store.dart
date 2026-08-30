@@ -231,6 +231,13 @@ abstract class CertDao {
 
   Future<OnlyOnline?> isOnline({required String fingerprint});
 
+  Future<void> purgeCircleMember({
+    required String id,
+    required String ty,
+    required String parent,
+    required String parentTy,
+  });
+
   Future<List<PgpDataCert>> searchOwnedCerts({required String userid});
 
   Future<void> updateRole({required String fingerprint, required String role});

@@ -129,6 +129,14 @@ abstract class SqliteDb implements RustOpaqueInterface, CertDao, Dao, TestDao {
   static SqliteDb newInMemory() =>
       RustLib.instance.api.crateApiDbConnectionSqliteDbNewInMemory();
 
+  @override
+  Future<void> purgeCircleMember({
+    required String id,
+    required String ty,
+    required String parent,
+    required String parentTy,
+  });
+
   Future<void> rollback({required BigInt version});
 
   @override

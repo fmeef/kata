@@ -59,6 +59,12 @@ abstract class CircleApp implements RustOpaqueInterface, CircleLike {
 
   Future<void> mergeBoth({required CircleApp other});
 
+  Future<void> remove({
+    required CircleHandle handle,
+    required CircleHandle parent,
+    required bool delete,
+  });
+
   Future<void> toDb({required SqliteDb db});
 
   void updateTag({required CircleHandle id, required MemberTag tag});
