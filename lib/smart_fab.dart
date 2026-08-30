@@ -42,6 +42,7 @@ class _SmartFabState extends State<SmartFab> with GoRouterAware {
       '/network' => showFab(),
       '/mycards' => showFab(),
       '/newapp' => showFab(create: true),
+      '/newcircle' => showFab(create: true),
       _ => hideFab(),
     });
   }

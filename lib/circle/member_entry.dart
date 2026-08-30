@@ -14,7 +14,7 @@ class MemberEntry extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final content = entry.content;
-    final icon = entry.content.getIcon();
+    final icon = entry.getIcon();
     if (content != null) {
       final circle = content;
       final id = circle.getIdUserhandle();

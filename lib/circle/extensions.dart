@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
 
-extension GetIcon<T extends CircleLike?> on T {
+// extension GetIcon<T extends CircleLike> on T? {
+//   IconData getIcon() {
+//     return (switch (this?.getType()) {
+//       CircleType.user => Icons.person,
+//       CircleType.circle => Icons.group,
+//       CircleType.app => Icons.apps,
+//       null => Icons.device_unknown,
+//     });
+//   }
+// }
+
+extension GetIconCircleOrUse on CircleOr_User? {
   IconData getIcon() {
-    return (switch (this?.getType()) {
+        return (switch (this?.getType()) {
       CircleType.user => Icons.person,
       CircleType.circle => Icons.group,
       CircleType.app => Icons.apps,
@@ -12,14 +23,20 @@ extension GetIcon<T extends CircleLike?> on T {
   }
 }
 
-extension GetIconCircleOR on CircleOr? {
+extension GetIconCircleEntry on CircleEntry? {
   IconData getIcon() {
-    return (this as CircleLike?).getIcon();
+        return this?.content.getIcon() ?? Icons.device_unknown;
   }
 }
 
-extension GetIconCircleEntry on CircleEntry? {
+
+extension GetIconCircleOr on CircleOr? {
   IconData getIcon() {
-    return (this as CircleLike?).getIcon();
+  return (switch (this?.getType()) {
+      CircleType.user => Icons.person,
+      CircleType.circle => Icons.group,
+      CircleType.app => Icons.apps,
+      null => Icons.device_unknown,
+    });
   }
 }
