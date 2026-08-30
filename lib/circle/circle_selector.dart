@@ -8,7 +8,13 @@ import 'package:kata/src/rust/api/pgp/circles.dart';
 class CircleSelector extends StatelessWidget {
   final FutureOr<void> Function(List<CircleOr>) selected;
   final CircleHandle? parent;
-  const CircleSelector({super.key, required this.selected, this.parent});
+  final bool users;
+  const CircleSelector({
+    super.key,
+    required this.selected,
+    this.parent,
+    this.users = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +38,7 @@ class CircleSelector extends StatelessWidget {
           final circles = await pgpApp.getDb().getCirclesJoin();
           final db = await pgpApp.circlesFromDb(
             members: circles,
-            users: false,
+            users: true,
             all: true,
           );
           return db.map((v) => KV(key: v.idHex(), value: v)).toList();

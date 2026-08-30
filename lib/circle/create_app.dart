@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kata/circle/app_card.dart';
 import 'package:kata/circle/circle_list_options.dart';
+import 'package:kata/circle/circle_selector.dart';
 
 import 'package:kata/fab_observer.dart';
 import 'package:kata/fab_state.dart';
 import 'package:kata/pgp/cert/active_cert.dart';
 import 'package:kata/pgp/cert/user_selector.dart';
 import 'package:kata/src/rust/api.dart';
+import 'package:kata/src/rust/api/pgp/circles.dart';
 import 'package:kata/src/rust/api/pgp/circles/app.dart';
 import 'package:provider/provider.dart';
 
@@ -67,7 +69,7 @@ class _CreateAppState extends State<CreateApp> {
 
               Expanded(
                 flex: 3,
-                child: UserSelector(
+                child: CircleSelector(
                   selected: (l) async {
                     final ActiveCert cert = context.read();
                     final activeCert = cert.cert;
@@ -77,10 +79,13 @@ class _CreateAppState extends State<CreateApp> {
                       );
 
                       for (final member in l) {
-                        await c.addUser(
-                          user: member.fingerprint(),
-                          tag: MemberTag.merge,
-                        );
+                        (switch (member) {
+                          CircleOr_User(:final field0) => await c.addUser(
+                            user: field0,
+                            tag: MemberTag.merge,
+                          ),
+                          _ => (),
+                        });
                       }
 
                       setState(() {
@@ -88,12 +93,17 @@ class _CreateAppState extends State<CreateApp> {
                       });
                     } else if (_circle != null) {
                       for (final member in l) {
-                        await _circle?.addUser(
-                          user: member.fingerprint(),
-                          tag: MemberTag.merge,
-                        );
-                        setState(() {});
+                        (switch (member) {
+                          CircleOr_User(:final field0) =>
+                            await _circle?.addUser(
+                              user: field0,
+                              tag: MemberTag.merge,
+                            ),
+                          _ => (),
+                        });
                       }
+
+                      setState(() {});
                     }
                   },
                 ),

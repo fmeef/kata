@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kata/circle/circle_card.dart';
 import 'package:kata/circle/circle_list_options.dart';
+import 'package:kata/circle/circle_selector.dart';
 import 'package:kata/fab_observer.dart';
 import 'package:kata/fab_state.dart';
 import 'package:kata/pgp/cert/user_selector.dart';
@@ -68,16 +69,9 @@ class _CreateAppState extends State<CreateCircle> {
 
               Expanded(
                 flex: 3,
-                child: UserSelector(
+                child: CircleSelector(
                   selected: (l) async {
-                    final c = await pgpApp.createCircle(
-                      keys: l
-                          .map(
-                            (v) =>
-                                CircleOr.fromCert(userHandle: v.fingerprint()),
-                          )
-                          .toList(),
-                    );
+                    final c = await pgpApp.createCircle(keys: l);
 
                     final id = c.getIdUserhandle();
 
