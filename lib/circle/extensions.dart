@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
 
-extension GetIcon on CircleLike? {
+extension GetIcon<T extends CircleLike?> on T {
   IconData getIcon() {
     return (switch (this?.getType()) {
       CircleType.user => Icons.person,
@@ -14,12 +14,12 @@ extension GetIcon on CircleLike? {
 
 extension GetIconCircleOR on CircleOr? {
   IconData getIcon() {
-    return (this as CircleLike).getIcon();
+    return (this as CircleLike?).getIcon();
   }
 }
 
 extension GetIconCircleEntry on CircleEntry? {
   IconData getIcon() {
-    return (this as CircleLike).getIcon();
+    return (this as CircleLike?).getIcon();
   }
 }
