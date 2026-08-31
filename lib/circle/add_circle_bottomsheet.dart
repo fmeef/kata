@@ -47,10 +47,21 @@ class _AddCircleBottomsheetState extends State<AddCircleBottomsheet> {
                       tag: _tag?.name ?? MemberTag.merge,
                       db: pgpApp,
                     );
-                    if (context.mounted) {
-                      context.pop();
-                    }
                   }
+                } else if (widget.add.circleType == CircleType.user) {
+                  final add = CircleOr.fromCert(userHandle: widget.add.id);
+                  await add.toDb(db: pgpApp.getDb());
+                  for (final circle in _selected) {
+                    await circle.add(
+                      circle: add,
+                      tag: _tag?.name ?? MemberTag.merge,
+                      db: pgpApp,
+                    );
+                  }
+                }
+
+                if (context.mounted) {
+                  context.pop();
                 }
               },
               child: const Text('Add'),
