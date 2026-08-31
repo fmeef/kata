@@ -25,6 +25,19 @@ class AppMemberEntry extends StatelessWidget {
     required this.parent,
   });
 
+  Widget chip() {
+    if (onChange != null) {
+      return DropdownMenu(
+        initialSelection: AppTag.merge,
+        dropdownMenuEntries: AppTag.entries,
+        requestFocusOnTap: false,
+        onSelected: (AppTag? it) async => await onChange!(entry.id, it),
+      );
+    } else {
+      return Chip(label: Text(entry.tag?.name ?? 'cry'));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final content = entry.content;
@@ -54,15 +67,6 @@ class AppMemberEntry extends StatelessWidget {
               ),
             ),
           ),
-          if (onChange != null)
-            DropdownMenu(
-              initialSelection: AppTag.merge,
-              dropdownMenuEntries: AppTag.entries,
-              requestFocusOnTap: false,
-              onSelected: (AppTag? it) async => await onChange!(entry.id, it),
-            )
-          else
-            Chip(label: Text(entry.tag?.name ?? 'cry')),
           MenuAnchor(
             controller: _controller,
             childFocusNode: _node,
@@ -90,15 +94,15 @@ class AppMemberEntry extends StatelessWidget {
                 },
               ),
             ],
-            builder: (ctx, controller, child) => IconButton(
-              onPressed: () {
+            builder: (ctx, controller, child) => InkWell(
+              onTap: () {
                 if (controller.isOpen) {
                   controller.close();
                 } else {
                   controller.open();
                 }
               },
-              icon: Icon(Icons.menu),
+              child: chip(),
             ),
           ),
         ],
