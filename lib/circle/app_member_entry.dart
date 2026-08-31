@@ -42,11 +42,12 @@ class AppMemberEntry extends StatelessWidget {
   Widget build(BuildContext context) {
     final content = entry.content;
     final PgpApp pgpApp = context.read();
-
+    final theme = Theme.of(context);
     if (content != null) {
       final circle = content;
       final id = circle.getIdUserhandle();
       final icon = circle.getIcon();
+
       final builder = VisualKeyBuilder.fromHandle(
         data: id,
       ).lujvo(start: BigInt.from(0), end: BigInt.from(16));
@@ -90,6 +91,22 @@ class AppMemberEntry extends StatelessWidget {
                     parent: parent.handle(),
                     delete: true,
                   );
+                  await parent.toDb(db: pgpApp.getDb());
+                },
+              ),
+              MenuItemButton(
+                child: const Text('merge'),
+                onPressed: () async {
+                  parent.updateTag(id: entry.id, tag: MemberTag.merge);
+                  await parent.resign();
+                  await parent.toDb(db: pgpApp.getDb());
+                },
+              ),
+              MenuItemButton(
+                child: const Text('overwrite'),
+                onPressed: () async {
+                  parent.updateTag(id: entry.id, tag: MemberTag.overwrite);
+                  await parent.resign();
                   await parent.toDb(db: pgpApp.getDb());
                 },
               ),

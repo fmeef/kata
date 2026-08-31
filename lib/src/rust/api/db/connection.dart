@@ -9,7 +9,7 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:uuid/uuid.dart';
 import 'store.dart';
 
-// These functions are ignored because they are not marked as `pub`: `connection`, `fire_watchers`, `new`
+// These functions are ignored because they are not marked as `pub`: `connection`, `fire_watcher`, `fire_watchers`, `new`, `setup_watchers`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `SqliteDbInner`, `WatcherInner`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `clone`, `drop`, `fmt`
 // These functions are ignored (category: IgnoreBecauseExplicitAttribute): `insert_on_conflict_custom`

@@ -10,7 +10,7 @@ import '../circles.dart';
 import 'circle.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These functions are ignored because they are not marked as `pub`: `as_bytes`, `as_read`, `as_str`, `delete`, `id_hex`, `into_option`, `is_none`, `member_type`, `new_empty`, `option_mut`, `option`, `resign`, `tag_reader`, `to_read`
+// These functions are ignored because they are not marked as `pub`: `as_bytes`, `as_read`, `as_str`, `delete`, `id_hex`, `into_option`, `is_none`, `member_type`, `new_empty`, `option_mut`, `option`, `tag_reader`, `to_read`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `CircleAppInner`, `EMPTY`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `deref`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `hash`, `initialize`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`
 
@@ -64,6 +64,8 @@ abstract class CircleApp implements RustOpaqueInterface, CircleLike {
     required CircleHandle parent,
     required bool delete,
   });
+
+  Future<void> resign();
 
   Future<void> toDb({required SqliteDb db});
 
