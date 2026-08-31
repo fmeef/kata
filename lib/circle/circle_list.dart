@@ -50,32 +50,28 @@ class _CircleListState extends State<CircleList> {
     _watcher = pgpApp.getWatcher();
     _watcher.watch(
       table: 'circle_members',
-      cb: (_) {
+      cb: (_) async {
         if (widget.parent != null) {
-          pgpApp.getCircleById(id: widget.parent!).then((circles) async {
-            final members = await circles?.iterMembers().toList();
+          final circles = await pgpApp.getCircleById(id: widget.parent!);
 
-            if (mounted) {
-              setState(() {
-                _members = members
-                    ?.where((v) => v.content != null)
-                    .map((v) => v.content!)
-                    .toList();
-              });
-            }
+          final members = await circles?.iterMembers().toList();
+
+          setState(() {
+            _members = members
+                ?.where((v) => v.content != null)
+                .map((v) => v.content!)
+                .toList();
           });
         } else {
-          pgpApp.getDb().getCirclesJoin().then((circles) async {
-            final c = await pgpApp.circlesFromDb(
-              members: circles,
-              users: false,
-              all: true,
-            );
-            if (mounted) {
-              setState(() {
-                _members = c;
-              });
-            }
+          final circles = await pgpApp.getDb().getCirclesJoin();
+          final c = await pgpApp.circlesFromDb(
+            members: circles,
+            users: false,
+            all: true,
+          );
+
+          setState(() {
+            _members = c;
           });
         }
       },
