@@ -813,9 +813,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   UuidValue dco_decode_Uuid(dynamic raw);
 
   @protected
-  AppMember dco_decode_app_member(dynamic raw);
-
-  @protected
   bool dco_decode_bool(dynamic raw);
 
   @protected
@@ -862,9 +859,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   MemberTag dco_decode_box_autoadd_member_tag(dynamic raw);
-
-  @protected
-  NonOpaqueApp dco_decode_box_autoadd_non_opaque_app(dynamic raw);
 
   @protected
   OnlyFingerprint dco_decode_box_autoadd_only_fingerprint(dynamic raw);
@@ -977,9 +971,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<String> dco_decode_list_String(dynamic raw);
 
   @protected
-  List<AppMember> dco_decode_list_app_member(dynamic raw);
-
-  @protected
   List<CertSynopsis> dco_decode_list_cert_synopsis(dynamic raw);
 
   @protected
@@ -1026,9 +1017,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   MemberTag dco_decode_member_tag(dynamic raw);
-
-  @protected
-  NonOpaqueApp dco_decode_non_opaque_app(dynamic raw);
 
   @protected
   OnConflict dco_decode_on_conflict(dynamic raw);
@@ -1786,9 +1774,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   UuidValue sse_decode_Uuid(SseDeserializer deserializer);
 
   @protected
-  AppMember sse_decode_app_member(SseDeserializer deserializer);
-
-  @protected
   bool sse_decode_bool(SseDeserializer deserializer);
 
   @protected
@@ -1835,11 +1820,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   MemberTag sse_decode_box_autoadd_member_tag(SseDeserializer deserializer);
-
-  @protected
-  NonOpaqueApp sse_decode_box_autoadd_non_opaque_app(
-    SseDeserializer deserializer,
-  );
 
   @protected
   OnlyFingerprint sse_decode_box_autoadd_only_fingerprint(
@@ -1956,9 +1936,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<String> sse_decode_list_String(SseDeserializer deserializer);
 
   @protected
-  List<AppMember> sse_decode_list_app_member(SseDeserializer deserializer);
-
-  @protected
   List<CertSynopsis> sse_decode_list_cert_synopsis(
     SseDeserializer deserializer,
   );
@@ -2013,9 +1990,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   MemberTag sse_decode_member_tag(SseDeserializer deserializer);
-
-  @protected
-  NonOpaqueApp sse_decode_non_opaque_app(SseDeserializer deserializer);
 
   @protected
   OnConflict sse_decode_on_conflict(SseDeserializer deserializer);
@@ -2900,9 +2874,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_Uuid(UuidValue self, SseSerializer serializer);
 
   @protected
-  void sse_encode_app_member(AppMember self, SseSerializer serializer);
-
-  @protected
   void sse_encode_bool(bool self, SseSerializer serializer);
 
   @protected
@@ -2964,12 +2935,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_member_tag(
     MemberTag self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_box_autoadd_non_opaque_app(
-    NonOpaqueApp self,
     SseSerializer serializer,
   );
 
@@ -3113,12 +3078,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_list_String(List<String> self, SseSerializer serializer);
 
   @protected
-  void sse_encode_list_app_member(
-    List<AppMember> self,
-    SseSerializer serializer,
-  );
-
-  @protected
   void sse_encode_list_cert_synopsis(
     List<CertSynopsis> self,
     SseSerializer serializer,
@@ -3187,9 +3146,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_member_tag(MemberTag self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_non_opaque_app(NonOpaqueApp self, SseSerializer serializer);
 
   @protected
   void sse_encode_on_conflict(OnConflict self, SseSerializer serializer);
