@@ -5,10 +5,8 @@ import 'package:kata/circle/circle_list_options.dart';
 import 'package:kata/circle/circle_selector.dart';
 import 'package:kata/fab_observer.dart';
 import 'package:kata/fab_state.dart';
-import 'package:kata/pgp/cert/user_selector.dart';
 import 'package:kata/src/rust/api.dart';
 import 'package:kata/src/rust/api/pgp.dart';
-import 'package:kata/src/rust/api/pgp/circles.dart';
 import 'package:kata/src/rust/api/pgp/circles/circle.dart';
 import 'package:provider/provider.dart';
 

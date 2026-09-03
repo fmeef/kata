@@ -7,7 +7,6 @@ import 'package:kata/circle/circle_selector.dart';
 import 'package:kata/fab_observer.dart';
 import 'package:kata/fab_state.dart';
 import 'package:kata/pgp/cert/active_cert.dart';
-import 'package:kata/pgp/cert/user_selector.dart';
 import 'package:kata/src/rust/api.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
 import 'package:kata/src/rust/api/pgp/circles/app.dart';
@@ -46,6 +45,13 @@ class _CreateAppState extends State<CreateApp> {
         Expanded(
           child: Column(
             children: [
+              TextField(
+                controller: _controller,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hint: const Text('App name'),
+                ),
+              ),
               if (_circle != null)
                 Flexible(
                   flex: 2,

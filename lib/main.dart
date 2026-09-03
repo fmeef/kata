@@ -2,7 +2,6 @@ import 'package:kata/circle/circle_list.dart';
 import 'package:kata/circle/circle_list_options.dart';
 import 'package:kata/circle/create_app.dart';
 import 'package:kata/circle/create_circle.dart';
-import 'package:kata/circle/create_circle_app.dart';
 import 'package:kata/drawer_content.dart';
 import 'package:kata/graphvis/graph_test.dart';
 

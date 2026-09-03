@@ -42,7 +42,7 @@ class AppMemberEntry extends StatelessWidget {
   Widget build(BuildContext context) {
     final content = entry.content;
     final PgpApp pgpApp = context.read();
-    final theme = Theme.of(context);
+
     if (content != null) {
       final circle = content;
       final id = circle.getIdUserhandle();

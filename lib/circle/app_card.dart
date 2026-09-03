@@ -31,7 +31,6 @@ enum AppTag {
 }
 
 class _AppCardState extends State<AppCard> {
-  final TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
