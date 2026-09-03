@@ -651,6 +651,7 @@ abstract class RustLibApi extends BaseApi {
   Future<CircleApp> crateApiPgpAppCreateApp({
     required PgpApp that,
     required UserHandle owner,
+    required String name,
   });
 
   Future<Circle> crateApiPgpAppCreateCircle({
@@ -6166,6 +6167,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Future<CircleApp> crateApiPgpAppCreateApp({
     required PgpApp that,
     required UserHandle owner,
+    required String name,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -6179,6 +6181,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             owner,
             serializer,
           );
+          sse_encode_String(name, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -6192,7 +6195,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: sse_decode_AnyhowException,
         ),
         constMeta: kCrateApiPgpAppCreateAppConstMeta,
-        argValues: [that, owner],
+        argValues: [that, owner, name],
         apiImpl: this,
       ),
     );
@@ -6200,7 +6203,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   TaskConstMeta get kCrateApiPgpAppCreateAppConstMeta => const TaskConstMeta(
     debugName: "PgpApp_create_app",
-    argNames: ["that", "owner"],
+    argNames: ["that", "owner", "name"],
   );
 
   @override
@@ -21327,8 +21330,14 @@ class PgpAppImpl extends RustOpaque implements PgpApp {
     all: all,
   );
 
-  Future<CircleApp> createApp({required UserHandle owner}) =>
-      RustLib.instance.api.crateApiPgpAppCreateApp(that: this, owner: owner);
+  Future<CircleApp> createApp({
+    required UserHandle owner,
+    required String name,
+  }) => RustLib.instance.api.crateApiPgpAppCreateApp(
+    that: this,
+    owner: owner,
+    name: name,
+  );
 
   Future<Circle> createCircle({required List<CircleOr> keys}) =>
       RustLib.instance.api.crateApiPgpAppCreateCircle(that: this, keys: keys);

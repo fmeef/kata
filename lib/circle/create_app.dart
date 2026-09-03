@@ -15,6 +15,7 @@ import 'package:provider/provider.dart';
 
 class _CreateAppState extends State<CreateApp> {
   CircleApp? _circle;
+  final TextEditingController _controller = TextEditingController();
   late final FabState state = context.read();
 
   late final FabObserver observer = FabObserver(
@@ -76,6 +77,7 @@ class _CreateAppState extends State<CreateApp> {
                     if (activeCert != null && _circle == null) {
                       final c = await pgpApp.createApp(
                         owner: activeCert.cert.fingerprint,
+                        name: _controller.text,
                       );
 
                       for (final member in l) {

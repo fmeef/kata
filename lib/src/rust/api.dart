@@ -64,7 +64,10 @@ abstract class PgpApp
   static Future<PgpApp> create({required Config config}) =>
       RustLib.instance.api.crateApiPgpAppCreate(config: config);
 
-  Future<CircleApp> createApp({required UserHandle owner});
+  Future<CircleApp> createApp({
+    required UserHandle owner,
+    required String name,
+  });
 
   Future<Circle> createCircle({required List<CircleOr> keys});
 
