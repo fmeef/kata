@@ -101,6 +101,8 @@ class _CreateAppState extends State<CreateApp> {
                       });
                     } else if (_circle != null) {
                       for (final member in l) {
+                        print('add member2 ${member.getIdUserhandle().name()}');
+
                         (switch (member) {
                           CircleOr_User(:final field0) =>
                             await _circle?.addUser(
