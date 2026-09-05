@@ -8,7 +8,6 @@ import 'package:kata/fab_observer.dart';
 import 'package:kata/fab_state.dart';
 import 'package:kata/pgp/cert/active_cert.dart';
 import 'package:kata/src/rust/api.dart';
-import 'package:kata/src/rust/api/pgp/circles.dart';
 import 'package:kata/src/rust/api/pgp/circles/app.dart';
 import 'package:provider/provider.dart';
 
@@ -66,7 +65,7 @@ class _CreateAppState extends State<CreateApp> {
                         onChange: (id, value) async {
                           final tag = value?.name;
                           if (tag != null) {
-                            _circle?.updateTag(id: id, tag: tag);
+                            await _circle?.updateTag(id: id, tag: tag);
                           }
                         },
                       ),
@@ -87,13 +86,10 @@ class _CreateAppState extends State<CreateApp> {
                       );
 
                       for (final member in l) {
-                        (switch (member) {
-                          CircleOr_User(:final field0) => await c.addUser(
-                            user: field0,
-                            tag: MemberTag.merge,
-                          ),
-                          _ => (),
-                        });
+                        await c.addCircleOr(
+                          circle: member,
+                          tag: MemberTag.merge,
+                        );
                       }
 
                       setState(() {
@@ -101,16 +97,10 @@ class _CreateAppState extends State<CreateApp> {
                       });
                     } else if (_circle != null) {
                       for (final member in l) {
-                        print('add member2 ${member.getIdUserhandle().name()}');
-
-                        (switch (member) {
-                          CircleOr_User(:final field0) =>
-                            await _circle?.addUser(
-                              user: field0,
-                              tag: MemberTag.merge,
-                            ),
-                          _ => (),
-                        });
+                        await _circle?.addCircleOr(
+                          circle: member,
+                          tag: MemberTag.merge,
+                        );
                       }
 
                       setState(() {});

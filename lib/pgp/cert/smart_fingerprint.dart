@@ -103,7 +103,7 @@ class _SmartFingerprintState extends State<SmartFingerprint> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final fp = widget.fingerprint.name();
+    final fp = widget.fingerprint.fingerprint();
 
     if (visualKey == null || displayFp != widget.fingerprint) {
       widget.builder.applyOrElse(data: widget.fingerprint).then((v) {

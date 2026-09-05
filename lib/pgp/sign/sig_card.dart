@@ -103,7 +103,7 @@ class SigCard extends StatelessWidget {
                             if (handle != null)
                               Text(handle!, style: theme.textTheme.labelLarge),
                             Text(
-                              fingerprint.name(),
+                              fingerprint.fingerprint(),
                               softWrap: true,
                               style: theme.textTheme.bodySmall,
                             ),

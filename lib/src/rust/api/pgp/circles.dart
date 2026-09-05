@@ -16,7 +16,7 @@ part 'circles.freezed.dart';
 // These functions are ignored because they are not marked as `pub`: `as_bytes`, `as_read`, `as_read`, `empty`, `from_circle_or_tag`, `from_circle_or`, `get_bin`, `get_bytes`, `get_children_parent`, `get_children`, `get_parent_cache`, `get_type_str`, `get_type_u8`, `get_userhandle`, `into_option`, `is_none`, `member_type`, `option_mut`, `option`, `thin`
 // These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `CircleOrRef`, `MaybeDeletedFull`, `TagOr`
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `clone`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `cmp`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `hash`, `hash`, `hash`, `hash`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `partial_cmp`, `read`
-// These functions are ignored (category: IgnoreBecauseNotAllowedOwner): `get_id_userhandle`, `get_id`, `get_member`, `get_members`, `get_owner`, `get_type`, `handle`, `insert`, `iter_members`, `validate`, `verify`
+// These functions are ignored (category: IgnoreBecauseNotAllowedOwner): `get_id_userhandle`, `get_id`, `get_member`, `get_members`, `get_name`, `get_owner`, `get_type`, `handle`, `insert`, `iter_members`, `validate`, `verify`
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<CircleEntry>>
 abstract class CircleEntry implements RustOpaqueInterface {
@@ -52,6 +52,8 @@ abstract class CircleLike {
   CircleEntry? getMember({required CircleHandle id});
 
   List<CircleEntry> getMembers();
+
+  String getName();
 
   UserHandle? getOwner();
 
@@ -103,6 +105,9 @@ sealed class CircleOr with _$CircleOr {
 
   List<CircleEntry> getMembers() =>
       RustLib.instance.api.crateApiPgpCirclesCircleOrGetMembers(that: this);
+
+  String getName() =>
+      RustLib.instance.api.crateApiPgpCirclesCircleOrGetName(that: this);
 
   UserHandle? getOwner() =>
       RustLib.instance.api.crateApiPgpCirclesCircleOrGetOwner(that: this);

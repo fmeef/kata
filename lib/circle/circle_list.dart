@@ -8,7 +8,7 @@ import 'package:kata/src/rust/api/pgp/circles.dart';
 import 'package:provider/provider.dart';
 
 class _CircleListState extends State<CircleList> {
-  List<CircleOr>? _members;
+  List<Widget>? _members;
 
   late final FabState fabState = context.read();
   late final Watcher _watcher;
@@ -29,6 +29,7 @@ class _CircleListState extends State<CircleList> {
         _members = members
             ?.where((v) => v.content != null)
             .map((v) => v.content!)
+            .map((v) => OmniCard(circle: v, expanded: true, noclick: false))
             .toList();
       });
     } else {
@@ -40,7 +41,9 @@ class _CircleListState extends State<CircleList> {
       );
 
       setState(() {
-        _members = c;
+        _members = c
+            .map((v) => OmniCard(circle: v, expanded: true, noclick: false))
+            .toList();
       });
     }
   }
@@ -70,11 +73,7 @@ class _CircleListState extends State<CircleList> {
   Widget build(BuildContext context) {
     final members = _members;
     if (members != null) {
-      return ListView(
-        children: members
-            .map((v) => OmniCard(circle: v, expanded: true, noclick: false))
-            .toList(),
-      );
+      return ListView(children: members);
     } else {
       return Center(child: CircularProgressIndicator());
     }

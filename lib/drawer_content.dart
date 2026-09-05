@@ -28,7 +28,7 @@ class DrawerContent extends StatelessWidget {
             )
           else
             Text(
-              cert.cert.fingerprint.name(),
+              cert.cert.fingerprint.fingerprint(),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),

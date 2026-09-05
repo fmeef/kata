@@ -20,6 +20,8 @@ abstract class CircleApp implements RustOpaqueInterface, CircleLike {
 
   Future<void> addCircle({required Circle circle, required MemberTag tag});
 
+  Future<void> addCircleOr({required CircleOr circle, required MemberTag tag});
+
   Future<void> addUser({required UserHandle user, required MemberTag tag});
 
   @override
@@ -33,6 +35,9 @@ abstract class CircleApp implements RustOpaqueInterface, CircleLike {
 
   @override
   List<CircleEntry> getMembers();
+
+  @override
+  String getName();
 
   @override
   UserHandle? getOwner();
@@ -67,7 +72,7 @@ abstract class CircleApp implements RustOpaqueInterface, CircleLike {
 
   Future<void> toDb({required SqliteDb db});
 
-  void updateTag({required CircleHandle id, required MemberTag tag});
+  Future<void> updateTag({required CircleHandle id, required MemberTag tag});
 
   @override
   Future<bool> validate();

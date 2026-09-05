@@ -60,7 +60,7 @@ class CircleDeleteDialog extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () async {
-                    final hex = userhandle.name();
+                    final hex = userhandle.fingerprint();
                     await app.getDb().deleteCircle(id: hex, ty: "circle");
                     if (context.mounted) context.pop();
                   },

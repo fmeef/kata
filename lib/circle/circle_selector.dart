@@ -13,7 +13,7 @@ class CircleSelector extends StatelessWidget {
     super.key,
     required this.selected,
     this.parent,
-    this.users = false,
+    this.users = true,
   });
 
   @override
@@ -38,7 +38,7 @@ class CircleSelector extends StatelessWidget {
           final circles = await pgpApp.getDb().getCirclesJoin();
           final db = await pgpApp.circlesFromDb(
             members: circles,
-            users: true,
+            users: users,
             all: true,
           );
           return db.map((v) => KV(key: v.idHex(), value: v)).toList();

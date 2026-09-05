@@ -30,6 +30,9 @@ abstract class Circle implements RustOpaqueInterface, CircleLike {
   List<CircleEntry> getMembers();
 
   @override
+  String getName();
+
+  @override
   UserHandle? getOwner();
 
   @override

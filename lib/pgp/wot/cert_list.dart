@@ -54,8 +54,8 @@ class _CertListState extends State<CertList> {
         final IdentityService service = context.read();
         if (active != null) {
           final graphController = await service.authenticate(
-            roots: [active.cert.fingerprint.name()],
-            fingerprint: cert.cert.fingerprint.name(),
+            roots: [active.cert.fingerprint.fingerprint()],
+            fingerprint: cert.cert.fingerprint.fingerprint(),
             trust: 1,
           );
 
@@ -105,7 +105,7 @@ class _CertListState extends State<CertList> {
     try {
       for (final _CertTrust key in certs ?? []) {
         certRefreshController.onUpdate(key.cert.ids.firstOrNull ?? "");
-        await pgp.fillFromKeyserver(key.cert.cert.fingerprint.name());
+        await pgp.fillFromKeyserver(key.cert.cert.fingerprint.fingerprint());
         if (key.cert.cert.online) {
           await pgp.uploadToKeyserver(key.cert);
         }
@@ -200,7 +200,7 @@ class _CertListState extends State<CertList> {
 
         if (roots != null) {
           final network = pgp.networkFromFingerprints(
-            fingerprints: roots.map((v) => v.name()).toList(),
+            fingerprints: roots.map((v) => v.fingerprint()).toList(),
           );
 
           if (watcher == null) {
@@ -258,8 +258,8 @@ class _CertListState extends State<CertList> {
                               trust: v.trust,
                               graphController: v.graphController,
                               active:
-                                  v.cert.cert.fingerprint.name() ==
-                                  cert?.cert.fingerprint.name(),
+                                  v.cert.cert.fingerprint.fingerprint() ==
+                                  cert?.cert.fingerprint.fingerprint(),
                             ),
                           )
                           .toList() ??

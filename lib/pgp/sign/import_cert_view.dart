@@ -50,7 +50,7 @@ class ImportCertView extends StatelessWidget {
                       onPressed: () async {
                         try {
                           await pgpApp.fillFromKeyserver(
-                            options.fingerprint.name(),
+                            options.fingerprint.fingerprint(),
                           );
                         } on Exception catch (e) {
                           sm.showSnackBar(

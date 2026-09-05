@@ -51,7 +51,7 @@ class _AppCardState extends State<AppCard> {
         padding: EdgeInsetsGeometry.fromSTEB(16, 8, 16, 8),
         child: ExpansionTile(
           initiallyExpanded: widget.expanded,
-          subtitle: Text(widget.members.getOwner()?.name() ?? ""),
+          subtitle: Text(widget.members.getName()),
           leading: Chip(label: Text('${m.length}')),
           title: Row(
             children: [

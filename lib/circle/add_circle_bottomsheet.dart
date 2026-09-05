@@ -18,6 +18,7 @@ class _AddCircleBottomsheetState extends State<AddCircleBottomsheet> {
         Expanded(
           child: CircleSelector(
             parent: widget.parent,
+            users: false,
             selected: (sel) {
               _selected = sel;
               if (sel.any((p) => p.getType() == CircleType.app)) {

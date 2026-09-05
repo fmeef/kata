@@ -26,6 +26,8 @@ abstract class UserHandle implements RustOpaqueInterface, CircleLike {
 
   String compositeLujvoOrElse({required bool short});
 
+  String fingerprint();
+
   static UserHandle fromHex({required String hex}) =>
       RustLib.instance.api.crateApiPgpUserHandleFromHex(hex: hex);
 
@@ -40,6 +42,9 @@ abstract class UserHandle implements RustOpaqueInterface, CircleLike {
 
   @override
   List<CircleEntry> getMembers();
+
+  @override
+  String getName();
 
   @override
   UserHandle? getOwner();
@@ -59,8 +64,6 @@ abstract class UserHandle implements RustOpaqueInterface, CircleLike {
   Stream<CircleEntry> iterMembers();
 
   BigInt len();
-
-  String name();
 
   VisualKey separate();
 

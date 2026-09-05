@@ -97,7 +97,7 @@ class AppMemberEntry extends StatelessWidget {
               MenuItemButton(
                 child: const Text('merge'),
                 onPressed: () async {
-                  parent.updateTag(id: entry.id, tag: MemberTag.merge);
+                  await parent.updateTag(id: entry.id, tag: MemberTag.merge);
                   await parent.resign();
                   await parent.toDb(db: pgpApp.getDb());
                 },
@@ -105,7 +105,10 @@ class AppMemberEntry extends StatelessWidget {
               MenuItemButton(
                 child: const Text('overwrite'),
                 onPressed: () async {
-                  parent.updateTag(id: entry.id, tag: MemberTag.overwrite);
+                  await parent.updateTag(
+                    id: entry.id,
+                    tag: MemberTag.overwrite,
+                  );
                   await parent.resign();
                   await parent.toDb(db: pgpApp.getDb());
                 },

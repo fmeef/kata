@@ -17,7 +17,7 @@ class UserSelector extends StatelessWidget {
           .iterCerts()
           .map(
             (v) => KV(
-              key: v.cert.fingerprint.name(),
+              key: v.cert.fingerprint.fingerprint(),
               value: MaybeCert.fromCert(cert: v),
             ),
           )
