@@ -13,37 +13,34 @@ class _CircleListState extends State<CircleList> {
   late final FabState fabState = context.read();
   late final Watcher _watcher;
   late final PgpApp _pgpApp = context.read();
-  late final FabObserver observer = FabObserver(
-    handler: () async {
-      await updateCircles();
-    },
-  );
 
   Future<void> updateCircles() async {
     if (widget.parent != null) {
       final circles = await _pgpApp.getCircleById(id: widget.parent!);
 
       final members = await circles?.iterMembers().toList();
-
+      final m = members
+          ?.where((v) => v.content != null)
+          .map((v) => v.content!)
+          .map((v) => OmniCard(circle: v, expanded: true, noclick: false))
+          .toList();
       setState(() {
-        _members = members
-            ?.where((v) => v.content != null)
-            .map((v) => v.content!)
-            .map((v) => OmniCard(circle: v, expanded: true, noclick: false))
-            .toList();
+        _members = m;
       });
     } else {
       final circles = await _pgpApp.getDb().getCirclesJoin();
-      final c = await _pgpApp.circlesFromDb(
+      final m = await _pgpApp.circlesFromDb(
         members: circles,
         users: false,
         all: true,
       );
 
+      final c = m
+          .map((v) => OmniCard(circle: v, expanded: true, noclick: false))
+          .toList();
+
       setState(() {
-        _members = c
-            .map((v) => OmniCard(circle: v, expanded: true, noclick: false))
-            .toList();
+        _members = c;
       });
     }
   }
@@ -51,7 +48,6 @@ class _CircleListState extends State<CircleList> {
   @override
   void initState() {
     super.initState();
-    fabState.addHandler(observer);
 
     _watcher = _pgpApp.getWatcher();
     _watcher.watch(
@@ -65,7 +61,6 @@ class _CircleListState extends State<CircleList> {
   @override
   void dispose() {
     super.dispose();
-    fabState.removeHandler(observer);
     _watcher.dispose();
   }
 
