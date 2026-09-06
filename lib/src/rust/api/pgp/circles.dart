@@ -51,7 +51,7 @@ abstract class CircleLike {
 
   CircleEntry? getMember({required CircleHandle id});
 
-  List<CircleEntry> getMembers();
+  Future<List<CircleEntry>> getMembers();
 
   String getName();
 
@@ -103,7 +103,7 @@ sealed class CircleOr with _$CircleOr {
   CircleEntry? getMember({required CircleHandle id}) => RustLib.instance.api
       .crateApiPgpCirclesCircleOrGetMember(that: this, id: id);
 
-  List<CircleEntry> getMembers() =>
+  Future<List<CircleEntry>> getMembers() =>
       RustLib.instance.api.crateApiPgpCirclesCircleOrGetMembers(that: this);
 
   String getName() =>

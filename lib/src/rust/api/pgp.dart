@@ -41,7 +41,7 @@ abstract class UserHandle implements RustOpaqueInterface, CircleLike {
   CircleEntry? getMember({required CircleHandle id});
 
   @override
-  List<CircleEntry> getMembers();
+  Future<List<CircleEntry>> getMembers();
 
   @override
   String getName();

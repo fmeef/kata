@@ -137,7 +137,7 @@ abstract class RustLibApi extends BaseApi {
     required CircleHandle id,
   });
 
-  List<CircleEntry> crateApiPgpCirclesAppCircleAppGetMembers({
+  Future<List<CircleEntry>> crateApiPgpCirclesAppCircleAppGetMembers({
     required CircleApp that,
   });
 
@@ -410,7 +410,7 @@ abstract class RustLibApi extends BaseApi {
     required CircleHandle id,
   });
 
-  List<CircleEntry> crateApiPgpCirclesCircleCircleGetMembers({
+  Future<List<CircleEntry>> crateApiPgpCirclesCircleCircleGetMembers({
     required Circle that,
   });
 
@@ -1281,7 +1281,9 @@ abstract class RustLibApi extends BaseApi {
     required CircleHandle id,
   });
 
-  List<CircleEntry> crateApiPgpUserHandleGetMembers({required UserHandle that});
+  Future<List<CircleEntry>> crateApiPgpUserHandleGetMembers({
+    required UserHandle that,
+  });
 
   String crateApiPgpUserHandleGetName({required UserHandle that});
 
@@ -1356,7 +1358,7 @@ abstract class RustLibApi extends BaseApi {
     required CircleHandle id,
   });
 
-  List<CircleEntry> crateApiPgpCirclesCircleOrGetMembers({
+  Future<List<CircleEntry>> crateApiPgpCirclesCircleOrGetMembers({
     required CircleOr that,
   });
 
@@ -2019,18 +2021,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  List<CircleEntry> crateApiPgpCirclesAppCircleAppGetMembers({
+  Future<List<CircleEntry>> crateApiPgpCirclesAppCircleAppGetMembers({
     required CircleApp that,
   }) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircleApp(
             that,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 8)!;
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 8,
+            port: port_,
+          );
         },
         codec: SseCodec(
           decodeSuccessData:
@@ -4335,18 +4342,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  List<CircleEntry> crateApiPgpCirclesCircleCircleGetMembers({
+  Future<List<CircleEntry>> crateApiPgpCirclesCircleCircleGetMembers({
     required Circle that,
   }) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCircle(
             that,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 72)!;
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 72,
+            port: port_,
+          );
         },
         codec: SseCodec(
           decodeSuccessData:
@@ -11564,22 +11576,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  List<CircleEntry> crateApiPgpUserHandleGetMembers({
+  Future<List<CircleEntry>> crateApiPgpUserHandleGetMembers({
     required UserHandle that,
   }) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserHandle(
             that,
             serializer,
           );
-          return pdeCallFfi(
+          pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
             funcId: 356,
-          )!;
+            port: port_,
+          );
         },
         codec: SseCodec(
           decodeSuccessData:
@@ -12335,19 +12348,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  List<CircleEntry> crateApiPgpCirclesCircleOrGetMembers({
+  Future<List<CircleEntry>> crateApiPgpCirclesCircleOrGetMembers({
     required CircleOr that,
   }) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_circle_or(that, serializer);
-          return pdeCallFfi(
+          pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
             funcId: 378,
-          )!;
+            port: port_,
+          );
         },
         codec: SseCodec(
           decodeSuccessData:
@@ -20871,7 +20885,7 @@ class CircleAppImpl extends RustOpaque implements CircleApp {
   CircleEntry? getMember({required CircleHandle id}) => RustLib.instance.api
       .crateApiPgpCirclesAppCircleAppGetMember(that: this, id: id);
 
-  List<CircleEntry> getMembers() =>
+  Future<List<CircleEntry>> getMembers() =>
       RustLib.instance.api.crateApiPgpCirclesAppCircleAppGetMembers(that: this);
 
   String getName() =>
@@ -21131,7 +21145,7 @@ class CircleImpl extends RustOpaque implements Circle {
   CircleEntry? getMember({required CircleHandle id}) => RustLib.instance.api
       .crateApiPgpCirclesCircleCircleGetMember(that: this, id: id);
 
-  List<CircleEntry> getMembers() =>
+  Future<List<CircleEntry>> getMembers() =>
       RustLib.instance.api.crateApiPgpCirclesCircleCircleGetMembers(that: this);
 
   String getName() =>
@@ -22379,7 +22393,7 @@ class UserHandleImpl extends RustOpaque implements UserHandle {
   CircleEntry? getMember({required CircleHandle id}) =>
       RustLib.instance.api.crateApiPgpUserHandleGetMember(that: this, id: id);
 
-  List<CircleEntry> getMembers() =>
+  Future<List<CircleEntry>> getMembers() =>
       RustLib.instance.api.crateApiPgpUserHandleGetMembers(that: this);
 
   String getName() =>

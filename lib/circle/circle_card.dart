@@ -5,32 +5,36 @@ import 'package:kata/src/rust/api/pgp.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
 import 'package:kata/src/rust/api/pgp/circles/circle.dart';
 
-class CircleCard extends StatelessWidget {
-  final Circle members;
-  final UserHandle id;
-  final bool expanded;
-  final bool noclick;
-  final BoxConstraints? constrained;
-  final Color? cardColor;
-  const CircleCard({
-    super.key,
-    required this.members,
-    required this.id,
-    this.expanded = false,
-    this.noclick = false,
-    this.constrained,
-    this.cardColor,
-  });
+class _CircleCardState extends State<CircleCard> {
+  List<Widget>? _members;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final m = await widget.members.getMembers();
+      final v = m
+          .map((item) => MemberEntry(entry: item, noclick: widget.noclick))
+          .toList();
+
+      setState(() {
+        _members = v;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final m = members
-        .getMembers()
-        .map((item) => MemberEntry(entry: item, noclick: noclick))
-        .toList();
+    final m = _members;
+
+    if (m == null) {
+      return Center(child: CircularProgressIndicator());
+    }
 
     return Card(
-      color: cardColor,
+      color: widget.cardColor,
       child: Padding(
         padding: EdgeInsetsGeometry.fromSTEB(16, 8, 16, 8),
         child: Row(
@@ -38,7 +42,7 @@ class CircleCard extends StatelessWidget {
           children: [
             Expanded(
               child: ExpansionTile(
-                initiallyExpanded: expanded,
+                initiallyExpanded: widget.expanded,
                 leading: Chip(label: Text('${m.length}')),
                 title: Row(
                   children: [
@@ -48,18 +52,20 @@ class CircleCard extends StatelessWidget {
                     ),
                     Expanded(
                       child: Text(
-                        id.separateLujvo().joinGismu(),
+                        widget.id.separateLujvo().joinGismu(),
                         style: theme.textTheme.titleMedium,
                       ),
                     ),
                   ],
                 ),
-                trailing: CircleCardMenu(circle: CircleOr.circle(members)),
-                children: (switch (constrained) {
+                trailing: CircleCardMenu(
+                  circle: CircleOr.circle(widget.members),
+                ),
+                children: (switch (widget.constrained) {
                   null => m,
                   _ => [
                     ConstrainedBox(
-                      constraints: constrained!,
+                      constraints: widget.constrained!,
                       child: ListView(
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
@@ -75,4 +81,25 @@ class CircleCard extends StatelessWidget {
       ),
     );
   }
+}
+
+class CircleCard extends StatefulWidget {
+  final Circle members;
+  final UserHandle id;
+  final bool expanded;
+  final bool noclick;
+  final BoxConstraints? constrained;
+  final Color? cardColor;
+  const CircleCard({
+    super.key,
+    required this.members,
+    required this.id,
+    this.expanded = false,
+    this.noclick = false,
+    this.constrained,
+    this.cardColor,
+  });
+
+  @override
+  State<StatefulWidget> createState() => _CircleCardState();
 }

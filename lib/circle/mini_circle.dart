@@ -8,21 +8,38 @@ import 'package:provider/provider.dart';
 
 class _MiniCircleState extends State<MiniCircle> {
   CircleOr? _child;
+  List<Widget>? _members;
 
   @override
   void initState() {
     super.initState();
     PgpApp pgpApp = context.read();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final m = await _child?.getMembers();
+
+      final v = m
+          ?.map(
+            (v) => Padding(
+              padding: EdgeInsetsGeometry.fromSTEB(8, 0, 0, 0),
+              child: MemberEntry(entry: v),
+            ),
+          )
+          .toList();
       if (widget.handle.circleType == CircleType.user) {
         setState(() {
           _child = CircleOr.fromCert(userHandle: widget.handle.id);
+          _members = v;
         });
       } else {
         final members = await pgpApp.getCircleById(id: widget.handle);
         if (mounted && _child == null) {
           setState(() {
             _child = members;
+            _members = v;
+          });
+        } else if (mounted) {
+          setState(() {
+            _members = v;
           });
         }
       }
@@ -64,21 +81,7 @@ class _MiniCircleState extends State<MiniCircle> {
                         ],
                       ),
                     ] +
-                    (_child
-                            ?.getMembers()
-                            .map(
-                              (v) => Padding(
-                                padding: EdgeInsetsGeometry.fromSTEB(
-                                  8,
-                                  0,
-                                  0,
-                                  0,
-                                ),
-                                child: MemberEntry(entry: v),
-                              ),
-                            )
-                            .toList() ??
-                        []),
+                    (_members ?? []),
               ),
             ),
           ],

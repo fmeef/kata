@@ -31,19 +31,39 @@ enum AppTag {
 }
 
 class _AppCardState extends State<AppCard> {
+  List<Widget>? _members;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final m = await widget.members.getMembers();
+
+      final v = m
+          .map(
+            (item) => AppMemberEntry(
+              entry: item,
+              onChange: widget.onChange,
+              parent: widget.members,
+            ),
+          )
+          .toList();
+      if (mounted) {
+        setState(() {
+          _members = v;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final m = widget.members
-        .getMembers()
-        .map(
-          (item) => AppMemberEntry(
-            entry: item,
-            onChange: widget.onChange,
-            parent: widget.members,
-          ),
-        )
-        .toList();
+    final members = _members;
+    if (members == null) {
+      return Center(child: CircularProgressIndicator());
+    }
 
     return Card(
       color: widget.cardColor,
@@ -52,7 +72,7 @@ class _AppCardState extends State<AppCard> {
         child: ExpansionTile(
           initiallyExpanded: widget.expanded,
           subtitle: Text(widget.members.getName()),
-          leading: Chip(label: Text('${m.length}')),
+          leading: Chip(label: Text('${members.length}')),
           title: Row(
             children: [
               const Padding(
@@ -69,14 +89,14 @@ class _AppCardState extends State<AppCard> {
           ),
           trailing: CircleCardMenu(circle: CircleOr.app(widget.members)),
           children: (switch (widget.constrained) {
-            null => m,
+            null => members,
             _ => [
               ConstrainedBox(
                 constraints: widget.constrained!,
                 child: ListView(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  children: m,
+                  children: members,
                 ),
               ),
             ],
