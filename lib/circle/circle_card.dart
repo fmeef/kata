@@ -24,14 +24,31 @@ class _CircleCardState extends State<CircleCard> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+  List<Widget> getChildren(BuildContext context) {
     final m = _members;
 
     if (m == null) {
-      return Center(child: CircularProgressIndicator());
+      return [Center(child: CircularProgressIndicator())];
     }
+
+    return (switch (widget.constrained) {
+      null => m,
+      _ => [
+        ConstrainedBox(
+          constraints: widget.constrained!,
+          child: ListView(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            children: m,
+          ),
+        ),
+      ],
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
 
     return Card(
       color: widget.cardColor,
@@ -43,7 +60,7 @@ class _CircleCardState extends State<CircleCard> {
             Expanded(
               child: ExpansionTile(
                 initiallyExpanded: widget.expanded,
-                leading: Chip(label: Text('${m.length}')),
+                leading: Chip(label: Text('${_members?.length}')),
                 title: Row(
                   children: [
                     const Padding(
@@ -61,19 +78,7 @@ class _CircleCardState extends State<CircleCard> {
                 trailing: CircleCardMenu(
                   circle: CircleOr.circle(widget.members),
                 ),
-                children: (switch (widget.constrained) {
-                  null => m,
-                  _ => [
-                    ConstrainedBox(
-                      constraints: widget.constrained!,
-                      child: ListView(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        children: m,
-                      ),
-                    ),
-                  ],
-                }),
+                children: getChildren(context),
               ),
             ),
           ],

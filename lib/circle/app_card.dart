@@ -57,13 +57,31 @@ class _AppCardState extends State<AppCard> {
     });
   }
 
+  List<Widget> getMembers(BuildContext context) {
+    final members = _members;
+
+    if (members == null) {
+      return [Center(child: CircularProgressIndicator())];
+    }
+
+    return (switch (widget.constrained) {
+      null => members,
+      _ => [
+        ConstrainedBox(
+          constraints: widget.constrained!,
+          child: ListView(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            children: members,
+          ),
+        ),
+      ],
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final members = _members;
-    if (members == null) {
-      return Center(child: CircularProgressIndicator());
-    }
 
     return Card(
       color: widget.cardColor,
@@ -72,7 +90,7 @@ class _AppCardState extends State<AppCard> {
         child: ExpansionTile(
           initiallyExpanded: widget.expanded,
           subtitle: Text(widget.members.getName()),
-          leading: Chip(label: Text('${members.length}')),
+          leading: Chip(label: Text('${_members?.length}')),
           title: Row(
             children: [
               const Padding(
@@ -88,19 +106,7 @@ class _AppCardState extends State<AppCard> {
             ],
           ),
           trailing: CircleCardMenu(circle: CircleOr.app(widget.members)),
-          children: (switch (widget.constrained) {
-            null => members,
-            _ => [
-              ConstrainedBox(
-                constraints: widget.constrained!,
-                child: ListView(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  children: members,
-                ),
-              ),
-            ],
-          }),
+          children: getMembers(context),
         ),
       ),
     );
