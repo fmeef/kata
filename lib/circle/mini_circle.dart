@@ -15,23 +15,34 @@ class _MiniCircleState extends State<MiniCircle> {
     super.initState();
     PgpApp pgpApp = context.read();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final m = await _child?.getMembers();
-
-      final v = m
-          ?.map(
-            (v) => Padding(
-              padding: EdgeInsetsGeometry.fromSTEB(8, 0, 0, 0),
-              child: MemberEntry(entry: v),
-            ),
-          )
-          .toList();
       if (widget.handle.circleType == CircleType.user) {
+        final child = CircleOr.fromCert(userHandle: widget.handle.id);
+        final m = await child.getMembers();
+
+        final v = m
+            .map(
+              (v) => Padding(
+                padding: EdgeInsetsGeometry.fromSTEB(8, 0, 0, 0),
+                child: MemberEntry(entry: v),
+              ),
+            )
+            .toList();
         setState(() {
-          _child = CircleOr.fromCert(userHandle: widget.handle.id);
+          _child = child;
           _members = v;
         });
       } else {
         final members = await pgpApp.getCircleById(id: widget.handle);
+        final m = await members?.getMembers();
+
+        final v = m
+            ?.map(
+              (v) => Padding(
+                padding: EdgeInsetsGeometry.fromSTEB(8, 0, 0, 0),
+                child: MemberEntry(entry: v),
+              ),
+            )
+            .toList();
         if (mounted && _child == null) {
           setState(() {
             _child = members;
@@ -40,6 +51,7 @@ class _MiniCircleState extends State<MiniCircle> {
         } else if (mounted) {
           setState(() {
             _members = v;
+            _child = members;
           });
         }
       }
