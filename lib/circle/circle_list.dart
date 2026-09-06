@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kata/circle/omni_card.dart';
-import 'package:kata/fab_observer.dart';
 import 'package:kata/fab_state.dart';
 import 'package:kata/src/rust/api.dart';
 import 'package:kata/src/rust/api/db/connection.dart';

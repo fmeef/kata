@@ -14,11 +14,17 @@ class _MiniCircleState extends State<MiniCircle> {
     super.initState();
     PgpApp pgpApp = context.read();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final members = await pgpApp.getCircleById(id: widget.handle);
-      if (mounted && _child == null) {
+      if (widget.handle.circleType == CircleType.user) {
         setState(() {
-          _child = members;
+          _child = CircleOr.fromCert(userHandle: widget.handle.id);
         });
+      } else {
+        final members = await pgpApp.getCircleById(id: widget.handle);
+        if (mounted && _child == null) {
+          setState(() {
+            _child = members;
+          });
+        }
       }
     });
   }
