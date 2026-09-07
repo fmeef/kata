@@ -1,27 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:kata/circle/circle_card_menu.dart';
 import 'package:kata/circle/member_entry.dart';
+import 'package:kata/src/rust/api.dart';
+import 'package:kata/src/rust/api/db/connection.dart';
 import 'package:kata/src/rust/api/pgp.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
 import 'package:kata/src/rust/api/pgp/circles/circle.dart';
+import 'package:provider/provider.dart';
 
 class _CircleCardState extends State<CircleCard> {
   List<Widget>? _members;
+  Watcher? _watcher;
+  late final PgpApp pgpApp = context.read();
 
   @override
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final m = await widget.members.getMembers();
-      final v = m
-          .map((item) => MemberEntry(entry: item, noclick: widget.noclick))
-          .toList();
+    Watcher watcher = pgpApp.getWatcher();
 
-      setState(() {
-        _members = v;
-      });
-    });
+    watcher.watch(
+      table: 'circle_update',
+      cb: (_) async {
+        final m = await widget.members.getMembers();
+        final v = m
+            .map((item) => MemberEntry(entry: item, noclick: widget.noclick))
+            .toList();
+        if (mounted) {
+          setState(() {
+            _members = v;
+          });
+        }
+      },
+    );
+
+    _watcher = watcher;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _watcher?.dispose();
   }
 
   List<Widget> getChildren(BuildContext context) {

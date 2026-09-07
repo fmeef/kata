@@ -65,6 +65,7 @@ class CircleDeleteDialog extends StatelessWidget {
                       id: hex.id.fingerprint(),
                       ty: hex.circleType.name,
                     );
+                    await app.getDb().fireWatcher(table: 'circle_update');
                     if (context.mounted) context.pop();
                   },
                   child: const Text('Delete it'),

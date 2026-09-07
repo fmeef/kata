@@ -19,6 +19,7 @@ class _CreateAppState extends State<CreateCircle> {
     handler: () async {
       final PgpApp pgpApp = context.read();
       await _circle?.toDb(db: pgpApp.getDb());
+      await pgpApp.getDb().fireWatcher(table: 'circle_update');
       if (mounted) context.go('/circles', extra: CircleListOptions());
     },
   );

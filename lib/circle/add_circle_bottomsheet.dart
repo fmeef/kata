@@ -61,6 +61,8 @@ class _AddCircleBottomsheetState extends State<AddCircleBottomsheet> {
                   }
                 }
 
+                await pgpApp.getDb().fireWatcher(table: 'circle_update');
+
                 if (context.mounted) {
                   context.pop();
                 }

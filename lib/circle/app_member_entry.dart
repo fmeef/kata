@@ -92,6 +92,7 @@ class AppMemberEntry extends StatelessWidget {
                     delete: true,
                   );
                   await parent.toDb(db: pgpApp.getDb());
+                  await pgpApp.getDb().fireWatcher(table: 'circle_update');
                 },
               ),
               MenuItemButton(

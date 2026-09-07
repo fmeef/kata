@@ -4,9 +4,12 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:kata/circle/app_member_entry.dart';
 import 'package:kata/circle/circle_card_menu.dart';
+import 'package:kata/src/rust/api.dart';
+import 'package:kata/src/rust/api/db/connection.dart';
 import 'package:kata/src/rust/api/pgp.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
 import 'package:kata/src/rust/api/pgp/circles/app.dart';
+import 'package:provider/provider.dart';
 
 typedef IconEntry = DropdownMenuEntry<AppTag>;
 
@@ -32,29 +35,43 @@ enum AppTag {
 
 class _AppCardState extends State<AppCard> {
   List<Widget>? _members;
+  Watcher? _watcher;
+  late final PgpApp pgpApp = context.read();
 
   @override
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final m = await widget.members.getMembers();
+    Watcher watcher = pgpApp.getDb().getWatcher();
 
-      final v = m
-          .map(
-            (item) => AppMemberEntry(
-              entry: item,
-              onChange: widget.onChange,
-              parent: widget.members,
-            ),
-          )
-          .toList();
-      if (mounted) {
-        setState(() {
-          _members = v;
-        });
-      }
-    });
+    watcher.watch(
+      table: 'circle_update',
+      cb: (_) async {
+        final m = await widget.members.getMembers();
+
+        final v = m
+            .map(
+              (item) => AppMemberEntry(
+                entry: item,
+                onChange: widget.onChange,
+                parent: widget.members,
+              ),
+            )
+            .toList();
+        if (mounted) {
+          setState(() {
+            _members = v;
+          });
+        }
+      },
+    );
+    _watcher = watcher;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _watcher?.dispose();
   }
 
   List<Widget> getMembers(BuildContext context) {

@@ -50,7 +50,7 @@ class _CircleListState extends State<CircleList> {
 
     _watcher = _pgpApp.getWatcher();
     _watcher.watch(
-      table: 'circle_members',
+      table: 'circle_update',
       cb: (_) async {
         await updateCircles();
       },
