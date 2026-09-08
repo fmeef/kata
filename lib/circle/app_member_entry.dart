@@ -12,35 +12,28 @@ import 'package:kata/src/rust/api/pgp/circles/app.dart';
 import 'package:kata/src/rust/api/pgp/fingerprint/visual_key.dart';
 import 'package:provider/provider.dart';
 
-class AppMemberEntry extends StatelessWidget {
-  final CircleEntry entry;
-  final CircleApp parent;
-  final FocusNode _node = FocusNode();
-  final FutureOr<void> Function(CircleHandle, AppTag?)? onChange;
+class _AppMemberEntryState extends State<AppMemberEntry> {
   final MenuController _controller = MenuController();
-  AppMemberEntry({
-    super.key,
-    required this.entry,
-    required this.onChange,
-    required this.parent,
-  });
+  final FocusNode _node = FocusNode();
+  late MemberTag? _tag = widget.entry.tag;
 
   Widget chip() {
-    if (onChange != null) {
+    if (widget.onChange != null) {
       return DropdownMenu(
         initialSelection: AppTag.merge,
         dropdownMenuEntries: AppTag.entries,
         requestFocusOnTap: false,
-        onSelected: (AppTag? it) async => await onChange!(entry.id, it),
+        onSelected: (AppTag? it) async =>
+            await widget.onChange!(widget.entry.id, it),
       );
     } else {
-      return Chip(label: Text(entry.tag?.name ?? 'cry'));
+      return Chip(label: Text(_tag?.name ?? 'cry'));
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final content = entry.content;
+    final content = widget.entry.content;
     final PgpApp pgpApp = context.read();
 
     if (content != null) {
@@ -75,43 +68,59 @@ class AppMemberEntry extends StatelessWidget {
               MenuItemButton(
                 child: const Text('purge'),
                 onPressed: () async {
-                  await parent.remove(
-                    handle: entry.id,
-                    parent: parent.handle(),
+                  await widget.parent.remove(
+                    handle: widget.entry.id,
+                    parent: widget.parent.handle(),
                     delete: false,
                   );
-                  await parent.toDb(db: pgpApp.getDb());
+                  await widget.parent.toDb(db: pgpApp.getDb());
                 },
               ),
               MenuItemButton(
                 child: const Text('delete'),
                 onPressed: () async {
-                  await parent.remove(
-                    handle: entry.id,
-                    parent: parent.handle(),
+                  await widget.parent.remove(
+                    handle: widget.entry.id,
+                    parent: widget.parent.handle(),
                     delete: true,
                   );
-                  await parent.toDb(db: pgpApp.getDb());
+
+                  setState(() {
+                    _tag = MemberTag.delete;
+                  });
+
+                  await widget.parent.toDb(db: pgpApp.getDb());
                   await pgpApp.getDb().fireWatcher(table: 'circle_update');
                 },
               ),
               MenuItemButton(
                 child: const Text('merge'),
                 onPressed: () async {
-                  await parent.updateTag(id: entry.id, tag: MemberTag.merge);
-                  await parent.resign();
-                  await parent.toDb(db: pgpApp.getDb());
+                  await widget.parent.updateTag(
+                    id: widget.entry.id,
+                    tag: MemberTag.merge,
+                  );
+
+                  setState(() {
+                    _tag = MemberTag.merge;
+                  });
+
+                  await widget.parent.resign();
+                  await widget.parent.toDb(db: pgpApp.getDb());
                 },
               ),
               MenuItemButton(
                 child: const Text('overwrite'),
                 onPressed: () async {
-                  await parent.updateTag(
-                    id: entry.id,
+                  await widget.parent.updateTag(
+                    id: widget.entry.id,
                     tag: MemberTag.overwrite,
                   );
-                  await parent.resign();
-                  await parent.toDb(db: pgpApp.getDb());
+                  setState(() {
+                    _tag = MemberTag.overwrite;
+                  });
+                  await widget.parent.resign();
+                  await widget.parent.toDb(db: pgpApp.getDb());
                 },
               ),
             ],
@@ -132,4 +141,19 @@ class AppMemberEntry extends StatelessWidget {
       return Center(child: CircularProgressIndicator());
     }
   }
+}
+
+class AppMemberEntry extends StatefulWidget {
+  final CircleEntry entry;
+  final CircleApp parent;
+  final FutureOr<void> Function(CircleHandle, AppTag?)? onChange;
+  const AppMemberEntry({
+    super.key,
+    required this.entry,
+    required this.onChange,
+    required this.parent,
+  });
+
+  @override
+  State<StatefulWidget> createState() => _AppMemberEntryState();
 }
