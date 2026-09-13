@@ -52,7 +52,6 @@ mixin GoRouterAware<T extends StatefulWidget> on State<T> {
     if (_state.isTopRoute &&
         _sameLocation(_currentLocation!, _observerLocation)) {
       didPush();
-      return;
     }
 
     /// If the current route is pushed next and the current location is the same as the observer location then [_observerLocation] is returned to the top route.
@@ -60,7 +59,6 @@ mixin GoRouterAware<T extends StatefulWidget> on State<T> {
         _sameLocation(_currentLocation!, _observerLocation)) {
       didPopNext();
       _state = _GoRouterAwareState.topRoute;
-      return;
     }
 
     /// If the current route is not the top route and the current location contains the observer location then [_observerLocation] is no longer the top route.
@@ -68,7 +66,6 @@ mixin GoRouterAware<T extends StatefulWidget> on State<T> {
         _currentLocation!.path.toString().contains(_observerLocation.path)) {
       _state = _GoRouterAwareState.pushedNext;
       didPushNext();
-      return;
     }
 
     /// If the current route is the top route and the current location does not contain the observer location then [_observerLocation] is popped off.
@@ -76,7 +73,6 @@ mixin GoRouterAware<T extends StatefulWidget> on State<T> {
         !_currentLocation!.path.toString().contains(_observerLocation.path)) {
       didPop();
       _state = _GoRouterAwareState.poppedOff;
-      return;
     }
   }
 

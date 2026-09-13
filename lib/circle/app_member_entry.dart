@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:kata/circle/app_card.dart';
 import 'package:kata/circle/circle_list_options.dart';
 import 'package:kata/circle/extensions.dart';
@@ -10,6 +9,7 @@ import 'package:kata/src/rust/api.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
 import 'package:kata/src/rust/api/pgp/circles/app.dart';
 import 'package:kata/src/rust/api/pgp/fingerprint/visual_key.dart';
+import 'package:kata/title_controller.dart';
 import 'package:provider/provider.dart';
 
 class _AppMemberEntryState extends State<AppMemberEntry> {
@@ -55,10 +55,13 @@ class _AppMemberEntryState extends State<AppMemberEntry> {
               fingerprint: id,
               builder: builder,
               mode: FingerprintMode.userid,
-              onTap: (v) => context.push(
-                '/circles',
-                extra: CircleListOptions(parent: circle.handle()),
-              ),
+              onTap: (v) {
+                context.pushAlt(
+                  path: '/circles',
+                  extra: CircleListOptions(parent: circle.handle()),
+                  alt: circle.getName(),
+                );
+              },
             ),
           ),
           MenuAnchor(

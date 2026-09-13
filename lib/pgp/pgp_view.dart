@@ -1,9 +1,11 @@
 import 'package:kata/fab_state.dart';
+import 'package:kata/global_route_observer.dart';
 import 'package:kata/pgp/cert/active_cert.dart';
 import 'package:kata/pgp/cert/active_cert_provider.dart';
 import 'package:kata/pgp/identity_service.dart';
 import 'package:kata/pgp/pgp_service.dart';
 import 'package:flutter/material.dart';
+import 'package:kata/title_controller.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,12 +30,16 @@ class _PgpViewState extends State<PgpView> {
           Provider(create: (ctx) => Logger()),
           Provider(create: (ctx) => FabState()),
           Provider(create: (ctx) => SharedPreferencesAsync()),
+          Provider(create: (ctx) => TitleController(title: 'My Cards')),
         ],
         child: MultiProvider(
           providers: [
             Provider(
               create: (ctx) =>
                   IdentityService(pgpApp: ctx.read(), prefs: ctx.read()),
+            ),
+            Provider(
+              create: (ctx) => GlobalRouteObserver(titleController: ctx.read()),
             ),
           ],
           child: ActiveCertProvider(

@@ -10,7 +10,6 @@ class _SmartFabState extends State<SmartFab> with GoRouterAware {
   late Logger logger;
 
   late final FabState state = context.read();
-
   bool _create = false;
 
   @override

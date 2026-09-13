@@ -5,6 +5,7 @@ import 'package:kata/circle/extensions.dart';
 import 'package:kata/pgp/cert/smart_fingerprint.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
 import 'package:kata/src/rust/api/pgp/fingerprint/visual_key.dart';
+import 'package:kata/title_controller.dart';
 
 class MemberEntry extends StatelessWidget {
   final CircleEntry entry;
@@ -41,9 +42,10 @@ class MemberEntry extends StatelessWidget {
                 fingerprint: id,
                 builder: builder,
                 mode: FingerprintMode.userid,
-                onTap: (id) => context.push(
-                  '/circles',
+                onTap: (id) => context.pushAlt(
+                  path: '/circles',
                   extra: CircleListOptions(parent: entry.id),
+                  alt: entry.id.id.separateLujvo().joinGismu(),
                 ),
               ),
             ),
@@ -74,9 +76,10 @@ class MemberEntry extends StatelessWidget {
                 fingerprint: id,
                 builder: builder,
                 mode: FingerprintMode.userid,
-                onTap: (id) => context.push(
-                  '/circles',
+                onTap: (id) => context.pushAlt(
+                  path: '/circles',
                   extra: CircleListOptions(parent: id.handle()),
+                  alt: id.getName(),
                 ),
               ),
             ),
