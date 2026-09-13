@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:kata/circle/circle_list_options.dart';
 import 'package:kata/circle/extensions.dart';
 import 'package:kata/pgp/cert/smart_fingerprint.dart';
