@@ -140,7 +140,7 @@
                     ${cctools}/bin/lipo -create ${libz.out}/lib/libz.dylib ${crosspkgs.libz.out}/lib/libz.dylib -output $out/lib/libz.dylib
                   '';
                   system = builtins.currentSystem;
-                  buildInputs = [ apple-sdk_15 ];
+                  buildInputs = [ apple-sdk_26 ];
                 }
               else
                 botan3;
