@@ -14,7 +14,7 @@ import 'package:kata/src/rust/api/pgp/circles.dart';
 
 extension GetIconCircleOrUse on CircleOr_User? {
   IconData getIcon() {
-        return (switch (this?.getType()) {
+    return (switch (this?.getType()) {
       CircleType.user => Icons.person,
       CircleType.circle => Icons.group,
       CircleType.app => Icons.apps,
@@ -25,14 +25,13 @@ extension GetIconCircleOrUse on CircleOr_User? {
 
 extension GetIconCircleEntry on CircleEntry? {
   IconData getIcon() {
-        return this?.content.getIcon() ?? Icons.device_unknown;
+    return this?.content.getIcon() ?? Icons.device_unknown;
   }
 }
 
-
 extension GetIconCircleOr on CircleOr? {
   IconData getIcon() {
-  return (switch (this?.getType()) {
+    return (switch (this?.getType()) {
       CircleType.user => Icons.person,
       CircleType.circle => Icons.group,
       CircleType.app => Icons.apps,

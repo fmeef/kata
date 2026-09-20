@@ -187,6 +187,7 @@
               if isMacos then
                 {
                   BOTAN_LIB_DIR = "${wot_dual.out}/lib";
+                  NIX_BOTAN_LIB_DIR = "${wot_dual.out}/lib";
                   #BOTAN_DROID_DIR="${droidpkgs.botan3.out}/lib";
                   LIBRARY_PATH = "${wot_dual.out}/lib";
                   DYLD_LIBRARY_PATH = "${wot_dual.out}/lib";
