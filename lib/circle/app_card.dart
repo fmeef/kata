@@ -47,31 +47,41 @@ class _AppCardState extends State<AppCard> {
     watcher.watch(
       table: 'circle_update',
       cb: (_) async {
-        final m = await widget.members.getMembers();
-
-        final v = m
-            .map(
-              (item) => AppMemberEntry(
-                entry: item,
-                onChange: widget.onChange,
-                parent: widget.members,
-              ),
-            )
-            .toList();
-        if (mounted) {
-          setState(() {
-            _members = v;
-          });
-        }
+        await updateMembers();
       },
     );
     _watcher = watcher;
   }
 
   @override
+  void didUpdateWidget(covariant AppCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    updateMembers().ignore();
+  }
+
+  @override
   void dispose() {
     super.dispose();
     _watcher?.dispose();
+  }
+
+  Future<void> updateMembers() async {
+    final m = await widget.members.getMembers();
+
+    final v = m
+        .map(
+          (item) => AppMemberEntry(
+            entry: item,
+            onChange: widget.onChange,
+            parent: widget.members,
+          ),
+        )
+        .toList();
+    if (mounted) {
+      setState(() {
+        _members = v;
+      });
+    }
   }
 
   List<Widget> getMembers(BuildContext context) {

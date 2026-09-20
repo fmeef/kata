@@ -22,19 +22,29 @@ class _CircleCardState extends State<CircleCard> {
     watcher.watch(
       table: 'circle_update',
       cb: (_) async {
-        final m = await widget.members.getMembers();
-        final v = m
-            .map((item) => MemberEntry(entry: item, noclick: widget.noclick))
-            .toList();
-        if (mounted) {
-          setState(() {
-            _members = v;
-          });
-        }
+        await updateMembers();
       },
     );
 
     _watcher = watcher;
+  }
+
+  Future<void> updateMembers() async {
+    final m = await widget.members.getMembers();
+    final v = m
+        .map((item) => MemberEntry(entry: item, noclick: widget.noclick))
+        .toList();
+    if (mounted) {
+      setState(() {
+        _members = v;
+      });
+    }
+  }
+
+  @override
+  void didUpdateWidget(covariant CircleCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    updateMembers().ignore();
   }
 
   @override
