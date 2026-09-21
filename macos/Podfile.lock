@@ -1,21 +1,15 @@
 PODS:
   - FlutterMacOS (1.0.0)
-  - rust_lib_kata (0.0.1):
-    - FlutterMacOS
 
 DEPENDENCIES:
   - FlutterMacOS (from `Flutter/ephemeral`)
-  - rust_lib_kata (from `Flutter/ephemeral/.symlinks/plugins/rust_lib_kata/macos`)
 
 EXTERNAL SOURCES:
   FlutterMacOS:
     :path: Flutter/ephemeral
-  rust_lib_kata:
-    :path: Flutter/ephemeral/.symlinks/plugins/rust_lib_kata/macos
 
 SPEC CHECKSUMS:
   FlutterMacOS: c232990155153907050900a2e175c7773903ba4e
-  rust_lib_kata: 66d74447e092fd676077dccf97008c83449f5d19
 
 PODFILE CHECKSUM: 6545452e76bd5c7f284e1f443395bae7ac17cc0e
 

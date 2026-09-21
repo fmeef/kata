@@ -17,8 +17,14 @@ android {
 //       srcDir("src/main/jniLibs")
 //    }
 
-    sourceSets["main"].resources {
-        srcDir("src/main/jniLibs")
+//    sourceSets["main"].resources {
+//        srcDir("src/main/jniLibs")
+//    }
+
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging = true
+        }
     }
 
     compileOptions {
