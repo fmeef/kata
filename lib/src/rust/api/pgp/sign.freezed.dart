@@ -21,7 +21,7 @@ mixin _$TrustLevel {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TrustLevel);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is TrustLevel);
 }
 
 
@@ -30,7 +30,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'TrustLevel()';
+    return 'TrustLevel()';
 }
 
 
@@ -198,7 +198,7 @@ class TrustLevel_Ultimate extends TrustLevel {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TrustLevel_Ultimate);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is TrustLevel_Ultimate);
 }
 
 
@@ -207,7 +207,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'TrustLevel.ultimate()';
+    return 'TrustLevel.ultimate()';
 }
 
 
@@ -230,7 +230,7 @@ class TrustLevel_Full extends TrustLevel {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TrustLevel_Full);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is TrustLevel_Full);
 }
 
 
@@ -239,7 +239,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'TrustLevel.full()';
+    return 'TrustLevel.full()';
 }
 
 
@@ -262,7 +262,7 @@ class TrustLevel_Partial extends TrustLevel {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TrustLevel_Partial);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is TrustLevel_Partial);
 }
 
 
@@ -271,7 +271,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'TrustLevel.partial()';
+    return 'TrustLevel.partial()';
 }
 
 
@@ -299,16 +299,18 @@ $TrustLevel_CustomCopyWith<TrustLevel_Custom> get copyWith => _$TrustLevel_Custo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TrustLevel_Custom&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is TrustLevel_Custom&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'TrustLevel.custom(field0: $field0)';
+    return 'TrustLevel.custom(field0: $field0)';
 }
 
 

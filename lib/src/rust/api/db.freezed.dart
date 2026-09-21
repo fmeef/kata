@@ -26,16 +26,21 @@ $KeyHandleCopyWith<KeyHandle> get copyWith => _$KeyHandleCopyWithImpl<KeyHandle>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is KeyHandle&&(identical(other.field0, field0) || other.field0 == field0));
+  final _this = this as KeyHandle;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is KeyHandle&&(identical(other.field0, _this.field0) || other.field0 == _this.field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+  final _this = this as KeyHandle;
+  return Object.hash(runtimeType,_this.field0);
+}
 
 @override
 String toString() {
-  return 'KeyHandle(field0: $field0)';
+  final _this = this as KeyHandle;
+  return 'KeyHandle(field0: ${_this.field0})';
 }
 
 
@@ -222,16 +227,18 @@ $KeyHandle_KeyIdCopyWith<KeyHandle_KeyId> get copyWith => _$KeyHandle_KeyIdCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is KeyHandle_KeyId&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is KeyHandle_KeyId&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'KeyHandle.keyId(field0: $field0)';
+    return 'KeyHandle.keyId(field0: $field0)';
 }
 
 
@@ -288,16 +295,18 @@ $KeyHandle_FingerprintCopyWith<KeyHandle_Fingerprint> get copyWith => _$KeyHandl
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is KeyHandle_Fingerprint&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is KeyHandle_Fingerprint&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'KeyHandle.fingerprint(field0: $field0)';
+    return 'KeyHandle.fingerprint(field0: $field0)';
 }
 
 

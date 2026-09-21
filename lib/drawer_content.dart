@@ -69,10 +69,10 @@ class DrawerContent extends StatelessWidget {
         ),
         TextButton(
           onPressed: () async {
-            FilePickerResult? result = await FilePicker.pickFiles();
+            final result = await FilePicker.pickFiles();
             if (context.mounted) {
-              for (final path in result?.paths ?? List.empty()) {
-                await pgp.importCerts(import_: PgpImportFile(path: path));
+              for (final path in result) {
+                await pgp.importCerts(import_: PgpImportFile(path: path.path!));
               }
               if (context.mounted && context.canPop()) context.pop();
             }

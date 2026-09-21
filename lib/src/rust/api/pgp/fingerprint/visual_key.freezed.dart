@@ -21,16 +21,21 @@ mixin _$VisualKeyOr {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is VisualKeyOr&&const DeepCollectionEquality().equals(other.field0, field0));
+  final _this = this as VisualKeyOr;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is VisualKeyOr&&const DeepCollectionEquality().equals(other.field0, _this.field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(field0));
+int get hashCode {
+  final _this = this as VisualKeyOr;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.field0));
+}
 
 @override
 String toString() {
-  return 'VisualKeyOr(field0: $field0)';
+  final _this = this as VisualKeyOr;
+  return 'VisualKeyOr(field0: ${_this.field0})';
 }
 
 
@@ -191,16 +196,18 @@ $VisualKeyOr_GismuCopyWith<VisualKeyOr_Gismu> get copyWith => _$VisualKeyOr_Gism
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is VisualKeyOr_Gismu&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is VisualKeyOr_Gismu&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'VisualKeyOr.gismu(field0: $field0)';
+    return 'VisualKeyOr.gismu(field0: $field0)';
 }
 
 
@@ -257,16 +264,18 @@ $VisualKeyOr_NameCopyWith<VisualKeyOr_Name> get copyWith => _$VisualKeyOr_NameCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is VisualKeyOr_Name&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is VisualKeyOr_Name&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'VisualKeyOr.name(field0: $field0)';
+    return 'VisualKeyOr.name(field0: $field0)';
 }
 
 

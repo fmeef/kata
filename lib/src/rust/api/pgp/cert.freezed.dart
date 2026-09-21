@@ -21,7 +21,7 @@ mixin _$MaybeCert {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MaybeCert);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is MaybeCert);
 }
 
 
@@ -30,7 +30,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'MaybeCert()';
+    return 'MaybeCert()';
 }
 
 
@@ -191,16 +191,18 @@ $MaybeCert_FullCopyWith<MaybeCert_Full> get copyWith => _$MaybeCert_FullCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MaybeCert_Full&&(identical(other.cert, cert) || other.cert == cert));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is MaybeCert_Full&&(identical(other.cert, cert) || other.cert == cert));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,cert);
+int get hashCode {
+    return Object.hash(runtimeType,cert);
+}
 
 @override
 String toString() {
-  return 'MaybeCert.full(cert: $cert)';
+    return 'MaybeCert.full(cert: $cert)';
 }
 
 
@@ -257,16 +259,18 @@ $MaybeCert_FingerprintCopyWith<MaybeCert_Fingerprint> get copyWith => _$MaybeCer
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MaybeCert_Fingerprint&&(identical(other.fpr, fpr) || other.fpr == fpr));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is MaybeCert_Fingerprint&&(identical(other.fpr, fpr) || other.fpr == fpr));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,fpr);
+int get hashCode {
+    return Object.hash(runtimeType,fpr);
+}
 
 @override
 String toString() {
-  return 'MaybeCert.fingerprint(fpr: $fpr)';
+    return 'MaybeCert.fingerprint(fpr: $fpr)';
 }
 
 

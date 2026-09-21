@@ -21,16 +21,21 @@ mixin _$CircleOr {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CircleOr&&const DeepCollectionEquality().equals(other.field0, field0));
+  final _this = this as CircleOr;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CircleOr&&const DeepCollectionEquality().equals(other.field0, _this.field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(field0));
+int get hashCode {
+  final _this = this as CircleOr;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.field0));
+}
 
 @override
 String toString() {
-  return 'CircleOr(field0: $field0)';
+  final _this = this as CircleOr;
+  return 'CircleOr(field0: ${_this.field0})';
 }
 
 
@@ -197,16 +202,18 @@ $CircleOr_CircleCopyWith<CircleOr_Circle> get copyWith => _$CircleOr_CircleCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CircleOr_Circle&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is CircleOr_Circle&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'CircleOr.circle(field0: $field0)';
+    return 'CircleOr.circle(field0: $field0)';
 }
 
 
@@ -263,16 +270,18 @@ $CircleOr_UserCopyWith<CircleOr_User> get copyWith => _$CircleOr_UserCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CircleOr_User&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is CircleOr_User&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'CircleOr.user(field0: $field0)';
+    return 'CircleOr.user(field0: $field0)';
 }
 
 
@@ -329,16 +338,18 @@ $CircleOr_AppCopyWith<CircleOr_App> get copyWith => _$CircleOr_AppCopyWithImpl<C
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CircleOr_App&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is CircleOr_App&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'CircleOr.app(field0: $field0)';
+    return 'CircleOr.app(field0: $field0)';
 }
 
 

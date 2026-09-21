@@ -21,16 +21,21 @@ mixin _$PgpImportImplementor {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PgpImportImplementor&&const DeepCollectionEquality().equals(other.field0, field0));
+  final _this = this as PgpImportImplementor;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PgpImportImplementor&&const DeepCollectionEquality().equals(other.field0, _this.field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(field0));
+int get hashCode {
+  final _this = this as PgpImportImplementor;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.field0));
+}
 
 @override
 String toString() {
-  return 'PgpImportImplementor(field0: $field0)';
+  final _this = this as PgpImportImplementor;
+  return 'PgpImportImplementor(field0: ${_this.field0})';
 }
 
 
@@ -191,16 +196,18 @@ $PgpImportImplementor_Variant0CopyWith<PgpImportImplementor_Variant0> get copyWi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PgpImportImplementor_Variant0&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is PgpImportImplementor_Variant0&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'PgpImportImplementor.variant0(field0: $field0)';
+    return 'PgpImportImplementor.variant0(field0: $field0)';
 }
 
 
@@ -257,16 +264,18 @@ $PgpImportImplementor_Variant1CopyWith<PgpImportImplementor_Variant1> get copyWi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PgpImportImplementor_Variant1&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is PgpImportImplementor_Variant1&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'PgpImportImplementor.variant1(field0: $field0)';
+    return 'PgpImportImplementor.variant1(field0: $field0)';
 }
 
 
