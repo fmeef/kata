@@ -9,6 +9,7 @@ void main(List<String> args) async {
       extraCargoEnvironmentVariables: {
         'BOTAN_LIB_DIR': Platform.environment['NIX_BOTAN_LIB_DIR'] ?? '',
       },
+      features: ["flutter_gen"],
     ).run(input: input, output: output);
   });
 }
