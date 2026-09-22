@@ -213,9 +213,9 @@
                   };
                 in
                 {
-                  BOTAN_LIB_DIR = "${botan3.out}/lib";
+                  NIX_BOTAN_LIB_DIR = "${botan3.out}/lib";
                   BOTAN_DROID_DIR = "${droidlibs.out}";
-                  BOTAN_INCLUDE_DIR = "${botan3.dev}/include/botan-3";
+                  NIX_BOTAN_INCLUDE_DIR = "${botan3.dev}/include/botan-3";
                   LD_LIBRARY_PATH = "${botan3.out}/lib";
                 };
             # myFlutter = unstable.flutter.overrideDerivation (oldAttrs: {

@@ -8,6 +8,7 @@ void main(List<String> args) async {
       cratePath: 'rust',
       extraCargoEnvironmentVariables: {
         'BOTAN_LIB_DIR': Platform.environment['NIX_BOTAN_LIB_DIR'] ?? '',
+        'BOTAN_INCLUDE_DIR': Platform.environment['NIX_BOTAN_INCLUDE_DIR'] ?? '',
       },
       features: ["flutter_gen"],
     ).run(input: input, output: output);
