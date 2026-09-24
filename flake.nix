@@ -192,6 +192,7 @@
                   LIBRARY_PATH = "${wot_dual.out}/lib";
                   DYLD_LIBRARY_PATH = "${wot_dual.out}/lib";
                   LD_LIBRARY_PATH = "${wot_dual.out}/lib";
+                  NIX_BOTAN_INCLUDE_DIR = "${botan3.dev}/include/botan-3";
                 }
               else
                 let
