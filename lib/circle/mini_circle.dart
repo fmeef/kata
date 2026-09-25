@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:kata/circle/member_entry.dart';
+import 'package:kata/prefs/prefs_helpers.dart';
 import 'package:kata/src/rust/api.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
 import 'package:kata/circle/extensions.dart';
 
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class _MiniCircleState extends State<MiniCircle> {
   CircleOr? _child;
   List<Widget>? _members;
+  String _gismu = "";
 
   @override
   void initState() {
     super.initState();
     PgpApp pgpApp = context.read();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      SharedPreferencesAsync prefs = context.read();
+
+      _gismu = await _child?.getIdUserhandle().gismuOrHex(prefs) ?? "";
+
       if (widget.handle.circleType == CircleType.user) {
         final child = CircleOr.fromCert(userHandle: widget.handle.id);
         final m = await child.getMembers();
@@ -83,13 +90,7 @@ class _MiniCircleState extends State<MiniCircle> {
                               color: theme.colorScheme.tertiary,
                             ),
                           ),
-                          Text(
-                            _child
-                                    ?.getIdUserhandle()
-                                    .separateLujvo()
-                                    .joinGismu() ??
-                                "",
-                          ),
+                          Text(_gismu),
                         ],
                       ),
                     ] +

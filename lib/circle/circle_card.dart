@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:kata/circle/circle_card_menu.dart';
 import 'package:kata/circle/member_entry.dart';
+import 'package:kata/prefs/prefs_helpers.dart';
 import 'package:kata/src/rust/api.dart';
 import 'package:kata/src/rust/api/db/connection.dart';
 import 'package:kata/src/rust/api/pgp.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
 import 'package:kata/src/rust/api/pgp/circles/circle.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class _CircleCardState extends State<CircleCard> {
   List<Widget>? _members;
   Watcher? _watcher;
+  String _fingerprint = "";
   late final PgpApp pgpApp = context.read();
 
   @override
@@ -31,6 +34,9 @@ class _CircleCardState extends State<CircleCard> {
 
   Future<void> updateMembers() async {
     final m = await widget.members.getMembers();
+    final SharedPreferencesAsync prefs = context.read();
+
+    _fingerprint = await widget.id.gismuOrHex(prefs);
     final v = m
         .map((item) => MemberEntry(entry: item, noclick: widget.noclick))
         .toList();
@@ -98,7 +104,7 @@ class _CircleCardState extends State<CircleCard> {
                     ),
                     Expanded(
                       child: Text(
-                        widget.id.separateLujvo().joinGismu(),
+                        _fingerprint,
                         style: theme.textTheme.titleMedium,
                       ),
                     ),

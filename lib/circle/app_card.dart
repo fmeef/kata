@@ -4,12 +4,14 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:kata/circle/app_member_entry.dart';
 import 'package:kata/circle/circle_card_menu.dart';
+import 'package:kata/prefs/prefs_helpers.dart';
 import 'package:kata/src/rust/api.dart';
 import 'package:kata/src/rust/api/db/connection.dart';
 import 'package:kata/src/rust/api/pgp.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
 import 'package:kata/src/rust/api/pgp/circles/app.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 typedef IconEntry = DropdownMenuEntry<AppTag>;
 
@@ -36,6 +38,7 @@ enum AppTag {
 class _AppCardState extends State<AppCard> {
   List<Widget>? _members;
   Watcher? _watcher;
+  String _fingerprint = "";
   late final PgpApp pgpApp = context.read();
 
   @override
@@ -67,7 +70,8 @@ class _AppCardState extends State<AppCard> {
 
   Future<void> updateMembers() async {
     final m = await widget.members.getMembers();
-
+    final SharedPreferencesAsync prefs = context.read();
+    _fingerprint = widget.id.comment() ?? await widget.id.gismuOrHex(prefs);
     final v = m
         .map(
           (item) => AppMemberEntry(
@@ -125,10 +129,7 @@ class _AppCardState extends State<AppCard> {
                 child: Icon(Icons.apps),
               ),
               Expanded(
-                child: Text(
-                  widget.id.comment() ?? widget.id.separateLujvo().joinGismu(),
-                  style: theme.textTheme.titleMedium,
-                ),
+                child: Text(_fingerprint, style: theme.textTheme.titleMedium),
               ),
             ],
           ),
