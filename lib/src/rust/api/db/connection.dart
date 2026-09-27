@@ -43,6 +43,9 @@ abstract class SqliteDb implements RustOpaqueInterface, CertDao, Dao, TestDao {
   Future<List<OnlyId>> getAllCircleIds();
 
   @override
+  Future<List<OnlyIdType>> getAllMissingIds();
+
+  @override
   Future<List<PgpDataCert>> getByDomain({required String domain});
 
   @override
@@ -90,6 +93,9 @@ abstract class SqliteDb implements RustOpaqueInterface, CertDao, Dao, TestDao {
   Future<List<CircleWithMembers>> getCirclesJoin();
 
   @override
+  Future<List<CircleWithMembers>> getCirclesJoinSearch({required String query});
+
+  @override
   Future<List<CircleWithMembers>> getCirclesWithoutParent();
 
   @override
@@ -100,6 +106,12 @@ abstract class SqliteDb implements RustOpaqueInterface, CertDao, Dao, TestDao {
 
   @override
   Future<BigInt> getMigrationVersion();
+
+  @override
+  Future<List<OnlyIdType>> getMissingIdsForParent({
+    required String parent,
+    required String parentType,
+  });
 
   Watcher getWatcher();
 

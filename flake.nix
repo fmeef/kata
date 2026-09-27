@@ -150,6 +150,7 @@
               master.flutter
               androidSdk
               jdk21
+              nettle
               rustup
               # fish
               cmake

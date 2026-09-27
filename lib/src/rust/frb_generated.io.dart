@@ -882,6 +882,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   OnlyId dco_decode_box_autoadd_only_id(dynamic raw);
 
   @protected
+  OnlyIdType dco_decode_box_autoadd_only_id_type(dynamic raw);
+
+  @protected
   OnlyOnline dco_decode_box_autoadd_only_online(dynamic raw);
 
   @protected
@@ -1007,6 +1010,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<OnlyId> dco_decode_list_only_id(dynamic raw);
 
   @protected
+  List<OnlyIdType> dco_decode_list_only_id_type(dynamic raw);
+
+  @protected
   List<int> dco_decode_list_prim_u_8_loose(dynamic raw);
 
   @protected
@@ -1041,6 +1047,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   OnlyId dco_decode_only_id(dynamic raw);
+
+  @protected
+  OnlyIdType dco_decode_only_id_type(dynamic raw);
 
   @protected
   OnlyOnline dco_decode_only_online(dynamic raw);
@@ -1857,6 +1866,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   OnlyId sse_decode_box_autoadd_only_id(SseDeserializer deserializer);
 
   @protected
+  OnlyIdType sse_decode_box_autoadd_only_id_type(SseDeserializer deserializer);
+
+  @protected
   OnlyOnline sse_decode_box_autoadd_only_online(SseDeserializer deserializer);
 
   @protected
@@ -1990,6 +2002,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<OnlyId> sse_decode_list_only_id(SseDeserializer deserializer);
 
   @protected
+  List<OnlyIdType> sse_decode_list_only_id_type(SseDeserializer deserializer);
+
+  @protected
   List<int> sse_decode_list_prim_u_8_loose(SseDeserializer deserializer);
 
   @protected
@@ -2026,6 +2041,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   OnlyId sse_decode_only_id(SseDeserializer deserializer);
+
+  @protected
+  OnlyIdType sse_decode_only_id_type(SseDeserializer deserializer);
 
   @protected
   OnlyOnline sse_decode_only_online(SseDeserializer deserializer);
@@ -2989,6 +3007,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_box_autoadd_only_id(OnlyId self, SseSerializer serializer);
 
   @protected
+  void sse_encode_box_autoadd_only_id_type(
+    OnlyIdType self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_only_online(
     OnlyOnline self,
     SseSerializer serializer,
@@ -3155,6 +3179,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_list_only_id(List<OnlyId> self, SseSerializer serializer);
 
   @protected
+  void sse_encode_list_only_id_type(
+    List<OnlyIdType> self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_list_prim_u_8_loose(List<int> self, SseSerializer serializer);
 
   @protected
@@ -3199,6 +3229,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_only_id(OnlyId self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_only_id_type(OnlyIdType self, SseSerializer serializer);
 
   @protected
   void sse_encode_only_online(OnlyOnline self, SseSerializer serializer);

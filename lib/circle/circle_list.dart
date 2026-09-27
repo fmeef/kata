@@ -3,6 +3,7 @@ import 'package:kata/circle/omni_card.dart';
 import 'package:kata/fab_state.dart';
 import 'package:kata/src/rust/api.dart';
 import 'package:kata/src/rust/api/db/connection.dart';
+import 'package:kata/src/rust/api/db/store.dart';
 import 'package:kata/src/rust/api/pgp/circles.dart';
 import 'package:provider/provider.dart';
 
@@ -12,9 +13,11 @@ class _CircleListState extends State<CircleList> {
   late final FabState fabState = context.read();
   late final Watcher _watcher;
   late final PgpApp _pgpApp = context.read();
+  final SearchController controller = SearchController();
 
   Future<void> updateCircles() async {
     if (widget.parent != null) {
+      await _pgpApp.fillMissingCards(parent: widget.parent!);
       final circles = await _pgpApp.getCircleById(id: widget.parent!);
 
       final members = await circles?.iterMembers().toList();
@@ -27,7 +30,16 @@ class _CircleListState extends State<CircleList> {
         _members = m;
       });
     } else {
-      final circles = await _pgpApp.getDb().getCirclesJoin();
+      await _pgpApp.fillAllMissingCards();
+      late List<CircleWithMembers> circles;
+      if (controller.text.isEmpty) {
+        circles = await _pgpApp.getDb().getCirclesJoin();
+      } else {
+        circles = await _pgpApp.getDb().getCirclesJoinSearch(
+          query: controller.text,
+        );
+      }
+
       final m = await _pgpApp.circlesFromDb(
         members: circles,
         users: false,
@@ -67,7 +79,20 @@ class _CircleListState extends State<CircleList> {
   Widget build(BuildContext context) {
     final members = _members;
     if (members != null) {
-      return ListView(children: members);
+      return Column(
+        children: [
+          TextField(
+            controller: controller,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              hint: const Text('Search'),
+            ),
+            onEditingComplete: () async => await updateCircles(),
+          ),
+
+          Expanded(child: ListView(children: members)),
+        ],
+      );
     } else {
       return Center(child: CircularProgressIndicator());
     }

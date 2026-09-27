@@ -89,10 +89,14 @@ abstract class PgpApp
   @override
   Future<void> exportFile({required String file});
 
+  Future<void> fillAllMissingCards();
+
   Future<void> fillFromKeyserver({
     required UserHandle fingerprint,
     required String server,
   });
+
+  Future<void> fillMissingCards({required CircleHandle parent});
 
   @override
   GenerateCert generateKey({required String email});
