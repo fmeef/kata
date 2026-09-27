@@ -18,6 +18,7 @@ class _CircleListState extends State<CircleList> {
   Future<void> updateCircles() async {
     if (widget.parent != null) {
       await _pgpApp.fillMissingCards(parent: widget.parent!);
+      await _pgpApp.reindex();
       final circles = await _pgpApp.getCircleById(id: widget.parent!);
 
       final members = await circles?.iterMembers().toList();
@@ -31,13 +32,12 @@ class _CircleListState extends State<CircleList> {
       });
     } else {
       await _pgpApp.fillAllMissingCards();
+      await _pgpApp.reindex();
       late List<CircleWithMembers> circles;
       if (controller.text.isEmpty) {
         circles = await _pgpApp.getDb().getCirclesJoin();
       } else {
-        circles = await _pgpApp.getDb().getCirclesJoinSearch(
-          query: controller.text,
-        );
+        circles = await _pgpApp.getCirclesJoinSearch(query: controller.text);
       }
 
       final m = await _pgpApp.circlesFromDb(

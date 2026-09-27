@@ -220,6 +220,8 @@ abstract class CertDao {
 
   Future<List<CircleWithMembers>> getCirclesJoinSearch({required String query});
 
+  Future<List<OnlyIdType>> getCirclesMissingIdx();
+
   Future<List<CircleWithMembers>> getCirclesWithoutParent();
 
   Future<OnlyFingerprint?> getFingerprintForRole({required String role});
@@ -253,6 +255,14 @@ abstract class CertDao {
   });
 
   Future<List<PgpDataCert>> searchOwnedCerts({required String userid});
+
+  Future<void> setIdx({
+    required String id,
+    required String circleType,
+    required String idx,
+  });
+
+  Future<void> setIdxApp({required String id, required String circleType});
 
   Future<void> updateRole({required String fingerprint, required String role});
 

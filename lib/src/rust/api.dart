@@ -110,6 +110,8 @@ abstract class PgpApp
 
   Future<List<CircleOr>> getCirclesForParent({required CircleHandle parent});
 
+  Future<List<CircleWithMembers>> getCirclesJoinSearch({required String query});
+
   @override
   SqliteDb getDb();
 
@@ -173,6 +175,8 @@ abstract class PgpApp
   Future<void> megaFlush();
 
   StoreNetwork networkFromFingerprints({required List<String> fingerprints});
+
+  Future<void> reindex();
 
   Future<void> signWithTrustLevel({
     required String signer,
