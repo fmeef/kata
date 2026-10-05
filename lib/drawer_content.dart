@@ -76,6 +76,7 @@ class DrawerContent extends StatelessWidget {
               }
               if (context.mounted && context.canPop()) context.pop();
             }
+            await pgp.getDb().fireWatchers();
           },
 
           child: const Text("Import cards"),
