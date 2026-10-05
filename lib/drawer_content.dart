@@ -1,3 +1,4 @@
+import 'package:kata/import_dialog.dart';
 import 'package:kata/pgp/cert/active_cert.dart';
 import 'package:kata/pgp/cert/automicon.dart';
 import 'package:kata/src/rust/api.dart';
@@ -71,12 +72,16 @@ class DrawerContent extends StatelessWidget {
           onPressed: () async {
             final result = await FilePicker.pickFiles();
             if (context.mounted) {
+              showDialog(context: context, builder: (ctx) => ImportDialog());
               for (final path in result) {
                 await pgp.importCerts(import_: PgpImportFile(path: path.path!));
               }
               if (context.mounted && context.canPop()) context.pop();
             }
             await pgp.getDb().fireWatchers();
+            if (context.mounted && context.canPop()) {
+              context.pop();
+            }
           },
 
           child: const Text("Import cards"),
